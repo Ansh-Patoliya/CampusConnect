@@ -16,6 +16,10 @@ public class Club {
         this.status="Pending";
     }
 
+    public Club() {
+        this.clubId=createClubID();
+    }
+
     public String getStatus() {
         return status;
     }
@@ -73,6 +77,6 @@ public class Club {
     }
 
    public String createClubID(){
-         return "C" +clubCount;
+         return "C" +clubCount++;
    }
 }
