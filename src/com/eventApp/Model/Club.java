@@ -3,17 +3,21 @@ package com.eventApp.Model;
 public class Club {
     private String clubName,descriptions,category,founderId,status;
     private int memberCount;
-    private int clubId;
+    private String clubId;
     static int clubCount=1;
 
     public Club(String clubName, String descriptions, String category, String founderId, int memberCount) {
-        this.clubId=clubCount++;
+        this.clubId=createClubID();
         this.clubName = clubName;
         this.descriptions = descriptions;
         this.category = category;
         this.founderId = founderId;
         this.memberCount = memberCount;
         this.status="Pending";
+    }
+
+    public Club() {
+        this.clubId=createClubID();
     }
 
     public String getStatus() {
@@ -24,11 +28,11 @@ public class Club {
         this.status = status;
     }
 
-    public int getClubId() {
+    public String getClubId() {
         return clubId;
     }
 
-    public void setClubId(int clubId) {
+    public void setClubId(String clubId) {
         this.clubId = clubId;
     }
 
@@ -72,10 +76,7 @@ public class Club {
         this.memberCount = memberCount;
     }
 
-    @Override
-    public String toString() {
-        return "Club{" +
-                "clubId=" + clubId +
-                '}';
-    }
+   public String createClubID(){
+         return "C" +clubCount++;
+   }
 }
