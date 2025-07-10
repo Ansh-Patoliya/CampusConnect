@@ -3,13 +3,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    String eventId, eventName, venue, description, status;
-    private int maxParticipants, clubId, userId;
+    String eventId, eventName, venue, description, status, clubId, userId;
+    private int maxParticipants;
     private static int registeredCount;
     LocalDate eventDate;
     LocalTime startTime, endTime;
 
-    public Event(String eventName, String description, String venue, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime, int clubId) {
+    public Event(String eventName, String description, String venue,String clubId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -34,6 +34,14 @@ public class Event {
     public LocalTime getStartTime() { return startTime; }
 
     public LocalTime getEndTime() { return endTime; }
+
+    public int getMaxParticipants() { return maxParticipants; }
+
+    public String getClubId() { return clubId; }
+
+    public void setClubId(String clubId) { this.clubId = clubId; }
+
+    public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
 
     public void setEventId(String eventId) { this.eventId = eventId; }
 
