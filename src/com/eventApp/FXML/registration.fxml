@@ -1,72 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="753.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutX="143.0" layoutY="61.0" prefHeight="586.0" prefWidth="490.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
+      <AnchorPane layoutX="108.0" layoutY="38.0" prefHeight="634.0" prefWidth="535.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
          <children>
-            <AnchorPane prefHeight="71.0" prefWidth="467.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 12; -fx-border-image-width: 1; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
+            <AnchorPane prefHeight="71.0" prefWidth="535.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 12; -fx-border-image-width: 1; -fx-border-color: rgba(255, 255, 255, 0.3); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="118.0" layoutY="12.0" prefHeight="47.0" prefWidth="231.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Registration" textFill="WHITE">
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="152.0" layoutY="12.0" prefHeight="47.0" prefWidth="231.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Registration" textFill="WHITE">
                      <font>
                         <Font name="SansSerif Bold" size="32.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <TextField layoutX="118.0" layoutY="103.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField layoutX="138.0" layoutY="107.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="106.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Name :" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="110.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Name :" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="148.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Email :" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="152.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Email :" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="118.0" layoutY="145.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter email" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField layoutX="138.0" layoutY="149.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter email" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="196.0" prefHeight="23.0" prefWidth="80.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Password :" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="42.0" layoutY="200.0" prefHeight="23.0" prefWidth="80.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Password :" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="118.0" layoutY="193.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter password" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField layoutX="138.0" layoutY="197.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter password" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="230.0" prefHeight="47.0" prefWidth="91.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold; -fx-wrap-text: true;" text="Confirm Password :" textAlignment="CENTER" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="234.0" prefHeight="47.0" prefWidth="91.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold; -fx-wrap-text: true;" text="Confirm Password :" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <TextField layoutX="118.0" layoutY="239.0" prefHeight="30.0" prefWidth="202.0" promptText="Confirm password" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField layoutX="138.0" layoutY="243.0" prefHeight="30.0" prefWidth="202.0" promptText="Confirm password" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="283.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Role :" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="54.0" layoutY="287.0" prefHeight="23.0" prefWidth="55.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Role :" textFill="WHITE">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="133.0" layoutY="284.0" mnemonicParsing="false" style="-fx-text-fill: #5d326b; -fx-font-weight: 500;" text="Student">
+            <RadioButton layoutX="153.0" layoutY="288.0" mnemonicParsing="false" style="-fx-text-fill: #5d326b; -fx-font-weight: 500;" text="Student">
                <font>
                   <Font size="14.0" />
                </font>
@@ -74,22 +80,22 @@
                   <ToggleGroup fx:id="RollGroup" />
                </toggleGroup>
             </RadioButton>
-            <Button alignment="CENTER" layoutX="48.0" layoutY="510.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Button">
+            <Button alignment="CENTER" layoutX="79.0" layoutY="564.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Registration">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <RadioButton layoutX="218.0" layoutY="285.0" mnemonicParsing="false" style="-fx-text-fill: #5d326b; -fx-font-weight: 500;" text="Club member" toggleGroup="$RollGroup">
+            <RadioButton layoutX="238.0" layoutY="289.0" mnemonicParsing="false" style="-fx-text-fill: #5d326b; -fx-font-weight: 500;" text="Club member" toggleGroup="$RollGroup">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <Button alignment="CENTER" layoutX="267.0" layoutY="510.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="106.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
+            <Button alignment="CENTER" layoutX="300.0" layoutY="564.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <AnchorPane fx:id="StudentField" layoutX="12.0" layoutY="307.0" prefHeight="196.0" prefWidth="523.0">
+            <AnchorPane fx:id="StudentField" layoutX="32.0" layoutY="311.0" prefHeight="196.0" prefWidth="523.0" visible="false">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="3.0" layoutY="13.0" prefHeight="23.0" prefWidth="91.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Department :" textFill="WHITE">
                      <font>
@@ -122,6 +128,66 @@
                      </font>
                   </TextField>
                   <AnchorPane layoutX="378.0" layoutY="-4.0" prefHeight="200.0" prefWidth="126.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="ClubField" layoutX="20.0" layoutY="319.0" prefHeight="222.0" prefWidth="535.0" visible="false">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="2.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Join Exsiting Club :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="25.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Select Club :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="roleCombo" layoutX="172.0" layoutY="23.0" prefWidth="150">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Choice 1"/>
+                           <String fx:value="Choice 2"/>
+                           <String fx:value="Choice 3"/>
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="50.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Create Club :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="83.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Club name :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="142.0" layoutY="79.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="125.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Description :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextArea layoutX="132.0" layoutY="120.0" prefHeight="56.0" prefWidth="271.0" promptText="Enter 200 word" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1;" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="196.0" prefHeight="23.0" prefWidth="126.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Category :" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="dropdown" layoutX="132.0" layoutY="194.0" prefWidth="150">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Choice 1" />
+                           <String fx:value="Choice 2" />
+                           <String fx:value="Choice 3" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+
                </children>
             </AnchorPane>
          </children>
