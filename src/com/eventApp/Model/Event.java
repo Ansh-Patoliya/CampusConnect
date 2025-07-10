@@ -34,4 +34,16 @@ public class Event {
     public LocalTime getStartTime() { return startTime; }
 
     public LocalTime getEndTime() { return endTime; }
+
+    public void setEventId(String eventId) { this.eventId = eventId; }
+
+    public void setEventName(String eventName) { this.eventName = eventName; }
+
+    public void setVenue(String venue) { this.venue = venue; }
+
+    public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
+
+    public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
+
+    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
 }
