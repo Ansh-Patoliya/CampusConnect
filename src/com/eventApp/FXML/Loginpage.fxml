@@ -1,55 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="795.0" style="-fx-background-color: #1E5BAF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <AnchorPane layoutX="106.0" layoutY="106.0" prefHeight="354.0" prefWidth="257.0" style="-fx-background-color: #F2A01E;">
-         <children>
-            <Label layoutX="93.0" layoutY="60.0" prefHeight="34.0" prefWidth="94.0" text="Hello!" textAlignment="CENTER" textFill="WHITE">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+
+   <!-- Floating Bubbles Background -->
+   <Circle fill="rgba(255,255,255,0.12)" layoutX="150" layoutY="120" radius="80" />
+   <Circle fill="rgba(255,255,255,0.08)" layoutX="750" layoutY="400" radius="120" />
+   <Circle fill="rgba(255,255,255,0.05)" layoutX="600" layoutY="100" radius="200" />
+
+   <!-- Main Card Container -->
+   <HBox layoutX="150.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 25, 0, 0, 10);">
+
+      <!-- Left Welcome Panel - Made slightly wider -->
+      <StackPane prefWidth="270" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 20 0 0 20;">
+         <VBox alignment="CENTER" spacing="25" style="-fx-padding: 40;">
+            <!-- Elegant Icon -->
+            <StackPane>
+               <Circle fill="radial-gradient(center 50% 50%, radius 50%, #654ea366, #654ea300)" radius="50" />
+               <Text style="-fx-font-size: 42; -fx-fill: linear-gradient(to bottom, #654ea3, #9b59b6);" text="🎓">
+                  <effect>
+                     <DropShadow color="#654ea355" radius="15" spread="0.3" />
+                  </effect>
+               </Text>
+            </StackPane>
+
+            <VBox alignment="CENTER" spacing="8">
+               <Label style="-fx-text-fill: #2d3436; -fx-font-weight: bold;" text="Welcome Back!">
+                  <font>
+                     <Font name="System Bold" size="24.0" />
+                  </font>
+               </Label>
+               <Label style="-fx-text-fill: #636e72;" text="to">
+                  <font>
+                     <Font name="System" size="13.0" />
+                  </font>
+               </Label>
+               <Label style="-fx-text-fill: linear-gradient(to right, #654ea3, #9b59b6); -fx-font-weight: bold;" text="Campus Connect">
+                  <font>
+                     <Font name="System Bold" size="20.0" />
+                  </font>
+               </Label>
+            </VBox>
+
+            <Separator prefWidth="200" style="-fx-background-color: #dfe6e9;" />
+
+            <VBox alignment="CENTER" spacing="12">
+               <Label style="-fx-text-fill: #636e72;" text="Don't have an account?">
+                  <font>
+                     <Font name="System" size="12.0" />
+                  </font>
+               </Label>
+               <Button fx:id="signUp" style="-fx-background-color: transparent; -fx-text-fill: #654ea3; -fx-border-color: #654ea3; -fx-border-radius: 18; -fx-border-width: 1.5; -fx-pref-width: 120; -fx-pref-height: 36;" text="SIGN UP">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Button>
+            </VBox>
+         </VBox>
+      </StackPane>
+
+      <!-- Right Login Form - Adjusted width to maintain total 600 -->
+      <StackPane prefWidth="330" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 0 20 20 0;">
+         <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 50 40 40 40;">
+            <VBox alignment="CENTER_LEFT" spacing="25">
+               <Label style="-fx-text-fill: #2d3436; -fx-font-weight: bold;" text="Login Account">
+                  <font>
+                     <Font name="System Bold" size="22.0" />
+                  </font>
+               </Label>
+
+               <VBox alignment="CENTER_LEFT" spacing="8">
+                  <Label style="-fx-text-fill: #2d3436;" text="Username">
+                     <font>
+                        <Font name="System SemiBold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="username" style="-fx-background-color: #f5f6fa; -fx-background-radius: 10; -fx-border-color: #dfe6e9; -fx-border-radius: 10; -fx-padding: 12; -fx-pref-width: 250; -fx-font-size: 13;">
+                     <effect>
+                        <InnerShadow choke="0.5" color="#654ea322" radius="5" />
+                     </effect>
+                  </TextField>
+               </VBox>
+
+               <VBox alignment="CENTER_LEFT" spacing="8">
+                  <Label style="-fx-text-fill: #2d3436;" text="Password">
+                     <font>
+                        <Font name="System SemiBold" size="12.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="password" style="-fx-background-color: #f5f6fa; -fx-background-radius: 10; -fx-border-color: #dfe6e9; -fx-border-radius: 10; -fx-padding: 12; -fx-pref-width: 250; -fx-font-size: 13;">
+                     <effect>
+                        <InnerShadow choke="0.5" color="#654ea322" radius="5" />
+                     </effect>
+                  </PasswordField>
+                  <HBox alignment="CENTER_RIGHT" prefWidth="250">
+                     <Hyperlink fx:id="forgotPassword" style="-fx-text-fill: #9b59b6; -fx-font-size: 12; -fx-underline: false; -fx-border-color: transparent;" text="Forgot Password?">
+                        <font>
+                           <Font name="System SemiBold" size="12.0" />
+                        </font>
+                     </Hyperlink>
+                  </HBox>
+               </VBox>
+            </VBox>
+
+            <Button fx:id="signIn" style="-fx-background-color: linear-gradient(to right, #654ea3, #9b59b6); -fx-text-fill: white; -fx-background-radius: 10; -fx-pref-width: 250; -fx-pref-height: 42; -fx-font-weight: bold; -fx-cursor: hand;" text="SIGN IN">
                <font>
-                  <Font name="Serif Bold" size="30.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
-            </Label>
-            <Label layoutX="37.0" layoutY="94.0" prefHeight="41.0" prefWidth="196.0" text="Welcome back to Campus Connect" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-               <font>
-                  <Font name="Serif Regular" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="71.0" layoutY="216.0" prefHeight="34.0" prefWidth="128.0" text="Don't have an account?" textFill="WHITE">
-               <font>
-                  <Font name="Serif Regular" size="12.0" />
-               </font></Label>
-            <Button fx:id="signUp" layoutX="86.0" layoutY="250.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="74.0" text="Sign up" textFill="#1e5baf">
-               <font>
-                  <Font name="Serif Regular" size="12.0" />
-               </font>
+               <effect>
+                  <DropShadow color="#654ea355" radius="10" spread="0.2" />
+               </effect>
             </Button>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="363.0" layoutY="106.0" prefHeight="354.0" prefWidth="331.0" style="-fx-background-color: #FFFFFF;">
-         <children>
-            <Label layoutX="24.0" layoutY="21.0" prefHeight="28.0" prefWidth="74.0" text="SIGN IN" textFill="#1e5baf">
-               <font>
-                  <Font name="Serif Bold" size="17.0" />
-               </font>
-            </Label>
-            <TextField fx:id="username" layoutX="38.0" layoutY="105.0" prefHeight="25.0" prefWidth="246.0" promptText="Enter username" />
-            <TextField fx:id="password" layoutX="38.0" layoutY="165.0" prefHeight="25.0" prefWidth="246.0" promptText="Enter password" />
-            <Label layoutX="38.0" layoutY="88.0" prefHeight="17.0" prefWidth="59.0" text="Username" textFill="#1e5baf" />
-            <Label layoutX="38.0" layoutY="148.0" prefHeight="17.0" prefWidth="59.0" text="Password" textFill="#1e5baf" />
-            <Button fx:id="signIn" layoutX="87.0" layoutY="224.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="148.0" text="Sign in" textFill="#1e5baf">
-               <font>
-                  <Font name="Serif Regular" size="12.0" />
-               </font>
-            </Button>
-            <Hyperlink fx:id="forgotPassword" layoutX="111.0" layoutY="292.0" prefHeight="23.0" prefWidth="109.0" text="Forgot password?" textFill="#f2a01e" />
-         </children>
-      </AnchorPane>
-   </children>
+         </VBox>
+      </StackPane>
+   </HBox>
+
+   <!-- Subtle Footer -->
+   <Label layoutX="375.0" layoutY="520.0" style="-fx-text-fill: rgba(255,255,255,0.8);" text="© 2025 Campus Connect | All Rights Reserved">
+      <font>
+         <Font name="System" size="11.0" />
+      </font>
+   </Label>
 </AnchorPane>
