@@ -10,14 +10,17 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        Parent root = FXMLLoader.load(getClass().getResource("/com/eventApp/FXML/registration.fxml"));
-        primaryStage.setTitle("Login");
-        primaryStage.setScene(new Scene(root, 1400, 800));
-        primaryStage.show();
-
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/LoginPage.fxml"));
+            Parent root = loader.load();
+            primaryStage.setTitle("Campus Connect");
+            primaryStage.setScene(new Scene(root, 1400, 800));
+            primaryStage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
