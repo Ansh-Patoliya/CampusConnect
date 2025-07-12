@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="710.0" prefWidth="753.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.RegistrationController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="820.0" prefWidth="1248.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.RegistrationController">
    <children>
       <AnchorPane layoutX="508.0" layoutY="108.0" prefHeight="634.0" prefWidth="535.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
          <children>
@@ -72,7 +80,7 @@
                   <ToggleGroup fx:id="RollGroup" />
                </toggleGroup>
             </RadioButton>
-            <Button alignment="CENTER" layoutX="79.0" layoutY="564.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Registration">
+            <Button alignment="CENTER" layoutX="79.0" layoutY="564.0" mnemonicParsing="false" onAction="#handleRegistration" prefHeight="30.0" prefWidth="153.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Registration">
                <font>
                   <Font size="15.0" />
                </font>
@@ -82,7 +90,7 @@
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <Button alignment="CENTER" layoutX="300.0" layoutY="564.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
+            <Button alignment="CENTER" layoutX="300.0" layoutY="564.0" mnemonicParsing="false" onAction="#openLoginPage" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
                <font>
                   <Font size="15.0" />
                </font>
@@ -119,7 +127,18 @@
                         <Font size="14.0" />
                      </font>
                   </TextField>
-                  <AnchorPane layoutX="378.0" layoutY="-4.0" prefHeight="200.0" prefWidth="126.0" />
+                  <ListView fx:id="interestListView" layoutX="323.0" layoutY="9.0" prefHeight="178.0" prefWidth="200.0">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:value="Artificial Intelligence" />
+                           <String fx:value="Robotics" />
+                           <String fx:value="Gaming" />
+                           <String fx:value="Music" />
+                           <String fx:value="Art  Design" />
+                           <String fx:value="Entrepreneurship" />
+                        </FXCollections>
+                     </items>
+                  </ListView>
                </children>
             </AnchorPane>
             <AnchorPane fx:id="ClubField" layoutX="20.0" layoutY="319.0" prefHeight="222.0" prefWidth="535.0" visible="false">
