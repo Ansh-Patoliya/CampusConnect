@@ -5,7 +5,9 @@ import com.eventApp.Utils.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class StudentDAO {
     public boolean
@@ -39,6 +41,25 @@ public class StudentDAO {
         catch (Exception e) {
         }
 
+        return false;
+    }
+
+    public boolean checkLoginDetails(String emailInput, String passwordInput){
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "select email from users where email = '" + emailInput + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, emailInput);
+            ResultSet rs = preparedStatement.getResultSet();
+            while(rs.next()){
+                String storedPassword = rs.getString("password");
+                if(Objects.equals(passwordInput,storedPassword)){
+                    System.out.println("Login verified");
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        }
         return false;
     }
 }
