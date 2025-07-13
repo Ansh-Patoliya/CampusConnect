@@ -121,7 +121,7 @@
    </HBox>
 
    <!-- Subtle Footer -->
-   <Label layoutX="375.0" layoutY="520.0" style="-fx-text-fill: rgba(255,255,255,0.8);" text="© 2025 Campus Connect | All Rights Reserved">
+   <Label layoutX="338.0" layoutY="517.0" style="-fx-text-fill: rgba(255,255,255,0.8);" text="© 2025 Campus Connect | All Rights Reserved">
       <font>
          <Font name="System" size="11.0" />
       </font>
