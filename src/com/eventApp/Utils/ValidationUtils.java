@@ -12,7 +12,7 @@ public class ValidationUtils {
         -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
         -> This method ignores spaces, digits, and special characters — it returns false if any are present.
     */
-        return true;
+        return false;
     }
 
     public static boolean checkEmail(String email) {
