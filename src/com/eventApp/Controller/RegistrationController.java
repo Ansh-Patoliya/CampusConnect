@@ -76,7 +76,7 @@ public class RegistrationController {
             String enrollmentNo = enrollmentField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
             if (interest == null || interest.isEmpty()) {
-                showError("❌ Please select at least one interest.");
+                FXMLScreenLoader.showError("❌ Please select at least one interest.");
                 return;
             }
             if(validateStudentFields(name,email,password,confirmPassword,department,semester,enrollmentNo)){
@@ -87,7 +87,7 @@ public class RegistrationController {
                     FXMLScreenLoader.openLoginPage(event);
                 }
                 else{
-                    showError("❌ Registration failed. Please try again.");
+                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
                 }
             }
             else{
@@ -98,7 +98,7 @@ public class RegistrationController {
             System.out.println("Club registration logic goes here.");
         }
         else{
-            showError("Please select a role (Student or Club Member) to register.");
+            FXMLScreenLoader.showError("Please select a role (Student or Club Member) to register.");
         }
 
     }
@@ -109,26 +109,26 @@ public class RegistrationController {
         if (!ValidationUtils.checkName(name))
         {
             nameField.clear();
-            showError("Name must contain only letters.");
+            FXMLScreenLoader.showError("Name must contain only letters.");
             isValid = false;
         }
 
         if (!ValidationUtils.checkEmail(email)) {
             emailField.clear();
-            showError("Please enter a valid email.");
+            FXMLScreenLoader.showError("Please enter a valid email.");
             isValid = false;
         }
 
         if (!ValidationUtils.checkPassword(password)) {
             passwordField.clear();
-            showError("Password must be strong (min 8 chars, mix of A-Z, a-z, 0-9, special char).");
+            FXMLScreenLoader.showError("Password must be strong (min 8 chars, mix of A-Z, a-z, 0-9, special char).");
             isValid = false;
         }
 
         if (!ValidationUtils.isMatchingPasswords(password, confirmPassword)) {
             passwordField.clear();
             confirmPasswordField.clear();
-            showError("Password and Confirm Password do not match.");
+            FXMLScreenLoader.showError("Password and Confirm Password do not match.");
             isValid = false;
         }
 
@@ -142,19 +142,19 @@ public class RegistrationController {
 
         if (!ValidationUtils.checkDepartment(department)) {
             departmentField.clear();
-            showError("❌ Department cannot be empty or invalid.");
+            FXMLScreenLoader.showError("❌ Department cannot be empty or invalid.");
             return false;
         }
 
         if (!ValidationUtils.checkSemester(semester)) {
             semesterField.clear();
-            showError("❌ Semester must be a number between 1 and 8.");
+            FXMLScreenLoader.showError("❌ Semester must be a number between 1 and 8.");
             return false;
         }
 
         if (!ValidationUtils.checkEnrollment(enrollmentNo)) {
             enrollmentField.clear();
-            showError("❌ Enrollment number must contain only digits.");
+            FXMLScreenLoader.showError("❌ Enrollment number must contain only digits.");
             return false;
         }
         return true;
