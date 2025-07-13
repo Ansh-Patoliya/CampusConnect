@@ -1,6 +1,6 @@
 package com.eventApp.Service;
 
-import com.eventApp.DAO.StudentDAO;
+import com.eventApp.DAO.StudenDAO;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 
