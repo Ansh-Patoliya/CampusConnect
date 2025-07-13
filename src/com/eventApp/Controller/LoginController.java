@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -15,7 +16,7 @@ public class LoginController {
     public Button signUp;
 
     public void openSignupPage(ActionEvent actionEvent) {
-        openSignupPage(actionEvent);
+        FXMLScreenLoader.openSignupPage(actionEvent);
     }
 
     public void handleSignIn(ActionEvent event) {

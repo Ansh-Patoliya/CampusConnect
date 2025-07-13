@@ -1,9 +1,8 @@
 package com.eventApp.Controller;
 
-import com.eventApp.DAO.StudentDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Student;
-import com.eventApp.Service.StudentRegistration;
+import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +64,7 @@ public class RegistrationController {
         FXMLScreenLoader.openLoginPage(event);
     }
 
-    private StudentRegistration studentRegistration= new StudentRegistration();
+    private final UserService userService=new UserService();
     public void handleRegistration(ActionEvent event) {
         String name = nameField.getText();
         String email = emailField.getText();
@@ -83,7 +82,7 @@ public class RegistrationController {
             if(validateStudentFields(name,email,password,confirmPassword,department,semester,enrollmentNo)){
                 int sem=Integer.parseInt(semester);
                 Student student=new Student(enrollmentNo,name,email,password,"student".toUpperCase(),department,sem,interest);
-                boolean success=studentRegistration.registerStudent(student);
+                boolean success=userService.registerStudent(student);
                 if(success) {
                     FXMLScreenLoader.openLoginPage(event);
                 }
