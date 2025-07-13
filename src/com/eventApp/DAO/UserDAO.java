@@ -1,7 +1,9 @@
 package com.eventApp.DAO;
 
+import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Student;
 import com.eventApp.Utils.DatabaseConnection;
+import com.eventApp.Utils.ValidationUtils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -58,6 +60,41 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
+        }
+        return false;
+    }
+
+    public static boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+            if (!ValidationUtils.checkEmail(emailInput)) {
+                FXMLScreenLoader.showError("Please enter a valid email.");
+                return false;
+            }
+
+
+            if (!newPassword.equals(confirmPassword)) {
+                FXMLScreenLoader.showError("Password and Confirm Password do not match.");
+                return false;
+            }
+
+            String query = "UPDATE users SET password = ? WHERE email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newPassword);
+            preparedStatement.setString(2, emailInput);
+
+            int r = preparedStatement.executeUpdate();
+            if(r>0) {
+                System.out.println("Password updated successfully.");
+                return true;
+            }
+            else {
+                FXMLScreenLoader.showError("Password update failed.");
+            }
+
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
         return false;
     }
