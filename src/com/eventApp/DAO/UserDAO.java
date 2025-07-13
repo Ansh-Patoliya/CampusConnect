@@ -1,0 +1,64 @@
+package com.eventApp.DAO;
+
+import com.eventApp.Model.Student;
+import com.eventApp.Utils.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
+
+public class UserDAO {
+    public boolean registrationStudent(Student student) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
+            preparedStatement.setString(1,student.getUserId());
+            preparedStatement.setString(2,student.getName());
+            preparedStatement.setString(3,student.getEmail());
+            preparedStatement.setString(4,student.getPassword());
+            preparedStatement.setString(5,"student".toUpperCase());
+
+            int userInsert=preparedStatement.executeUpdate();
+
+            preparedStatement= connection.prepareStatement("insert into students values(?,?,?,?)");
+            preparedStatement.setString(1,student.getUserId());
+            preparedStatement.setString(2, student.getDepartment());
+            preparedStatement.setInt(3,student.getSemester());
+            preparedStatement.setString(4,String.join(",",student.getInterest()));
+
+            int studentInsert=preparedStatement.executeUpdate();
+            if(userInsert>0 && studentInsert>0){
+                System.out.println("registration complete");
+                return true;
+            }
+            else{
+                System.out.println("registration fail..");
+            }
+        }
+        catch (Exception e) {
+        }
+
+        return false;
+    }
+
+    public boolean checkLoginDetails(String emailInput, String passwordInput){
+        try{
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "select email from users where email = '" + emailInput + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, emailInput);
+            ResultSet rs = preparedStatement.getResultSet();
+            while(rs.next()){
+                String storedPassword = rs.getString("password");
+                if(Objects.equals(passwordInput,storedPassword)){
+                    System.out.println("Login verified");
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+        }
+        return false;
+    }
+}
