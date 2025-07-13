@@ -8,4 +8,6 @@ public class StudentRegistration {
     public boolean registerStudent(Student student) {
         return studentDAO.registration(student);
     }
+
+    public boolean checklogin(String emailInput, String passwordInput) { return studentDAO.checkLoginDetails(emailInput, passwordInput); }
 }
