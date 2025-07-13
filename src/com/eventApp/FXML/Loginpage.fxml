@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:controller="com.eventApp.Loader.FXMLScreenLoader" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:controller="com.eventApp.Controller.LoginController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
 
    <!-- Floating Bubbles Background -->
    <Circle fill="rgba(255,255,255,0.12)" layoutX="150" layoutY="120" radius="80" />
