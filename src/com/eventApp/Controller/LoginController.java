@@ -32,6 +32,6 @@ public class LoginController {
     }
 
     public void openForgotPassword(ActionEvent actionEvent) {
-        openForgotPassword(actionEvent);
+        FXMLScreenLoader.openForgotPassword(actionEvent);
     }
 }
