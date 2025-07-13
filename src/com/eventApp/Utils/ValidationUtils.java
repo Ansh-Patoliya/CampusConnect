@@ -12,7 +12,17 @@ public class ValidationUtils {
         -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
         -> This method ignores spaces, digits, and special characters — it returns false if any are present.
     */
-        return false;
+        if (name == null || name.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < name.length(); i++) {
+            char c = name.charAt(i);
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean checkEmail(String email) {
@@ -30,11 +40,33 @@ public class ValidationUtils {
             -> Contains at least one digit (0–9)
             -> Contains at least one special character (e.g. !@#$%^&*)
      */
-        return true;
+        if (password == null || password.length() < 8) {
+            return false;
+        }
+
+        boolean hasUpperCase = false;
+        boolean hasLowerCase = false;
+        boolean hasDigit = false;
+        boolean hasSpecialChar = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (c >= 'A' && c <= 'Z') {
+                hasUpperCase = true;
+            } else if (c >= 'a' && c <= 'z') {
+                hasLowerCase = true;
+            } else if (c >= '0' && c <= '9') {
+                hasDigit = true;
+            } else if ("!@#$%^&*".indexOf(c) > -1) {
+                hasSpecialChar = true;
+            }
+        }
+
+        return hasDigit && hasLowerCase && hasUpperCase && hasSpecialChar;
     }
 
-    public static boolean isMatchingPasswords(String Password, String ConfirmPassword) {
-        return true;
+    public static boolean isMatchingPasswords(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
     }
 
     public static boolean checkDepartment(String department) {
@@ -50,6 +82,14 @@ public class ValidationUtils {
         -> Validates that the given input contains only numeric digits (0–9).
         -> This method returns false if the input includes letters, spaces, or special characters.
      */
+        if (semester == null || semester.length() != 1) {
+            return false;
+        }
+         char c = semester.charAt(0);
+            if (c < '0' || c > '8') {
+                return false; // Found a non-digit character
+            }
+
         return true;
     }
 
@@ -58,6 +98,16 @@ public class ValidationUtils {
         -> Validates that the given input contains only numeric digits (0–9).
         -> This method returns false if the input includes letters, spaces, or special characters.
      */
+        if (enrollment == null || enrollment.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < enrollment.length(); i++) {
+            char c = enrollment.charAt(i);
+            if (c < '0' || c > '9') {
+                return false; // Found a non-digit character
+            }
+        }
         return true;
     }
 }
