@@ -160,11 +160,5 @@ public class RegistrationController {
         }
         return true;
     }
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validation Error");
-        alert.setHeaderText(null); // No header
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+
 }

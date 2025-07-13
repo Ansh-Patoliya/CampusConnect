@@ -29,4 +29,8 @@ public class LoginController {
             System.out.println("Invalid login id or password");
         }
     }
+
+    public void openForgotPassword(ActionEvent actionEvent) {
+        openForgotPassword(actionEvent);
+    }
 }

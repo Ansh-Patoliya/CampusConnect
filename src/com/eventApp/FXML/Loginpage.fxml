@@ -99,7 +99,7 @@
                      </effect>
                   </PasswordField>
                   <HBox alignment="CENTER_RIGHT" prefWidth="250">
-                     <Hyperlink fx:id="forgotPassword" style="-fx-text-fill: #9b59b6; -fx-font-size: 12; -fx-underline: false; -fx-border-color: transparent;" text="Forgot Password?">
+                     <Hyperlink fx:id="forgotPassword" onAction="#openForgotPassword" style="-fx-text-fill: #9b59b6; -fx-font-size: 12; -fx-underline: false; -fx-border-color: transparent;" text="Forgot Password?">
                         <font>
                            <Font name="System SemiBold" size="12.0" />
                         </font>
