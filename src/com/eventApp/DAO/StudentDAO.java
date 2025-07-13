@@ -53,7 +53,7 @@ public class StudentDAO {
             ResultSet rs = preparedStatement.getResultSet();
             while(rs.next()){
                 String storedPassword = rs.getString("password");
-                if(Objects.equals(passwordInput,storedPassword)){
+                if(passwordInput.equals(storedPassword))){
                     System.out.println("Login verified");
                     return true;
                 }
