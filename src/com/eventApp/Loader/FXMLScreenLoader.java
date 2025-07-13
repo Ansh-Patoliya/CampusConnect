@@ -22,7 +22,7 @@ public class FXMLScreenLoader {
         }
     }
 
-    public void openSignupPage(ActionEvent event) {
+    public static void openSignupPage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/registration.fxml"));
             Parent root = loader.load();
