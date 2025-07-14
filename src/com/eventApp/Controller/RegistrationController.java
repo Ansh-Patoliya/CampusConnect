@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.UserDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
@@ -115,10 +116,34 @@ public class RegistrationController {
             String description=descriptionField.getText().trim();
             String selectClub=(String)selectClubField.getValue();
             String category=(String)categoryField.getValue();
+            int maxMembers = Integer.parseInt(maxMemberField.getText());
 
             if(validateClubFields(name,email,password,confirmPassword,clubName,description,category,enrollmentNo)){
-                Club club = new Club(clubName, description, selectClub, category,30);
+                Club club = new Club(clubName, description, selectClub, category,maxMembers);
                 ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(),"head",club.getClubId());
+                boolean success = userService.registerClub(club, clubMember);
+                if (success){
+                    FXMLScreenLoader.openLoginPage(event);
+                } else {
+                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                }
+            }
+        }
+        else if (joinExistingRadio.isSelected()) {
+            // Handle joining existing club logic here
+            String selectClub = (String) selectClubField.getValue();
+            if (!(selectClub == null || selectClub.isEmpty())) {
+                String clubId = UserDAO.getClubId(selectClub);
+                ClubMember clubMember = new ClubMember(enrollmentNo,name,email,password,"club_member","member",clubId);
+                boolean success = userService.registerClubMember(clubMember);
+                if (success) {
+                    FXMLScreenLoader.openLoginPage(event);
+                } else {
+                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                }
+            }
+            else{
+                FXMLScreenLoader.showError("❌ Please select a club to join.");
             }
         }
         else{
