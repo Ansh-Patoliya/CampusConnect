@@ -1,6 +1,7 @@
 package com.eventApp.Controller;
 
 import com.eventApp.Loader.FXMLScreenLoader;
+import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
@@ -21,9 +22,9 @@ public class RegistrationController {
     public TextField departmentField;
     public TextField semesterField;
     public TextField enrollmentField;
-    public ComboBox selectClubField;
     public TextField clubNameField;
     public TextArea descriptionField;
+    public ComboBox selectClubField;
     public ComboBox categoryField;
     public ListView interestListView;
     @FXML
@@ -69,11 +70,11 @@ public class RegistrationController {
         String name = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
+        String enrollmentNo = enrollmentField.getText();
         String confirmPassword = confirmPasswordField.getText();
         if (studentRadio.isSelected()) {
             String department = departmentField.getText();
             String semester = semesterField.getText();
-            String enrollmentNo = enrollmentField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
             if (interest == null || interest.isEmpty()) {
                 FXMLScreenLoader.showError("❌ Please select at least one interest.");
@@ -95,7 +96,14 @@ public class RegistrationController {
             }
         } else if (clubRadio.isSelected()) {
             // Handle club registration logic here
-            System.out.println("Club registration logic goes here.");
+            String clubName=clubNameField.getText().trim();
+            String description=descriptionField.getText().trim();
+            String selectClub=(String)selectClubField.getValue();
+            String category=(String)categoryField.getValue();
+
+            if(validateClubFields(name,email,password,confirmPassword,clubName,description,category,enrollmentNo)){
+
+            }
         }
         else{
             FXMLScreenLoader.showError("Please select a role (Student or Club Member) to register.");
@@ -157,6 +165,10 @@ public class RegistrationController {
             FXMLScreenLoader.showError("❌ Enrollment number must contain only digits.");
             return false;
         }
+        return true;
+    }
+
+    public boolean validateClubFields(String name, String email, String password, String confirmPassword, String clubName, String description,String category,String enrollmentNo){
         return true;
     }
 
