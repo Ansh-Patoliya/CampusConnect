@@ -162,4 +162,28 @@ public class ValidationUtils {
         }
         return true;
     }
+
+    public static boolean checkClubName(String clubName) {
+        /*
+            -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
+            -> This method ignores spaces, digits, and special characters — it returns false if any are present.
+        */
+        return checkName(clubName);
+    }
+
+    public static boolean checkDescription(String description) {
+        /*
+            -> Validates that the given input string is not empty.
+            -> This method returns false if the input is null or contains only whitespace.
+        */
+        return description != null && !description.trim().isEmpty();
+    }
+
+    public static boolean checkCategory(String category) {
+        /*
+            -> Validates that the given input string is not empty.
+            -> This method returns false if the input is null or contains only whitespace.
+        */
+        return category != null && !category.trim().isEmpty();
+    }
 }
