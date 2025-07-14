@@ -26,6 +26,58 @@ public class ValidationUtils {
     }
 
     public static boolean checkEmail(String email) {
+        if( email == null || email.isEmpty()) {
+            return false;
+        }
+        // ->@ count exactly 1
+        int atCount = 0;
+        for (int i = 0; i < email.length(); i++) {
+            if(email.charAt(i) == '@') {
+                atCount++;
+            }
+        }
+        if(atCount != 1) {
+            return false;
+        }
+        /*
+            ->Valid Position of @
+                ->The @ should not be:
+                ->At the start of the email.
+                ->At the end of the email.
+         */
+        if(email.indexOf('@') == 0 || email.lastIndexOf('@') == email.length() - 1) {
+            return false;
+        }
+        /*
+            ->Valid Domain
+                ->The domain part (after @) should contain at least one dot (.)
+                ->The dot should not be at the start or end of the domain.
+         */
+        int dotIndex = email.indexOf('.', email.indexOf('@'));
+        if(dotIndex == -1 || dotIndex == email.length() - 1 || dotIndex == email.indexOf('@') + 1) {
+            return false;
+        }
+        /*
+            ->minimum domain length
+                ->The domain part should be at least 2 characters long (e.g., "com", "org", "in").
+         */
+        String domain = email.substring(email.indexOf('.') + 1);
+        if(domain.length() < 2) {
+            return false;
+        }
+        /*
+            ->Valid Characters
+                ->The email should only contain valid characters:
+                ->Alphanumeric characters (A-Z, a-z, 0-9)
+                ->Special characters like . _ - @
+         */
+        for (int i = 0; i < email.length(); i++) {
+            char c = email.charAt(i);
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9') &&
+                    c != '.' && c != '_' && c != '-' && c != '@') {
+                return false;
+            }
+        }
         return true;
     }
 
