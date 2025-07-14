@@ -48,10 +48,10 @@ public class UserDAO {
     public boolean checkLoginDetails(String emailInput, String passwordInput){
         try{
             Connection connection = DatabaseConnection.getConnection();
-            String query = "select email from users where email = '" + emailInput + "'";
+            String query = "select email,password from users where email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, emailInput);
-            ResultSet rs = preparedStatement.getResultSet();
+            ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
                 String storedPassword = rs.getString("password");
                 if(Objects.equals(passwordInput,storedPassword)){
