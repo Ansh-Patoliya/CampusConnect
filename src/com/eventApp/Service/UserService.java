@@ -2,6 +2,7 @@ package com.eventApp.Service;
 
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.Model.Club;
+import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 
 public class UserService {
@@ -10,13 +11,17 @@ public class UserService {
         return userDAO.registrationStudent(student);
     }
 
-    public boolean registerClubMember(Club club){
-        return true;
+    public boolean registerClubMember(ClubMember clubMember){
+        return userDAO.registrationClubMember(clubMember);
     }
 
     public boolean checklogin(String emailInput, String passwordInput) { return userDAO.checkLoginDetails(emailInput, passwordInput); }
 
     public boolean resetPassword(String emailInput, String newPassword, String confirmPassword) {
         return UserDAO.resetPass(emailInput,newPassword,confirmPassword);
+    }
+
+    public boolean registerClub(Club club,ClubMember clubMember) {
+        return userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
     }
 }
