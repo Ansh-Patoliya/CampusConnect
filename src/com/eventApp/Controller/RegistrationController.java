@@ -1,6 +1,9 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.UserDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
+import com.eventApp.Model.Club;
+import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
@@ -21,13 +24,22 @@ public class RegistrationController {
     public TextField departmentField;
     public TextField semesterField;
     public TextField enrollmentField;
-    public ComboBox selectClubField;
     public TextField clubNameField;
     public TextArea descriptionField;
+    public ComboBox selectClubField;
     public ComboBox categoryField;
     public ListView interestListView;
+    public AnchorPane CreateNewPane;
+    public AnchorPane JoinExistingPane;
+    public ToggleGroup clubOptionGroup;
+    public TextField maxMemberField;
     @FXML
     private RadioButton studentRadio;
+    @FXML
+    RadioButton joinExistingRadio;
+    
+    @FXML
+    RadioButton createNewRadio;
 
     @FXML
     private RadioButton clubRadio;
@@ -40,21 +52,26 @@ public class RegistrationController {
 
     @FXML
     public void initialize() {
-        // Listener for Student radio
-        studentRadio.setOnAction(e -> {
-            if (studentRadio.isSelected()) {
-                StudentField.setVisible(true);
-                ClubField.setVisible(false);
-            }
+        clubRadio.setOnAction(e -> {
+            ClubField.setVisible(true);
+            StudentField.setVisible(false);
         });
 
-        // Listener for Club Member radio
-        clubRadio.setOnAction(e -> {
-            if (clubRadio.isSelected()) {
-                ClubField.setVisible(true);
-                StudentField.setVisible(false);
-            }
+        studentRadio.setOnAction(e -> {
+            StudentField.setVisible(true);
+            ClubField.setVisible(false);
         });
+
+        joinExistingRadio.setOnAction(e -> {
+            JoinExistingPane.setVisible(true);
+            CreateNewPane.setVisible(false);
+        });
+
+        createNewRadio.setOnAction(e -> {
+            CreateNewPane.setVisible(true);
+            JoinExistingPane.setVisible(false);
+        });
+
 
         interestListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
@@ -69,11 +86,11 @@ public class RegistrationController {
         String name = nameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
+        String enrollmentNo = enrollmentField.getText();
         String confirmPassword = confirmPasswordField.getText();
         if (studentRadio.isSelected()) {
             String department = departmentField.getText();
             String semester = semesterField.getText();
-            String enrollmentNo = enrollmentField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
             if (interest == null || interest.isEmpty()) {
                 FXMLScreenLoader.showError("❌ Please select at least one interest.");
@@ -95,7 +112,39 @@ public class RegistrationController {
             }
         } else if (clubRadio.isSelected()) {
             // Handle club registration logic here
-            System.out.println("Club registration logic goes here.");
+            String clubName=clubNameField.getText().trim();
+            String description=descriptionField.getText().trim();
+            String selectClub=(String)selectClubField.getValue();
+            String category=(String)categoryField.getValue();
+            int maxMembers = Integer.parseInt(maxMemberField.getText());
+
+            if(validateClubFields(name,email,password,confirmPassword,clubName,description,category,enrollmentNo)){
+                Club club = new Club(clubName, description, selectClub, category,maxMembers);
+                ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(),"head",club.getClubId());
+                boolean success = userService.registerClub(club, clubMember);
+                if (success){
+                    FXMLScreenLoader.openLoginPage(event);
+                } else {
+                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                }
+            }
+        }
+        else if (joinExistingRadio.isSelected()) {
+            // Handle joining existing club logic here
+            String selectClub = (String) selectClubField.getValue();
+            if (!(selectClub == null || selectClub.isEmpty())) {
+                String clubId = UserDAO.getClubId(selectClub);
+                ClubMember clubMember = new ClubMember(enrollmentNo,name,email,password,"club_member","member",clubId);
+                boolean success = userService.registerClubMember(clubMember);
+                if (success) {
+                    FXMLScreenLoader.openLoginPage(event);
+                } else {
+                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                }
+            }
+            else{
+                FXMLScreenLoader.showError("❌ Please select a club to join.");
+            }
         }
         else{
             FXMLScreenLoader.showError("Please select a role (Student or Club Member) to register.");
@@ -103,7 +152,7 @@ public class RegistrationController {
 
     }
 
-    public boolean validateFields(String name, String email, String password, String confirmPassword) {
+    public boolean validateFields(String name, String email,String enrollmentNo, String password, String confirmPassword) {
         boolean isValid = true;
 
         if (!ValidationUtils.checkName(name))
@@ -116,6 +165,12 @@ public class RegistrationController {
         if (!ValidationUtils.checkEmail(email)) {
             emailField.clear();
             FXMLScreenLoader.showError("Please enter a valid email.");
+            isValid = false;
+        }
+
+        if(ValidationUtils.checkEnrollment(enrollmentNo)){
+            enrollmentField.clear();
+            FXMLScreenLoader.showError("Enrollment number must contain only digits.");
             isValid = false;
         }
 
@@ -136,7 +191,7 @@ public class RegistrationController {
     }
 
     public boolean validateStudentFields(String name, String email, String password, String confirmPassword, String department, String semester, String enrollmentNo) {
-        if (!validateFields(name, email, password, confirmPassword)) {
+        if (!validateFields(name, email,enrollmentNo, password, confirmPassword)) {
             return false; // General validations failed
         }
 
@@ -152,9 +207,27 @@ public class RegistrationController {
             return false;
         }
 
-        if (!ValidationUtils.checkEnrollment(enrollmentNo)) {
-            enrollmentField.clear();
-            FXMLScreenLoader.showError("❌ Enrollment number must contain only digits.");
+        return true;
+    }
+
+    public boolean validateClubFields(String name, String email, String password, String confirmPassword, String clubName, String description,String category,String enrollmentNo){
+        if (!validateFields(name, email,enrollmentNo, password, confirmPassword)) {
+            return false; // General validations failed
+        }
+
+        if(ValidationUtils.checkClubName(clubName)){
+            clubNameField.clear();
+            FXMLScreenLoader.showError("❌ Club name must contain only letters.");
+            return false;
+        }
+        if (ValidationUtils.checkDescription(description)) {
+            descriptionField.clear();
+            FXMLScreenLoader.showError("❌ Description cannot be empty.");
+            return false;
+        }
+
+        if(!ValidationUtils.checkCategory(category)) {
+            FXMLScreenLoader.showError("❌ Please select a valid category.");
             return false;
         }
         return true;

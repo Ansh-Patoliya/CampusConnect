@@ -1,6 +1,7 @@
 package com.eventApp.Controller;
 
 import com.eventApp.Loader.FXMLScreenLoader;
+import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -23,9 +24,11 @@ public class LoginController {
         String emailInput = username.getText().trim();
         String passwordInput = password.getText().trim();
 
+        UserService userService=new UserService();
         if (ValidationUtils.checkEmail(emailInput) && ValidationUtils.checkPassword(passwordInput)) {
             FXMLScreenLoader.showError("✅Login Successful");
             //code to move forward towards dashboard
+            userService.checklogin(emailInput,passwordInput);
         }
         else{
             FXMLScreenLoader.showError("❌Invalid login id or password");

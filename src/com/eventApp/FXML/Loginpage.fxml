@@ -108,7 +108,7 @@
                </VBox>
             </VBox>
 
-            <Button fx:id="signIn" style="-fx-background-color: linear-gradient(to right, #654ea3, #9b59b6); -fx-text-fill: white; -fx-background-radius: 10; -fx-pref-width: 250; -fx-pref-height: 42; -fx-font-weight: bold; -fx-cursor: hand;" text="SIGN IN">
+            <Button fx:id="signIn" onAction="#handleSignIn" style="-fx-background-color: linear-gradient(to right, #654ea3, #9b59b6); -fx-text-fill: white; -fx-background-radius: 10; -fx-pref-width: 250; -fx-pref-height: 42; -fx-font-weight: bold; -fx-cursor: hand;" text="SIGN IN">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

@@ -2,19 +2,19 @@ package com.eventApp.Model;
 
 public class ClubMember extends User{
     private String position;
-    private int clubId;
+    private String clubId;
 
-    public ClubMember(String userId, String name, String email, String password, String role, String position,int clubId) {
+    public ClubMember(String userId, String name, String email, String password, String role, String position,String clubId) {
         super(userId, name, email, password, role);
         this.position = position;
         this.clubId=clubId;
     }
 
-    public int getClubId() {
+    public String getClubId() {
         return clubId;
     }
 
-    public void setClubId(int clubId) {
+    public void setClubId(String clubId) {
         this.clubId = clubId;
     }
 
