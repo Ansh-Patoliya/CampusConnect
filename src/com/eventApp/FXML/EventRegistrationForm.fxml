@@ -45,6 +45,8 @@
             <Label layoutX="40.0" layoutY="323.0" prefHeight="26.0" prefWidth="94.0" text="Host:" textFill="#873fa6">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
+
+
                </font>
             </Label>
             <Label layoutX="39.0" layoutY="370.0" prefHeight="26.0" prefWidth="94.0" text="Max capacity:" textFill="#873fa6">

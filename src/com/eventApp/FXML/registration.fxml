@@ -46,7 +46,7 @@
             <Button layoutX="301.0" layoutY="577.0" onAction="#openLoginPage" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold;" text="Cancel" />
 
             <!-- Student Fields -->
-            <AnchorPane fx:id="StudentField" disable="true" layoutX="32.0" layoutY="306.0" prefHeight="265.0" prefWidth="470.0">
+            <AnchorPane fx:id="StudentField" layoutX="32.0" layoutY="306.0" prefHeight="265.0" prefWidth="470.0" visible="false">
                <children>
                   <Label layoutX="3.0" layoutY="13.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Department :" />
                   <ComboBox fx:id="departmentField" layoutX="109.0" layoutY="9.0" prefWidth="320.0" promptText="Select department" />

@@ -29,20 +29,27 @@ public class ValidationUtils {
         return true;
     }
 
-    public static boolean checkDuplicateEmail(String newEmail) throws Exception{
-        Connection connection = DatabaseConnection.getConnection();
-        String query = "SELECT email FROM Users WHERE email = ?";
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1,newEmail);
+    public static boolean checkDuplicateEmail(String newEmail) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "SELECT email FROM Users WHERE email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newEmail);
 
-        ResultSet rs = preparedStatement.executeQuery();
+            ResultSet rs = preparedStatement.executeQuery();
 
-        if (!rs.next()) {
-            return true;
+            if (!rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }
     public static boolean checkEmail(String email) {
+        if(!checkDuplicateEmail(email)){
+            return false;
+        }
         if( email == null || email.isEmpty()) {
             return false;
         }
