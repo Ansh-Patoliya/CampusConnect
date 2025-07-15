@@ -89,7 +89,7 @@ public class UserDAO {
     public static boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
         try{
             Connection connection = DatabaseConnection.getConnection();
-            if (!ValidationUtils.checkEmail(emailInput)||!ValidationUtils.checkDuplicateEmail(emailInput)) {
+            if (!ValidationUtils.checkEmail(emailInput)) {
                 FXMLScreenLoader.showError("Please enter a valid email.");
                 return false;
             }
