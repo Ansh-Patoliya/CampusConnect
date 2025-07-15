@@ -26,11 +26,12 @@ public class LoginController {
 
         UserService userService=new UserService();
         if (ValidationUtils.checkEmail(emailInput) && ValidationUtils.checkPassword(passwordInput)) {
+            FXMLScreenLoader.showError("✅Login Successful");
             //code to move forward towards dashboard
             userService.checklogin(emailInput,passwordInput);
         }
         else{
-            System.out.println("Invalid login id or password");
+            FXMLScreenLoader.showError("❌Invalid login id or password");
         }
     }
 
