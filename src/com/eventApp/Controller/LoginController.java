@@ -24,10 +24,11 @@ public class LoginController {
         String passwordInput = password.getText().trim();
 
         if (ValidationUtils.checkEmail(emailInput) && ValidationUtils.checkPassword(passwordInput)) {
+            FXMLScreenLoader.showError("✅Login Successful");
             //code to move forward towards dashboard
         }
         else{
-            System.out.println("Invalid login id or password");
+            FXMLScreenLoader.showError("❌Invalid login id or password");
         }
     }
 
