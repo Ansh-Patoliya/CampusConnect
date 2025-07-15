@@ -27,6 +27,9 @@
             <Label layoutX="53.0" layoutY="136.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Email :" />
             <TextField fx:id="emailField" layoutX="137.0" layoutY="131.0" prefWidth="202.0" promptText="Enter email" />
 
+            <Label layoutX="40.0" layoutY="163.0" prefHeight="34.0" prefWidth="94.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Enrollment Number:" wrapText="true" />
+            <TextField fx:id="enrollmentField" layoutX="137.0" layoutY="167.0" prefHeight="26.0" prefWidth="202.0" promptText="Enter enrollment number" />
+
             <Label layoutX="42.0" layoutY="210.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Password :" />
             <PasswordField fx:id="passwordField" layoutX="137.0" layoutY="205.0" prefWidth="202.0" promptText="Enter password" />
 
@@ -122,9 +125,6 @@
 
                </children>
             </AnchorPane>
-
-            <Label layoutX="40.0" layoutY="163.0" prefHeight="34.0" prefWidth="94.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Enrollment Number:" wrapText="true" />
-            <TextField fx:id="enrollmentField" layoutX="137.0" layoutY="167.0" prefHeight="26.0" prefWidth="202.0" promptText="Enter enrollment number" />
          </children>
       </AnchorPane>
    </children>
