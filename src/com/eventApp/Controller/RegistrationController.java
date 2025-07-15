@@ -222,7 +222,11 @@ public class RegistrationController {
             String clubName=clubNameField.getText().trim();
             String description=descriptionField.getText().trim();
             String category=(String)categoryField.getValue();
-            int maxMembers = Integer.parseInt(maxMemberField.getText());
+            String maxMember=maxMemberField.getText();
+            int maxMembers = 0;
+            if(ValidationUtils.maxMembers(maxMember)) {
+                maxMembers = Integer.parseInt(maxMember);
+            }
 
             System.out.println(category);
             if(validateClubFields(name,email,password,confirmPassword,clubName,description,category,enrollmentNo)){
