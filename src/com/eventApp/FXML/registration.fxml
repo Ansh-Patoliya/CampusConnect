@@ -21,17 +21,17 @@
             </AnchorPane>
 
             <!-- Basic Fields -->
-            <Label layoutX="54.0" layoutY="110.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Name :" />
-            <TextField fx:id="nameField" layoutX="138.0" layoutY="107.0" prefWidth="202.0" promptText="Enter name" />
+            <Label layoutX="54.0" layoutY="99.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Name :" />
+            <TextField fx:id="nameField" layoutX="137.0" layoutY="94.0" prefWidth="202.0" promptText="Enter name" />
 
-            <Label layoutX="54.0" layoutY="152.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Email :" />
-            <TextField fx:id="emailField" layoutX="138.0" layoutY="149.0" prefWidth="202.0" promptText="Enter email" />
+            <Label layoutX="53.0" layoutY="136.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Email :" />
+            <TextField fx:id="emailField" layoutX="137.0" layoutY="131.0" prefWidth="202.0" promptText="Enter email" />
 
-            <Label layoutX="42.0" layoutY="200.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Password :" />
-            <PasswordField fx:id="passwordField" layoutX="138.0" layoutY="197.0" prefWidth="202.0" promptText="Enter password" />
+            <Label layoutX="42.0" layoutY="210.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Password :" />
+            <PasswordField fx:id="passwordField" layoutX="137.0" layoutY="205.0" prefWidth="202.0" promptText="Enter password" />
 
-            <Label layoutX="37.0" layoutY="226.0" prefHeight="47.0" prefWidth="72.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Confirm Password :" wrapText="true" />
-            <PasswordField fx:id="confirmPasswordField" layoutX="138.0" layoutY="243.0" prefWidth="202.0" promptText="Confirm password" />
+            <Label layoutX="37.0" layoutY="232.0" prefHeight="47.0" prefWidth="72.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Confirm Password :" wrapText="true" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="137.0" layoutY="243.0" prefWidth="202.0" promptText="Confirm password" />
 
             <Label layoutX="54.0" layoutY="287.0" style="-fx-font-family: sans-serif; -fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Role :" />
             <RadioButton fx:id="studentRadio" layoutX="153.0" layoutY="288.0" text="Student">
@@ -46,16 +46,13 @@
             <Button layoutX="301.0" layoutY="577.0" onAction="#openLoginPage" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold;" text="Cancel" />
 
             <!-- Student Fields -->
-            <AnchorPane fx:id="StudentField" layoutX="32.0" layoutY="306.0" prefHeight="265.0" prefWidth="470.0" visible="false">
+            <AnchorPane fx:id="StudentField" disable="true" layoutX="32.0" layoutY="306.0" prefHeight="265.0" prefWidth="470.0">
                <children>
                   <Label layoutX="3.0" layoutY="13.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Department :" />
-                  <TextField fx:id="departmentField" layoutX="109.0" layoutY="9.0" prefWidth="320.0" promptText="Enter department name" />
+                  <ComboBox fx:id="departmentField" layoutX="109.0" layoutY="9.0" prefWidth="320.0" promptText="Select department" />
 
                   <Label layoutX="3.0" layoutY="57.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Semester :" />
                   <TextField fx:id="semesterField" layoutX="109.0" layoutY="53.0" prefWidth="320.0" promptText="Enter semester" />
-
-                  <Label layoutX="3.0" layoutY="88.0" prefHeight="34.0" prefWidth="94.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Enrollment Number:" wrapText="true" />
-                  <TextField fx:id="enrollmentField" layoutX="109.0" layoutY="93.0" prefWidth="320.0" promptText="Enter enrollment number" />
 
                   <Label layoutX="3.0" layoutY="137.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Interest(s):" />
                   <ListView fx:id="interestListView" layoutX="109.0" layoutY="133.0" prefHeight="120.0" prefWidth="320.0">
@@ -74,8 +71,9 @@
             </AnchorPane>
 
 
+
             <!-- Club Fields -->
-            <AnchorPane fx:id="ClubField" layoutX="20.0" layoutY="319.0" prefHeight="280.0" prefWidth="535.0" visible="false">
+            <AnchorPane fx:id="ClubField" layoutX="20.0" layoutY="319.0" prefHeight="252.0" prefWidth="535.0" visible="false">
                <children>
                   <Label layoutX="20.0" layoutY="5.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Select Option:" />
                   <RadioButton fx:id="joinExistingRadio" layoutX="140.0" layoutY="5.0" text="Join Existing">
@@ -124,6 +122,9 @@
 
                </children>
             </AnchorPane>
+
+            <Label layoutX="40.0" layoutY="163.0" prefHeight="34.0" prefWidth="94.0" style="-fx-text-fill: #6c3483; -fx-font-weight: bold;" text="Enrollment Number:" wrapText="true" />
+            <TextField fx:id="enrollmentField" layoutX="137.0" layoutY="167.0" prefHeight="26.0" prefWidth="202.0" promptText="Enter enrollment number" />
          </children>
       </AnchorPane>
    </children>

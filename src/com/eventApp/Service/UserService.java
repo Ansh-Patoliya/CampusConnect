@@ -4,6 +4,7 @@ import com.eventApp.DAO.UserDAO;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
+import com.eventApp.Model.User;
 
 public class UserService {
     private final UserDAO userDAO= new UserDAO();
@@ -21,7 +22,7 @@ public class UserService {
         return UserDAO.resetPass(emailInput,newPassword,confirmPassword);
     }
 
-    public boolean registerClub(Club club,ClubMember clubMember) {
-        return userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
+    public boolean registerClub(Club club, ClubMember clubMember, User user) {
+        return userDAO.registrationUser(user)&&userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
     }
 }
