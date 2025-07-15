@@ -210,4 +210,22 @@ public class ValidationUtils {
         */
         return category != null && !category.trim().isEmpty();
     }
+
+    public static boolean maxMembers(String maxMembers) {
+        /*
+            -> Validates that the given input contains only numeric digits (0–9).
+            -> This method returns false if the input includes letters, spaces, or special characters.
+         */
+        if (maxMembers == null || maxMembers.isEmpty()) {
+            return false;
+        }
+
+        for (int i = 0; i < maxMembers.length(); i++) {
+            char c = maxMembers.charAt(i);
+            if (c < '0' || c > '9') {
+                return false; // Found a non-digit character
+            }
+        }
+        return true;
+    }
 }
