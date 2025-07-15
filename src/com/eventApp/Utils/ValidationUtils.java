@@ -1,5 +1,9 @@
 package com.eventApp.Utils;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 /*
     -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
     -> This method ignores spaces, digits, and special characters — it returns false if any are present.
@@ -25,6 +29,19 @@ public class ValidationUtils {
         return true;
     }
 
+    public static boolean checkDuplicateEmail(String newEmail) throws Exception{
+        Connection connection = DatabaseConnection.getConnection();
+        String query = "SELECT email FROM Users WHERE email = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1,newEmail);
+
+        ResultSet rs = preparedStatement.executeQuery();
+
+        if (!rs.next()) {
+            return true;
+        }
+        return false;
+    }
     public static boolean checkEmail(String email) {
         if( email == null || email.isEmpty()) {
             return false;

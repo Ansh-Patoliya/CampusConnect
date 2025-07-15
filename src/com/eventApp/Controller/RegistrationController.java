@@ -5,6 +5,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
+import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class RegistrationController {
@@ -21,7 +23,7 @@ public class RegistrationController {
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
     public ToggleGroup RollGroup;
-    public TextField departmentField;
+    public ComboBox departmentField;
     public TextField semesterField;
     public TextField enrollmentField;
     public TextField clubNameField;
@@ -73,7 +75,112 @@ public class RegistrationController {
         });
 
 
+        categoryField.getItems().addAll("Tech", "Cultural", "Sports", "Literature");
+        categoryField.setValue("Tech"); // Optional default
+
         interestListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        loadExistingClubs();
+
+        List<String> department = Arrays.asList(
+                // Engineering & Technology
+                "Computer Engineering",
+                "Information Technology",
+                "Electronics & Communication Engineering",
+                "Electrical Engineering",
+                "Mechanical Engineering",
+                "Civil Engineering",
+                "Chemical Engineering",
+                "Biomedical Engineering",
+                "Mechatronics Engineering",
+                "Automobile Engineering",
+
+                // Science
+                "Physics",
+                "Chemistry",
+                "Mathematics",
+                "Biotechnology",
+                "Microbiology",
+                "Environmental Science",
+
+                // Commerce & Management
+                "Accounting",
+                "Finance",
+                "Marketing",
+                "Business Administration",
+                "Economics",
+                "Human Resource Management",
+
+                // Arts & Humanities
+                "English Literature",
+                "History",
+                "Political Science",
+                "Psychology",
+                "Sociology",
+                "Philosophy",
+
+                // Law & Education
+                "Law",
+                "Education",
+                "Library Science",
+
+                // Medical & Health Sciences
+                "Nursing",
+                "Pharmacy",
+                "Physiotherapy",
+                "Public Health",
+                "Dentistry",
+
+                // Others
+                "Hotel Management",
+                "Journalism and Mass Communication",
+                "Design",
+                "Fashion Technology",
+                "Animation",
+                "Fine Arts"
+        );
+
+        List<String> clubCategories = Arrays.asList(
+                // Technical
+                "Coding",
+                "Robotics",
+                "AI/ML",
+                "Cybersecurity",
+                "Web & App Development",
+                "Electronics",
+                "Open Source",
+
+                // Cultural
+                "Dance",
+                "Music",
+                "Drama/Theatre",
+                "Literature",
+                "Fine Arts",
+                "Photography",
+                "Film & Media",
+
+                // Academic / Leadership
+                "Entrepreneurship",
+                "Finance & Business",
+                "Debate",
+                "Public Speaking",
+                "Management",
+                "Innovation",
+                "Science & Research"
+        );
+
+
+
+        departmentField.getItems().addAll(department);
+        categoryField.getItems().addAll(clubCategories);
+
+    }
+
+    private UserDAO userDAO=new UserDAO();
+    private void loadExistingClubs() {
+        List<String> clubs = userDAO.getAllClubsName();
+        if (clubs != null && !clubs.isEmpty()) {
+            selectClubField.getItems().addAll(clubs);
+        }
     }
 
 
@@ -89,7 +196,7 @@ public class RegistrationController {
         String enrollmentNo = enrollmentField.getText();
         String confirmPassword = confirmPasswordField.getText();
         if (studentRadio.isSelected()) {
-            String department = departmentField.getText();
+            String department = departmentField.getValue().toString();
             String semester = semesterField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
             if (interest == null || interest.isEmpty()) {
@@ -114,17 +221,19 @@ public class RegistrationController {
             // Handle club registration logic here
             String clubName=clubNameField.getText().trim();
             String description=descriptionField.getText().trim();
-            String selectClub=(String)selectClubField.getValue();
             String category=(String)categoryField.getValue();
             int maxMembers = Integer.parseInt(maxMemberField.getText());
 
+            System.out.println(category);
             if(validateClubFields(name,email,password,confirmPassword,clubName,description,category,enrollmentNo)){
-                Club club = new Club(clubName, description, selectClub, category,maxMembers);
-                ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(),"head",club.getClubId());
-                boolean success = userService.registerClub(club, clubMember);
+                User user=new User(enrollmentNo,name,email,password,"club_member".toUpperCase());
+                Club club = new Club(clubName, description, category,enrollmentNo, maxMembers);
+                ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(),"President",club.getClubId());
+                boolean success = userService.registerClub(club, clubMember, user);
                 if (success){
                     FXMLScreenLoader.openLoginPage(event);
                 } else {
+                    System.out.println(category);
                     FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
                 }
             }
@@ -134,7 +243,7 @@ public class RegistrationController {
             String selectClub = (String) selectClubField.getValue();
             if (!(selectClub == null || selectClub.isEmpty())) {
                 String clubId = UserDAO.getClubId(selectClub);
-                ClubMember clubMember = new ClubMember(enrollmentNo,name,email,password,"club_member","member",clubId);
+                ClubMember clubMember = new ClubMember(enrollmentNo,name,email,password,"club_member".toUpperCase(),"Member",clubId);
                 boolean success = userService.registerClubMember(clubMember);
                 if (success) {
                     FXMLScreenLoader.openLoginPage(event);
@@ -168,7 +277,7 @@ public class RegistrationController {
             isValid = false;
         }
 
-        if(ValidationUtils.checkEnrollment(enrollmentNo)){
+        if(!ValidationUtils.checkEnrollment(enrollmentNo)){
             enrollmentField.clear();
             FXMLScreenLoader.showError("Enrollment number must contain only digits.");
             isValid = false;
@@ -196,7 +305,6 @@ public class RegistrationController {
         }
 
         if (!ValidationUtils.checkDepartment(department)) {
-            departmentField.clear();
             FXMLScreenLoader.showError("❌ Department cannot be empty or invalid.");
             return false;
         }
@@ -215,12 +323,12 @@ public class RegistrationController {
             return false; // General validations failed
         }
 
-        if(ValidationUtils.checkClubName(clubName)){
+        if(!ValidationUtils.checkClubName(clubName)){
             clubNameField.clear();
             FXMLScreenLoader.showError("❌ Club name must contain only letters.");
             return false;
         }
-        if (ValidationUtils.checkDescription(description)) {
+        if (!ValidationUtils.checkDescription(description)) {
             descriptionField.clear();
             FXMLScreenLoader.showError("❌ Description cannot be empty.");
             return false;

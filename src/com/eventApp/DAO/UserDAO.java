@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class UserDAO {
@@ -87,7 +89,7 @@ public class UserDAO {
     public static boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
         try{
             Connection connection = DatabaseConnection.getConnection();
-            if (!ValidationUtils.checkEmail(emailInput)) {
+            if (!ValidationUtils.checkEmail(emailInput)||!ValidationUtils.checkDuplicateEmail(emailInput)) {
                 FXMLScreenLoader.showError("Please enter a valid email.");
                 return false;
             }
@@ -140,16 +142,13 @@ public class UserDAO {
         try{
             Connection connection=DatabaseConnection.getConnection();
 
-            User user=new User(clubMember.getUserId(),clubMember.getName(),clubMember.getEmail(),clubMember.getPassword(),clubMember.getRole());
-            boolean userInsert=registrationUser(user);
-
             PreparedStatement preparedStatement=connection.prepareStatement("insert into club_members values(?,?,?)");
             preparedStatement.setString(1,clubMember.getUserId());
             preparedStatement.setString(2,clubMember.getClubId());
             preparedStatement.setString(3,clubMember.getPosition());
 
             int clubMemberInsert=preparedStatement.executeUpdate();
-            if(userInsert && clubMemberInsert>0){
+            if(clubMemberInsert>0){
                 return true;
             }
             else{
@@ -173,9 +172,34 @@ public class UserDAO {
             preparedStatement.setString(4,club.getDescriptions());
             preparedStatement.setString(5,club.getFounderId());
             preparedStatement.setString(6,club.getStatus());
+
+            int insertClub=preparedStatement.executeUpdate();
+            if(insertClub>0){
+                return true;
+            }
+            else{
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<String> getAllClubsName(){
+        List<String> clubNames = new ArrayList<>();
+        try{
+            Connection connection= DatabaseConnection.getConnection();
+            PreparedStatement ps= connection.prepareStatement("SELECT club_name FROM clubs");
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                String clubName = rs.getString(1);
+                clubNames.add(clubName);
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return clubNames;
     }
 }
