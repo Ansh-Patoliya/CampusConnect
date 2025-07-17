@@ -252,7 +252,7 @@ public class ValidationUtils {
         }
     }
 
-    public boolean isValidDate(String date) {
+    public static boolean isValidDate(String date) {
         try {
             LocalDate.parse(date); // Uses default ISO format: yyyy-MM-dd
             return true;
@@ -261,7 +261,7 @@ public class ValidationUtils {
         }
     }
 
-    public boolean isValidVenue(String venue, LocalDate date){
+    public static boolean isValidVenue(String venue, LocalDate date){
         String query = "select venue from clubs where venue = ? and eventDate = ?";
         PreparedStatement preparedStatement;
         try {
