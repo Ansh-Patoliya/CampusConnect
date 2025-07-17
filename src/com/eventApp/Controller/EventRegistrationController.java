@@ -1,13 +1,23 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.UserDAO;
+import com.eventApp.Loader.FXMLScreenLoader;
+import com.eventApp.Model.Event;
+import com.eventApp.Model.User;
+import com.eventApp.Service.ClubService;
+import com.eventApp.Utils.CurrentUser;
+import com.eventApp.Utils.ValidationUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -15,6 +25,12 @@ public class EventRegistrationController {
     public RadioButton fixedRadio;
     public RadioButton variableRadio;
     public AnchorPane discountNote;
+    public TextField eventNameField;
+    public TextField descriptionField1;
+    public TextField capacityField;
+    public DatePicker datePicker;
+    public TextField venueField;
+    public TextField ticketPriceField;
     @FXML
     private ComboBox<String> startTimeCombo;
 
@@ -42,10 +58,76 @@ public class EventRegistrationController {
         });
     }
 
+    private ClubService clubService = new ClubService();
     public void handleEventRegistration(ActionEvent event) {
+        String eventName = eventNameField.getText();
+        String description = descriptionField1.getText();
+        String venue = venueField.getText();
+        String maxParticipants= capacityField.getText();
+        String ticketPrice = ticketPriceField.getText();
+        LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+        LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+        LocalDate eventDate = datePicker.getValue();
 
+        User currentUser = CurrentUser.getCurrentUser();
+        String clubId= UserDAO.getClubIdByUserId(currentUser.getUserId());
+        String userId= currentUser.getUserId();
+        boolean discountApplicable = variableRadio.isSelected();
+
+        if(validateFields(eventName, description, venue, maxParticipants, eventDate, startTime, endTime, ticketPrice)) {
+            int maxParticipantsInt = Integer.parseInt(maxParticipants);
+            double ticketPriceDouble = Double.parseDouble(ticketPrice);
+            Event event1=new Event(eventName,description,venue,clubId,userId,maxParticipantsInt,eventDate,startTime,endTime,ticketPriceDouble, discountApplicable);
+            if(clubService.addEvent(event1)){
+                FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
+                openLoginPage(event);
+            } else {
+                FXMLScreenLoader.showMessage("Failed to create event. Please try again.", "Error", "error");
+            }
+        }
     }
 
+    public boolean validateFields(String eventName, String description, String venue, String maxParticipants, LocalDate eventDate, LocalTime startTime, LocalTime endTime, String ticketPrice) {
+        if(!ValidationUtils.checkName(eventName)){
+            eventNameField.clear();
+            FXMLScreenLoader.showError("Please enter a valid event name.");
+            return false;
+        }
+        if(!ValidationUtils.checkDescription(description)){
+            descriptionField1.clear();
+            FXMLScreenLoader.showError("Please enter a valid description.");
+            return false;
+        }
+        if(!ValidationUtils.checkName(venue)){
+            venueField.clear();
+            FXMLScreenLoader.showError("Please enter a valid venue.");
+            return false;
+        }
+        if(!ValidationUtils.checkNumber(maxParticipants)){
+            capacityField.clear();
+            FXMLScreenLoader.showError("Please enter a valid maximum participants number.");
+            return false;
+        }
+        if(!ValidationUtils.checkEventTime(startTime, endTime)){
+            startTimeCombo.getSelectionModel().clearSelection();
+            endTimeCombo.getSelectionModel().clearSelection();
+            FXMLScreenLoader.showError("Please select valid start and end times.");
+            return false;
+        }
+        if(!ValidationUtils.dateValidator(eventDate)){
+            datePicker.setValue(LocalDate.now());
+            FXMLScreenLoader.showError("Please select a valid event date.");
+            return false;
+        }
+        if(!ValidationUtils.checkNumber(ticketPrice)){
+            ticketPriceField.clear();
+            FXMLScreenLoader.showError("Please enter a valid ticket price.");
+            return false;
+        }
+
+        return true;
+    }
     public void openLoginPage(ActionEvent event) {
+        FXMLScreenLoader.openLoginPage(event);
     }
 }

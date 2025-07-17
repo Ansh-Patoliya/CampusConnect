@@ -202,4 +202,20 @@ public class UserDAO {
         }
         return clubNames;
     }
+
+    public static String getClubIdByUserId(String userId) {
+        String clubId = null;
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where user_id=?");
+            preparedStatement.setString(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                clubId = resultSet.getString(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return clubId;
+    }
 }

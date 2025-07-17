@@ -56,4 +56,19 @@ public class FXMLScreenLoader {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    public static void showMessage(String message, String title,String type) {
+        Alert alert;
+        if (type.equalsIgnoreCase("error")) {
+            alert = new Alert(Alert.AlertType.ERROR);
+        } else if (type.equalsIgnoreCase("info")) {
+            alert = new Alert(Alert.AlertType.INFORMATION);
+        } else {
+            alert = new Alert(Alert.AlertType.WARNING);
+        }
+        alert.setTitle(title);
+        alert.setHeaderText(null); // No header
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

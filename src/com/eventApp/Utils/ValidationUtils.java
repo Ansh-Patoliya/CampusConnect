@@ -297,7 +297,7 @@ public class ValidationUtils {
         return startTime.isBefore(endTime);
     }
 
-    public static boolean DateValidator(LocalDate inputDate){
+    public static boolean dateValidator(LocalDate inputDate){
         /**
          * Checks if the given date is in the future or present.
          * Returns true if the input has not passed yet.
