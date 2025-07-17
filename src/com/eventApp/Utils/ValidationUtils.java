@@ -257,4 +257,17 @@ public class ValidationUtils {
         }
     }
 
+    public boolean isValidVenue(String venue){
+        String query = "select venue from clubs where venue = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, venue);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
