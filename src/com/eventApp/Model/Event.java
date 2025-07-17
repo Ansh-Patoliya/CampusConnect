@@ -11,7 +11,7 @@ public class Event {
     LocalDate eventDate;
     LocalTime startTime, endTime;
 
-    public Event(String eventName, String description, String venue,String clubId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice) {
+    public Event(String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -20,9 +20,10 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
         this.clubId = clubId;
+        this.userId = userId;
         this.status = "pending";
         this.ticketPrice= ticketPrice;
-        this.discountApplicable= false;
+        this.discountApplicable= discountApplicable;
         //get club head's id from clubId and assign
     }
     //make method to get count of registrations

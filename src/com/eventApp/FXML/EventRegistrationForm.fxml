@@ -73,17 +73,17 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <TextField fx:id="nameField" layoutX="140.0" layoutY="64.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter event name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="eventNameField" layoutX="140.0" layoutY="64.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter event name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameField1" layoutX="142.0" layoutY="109.0" prefHeight="62.0" prefWidth="202.0" promptText="Enter description" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="descriptionField1" layoutX="142.0" layoutY="109.0" prefHeight="62.0" prefWidth="202.0" promptText="Enter description" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameField2" layoutX="139.0" layoutY="327.0" prefHeight="31.0" prefWidth="202.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="capacityField" layoutX="139.0" layoutY="327.0" prefHeight="31.0" prefWidth="202.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -93,7 +93,7 @@
 
             <DatePicker fx:id="datePicker" layoutX="140.0" layoutY="226.0" prefHeight="31.0" prefWidth="202.0" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1;" />
 
-            <TextField fx:id="nameField12" layoutX="140.0" layoutY="182.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="venueField" layoutX="140.0" layoutY="182.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
@@ -112,7 +112,7 @@
                   </Label>
                </children>
             </AnchorPane>
-            <TextField fx:id="nameField121" layoutX="139.0" layoutY="371.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="ticketPriceField" layoutX="139.0" layoutY="371.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
