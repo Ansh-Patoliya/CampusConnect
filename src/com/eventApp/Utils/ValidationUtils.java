@@ -276,7 +276,7 @@ public class ValidationUtils {
         }
     }
 
-    public boolean checkNumber(String input) {
+    public static boolean checkNumber(String input) {
         try {
             Integer.parseInt(input);
             return true;
@@ -285,7 +285,7 @@ public class ValidationUtils {
         }
     }
 
-    public boolean checkEventTime(LocalTime startTime, LocalTime endTime) {
+    public static boolean checkEventTime(LocalTime startTime, LocalTime endTime) {
     /*
          Validates that the start time of an event is earlier than the end time.
         -> Returns true if startTime is before endTime.
@@ -297,17 +297,17 @@ public class ValidationUtils {
         return startTime.isBefore(endTime);
     }
 
-    public boolean DateValidator(LocalDateTime inputDateTime){
+    public static boolean DateValidator(LocalDate inputDate){
         /**
-         * Checks if the given date-time is in the future or present.
+         * Checks if the given date is in the future or present.
          * Returns true if the input has not passed yet.
          */
-            if (inputDateTime == null) {
+            if (inputDate == null) {
                 return false;
             }
 
-            LocalDateTime currentDateTime = LocalDateTime.now();
-            return !inputDateTime.isBefore(currentDateTime);  // Valid if now or in future
+            LocalDate currentDate = LocalDate.now();
+            return !inputDate.isBefore(currentDate);  // Valid if now or in future
 
     }
 }
