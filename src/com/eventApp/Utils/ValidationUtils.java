@@ -265,7 +265,7 @@ public class ValidationUtils {
             preparedStatement.setString(1, venue);
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            return !resultSet.next();//if venue is already there then we can't allot it again
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
