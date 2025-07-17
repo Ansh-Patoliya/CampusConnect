@@ -3,6 +3,11 @@ package com.eventApp.Utils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 
 /*
     -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
@@ -47,9 +52,9 @@ public class ValidationUtils {
         return false;
     }
     public static boolean checkEmail(String email) {
-        if(!checkDuplicateEmail(email)){
-            return false;
-        }
+       if(!checkDuplicateEmail(email)){
+           return false;
+       }
         if( email == null || email.isEmpty()) {
             return false;
         }
@@ -228,4 +233,28 @@ public class ValidationUtils {
         }
         return true;
     }
+
+    public static boolean checkHost(String hostClub){
+        String query = "select club_name from clubs where club_name = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, hostClub);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date); // Uses default ISO format: yyyy-MM-dd
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
 }
