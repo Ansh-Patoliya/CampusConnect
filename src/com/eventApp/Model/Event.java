@@ -3,13 +3,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    String eventId, eventName, venue, description, status, clubId, userId;
+    private String eventId, eventName, venue, description, status, clubId, userId;
     private int maxParticipants;
+    private double ticketPrice;
+    private boolean discountApplicable;
     private static int registeredCount;
     LocalDate eventDate;
     LocalTime startTime, endTime;
 
-    public Event(String eventName, String description, String venue,String clubId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ) {
+    public Event(String eventName, String description, String venue,String clubId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -19,6 +21,8 @@ public class Event {
         this.endTime = endTime;
         this.clubId = clubId;
         this.status = "pending";
+        this.ticketPrice= ticketPrice;
+        this.discountApplicable= false;
         //get club head's id from clubId and assign
     }
     //make method to get count of registrations
@@ -54,4 +58,52 @@ public class Event {
     public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
 
     public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public double getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(double ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    public boolean isDiscountApplicable() {
+        return discountApplicable;
+    }
+
+    public void setDiscountApplicable(boolean discountApplicable) {
+        this.discountApplicable = discountApplicable;
+    }
+
+    public static int getRegisteredCount() {
+        return registeredCount;
+    }
+
+    public static void setRegisteredCount(int registeredCount) {
+        Event.registeredCount = registeredCount;
+    }
 }

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="652.0" prefWidth="856.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.control.DatePicker?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="697.0" prefWidth="856.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.EventRegistrationController">
    <children>
-      <AnchorPane layoutX="207.0" layoutY="31.0" prefHeight="589.0" prefWidth="442.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
+      <AnchorPane layoutX="207.0" layoutY="31.0" prefHeight="640.0" prefWidth="442.0" style="-fx-background-color: #f5f5f5; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 4);">
          <children>
             <Label layoutX="40.0" prefHeight="51.0" prefWidth="334.0" text="New Event Registration" textFill="#873fa6">
                <font>
@@ -42,35 +44,31 @@
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="323.0" prefHeight="26.0" prefWidth="94.0" text="Host:" textFill="#873fa6">
-               <font>
-                  <Font name="SansSerif Bold" size="14.0" />
-
-
-               </font>
-            </Label>
-            <Label layoutX="39.0" layoutY="370.0" prefHeight="26.0" prefWidth="94.0" text="Max capacity:" textFill="#873fa6">
+            <Label layoutX="21.0" layoutY="330.0" prefHeight="26.0" prefWidth="94.0" text="Max capacity:" textFill="#873fa6">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="40.0" layoutY="410.0" prefHeight="26.0" prefWidth="94.0" text="Ticket Price:" textFill="#873fa6">
+            <Label layoutX="30.0" layoutY="374.0" prefHeight="26.0" prefWidth="94.0" text="Ticket Price:" textFill="#873fa6">
                <font>
                   <Font name="SansSerif Bold" size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="159.0" layoutY="414.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="65.0" text="Fixed">
+            <RadioButton fx:id="variableRadio" layoutX="159.0" layoutY="439.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="66.0" text="Variable">
+               <toggleGroup>
+                  <ToggleGroup fx:id="priceGroup" />
+               </toggleGroup></RadioButton>
+            <RadioButton fx:id="fixedRadio" toggleGroup="$priceGroup" layoutX="159.0" layoutY="414.0" mnemonicParsing="false" prefHeight="18.0" prefWidth="65.0" text="Fixed">
                <font>
                   <Font size="13.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="159.0" layoutY="439.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="66.0" text="Variable" />
-            <Button alignment="CENTER" layoutX="39.0" layoutY="512.0" mnemonicParsing="false" onAction="#handleRegistration" prefHeight="30.0" prefWidth="153.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Register">
+            <Button alignment="CENTER" layoutX="39.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleEventRegistration" prefHeight="30.0" prefWidth="153.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Register">
                <font>
                   <Font size="15.0" />
                </font>
             </Button>
-            <Button alignment="CENTER" layoutX="226.0" layoutY="512.0" mnemonicParsing="false" onAction="#openLoginPage" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
+            <Button alignment="CENTER" layoutX="241.0" layoutY="569.0" mnemonicParsing="false" onAction="#openLoginPage" prefHeight="30.0" prefWidth="182.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Cancel">
                <font>
                   <Font size="15.0" />
                </font>
@@ -85,37 +83,36 @@
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameField2" layoutX="142.0" layoutY="367.0" prefHeight="31.0" prefWidth="202.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+            <TextField fx:id="nameField2" layoutX="139.0" layoutY="327.0" prefHeight="31.0" prefWidth="202.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameField3" layoutX="140.0" layoutY="321.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter host club" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="nameField4" layoutX="140.0" layoutY="275.0" prefHeight="31.0" prefWidth="66.0" promptText="HH:MM" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="235.0" layoutY="275.0" prefHeight="26.0" prefWidth="16.0" text="to" textFill="#873fa6">
-               <font>
-                  <Font name="SansSerif Bold" size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="nameField41" layoutX="275.0" layoutY="273.0" prefHeight="31.0" prefWidth="66.0" promptText="HH:MM" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="nameField11" layoutX="140.0" layoutY="226.0" prefHeight="31.0" prefWidth="202.0" promptText="Enter date" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
+            <ComboBox fx:id="startTimeCombo" layoutX="140.0" layoutY="275.0" prefHeight="31.0" prefWidth="80.0" promptText="Start Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8;" />
+            <ComboBox fx:id="endTimeCombo" layoutX="270.0" layoutY="275.0" prefHeight="31.0" prefWidth="80.0" promptText="End Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8;" />
+
+            <DatePicker fx:id="datePicker" layoutX="140.0" layoutY="226.0" prefHeight="31.0" prefWidth="202.0" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1;" />
+
             <TextField fx:id="nameField12" layoutX="140.0" layoutY="182.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <AnchorPane fx:id="discountNote" layoutX="17.0" layoutY="458.0" prefHeight="75.0" prefWidth="414.0" visible="false">
+               <children>
+                  <Label layoutX="14.0" prefHeight="26.0" prefWidth="130.0" text="📌 Discount Rules:">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="26.0" prefHeight="39.0" prefWidth="375.0" text="➤     First 20% people get 10% discount and last 7 days before event ticket price increases by 10%" textFill="#873fa6" wrapText="true">
+                     <font>
+                        <Font name="SansSerif Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="nameField121" layoutX="139.0" layoutY="371.0" prefHeight="30.0" prefWidth="202.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999;">
                <font>
                   <Font size="14.0" />
                </font>
