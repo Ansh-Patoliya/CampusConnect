@@ -263,7 +263,7 @@ public class ValidationUtils {
 
     public boolean isValidVenue(String venue, LocalDate date){
         String query = "select venue from clubs where venue = ? and eventDate = ?";
-        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatement;
         try {
             preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
             preparedStatement.setString(1, venue);
