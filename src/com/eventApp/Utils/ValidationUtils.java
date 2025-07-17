@@ -257,15 +257,16 @@ public class ValidationUtils {
         }
     }
 
-    public boolean isValidVenue(String venue){
-        String query = "select venue from clubs where venue = ?";
+    public boolean isValidVenue(String venue, LocalDate date){
+        String query = "select venue from clubs where venue = ? and eventDate = ?";
         PreparedStatement preparedStatement = null;
         try {
             preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
             preparedStatement.setString(1, venue);
+            preparedStatement.setString(2, String.valueOf(date));
 
             ResultSet resultSet = preparedStatement.executeQuery();
-            return !resultSet.next();//if venue is already there then we can't allot it again
+            return !resultSet.next();//if venue is used there then we can't allot it again
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
