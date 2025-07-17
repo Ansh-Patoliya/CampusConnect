@@ -1,10 +1,14 @@
 package com.eventApp.Utils;
 
+import com.eventApp.Loader.FXMLScreenLoader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -270,5 +274,40 @@ public class ValidationUtils {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean checkNumber(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean checkEventTime(LocalTime startTime, LocalTime endTime) {
+    /*
+         Validates that the start time of an event is earlier than the end time.
+        -> Returns true if startTime is before endTime.
+        -> Returns false otherwise (including if they are equal).
+    */
+        if (startTime == null || endTime == null) {
+           return false;
+        }
+        return startTime.isBefore(endTime);
+    }
+
+    public boolean DateValidator(LocalDateTime inputDateTime){
+        /**
+         * Checks if the given date-time is in the future or present.
+         * Returns true if the input has not passed yet.
+         */
+            if (inputDateTime == null) {
+                return false;
+            }
+
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            return !inputDateTime.isBefore(currentDateTime);  // Valid if now or in future
+
     }
 }
