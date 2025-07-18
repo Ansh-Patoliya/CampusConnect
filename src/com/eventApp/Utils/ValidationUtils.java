@@ -1,8 +1,17 @@
 package com.eventApp.Utils;
 
+import com.eventApp.Loader.FXMLScreenLoader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
+import java.util.AbstractList;
+import java.util.ArrayList;
 
 /*
     -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
@@ -47,9 +56,9 @@ public class ValidationUtils {
         return false;
     }
     public static boolean checkEmail(String email) {
-        if(!checkDuplicateEmail(email)){
-            return false;
-        }
+       if(!checkDuplicateEmail(email)){
+           return false;
+       }
         if( email == null || email.isEmpty()) {
             return false;
         }
@@ -227,5 +236,78 @@ public class ValidationUtils {
             }
         }
         return true;
+    }
+
+    public static boolean checkHost(String hostClub){
+        String query = "select club_name from clubs where club_name = ?";
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, hostClub);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return resultSet.next();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean isValidDate(String date) {
+        try {
+            LocalDate.parse(date); // Uses default ISO format: yyyy-MM-dd
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidVenue(String venue, LocalDate date){
+        String query = "select venue from clubs where venue = ? and eventDate = ?";
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = DatabaseConnection.getConnection().prepareStatement(query);
+            preparedStatement.setString(1, venue);
+            preparedStatement.setString(2, String.valueOf(date));
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return !resultSet.next();//if venue is used there then we can't allot it again
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static boolean checkNumber(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public static boolean checkEventTime(LocalTime startTime, LocalTime endTime) {
+    /*
+         Validates that the start time of an event is earlier than the end time.
+        -> Returns true if startTime is before endTime.
+        -> Returns false otherwise (including if they are equal).
+    */
+        if (startTime == null || endTime == null) {
+           return false;
+        }
+        return startTime.isBefore(endTime);
+    }
+
+    public static boolean dateValidator(LocalDate inputDate){
+        /**
+         * Checks if the given date is in the future or present.
+         * Returns true if the input has not passed yet.
+         */
+            if (inputDate == null) {
+                return false;
+            }
+
+            LocalDate currentDate = LocalDate.now();
+            return !inputDate.isBefore(currentDate);  // Valid if now or in future
+
     }
 }

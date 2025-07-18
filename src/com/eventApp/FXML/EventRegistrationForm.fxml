@@ -76,28 +76,36 @@
                <font>
                   <Font size="14.0" />
                </font>
+
             </TextField>
             <TextField fx:id="nameField12" layoutX="150.0" layoutY="182.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <DatePicker fx:id="datePicker" layoutX="150.0" layoutY="226.0" prefHeight="31.0" prefWidth="250.0" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-color: white;" />
-            <ComboBox fx:id="startTimeCombo" layoutX="150.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="Start Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
-            <ComboBox fx:id="endTimeCombo" layoutX="290.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="End Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
-            <TextField fx:id="nameField2" layoutX="150.0" layoutY="327.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="nameField121" layoutX="150.0" layoutY="371.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
 
+            <DatePicker fx:id="datePicker" layoutX="150.0" layoutY="226.0" prefHeight="31.0" prefWidth="250.0" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-color: white;" />
+            <ComboBox fx:id="startTimeCombo" layoutX="150.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="Start Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
+            <ComboBox fx:id="endTimeCombo" layoutX="290.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="End Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
+            <TextField fx:id="nameField2" layoutX="150.0" layoutY="327.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+
+            <TextField fx:id="nameField121" layoutX="150.0" layoutY="371.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+
+
             <!-- Radio Buttons -->
             <Label layoutX="40.0" layoutY="414.0" prefHeight="26.0" prefWidth="100.0" text="Price Type:" textFill="#873fa6">
+
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -132,8 +140,10 @@
                </children>
             </AnchorPane>
 
+
             <!-- Buttons - Adjusted position to accommodate larger discount note -->
             <Button alignment="CENTER" layoutX="40.0" layoutY="579.0" mnemonicParsing="false" onAction="#handleEventRegistration" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Register">
+
                <font>
                   <Font size="15.0" />
                </font>

@@ -9,31 +9,36 @@ import java.sql.PreparedStatement;
 import java.sql.Time;
 
 public class ClubDAO {
-    public static boolean createEvent(Event event) throws Exception{
-        String sql = "INSERT INTO events (event_id,club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean createEvent(Event event) {
+        try {
+            String sql = "INSERT INTO events (event_id,club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        Connection con = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = con.prepareStatement(sql);
+            Connection con = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-        preparedStatement.setString(1, event.getEventId());
-        preparedStatement.setString(2, event.getClubId());
-        preparedStatement.setString(3, event.getEventName());
-        preparedStatement.setString(4, event.getDescription());
-        preparedStatement.setDate(5, Date.valueOf(event.getEventDate()));
-        preparedStatement.setDouble(6, event.getTicketPrice());
-        preparedStatement.setString(7, event.getUserId());
-        preparedStatement.setBoolean(8, event.isDiscountApplicable());
-        preparedStatement.setTime(9, Time.valueOf(event.getStartTime()));
-        preparedStatement.setTime(10, Time.valueOf(event.getEndTime()));
-        preparedStatement.setString(11, event.getVenue());
-        preparedStatement.setInt(12, event.getMaxParticipants());
+            preparedStatement.setString(1, event.getEventId());
+            preparedStatement.setString(2, event.getClubId());
+            preparedStatement.setString(3, event.getEventName());
+            preparedStatement.setString(4, event.getDescription());
+            preparedStatement.setDate(5, Date.valueOf(event.getEventDate()));
+            preparedStatement.setDouble(6, event.getTicketPrice());
+            preparedStatement.setString(7, event.getUserId());
+            preparedStatement.setBoolean(8, event.isDiscountApplicable());
+            preparedStatement.setTime(9, Time.valueOf(event.getStartTime()));
+            preparedStatement.setTime(10, Time.valueOf(event.getEndTime()));
+            preparedStatement.setString(11, event.getVenue());
+            preparedStatement.setInt(12, event.getMaxParticipants());
 
-        int r = preparedStatement.executeUpdate();
+            int r = preparedStatement.executeUpdate();
 
-        if(r>0){
-            return true;
+            if (r > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
-        else {
+        catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
