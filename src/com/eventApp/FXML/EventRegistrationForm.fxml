@@ -67,18 +67,18 @@
             </Label>
 
             <!-- Input Fields (Aligned consistently) -->
-            <TextField fx:id="nameField" layoutX="150.0" layoutY="64.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter event name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+            <TextField fx:id="eventNameField" layoutX="150.0" layoutY="64.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter event name" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="nameField1" layoutX="150.0" layoutY="109.0" prefHeight="62.0" prefWidth="250.0" promptText="Enter description" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+            <TextField fx:id="descriptionField" layoutX="150.0" layoutY="109.0" prefHeight="62.0" prefWidth="250.0" promptText="Enter description" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
                <font>
                   <Font size="14.0" />
                </font>
 
             </TextField>
-            <TextField fx:id="nameField12" layoutX="150.0" layoutY="182.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+            <TextField fx:id="venueField" layoutX="150.0" layoutY="182.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter venue" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
 
                <font>
                   <Font size="14.0" />
@@ -88,14 +88,14 @@
             <DatePicker fx:id="datePicker" layoutX="150.0" layoutY="226.0" prefHeight="31.0" prefWidth="250.0" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-color: white;" />
             <ComboBox fx:id="startTimeCombo" layoutX="150.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="Start Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
             <ComboBox fx:id="endTimeCombo" layoutX="290.0" layoutY="275.0" prefHeight="31.0" prefWidth="110.0" promptText="End Time" style="-fx-border-color: #a569bd; -fx-border-width: 1; -fx-background-radius: 8; -fx-background-color: white;" />
-            <TextField fx:id="nameField2" layoutX="150.0" layoutY="327.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+            <TextField fx:id="capacityField" layoutX="150.0" layoutY="327.0" prefHeight="31.0" prefWidth="250.0" promptText="Enter max capacity" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
 
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
 
-            <TextField fx:id="nameField121" layoutX="150.0" layoutY="371.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
+            <TextField fx:id="ticketPriceField" layoutX="150.0" layoutY="371.0" prefHeight="30.0" prefWidth="250.0" promptText="Enter ticket price" style="-fx-background-radius: 8; -fx-border-radius: 5; -fx-border-color: #a569bd; -fx-border-width: 1; -fx-prompt-text-fill: #999; -fx-background-color: white;">
 
                <font>
                   <Font size="14.0" />

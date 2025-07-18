@@ -200,7 +200,7 @@ public class RegistrationController {
             String semester = semesterField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
             if (interest == null || interest.isEmpty()) {
-                FXMLScreenLoader.showError("❌ Please select at least one interest.");
+                FXMLScreenLoader.showMessage("❌ Please select at least one interest.", "title", "error");
                 return;
             }
             if(validateStudentFields(name,email,password,confirmPassword,department,semester,enrollmentNo)){
@@ -211,7 +211,7 @@ public class RegistrationController {
                     FXMLScreenLoader.openLoginPage(event);
                 }
                 else{
-                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                    FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
                 }
             }
             else{
@@ -237,8 +237,7 @@ public class RegistrationController {
                 if (success){
                     FXMLScreenLoader.openLoginPage(event);
                 } else {
-                    System.out.println(category);
-                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                    FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
                 }
             }
         }
@@ -252,15 +251,15 @@ public class RegistrationController {
                 if (success) {
                     FXMLScreenLoader.openLoginPage(event);
                 } else {
-                    FXMLScreenLoader.showError("❌ Registration failed. Please try again.");
+                    FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
                 }
             }
             else{
-                FXMLScreenLoader.showError("❌ Please select a club to join.");
+                FXMLScreenLoader.showMessage("❌ Please select a club to join.", "registration", "error");
             }
         }
         else{
-            FXMLScreenLoader.showError("Please select a role (Student or Club Member) to register.");
+            FXMLScreenLoader.showMessage("❌ Please select a registration option.", "registration", "error");
         }
 
     }
@@ -271,32 +270,29 @@ public class RegistrationController {
         if (!ValidationUtils.checkName(name))
         {
             nameField.clear();
-            FXMLScreenLoader.showError("Name must contain only letters.");
             isValid = false;
         }
 
         if (!ValidationUtils.checkEmail(email)) {
             emailField.clear();
-            FXMLScreenLoader.showError("Please enter a valid email.");
             isValid = false;
         }
 
         if(!ValidationUtils.checkEnrollment(enrollmentNo)){
             enrollmentField.clear();
-            FXMLScreenLoader.showError("Enrollment number must contain only digits.");
             isValid = false;
         }
 
         if (!ValidationUtils.checkPassword(password)) {
             passwordField.clear();
-            FXMLScreenLoader.showError("Password must be strong (min 8 chars, mix of A-Z, a-z, 0-9, special char).");
+            FXMLScreenLoader.showMessage("❌ Password must be at least 8 characters long, contain uppercase and lowercase letters, a number, and a special character.", "password", "error");
             isValid = false;
         }
 
         if (!ValidationUtils.isMatchingPasswords(password, confirmPassword)) {
             passwordField.clear();
             confirmPasswordField.clear();
-            FXMLScreenLoader.showError("Password and Confirm Password do not match.");
+            FXMLScreenLoader.showMessage("Password and Confirm Password do not match.", "password", "error");
             isValid = false;
         }
 
@@ -308,14 +304,8 @@ public class RegistrationController {
             return false; // General validations failed
         }
 
-        if (!ValidationUtils.checkDepartment(department)) {
-            FXMLScreenLoader.showError("❌ Department cannot be empty or invalid.");
-            return false;
-        }
-
         if (!ValidationUtils.checkSemester(semester)) {
             semesterField.clear();
-            FXMLScreenLoader.showError("❌ Semester must be a number between 1 and 8.");
             return false;
         }
 
@@ -329,17 +319,16 @@ public class RegistrationController {
 
         if(!ValidationUtils.checkClubName(clubName)){
             clubNameField.clear();
-            FXMLScreenLoader.showError("❌ Club name must contain only letters.");
             return false;
         }
         if (!ValidationUtils.checkDescription(description)) {
             descriptionField.clear();
-            FXMLScreenLoader.showError("❌ Description cannot be empty.");
+            FXMLScreenLoader.showMessage("❌ Description cannot be empty.", "description", "error");
             return false;
         }
 
         if(!ValidationUtils.checkCategory(category)) {
-            FXMLScreenLoader.showError("❌ Please select a valid category.");
+            FXMLScreenLoader.showMessage("❌ Please select a valid category.","category", "error");
             return false;
         }
         return true;
