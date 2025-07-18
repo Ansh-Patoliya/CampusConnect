@@ -13,7 +13,7 @@ public class CurrentUser {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
+    public static void setCurrentUser(User currentUser) {
         CurrentUser.currentUser = currentUser;
     }
 }

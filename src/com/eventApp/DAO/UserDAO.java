@@ -86,19 +86,9 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
+    public boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
         try{
             Connection connection = DatabaseConnection.getConnection();
-            if (!ValidationUtils.checkEmail(emailInput)) {
-                FXMLScreenLoader.showError("Please enter a valid email.");
-                return false;
-            }
-
-
-            if (!newPassword.equals(confirmPassword)) {
-                FXMLScreenLoader.showError("Password and Confirm Password do not match.");
-                return false;
-            }
 
             String query = "UPDATE users SET password = ? WHERE email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -111,7 +101,7 @@ public class UserDAO {
                 return true;
             }
             else {
-                FXMLScreenLoader.showError("Password update failed.");
+                FXMLScreenLoader.showMessage("Password update failed. Please try again.", "Error", "error");
             }
 
         }
@@ -217,5 +207,26 @@ public class UserDAO {
             e.printStackTrace();
         }
         return clubId;
+    }
+
+    public User getUserByemail(String emailInput) {
+        User user = null;
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE email = ?");
+            preparedStatement.setString(1, emailInput);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String userId = rs.getString("user_id");
+                String name = rs.getString("name");
+                String password = rs.getString("password");
+                String role = rs.getString("role");
+                user = new User(userId, name, emailInput, password, role);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

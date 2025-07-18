@@ -23,25 +23,26 @@ public class ForgetPasswordController {
         String password=passwordField.getText();
         String confirmPassword=confirmPasswordField.getText();
 
-        if(validateField(email,password,confirmPassword)){
-            userService.resetPassword(email,password,confirmPassword);
+        if(userService.resetPassword(email,password,confirmPassword)){
+            FXMLScreenLoader.openLoginPage(event);
+        } else {
+            // Handle the case where the password reset failed
+            // You can show an error message or take appropriate action
+            FXMLScreenLoader.showMessage("Password reset failed. Please try again.","Error","error");
         }
     }
 
     public boolean validateField(String email,String password,String confirmPassword){
         if(!ValidationUtils.checkEmail(email)){
             emailField.clear();
-            FXMLScreenLoader.showError("Please enter a valid email.");
         }
         if(!ValidationUtils.checkPassword(password)){
             passwordField.clear();
             confirmPasswordField.clear();
-            FXMLScreenLoader.showError("Please enter a valid password.");
         }
          if(!password.equals(confirmPassword)){
             passwordField.clear();
             confirmPasswordField.clear();
-            FXMLScreenLoader.showError("Passwords do not match.");
         }
 
         return true;

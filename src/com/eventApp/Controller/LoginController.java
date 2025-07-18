@@ -1,7 +1,9 @@
 package com.eventApp.Controller;
 
 import com.eventApp.Loader.FXMLScreenLoader;
+import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
+import com.eventApp.Utils.CurrentUser;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -25,14 +27,22 @@ public class LoginController {
         String passwordInput = password.getText().trim();
 
         UserService userService=new UserService();
-        if (ValidationUtils.checkEmail(emailInput) && ValidationUtils.checkPassword(passwordInput)) {
-            FXMLScreenLoader.showError("✅Login Successful");
-            //code to move forward towards dashboard
-            userService.checklogin(emailInput,passwordInput);
-        }
-        else{
-            FXMLScreenLoader.showError("❌Invalid login id or password");
-        }
+
+            if(userService.checklogin(emailInput,passwordInput)){
+                User user = userService.getUserByEmail(emailInput);
+                if (user != null) {
+                    CurrentUser.setCurrentUser(user);
+                    FXMLScreenLoader.showMessage("✅Login successful", "login","info");
+                    FXMLScreenLoader.openEventRegistration(event);
+//                    FXMLScreenLoader.openDashboard(event, user);
+                } else {
+                    FXMLScreenLoader.showMessage("❌User not found", "login", "error");
+                }
+            }
+            else{
+                FXMLScreenLoader.showMessage("❌Invalid email or password", "login", "error");
+            }
+
     }
 
     public void openForgotPassword(ActionEvent actionEvent) {

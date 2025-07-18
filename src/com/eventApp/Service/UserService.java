@@ -19,10 +19,14 @@ public class UserService {
     public boolean checklogin(String emailInput, String passwordInput) { return userDAO.checkLoginDetails(emailInput, passwordInput); }
 
     public boolean resetPassword(String emailInput, String newPassword, String confirmPassword) {
-        return UserDAO.resetPass(emailInput,newPassword,confirmPassword);
+        return userDAO.resetPass(emailInput,newPassword,confirmPassword);
     }
 
     public boolean registerClub(Club club, ClubMember clubMember, User user) {
         return userDAO.registrationUser(user)&&userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
+    }
+
+    public User getUserByEmail(String emailInput) {
+        return userDAO.getUserByemail(emailInput);
     }
 }

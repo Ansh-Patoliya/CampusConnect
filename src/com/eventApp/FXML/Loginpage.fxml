@@ -75,7 +75,7 @@
                </Label>
 
                <VBox alignment="CENTER_LEFT" spacing="8">
-                  <Label style="-fx-text-fill: #2d3436;" text="Username">
+                  <Label style="-fx-text-fill: #2d3436;" text="Email">
                      <font>
                         <Font name="System SemiBold" size="12.0" />
                      </font>

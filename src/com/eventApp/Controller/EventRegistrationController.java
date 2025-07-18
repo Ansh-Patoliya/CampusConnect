@@ -26,7 +26,7 @@ public class EventRegistrationController {
     public RadioButton variableRadio;
     public AnchorPane discountNote;
     public TextField eventNameField;
-    public TextField descriptionField1;
+    public TextField descriptionField;
     public TextField capacityField;
     public DatePicker datePicker;
     public TextField venueField;
@@ -61,7 +61,7 @@ public class EventRegistrationController {
     private ClubService clubService = new ClubService();
     public void handleEventRegistration(ActionEvent event) {
         String eventName = eventNameField.getText();
-        String description = descriptionField1.getText();
+        String description = descriptionField.getText();
         String venue = venueField.getText();
         String maxParticipants= capacityField.getText();
         String ticketPrice = ticketPriceField.getText();
@@ -70,8 +70,9 @@ public class EventRegistrationController {
         LocalDate eventDate = datePicker.getValue();
 
         User currentUser = CurrentUser.getCurrentUser();
+        String
+                userId= currentUser.getUserId();
         String clubId= UserDAO.getClubIdByUserId(currentUser.getUserId());
-        String userId= currentUser.getUserId();
         boolean discountApplicable = variableRadio.isSelected();
 
         if(validateFields(eventName, description, venue, maxParticipants, eventDate, startTime, endTime, ticketPrice)) {
@@ -90,38 +91,32 @@ public class EventRegistrationController {
     public boolean validateFields(String eventName, String description, String venue, String maxParticipants, LocalDate eventDate, LocalTime startTime, LocalTime endTime, String ticketPrice) {
         if(!ValidationUtils.checkName(eventName)){
             eventNameField.clear();
-            FXMLScreenLoader.showError("Please enter a valid event name.");
             return false;
         }
         if(!ValidationUtils.checkDescription(description)){
-            descriptionField1.clear();
-            FXMLScreenLoader.showError("Please enter a valid description.");
+            descriptionField.clear();
+
             return false;
         }
         if(!ValidationUtils.checkName(venue)){
             venueField.clear();
-            FXMLScreenLoader.showError("Please enter a valid venue.");
             return false;
         }
         if(!ValidationUtils.checkNumber(maxParticipants)){
             capacityField.clear();
-            FXMLScreenLoader.showError("Please enter a valid maximum participants number.");
             return false;
         }
         if(!ValidationUtils.checkEventTime(startTime, endTime)){
             startTimeCombo.getSelectionModel().clearSelection();
             endTimeCombo.getSelectionModel().clearSelection();
-            FXMLScreenLoader.showError("Please select valid start and end times.");
             return false;
         }
         if(!ValidationUtils.dateValidator(eventDate)){
             datePicker.setValue(LocalDate.now());
-            FXMLScreenLoader.showError("Please select a valid event date.");
             return false;
         }
         if(!ValidationUtils.checkNumber(ticketPrice)){
             ticketPriceField.clear();
-            FXMLScreenLoader.showError("Please enter a valid ticket price.");
             return false;
         }
 

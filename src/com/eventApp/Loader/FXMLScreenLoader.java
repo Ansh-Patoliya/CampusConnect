@@ -49,13 +49,19 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validation Error");
-        alert.setHeaderText(null); // No header
-        alert.setContentText(message);
-        alert.showAndWait();
+    public static void openEventRegistration(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventRegistrationForm.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Forgot Password");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     public static void showMessage(String message, String title,String type) {
         Alert alert;

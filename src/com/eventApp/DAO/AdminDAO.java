@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class AdminDAO {
 
     //bring list of pending event, make method in DAO return type list
-    ArrayList<Event> getEventList(String statusOfEvent){
+    public ArrayList<Event> getEventList(String statusOfEvent){
         ArrayList<Event> eventList = new ArrayList<>();
         try{
             Connection connection = DatabaseConnection.getConnection();
-            String query = "select * from events where status = ?";
+            String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,statusOfEvent);
             ResultSet resultSet = preparedStatement.executeQuery();
