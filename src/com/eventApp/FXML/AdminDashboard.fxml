@@ -29,7 +29,11 @@
             </Pane>
             <ListView fx:id="eventListView" layoutX="170.0" layoutY="100.0" prefWidth="400.0" prefHeight="400.0"
                       visible="false"
-                      style="-fx-background-color: white; -fx-border-color: #873fa6; -fx-border-width: 1;" />
+                      style="-fx-background-color: #f5f5f5 ; -fx-border-color: #873fa6; -fx-border-width: 1;" />
+
+            <ListView fx:id="clubListView" layoutX="170.0" layoutY="100.0" prefWidth="400.0" prefHeight="400.0"
+                      visible="false"
+                      style="-fx-background-color: #f5f5f5 ; -fx-border-color: #873fa6; -fx-border-width: 1;" />
 
             <BorderPane layoutY="48.0" prefHeight="571.0" prefWidth="157.0" style="-fx-background-radius: 0 0 0 12; -fx-background-color: #873fa6;">
                <top>
