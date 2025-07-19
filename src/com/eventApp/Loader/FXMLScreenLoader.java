@@ -62,6 +62,31 @@ public class FXMLScreenLoader {
         }
     }
 
+    public static void openAdminDashboard(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/AdminDashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Admin Dashboard");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void openClubApproval(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubApproval.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Club Approval");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void showMessage(String message, String title,String type) {
         Alert alert;

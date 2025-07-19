@@ -5,6 +5,7 @@ import com.eventApp.Model.Club;
 import com.eventApp.Service.ClubApprovalService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
 
 public class ClubApprovalController {
 
@@ -70,8 +71,9 @@ public class ClubApprovalController {
     }
 
     @FXML
-    private void onBack() {
+    private void onBack(ActionEvent event) {
         // You can implement navigation back to dashboard here
+        FXMLScreenLoader.openAdminDashboard(event); // Assuming this method opens the dashboard or previous screen
     }
 
     private void clearLabels() {

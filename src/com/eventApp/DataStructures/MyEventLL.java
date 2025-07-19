@@ -16,7 +16,7 @@ public class MyEventLL {
 
     Node first = null;
 
-    void insert(Event data) {
+    public void insert(Event data) {
         Node n = new Node(data);
         if (first == null) {
             first = n;

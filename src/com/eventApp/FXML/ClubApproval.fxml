@@ -58,7 +58,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="44.0" layoutY="473.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Back">
+      <Button alignment="CENTER" onAction="#onBack" layoutX="44.0" layoutY="473.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Back">
          <font>
             <Font size="15.0" />
          </font>

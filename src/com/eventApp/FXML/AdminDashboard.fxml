@@ -39,12 +39,12 @@
                <top>
                   <VBox prefHeight="206.0" prefWidth="158.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="viewEventButton" onAction="#handleViewEvent" mnemonicParsing="false" prefHeight="40.0" prefWidth="158.0" style="-fx-background-color: #f5f5f5;" text="View Events" textFill="#873fa6">
+                        <Button fx:id="viewEventButton"  mnemonicParsing="false" prefHeight="40.0" prefWidth="158.0" style="-fx-background-color: #f5f5f5;" text="View Events" textFill="#873fa6">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-                        <Button fx:id="viewClubButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #873fa6;" text="View Clubs" textFill="WHITESMOKE">
+                        <Button fx:id="viewClubButton" onAction="#handleClubApproval" mnemonicParsing="false" prefHeight="40.0" prefWidth="161.0" style="-fx-background-color: #873fa6;" text="View Clubs" textFill="WHITESMOKE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
