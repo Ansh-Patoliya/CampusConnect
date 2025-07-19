@@ -45,7 +45,7 @@ public class ClubDAO {
         MyClubQueue clubList=null;
         int rowCount=0;
         try(Connection connection = DatabaseConnection.getConnection()){
-            String fetchClubCount = "select count(*) from club where status = ?";
+            String fetchClubCount = "select count(*) from clubs where status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(fetchClubCount);
             preparedStatement.setString(1,clubStatus);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -53,7 +53,7 @@ public class ClubDAO {
                 rowCount = resultSet.getInt(1);
             }
             clubList = new MyClubQueue(rowCount);
-            String fetchClubRecord = "select * from club where status = ?";
+            String fetchClubRecord = "select * from clubs where status = ?";
             PreparedStatement preparedStatement2 = connection.prepareStatement(fetchClubRecord);
             preparedStatement2.setString(1,clubStatus);
             resultSet = preparedStatement2.executeQuery();
