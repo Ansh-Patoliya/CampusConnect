@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ClubApprovalService {
 
     private AdminDAO adminDAO;
-    private MyClubQueue queue= adminDAO.getClubList("pending");
+    private MyClubQueue queue;
     private ClubDAO clubDAO;
 
     public Club viewNextPendingClub() {
@@ -58,6 +58,10 @@ public class ClubApprovalService {
 
     public MyClubQueue getAllPendingClubs() {
         // Return pending clubs from DB
+        if (queue == null) {
+            queue = adminDAO.getClubList("pending");
+        }
         return queue;
+
     }
 }
