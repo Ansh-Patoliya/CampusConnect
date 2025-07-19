@@ -9,7 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import com.eventApp.Model.Event;
-
+import com.eventApp.Model.Club;
 import java.time.format.DateTimeFormatter;
 import java.util.Queue;
 
@@ -25,6 +25,9 @@ public class AdminController {
 
     @FXML
     private ListView<String> eventListView;
+
+    @FXML
+    private ListView<String> clubListView;
 
     public void initialize(){
         eventListView.setVisible(false);
@@ -47,4 +50,18 @@ public class AdminController {
         eventListView.setItems(eventList);
     }
 
+    public void handleViewClub(ActionEvent actionEvent) {
+        clubListView.setVisible(true);
+        Queue<Club> clubQueue = null;// method call
+
+        ObservableList<String> eventList = FXCollections.observableArrayList();
+
+        //print clubListView in gui
+        for (Club c : clubQueue) {
+            String formattedEvent = c.getClubName();
+            eventList.add(formattedEvent);
+        }
+
+        eventListView.setItems(eventList);
+    }
 }

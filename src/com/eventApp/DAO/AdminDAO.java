@@ -1,5 +1,6 @@
 package com.eventApp.DAO;
 
+import com.eventApp.Model.Club;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -16,8 +17,7 @@ public class AdminDAO {
     //bring list of pending event, make method in DAO return type list
     public ArrayList<Event> getEventList(String statusOfEvent){
         ArrayList<Event> eventList = new ArrayList<>();
-        try{
-            Connection connection = DatabaseConnection.getConnection();
+        try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1,statusOfEvent);
@@ -46,5 +46,26 @@ public class AdminDAO {
             throw new RuntimeException(e);
         }
         return eventList;
+    }
+
+    public ArrayList<Club> getClubList(String clubStatus){
+        ArrayList<Club> clubList = new ArrayList<>();
+        try(Connection connection = DatabaseConnection.getConnection()){
+            String query = "select * from club where status = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,clubStatus);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String clubName=resultSet.getString("club_name");
+                String descriptions= resultSet.getString("description");
+                String category= resultSet.getString("category");
+                String founderId=resultSet.getString("founder_Id");
+                int memberCount=resultSet.getInt("member_count");
+                clubList.add(new Club(clubName, descriptions, category, founderId, memberCount));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return clubList;
     }
 }
