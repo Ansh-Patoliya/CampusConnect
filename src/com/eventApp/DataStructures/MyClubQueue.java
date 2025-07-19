@@ -2,18 +2,18 @@ package com.eventApp.DataStructures;
 
 import com.eventApp.Model.Club;
 
-public class ClubApprovalQueue {
+public class MyClubQueue {
     int rear, front, size;
     Club clubQueue[];
 
-    public ClubApprovalQueue(int size) {
+    public MyClubQueue(int size) {
         this.front = -1;
         this.rear = -1;
         this.size = size;
         clubQueue = new Club[size];
     }
 
-    void enqueue(Club club) {
+    public void enqueue(Club club) {
         if (rear == size - 1) {
             return;
         }
@@ -38,7 +38,7 @@ public class ClubApprovalQueue {
         return temp;
     }
 
-    Club peek() {
+    public Club peek() {
         if (isEmpty()) {
             return null;
         }
