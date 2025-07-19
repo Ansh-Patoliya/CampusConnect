@@ -1,5 +1,6 @@
 package com.eventApp.DAO;
 
+import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 
 public class AdminDAO {
 
+
+
     //bring list of pending event, make method in DAO return type list
-    public ArrayList<Event> getEventList(String statusOfEvent){
-        ArrayList<Event> eventList = new ArrayList<>();
+    public MyEventLL getEventList(String statusOfEvent){
+        MyEventLL eventList = new MyEventLL();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -38,7 +41,7 @@ public class AdminDAO {
                 double ticketPrice = resultSet.getDouble("ticket_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
-                eventList.add(new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                eventList.insert(new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate,
                 startTime, endTime , ticketPrice, discountApplicable));
             }
         } catch (SQLException | ClassNotFoundException e) {
