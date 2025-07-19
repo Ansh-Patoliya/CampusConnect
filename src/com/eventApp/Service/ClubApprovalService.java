@@ -1,5 +1,4 @@
 package com.eventApp.Service;
-import com.eventApp.DAO.AdminDAO;
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.Model.Club;
 import com.eventApp.DataStructures.MyClubQueue;
@@ -11,8 +10,7 @@ import java.sql.SQLException;
 
 public class ClubApprovalService {
 
-    private AdminDAO adminDAO;
-    private MyClubQueue queue= adminDAO.getClubList("pending");
+    private MyClubQueue queue;
     private ClubDAO clubDAO;
 
     public Club viewNextPendingClub() {
@@ -20,12 +18,13 @@ public class ClubApprovalService {
         return queue.peek();
     }
 
-    public boolean approveNextClub(String clubId) {
+    public boolean approveNextClub() {
         // Approve and remove club from queue
+        Club nextClub = queue.dequeue();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'approved' WHERE id = ? AND status = 'pending'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, clubId);
+            preparedStatement.setString(1, nextClub.getClubId());
             int rowsUpdated = preparedStatement.executeUpdate();
             if(rowsUpdated>0){
                 queue.dequeue();
@@ -38,12 +37,13 @@ public class ClubApprovalService {
         }
     }
 
-    public boolean rejectNextClub(String clubId) {
+    public boolean rejectNextClub() {
         // Reject and remove club from queue
+        Club nextClub = queue.dequeue();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'rejected' WHERE id = ? AND status = 'pending'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, clubId);
+            preparedStatement.setString(1, nextClub.getClubId());
             int rowsUpdated = preparedStatement.executeUpdate();
             if(rowsUpdated>0){
                 queue.dequeue();
@@ -58,6 +58,10 @@ public class ClubApprovalService {
 
     public MyClubQueue getAllPendingClubs() {
         // Return pending clubs from DB
+        if (queue == null) {
+            queue = clubDAO.getClubList("pending");
+        }
         return queue;
+
     }
 }
