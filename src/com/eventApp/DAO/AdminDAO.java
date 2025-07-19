@@ -1,5 +1,6 @@
 package com.eventApp.DAO;
 
+import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
@@ -48,20 +49,29 @@ public class AdminDAO {
         return eventList;
     }
 
-    public ArrayList<Club> getClubList(String clubStatus){
-        ArrayList<Club> clubList = new ArrayList<>();
+    public MyClubQueue getClubList(String clubStatus){
+        MyClubQueue clubList=null;
+        int rowCount=0;
         try(Connection connection = DatabaseConnection.getConnection()){
-            String query = "select * from club where status = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            String fetchClubCount = "select count(*) from club where status = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(fetchClubCount);
             preparedStatement.setString(1,clubStatus);
             ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                rowCount = resultSet.getInt(1);
+            }
+            clubList = new MyClubQueue(rowCount);
+            String fetchClubRecord = "select * from club where status = ?";
+            PreparedStatement preparedStatement2 = connection.prepareStatement(fetchClubRecord);
+            preparedStatement2.setString(1,clubStatus);
+            resultSet = preparedStatement2.executeQuery();
             while (resultSet.next()){
                 String clubName=resultSet.getString("club_name");
                 String descriptions= resultSet.getString("description");
                 String category= resultSet.getString("category");
                 String founderId=resultSet.getString("founder_Id");
                 int memberCount=resultSet.getInt("member_count");
-                clubList.add(new Club(clubName, descriptions, category, founderId, memberCount));
+                clubList.enqueue(new Club(clubName, descriptions, category, founderId, memberCount));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
