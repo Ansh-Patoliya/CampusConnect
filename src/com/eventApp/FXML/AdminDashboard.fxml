@@ -58,14 +58,14 @@
                <VBox prefWidth="200.0" alignment="TOP_CENTER" spacing="15"
                      style="-fx-background-color: linear-gradient(to bottom, #5a2d82, #6a3093);
                                 -fx-padding: 40 20 20 20;">
-                  <Button fx:id="viewEventButton" mnemonicParsing="false"
+                  <Button fx:id="viewEventButton" onAction="#handleViewEvents" mnemonicParsing="false"
                           maxWidth="Infinity" prefHeight="50.0"
                           style="-fx-background-color: transparent;
                                        -fx-border-color: rgba(255,255,255,0.3);
                                        -fx-border-radius: 10; -fx-cursor: hand;
                                        -fx-font-size: 15;"
                           text="View Events" textFill="WHITE" />
-                  <Button fx:id="eventRequestsButton" mnemonicParsing="false"
+                  <Button fx:id="eventRequestsButton" onAction="#handleEventApproval" mnemonicParsing="false"
                           maxWidth="Infinity" prefHeight="50.0"
                           style="-fx-background-color: transparent;
                                        -fx-border-color: rgba(255,255,255,0.3);
@@ -94,7 +94,7 @@
                                        -fx-font-size: 15;"
                           text="Export Club List" textFill="WHITE" />
                   <Region VBox.vgrow="ALWAYS"/>
-                  <Button fx:id="backButton"
+                  <Button fx:id="backButton" onAction="#handleBack"
                           maxWidth="Infinity" prefHeight="50.0"
                           style="-fx-background-color: #f5f5f5;
                                        -fx-background-radius: 10; -fx-cursor: hand;

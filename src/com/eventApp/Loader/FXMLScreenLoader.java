@@ -36,7 +36,7 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void openForgotPassword(ActionEvent event){
+    public static void openForgotPassword(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ForgotPassword.fxml"));
             Parent root = loader.load();
@@ -49,7 +49,7 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void openEventRegistration(ActionEvent event){
+    public static void openEventRegistration(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventRegistrationForm.fxml"));
             Parent root = loader.load();
@@ -88,7 +88,20 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void showMessage(String message, String title,String type) {
+    public static void openEventApproval(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventApproval.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Event Approval");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void showMessage(String message, String title, String type) {
         Alert alert;
         if (type.equalsIgnoreCase("error")) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -101,5 +114,32 @@ public class FXMLScreenLoader {
         alert.setHeaderText(null); // No header
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public static void openViewEvents(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEvents.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("View Events");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void openClubDashboard(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubDashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Club Dashboard");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

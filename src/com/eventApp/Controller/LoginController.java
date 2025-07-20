@@ -33,8 +33,13 @@ public class LoginController {
                 if (user != null) {
                     CurrentUser.setCurrentUser(user);
                     FXMLScreenLoader.showMessage("✅Login successful", "login","info");
-                    FXMLScreenLoader.openEventRegistration(event);
-//                    FXMLScreenLoader.openDashboard(event, user);
+                    if (user.getRole().equalsIgnoreCase("admin")) {
+                        FXMLScreenLoader.openAdminDashboard(event);
+                    } else if (user.getRole().equalsIgnoreCase("club_member")) {
+                        FXMLScreenLoader.openClubDashboard(event);
+                    } else if (user.getRole().equalsIgnoreCase("student")) {
+
+                    }
                 } else {
                     FXMLScreenLoader.showMessage("❌User not found", "login", "error");
                 }
