@@ -28,7 +28,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="createdAt" layoutX="140.0" layoutY="209.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" visible="false" wrapText="true">
+      <Label fx:id="category" layoutX="140.0" layoutY="209.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" visible="false" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

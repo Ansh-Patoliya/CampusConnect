@@ -2,10 +2,12 @@ package com.eventApp.Controller;
 
 
 import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.DAO.AdminDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -65,7 +67,7 @@ public class ViewEventsController {
 
         completedCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(
-                        Boolean.parseBoolean(cellData.getValue().getCompletionStatus()) ? "Yes" : "No"));
+                        cellData.getValue().getCompletionStatus() ));
 
     }
 
@@ -77,5 +79,9 @@ public class ViewEventsController {
             }
         }
         eventTable.setItems(observableEvents);
+    }
+
+    public void onBack(ActionEvent event) {
+        FXMLScreenLoader.openAdminDashboard(event);
     }
 }
