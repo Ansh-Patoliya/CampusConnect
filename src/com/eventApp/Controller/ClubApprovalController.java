@@ -1,5 +1,7 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.ClubDAO;
+import com.eventApp.DAO.UserDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Service.ClubApprovalService;
@@ -16,6 +18,7 @@ import java.io.IOException;
 
 public class ClubApprovalController {
 
+    public Label category;
     @FXML
     private Label clubName;
 
@@ -24,10 +27,6 @@ public class ClubApprovalController {
 
     @FXML
     private Label createdBy;
-
-    @FXML
-    private Label createdAt;
-
 
     private final ClubApprovalService clubApprovalService = new ClubApprovalService();
 
@@ -38,19 +37,20 @@ public class ClubApprovalController {
         Platform.runLater(this::loadNextClub);
     }
 
+    UserDAO userDAO = new UserDAO();
     private void loadNextClub() {
         currentClub = clubApprovalService.viewNextPendingClub();
 
         if (currentClub != null) {
             clubName.setText(currentClub.getClubName());
             description.setText(currentClub.getDescriptions());
-            createdBy.setText(currentClub.getFounderId());
-            createdAt.setText(currentClub.getCategory());
+            createdBy.setText(userDAO.getUserNameBy(currentClub.getFounderId()));
+            category.setText(currentClub.getCategory());
 
             clubName.setVisible(true);
             description.setVisible(true);
             createdBy.setVisible(true);
-            createdAt.setVisible(true);
+            category.setVisible(true);
         } else {
             FXMLScreenLoader.showMessage("No more clubs to approve.", "Club Approval","info");
             clearLabels();
@@ -68,7 +68,7 @@ public class ClubApprovalController {
 
     @FXML
     private void onApprove() {
-        if (clubApprovalService.approveNextClub()) {
+        if (clubApprovalService.approveNextClub(currentClub)) {
             FXMLScreenLoader.showMessage("Club approved successfully.", "Club Approval", "info");
         } else {
             FXMLScreenLoader.showMessage("Error approving club.", "Club Approval", "error");
@@ -78,7 +78,7 @@ public class ClubApprovalController {
 
     @FXML
     private void onReject() {
-        if (clubApprovalService.rejectNextClub()) {
+        if (clubApprovalService.rejectNextClub(currentClub)) {
             FXMLScreenLoader.showMessage("Club rejected successfully.", "Club Approval", "info");
         } else {
             FXMLScreenLoader.showMessage("Error rejecting club.", "Club Approval", "error");
@@ -96,12 +96,12 @@ public class ClubApprovalController {
         clubName.setText("");
         description.setText("");
         createdBy.setText("");
-        createdAt.setText("");
+        category.setText("");
 
         clubName.setVisible(false);
         description.setVisible(false);
         createdBy.setVisible(false);
-        createdAt.setVisible(false);
+        category.setVisible(false);
     }
 
 }

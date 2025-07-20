@@ -29,6 +29,24 @@ public class Event {
         this.discountApplicable= discountApplicable;
         //get club head's id from clubId and assign
     }
+
+    public Event(String eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.venue = venue;
+        this.description = description;
+        this.approvalStatus = approvalStatus;
+        this.completionStatus = completionStatus;
+        this.clubId = clubId;
+        this.userId = userId;
+        this.maxParticipants = maxParticipants;
+        this.ticketPrice = ticketPrice;
+        this.discountApplicable = discountApplicable;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     //make method to get count of registrations
 
     public String getEventId() { return eventId; }
