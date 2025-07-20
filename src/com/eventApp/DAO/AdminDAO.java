@@ -47,7 +47,7 @@ public class AdminDAO {
     }
 
     //bring list of pending event, make method in DAO return type list
-    public static MyEventLL getEventList(String statusOfEvent){
+    public MyEventLL getEventList(String statusOfEvent){
         MyEventLL eventList = new MyEventLL();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
@@ -78,5 +78,29 @@ public class AdminDAO {
             throw new RuntimeException(e);
         }
         return eventList;
+    }
+
+    public boolean approveEvent(String eventId) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "UPDATE events SET approval_status = 'Approved' WHERE event_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, eventId);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean rejectEvent(String eventId) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "UPDATE events SET approval_status = 'Rejected' WHERE event_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, eventId);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

@@ -23,14 +23,11 @@ public class MyEventLL {
     class Node {
         Node next, prev;
         Event data;
-        Node next;
-        Node prev;
 
         Node(Event data) {
             this.data = data;
             this.next = null;
             this.prev = null;
-            this.data = data;
             size++;
         }
     }
