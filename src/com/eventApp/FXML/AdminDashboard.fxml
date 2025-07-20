@@ -72,7 +72,7 @@
                                        -fx-border-radius: 10; -fx-cursor: hand;
                                        -fx-font-size: 15;"
                           text="Event Requests" textFill="WHITE" />
-                  <Button fx:id="clubRequestsButton" mnemonicParsing="false"
+                  <Button fx:id="clubRequestsButton" onAction="#handleClubApproval" mnemonicParsing="false"
                           maxWidth="Infinity" prefHeight="50.0"
                           style="-fx-background-color: transparent;
                                        -fx-border-color: rgba(255,255,255,0.3);

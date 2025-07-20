@@ -6,21 +6,27 @@ import com.eventApp.Model.Event;
 
 public class EventService {
     private MyEventLL LL;
-    private MyEventLL eventList = new MyEventLL();
 
+    AdminDAO adminDAO = new AdminDAO();
     public EventService() {
         getAllPendingEvents();
     }
 
-    private MyEventLL getAllPendingEvents() {
+    private void getAllPendingEvents() {
         if (LL == null) {
-            LL = AdminDAO.getEventList("Pending");
+            LL = adminDAO.getEventList("Pending");
         }
-        return LL;
     }
 
     public Event viewNextEvent() {
         return LL.viewNextEvent();
+    }
+
+    public boolean approveEvent(String eventId) {
+        return adminDAO.approveEvent(eventId);
+    }
+    public boolean rejectEvent(String eventId) {
+        return adminDAO.rejectEvent(eventId);
     }
 
     public Event viewPreviousEvent() {
