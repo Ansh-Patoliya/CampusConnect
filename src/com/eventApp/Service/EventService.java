@@ -22,11 +22,11 @@ public class EventService {
         return LL.viewNextEvent();
     }
 
-    public boolean approveEvent(String eventId) {
-        return adminDAO.approveEvent(eventId);
+    public boolean approveEvent() {
+        return adminDAO.approvalStatusUpdate("Approved", LL.deleteAtCurrent().getEventId());
     }
-    public boolean rejectEvent(String eventId) {
-        return adminDAO.rejectEvent(eventId);
+    public boolean rejectEvent() {
+        return adminDAO.approvalStatusUpdate("Rejected", LL.deleteAtCurrent().getEventId());
     }
 
     public Event viewPreviousEvent() {

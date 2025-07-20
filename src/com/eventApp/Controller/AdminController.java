@@ -19,4 +19,16 @@ public class AdminController {
     public void handleClubApproval(ActionEvent event) {
         FXMLScreenLoader.openClubApproval(event);
     }
+
+    public void handleEventApproval(ActionEvent event) {
+        FXMLScreenLoader.openEventApproval(event);
+    }
+
+    public void handleViewEvents(ActionEvent event) {
+        FXMLScreenLoader.openViewEvents(event);
+    }
+
+    public void handleBack(ActionEvent event) {
+        FXMLScreenLoader.openLoginPage(event);
+    }
 }

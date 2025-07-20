@@ -1,6 +1,7 @@
 package com.eventApp.Service;
 
 
+import com.eventApp.DAO.UserDAO;
 import com.eventApp.Model.Club;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -19,6 +20,7 @@ import java.sql.SQLException;
 
 public class AdminService {
 
+    UserDAO userDAO = new UserDAO();
     public void exportClubData(String clubDetailsFile, Club club){
         try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile, true));
              Connection connection = DatabaseConnection.getConnection()){
@@ -28,22 +30,17 @@ public class AdminService {
 //            callableStatement.setString(1,club.getClubId());
 //            String presidentName = callableStatement.execute();
 //            clubFile.write(presidentName);
-            String formattedLine= String.format("%-10s | %-32s | %-32s | %-256s",club.getClubId() ,club.getClubName(), //presidentname,
+            String formattedLine=String.format("%-10s | %-32s | %-32s | %-256s","Club ID", "Club Name", "President Name", "Description");
+            clubFile.write(formattedLine);
+            clubFile.newLine();
+            formattedLine= String.format("%-10s | %-32s | %-32s | %-256s",club.getClubId() ,club.getClubName(), userDAO.getUserNameBy(club.getFounderId()),
                     club.getDescriptions());
             clubFile.write(formattedLine);
             clubFile.newLine();
+            clubFile.flush();
         } catch (IOException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
     
-
-    MyEventLL eventList;
-
-    AdminDAO adminDAO = new AdminDAO();
-
-    public void getEventList() {
-        this.eventList= adminDAO.getEventList();
-    }
-}
 
