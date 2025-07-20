@@ -81,7 +81,7 @@ public class EventRegistrationController {
             Event event1=new Event(eventName,description,venue,clubId,userId,maxParticipantsInt,eventDate,startTime,endTime,ticketPriceDouble, discountApplicable);
             if(clubService.addEvent(event1)){
                 FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
-                openLoginPage(event);
+                handleBack(event);
             } else {
                 FXMLScreenLoader.showMessage("Failed to create event. Please try again.", "Error", "error");
             }
@@ -122,7 +122,8 @@ public class EventRegistrationController {
 
         return true;
     }
-    public void openLoginPage(ActionEvent event) {
-        FXMLScreenLoader.openLoginPage(event);
+
+    public void handleBack(ActionEvent event) {
+        FXMLScreenLoader.openClubDashboard(event);
     }
 }

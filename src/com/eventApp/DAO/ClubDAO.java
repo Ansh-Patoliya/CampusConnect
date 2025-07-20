@@ -70,4 +70,20 @@ public class ClubDAO {
         }
         return clubList;
     }
+
+    public String getClubNameBy(String clubId) {
+        String clubName = null;
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "SELECT club_name FROM clubs WHERE club_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, clubId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                clubName = resultSet.getString("club_name");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return clubName;
+    }
 }

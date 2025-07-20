@@ -52,7 +52,7 @@ public class AdminDAO {
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,statusOfEvent);
+            preparedStatement.setString(1,statusOfEvent.toUpperCase());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 String eventName = resultSet.getString("event_name");
@@ -80,11 +80,12 @@ public class AdminDAO {
         return eventList;
     }
 
-    public boolean approveEvent(String eventId) {
+    public boolean approvalStatusUpdate(String approvalStatus,String eventId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "UPDATE events SET approval_status = 'Approved' WHERE event_id = ?";
+            String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, eventId);
+            preparedStatement.setString(1, approvalStatus.toUpperCase());
+            preparedStatement.setString(2, eventId);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException | ClassNotFoundException e) {
@@ -92,15 +93,4 @@ public class AdminDAO {
         }
     }
 
-    public boolean rejectEvent(String eventId) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "UPDATE events SET approval_status = 'Rejected' WHERE event_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, eventId);
-            int rowsUpdated = preparedStatement.executeUpdate();
-            return rowsUpdated > 0;
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 }

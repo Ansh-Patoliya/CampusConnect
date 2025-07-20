@@ -64,6 +64,32 @@ public class MyEventLL {
         }
     }
 
+    public Event deleteAtCurrent() {
+        if (current == null) {
+            return null;
+        }
+
+        Event data = current.data;
+
+        if (current.prev != null) {
+            current.prev.next = current.next;
+        } else {
+            first = current.next; // If current is the first node
+        }
+
+        if (current.next != null) {
+            current.next.prev = current.prev;
+        }
+
+        if (current == first) {
+            current = first; // Reset current to first node
+        } else {
+            current = current.prev; // Move current to previous node
+        }
+
+        size--;
+        return data;
+    }
     public Event viewCurrentEvent() {
         if (current == null) {
             return null;

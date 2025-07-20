@@ -229,4 +229,20 @@ public class UserDAO {
         }
         return user;
     }
+
+    public String getUserNameBy(String userId) {
+        String userName = null;
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM users WHERE user_id = ?");
+            preparedStatement.setString(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                userName = rs.getString("name");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return userName;
+    }
 }
