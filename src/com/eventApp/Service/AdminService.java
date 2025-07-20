@@ -1,7 +1,13 @@
 package com.eventApp.Service;
 
+
 import com.eventApp.Model.Club;
 import com.eventApp.Utils.DatabaseConnection;
+
+import com.eventApp.DAO.AdminDAO;
+import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.Model.Event;
+
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class AdminService {
+
     public void exportClubData(String clubDetailsFile, Club club){
         try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile, true));
              Connection connection = DatabaseConnection.getConnection()){
@@ -30,3 +37,13 @@ public class AdminService {
         }
     }
 }
+
+    MyEventLL eventList;
+
+    AdminDAO adminDAO = new AdminDAO();
+
+    public void getEventList() {
+        this.eventList= adminDAO.getEventList();
+    }
+}
+
