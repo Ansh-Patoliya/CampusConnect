@@ -3,6 +3,23 @@ package com.eventApp.DataStructures;
 import com.eventApp.Model.Event;
 
 public class MyEventLL {
+    public int size() {
+        return size;
+    }
+
+    int size = 0;
+
+    public Event get(int i) {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+        }
+        Node temp = first;
+        for (int j = 0; j < i; j++) {
+            temp = temp.next;
+        }
+        return temp.data;
+    }
+
     class Node {
         Node next, prev;
         Event data;
@@ -11,6 +28,7 @@ public class MyEventLL {
             this.next = null;
             this.prev = null;
             this.data = data;
+            size++;
         }
     }
 

@@ -3,9 +3,16 @@ package com.eventApp.Controller;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Service.ClubApprovalService;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ClubApprovalController {
 
@@ -28,7 +35,7 @@ public class ClubApprovalController {
 
     @FXML
     public void initialize() {
-        loadNextClub();
+        Platform.runLater(this::loadNextClub);
     }
 
     private void loadNextClub() {
@@ -47,6 +54,15 @@ public class ClubApprovalController {
         } else {
             FXMLScreenLoader.showMessage("No more clubs to approve.", "Club Approval","info");
             clearLabels();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/AdminDashboard.fxml"));
+                Parent root = loader.load();
+                Stage stage = (Stage) clubName.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Admin Dashboard");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eventApp.Controller.ViewEventsController"
+            prefWidth="900.0" prefHeight="600.0"
+            style="-fx-background-color: #f0f0f0;">
+
+    <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <!-- Title -->
+        <Label text="View Events" style="-fx-font-size: 26px; -fx-text-fill: #333;">
+            <VBox.margin>
+                <Insets top="10" bottom="10"/>
+            </VBox.margin>
+        </Label>
+
+        <!-- Table -->
+        <TableView fx:id="eventTable" prefHeight="500">
+            <columns>
+                <TableColumn fx:id="nameCol" text="Event Name" prefWidth="160"/>
+                <TableColumn fx:id="statusCol" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="dateCol" text="Event Date" prefWidth="140"/>
+                <TableColumn fx:id="creatorCol" text="Created By" prefWidth="140"/>
+                <TableColumn fx:id="completedCol" text="Completed?" prefWidth="100"/>
+            </columns>
+        </TableView>
+
+        <!-- Optional: Refresh Button -->
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <Button fx:id="refreshBtn" text="Refresh" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
