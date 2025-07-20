@@ -17,7 +17,7 @@ public class AdminDAO {
 
 
     //bring list of pending event, make method in DAO return type list
-    public MyEventLL getEventList(String statusOfEvent){
+    public static MyEventLL getEventList(String statusOfEvent){
         MyEventLL eventList = new MyEventLL();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
