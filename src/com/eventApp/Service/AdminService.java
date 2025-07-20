@@ -21,19 +21,20 @@ import java.sql.SQLException;
 public class AdminService {
 
     UserDAO userDAO = new UserDAO();
-    public void exportClubData(String clubDetailsFile, Club club){
+
+    public void exportClubData(String clubDetailsFile, Club club) {
         try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile, true));
-             Connection connection = DatabaseConnection.getConnection()){
+             Connection connection = DatabaseConnection.getConnection()) {
 //            callable procedure to fetchClubPresident here
 //            String fetchClubPresident="{call fetchClubPresident(?)}";
 //            CallableStatement callableStatement = connection.prepareCall(fetchClubPresident);
 //            callableStatement.setString(1,club.getClubId());
 //            String presidentName = callableStatement.execute();
 //            clubFile.write(presidentName);
-            String formattedLine=String.format("%-10s | %-32s | %-32s | %-256s","Club ID", "Club Name", "President Name", "Description");
+            String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();
-            formattedLine= String.format("%-10s | %-32s | %-32s | %-256s",club.getClubId() ,club.getClubName(), userDAO.getUserNameBy(club.getFounderId()),
+            formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", club.getClubId(), club.getClubName(), userDAO.getUserNameBy(club.getFounderId()),
                     club.getDescriptions());
             clubFile.write(formattedLine);
             clubFile.newLine();
@@ -42,5 +43,5 @@ public class AdminService {
             throw new RuntimeException(e);
         }
     }
-    
 
+}
