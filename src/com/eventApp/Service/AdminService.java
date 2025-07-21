@@ -2,6 +2,7 @@ package com.eventApp.Service;
 
 
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.Model.Admin;
 import com.eventApp.Model.Club;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -42,6 +43,13 @@ public class AdminService {
         } catch (IOException | SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private final AdminDAO adminDAO = new AdminDAO();
+
+    // Get Admin by ID via DAO
+    public Admin getAdmin(String userId) {
+        return adminDAO.getAdmin(userId);
     }
 
 }
