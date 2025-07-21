@@ -7,17 +7,12 @@ import javafx.fxml.FXML;
 
 public class StudentDashboardController {
 
-    private User currentUser;
-
-    public void setUser(User user) {
-        this.currentUser = user;
-    }
-
     @FXML
     private void handleViewProfile(ActionEvent event) {
-        if (currentUser != null) {
-            FXMLScreenLoader.openStudentProfile(currentUser);
-        }
+            FXMLScreenLoader.openStudentProfile(event);
     }
 
+    public void onBack(ActionEvent event) {
+        FXMLScreenLoader.openLoginPage(event);
+    }
 }

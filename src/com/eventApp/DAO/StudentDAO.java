@@ -14,39 +14,43 @@ import java.util.stream.Collectors;
 public class StudentDAO {
 
     public static Student getStudent(User user) {
-        Student student = null;
-        try {
-            Connection conn = DatabaseConnection.getConnection();
-            String query = "SELECT s.*, u.name, u.email, u.password, u.role " +
-                    "FROM students s JOIN users u ON s.user_id = u.user_id " +
-                    "WHERE s.user_id = ?";
-            PreparedStatement ps = conn.prepareStatement(query);
+        if (user == null || user.getUserId() == null) return null;
+
+        String query = "SELECT s.student_id, s.department, s.semester, s.interests, " +
+                "u.name, u.email, u.password, u.role " +
+                "FROM students s JOIN users u ON s.student_id = u.user_id " +
+                "WHERE s.student_id = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
             ps.setString(1, user.getUserId());
 
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                String interestCSV = rs.getString("interest");
-                List<String> interestList = null;
-                if (interestCSV != null && !interestCSV.trim().isEmpty()) {
-                    interestList = Arrays.stream(interestCSV.split(","))
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String interestCSV = rs.getString("interests");
+                    List<String> interestList = (interestCSV == null || interestCSV.trim().isEmpty())
+                            ? null
+                            : Arrays.stream(interestCSV.split(","))
                             .map(String::trim)
                             .collect(Collectors.toList());
-                }
 
-                student = new Student(
-                        rs.getString("user_id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password"),
-                        rs.getString("role"),
-                        rs.getString("department"),
-                        rs.getInt("semester"),
-                        interestList
-                );
+                    return new Student(
+                            rs.getString("student_id"),
+                            rs.getString("name"),
+                            rs.getString("email"),
+                            rs.getString("password"),
+                            rs.getString("role"),
+                            rs.getString("department"),
+                            rs.getInt("semester"),
+                            interestList
+                    );
+                }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // or use Logger
         }
-        return student;
+        return null;
     }
+
 }

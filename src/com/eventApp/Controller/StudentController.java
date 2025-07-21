@@ -3,13 +3,16 @@ package com.eventApp.Controller;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.StudentService;
+import com.eventApp.Utils.CurrentUser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 
 import java.util.List;
 
 public class StudentController {
 
+    public TextArea interestArea;
     private User user;
     private StudentService studentService = new StudentService();
 
@@ -17,10 +20,12 @@ public class StudentController {
     @FXML private Label emailLabel;
     @FXML private Label departmentLabel;
     @FXML private Label semesterLabel;
-    @FXML private Label interestLabel;
 
-    public void setUser(User user) {
-        this.user = user;
+    @FXML
+    public void initialize() {
+        // This method is called after the FXML file has been loaded
+        // You can perform any additional initialization here if needed
+        user= CurrentUser.getCurrentUser() ;// Assuming User class has a method to get the current logged-in user
         loadStudentProfile();
     }
 
@@ -33,7 +38,7 @@ public class StudentController {
                 departmentLabel.setText(student.getDepartment());
                 semesterLabel.setText(String.valueOf(student.getSemester()));
                 List<String> interests = student.getInterest();
-                interestLabel.setText(interests != null ? String.join(", ", interests) : "");
+                interestArea.setText(interests != null ? String.join(", ", interests) : "");
             }
         }
     }

@@ -38,7 +38,7 @@ public class LoginController {
                     } else if (user.getRole().equalsIgnoreCase("club_member")) {
                         FXMLScreenLoader.openClubDashboard(event);
                     } else if (user.getRole().equalsIgnoreCase("student")) {
-
+                        FXMLScreenLoader.openStudentDashboard(event);
                     }
                 } else {
                     FXMLScreenLoader.showMessage("❌User not found", "login", "error");

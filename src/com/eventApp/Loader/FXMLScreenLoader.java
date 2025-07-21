@@ -1,5 +1,7 @@
 package com.eventApp.Loader;
 
+import com.eventApp.Controller.StudentController;
+import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -145,26 +147,32 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void openStudentProfile(User user) {
+    public static void openStudentProfile(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/StudentProfile.fxml"));
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/StudentViewProfile.fxml"));
             Parent root = loader.load();
-
-            // Pass User to controller
-            com.eventApp.Controller.StudentController controller = loader.getController();
-            controller.setUser(user);
-
-            Stage stage = new Stage();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Student Profile");
-            stage.setScene(new Scene(root, 600, 500));  // Adjust size as needed
+            stage.setScene(new Scene(root, 1400, 800));
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 
+    public static void openStudentDashboard(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/StudentDashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Student Dashboard");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
+    }
 }
