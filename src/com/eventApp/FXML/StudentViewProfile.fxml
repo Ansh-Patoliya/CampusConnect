@@ -48,25 +48,25 @@
 
             <!-- Name -->
             <Label text="Name:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="0"/>
-            <TextField fx:id="nameField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+            <Label fx:id="nameLabel"  style="-fx-background-color: rgba(255,255,255,0.9);
                        -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
                        GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
             <!-- Email -->
             <Label text="Email:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="1"/>
-            <TextField fx:id="emailField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+            <Label fx:id="emailLabel"  style="-fx-background-color: rgba(255,255,255,0.9);
                        -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
                        GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
             <!-- Department -->
             <Label text="Department:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="2"/>
-            <TextField fx:id="departmentField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+            <Label fx:id="departmentLabel" style="-fx-background-color: rgba(255,255,255,0.9);
                        -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
                        GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
             <!-- Semester -->
             <Label text="Semester:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="3"/>
-            <TextField fx:id="semesterField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+            <Label fx:id="semesterLabel" style="-fx-background-color: rgba(255,255,255,0.9);
                        -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
                        GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
