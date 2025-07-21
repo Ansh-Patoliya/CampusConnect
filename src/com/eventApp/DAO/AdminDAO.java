@@ -1,6 +1,7 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.Model.Admin;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -21,7 +22,7 @@ public class AdminDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                String eventId = resultSet.getString("event_id");
+                int eventId = resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
@@ -60,6 +61,7 @@ public class AdminDAO {
             preparedStatement.setString(1,statusOfEvent.toUpperCase());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
+                int eventId=resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
@@ -76,8 +78,12 @@ public class AdminDAO {
                 double ticketPrice = resultSet.getDouble("ticket_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
-                eventList.insert(new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                startTime, endTime , ticketPrice, discountApplicable));
+                String approvalStatus = resultSet.getString("approval_status");
+                String completionStatus = resultSet.getString("completion_status");
+
+                eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus));
+
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -85,17 +91,41 @@ public class AdminDAO {
         return eventList;
     }
 
-    public boolean approvalStatusUpdate(String approvalStatus,String eventId) {
+    public boolean approvalStatusUpdate(String approvalStatus,int eventId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, approvalStatus.toUpperCase());
-            preparedStatement.setString(2, eventId);
+            preparedStatement.setInt(2, eventId);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Admin getAdmin(String userId) {
+        String sql = "SELECT userId, name, email, password, role FROM users WHERE userId = ? AND role = 'admin'";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Admin(
+                        rs.getString("userId"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // not found
     }
 
 }

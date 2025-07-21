@@ -15,7 +15,7 @@ public class ClubDAO {
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-            preparedStatement.setString(1, event.getEventId());
+            preparedStatement.setInt(1, event.getEventId());
             preparedStatement.setString(2, event.getClubId());
             preparedStatement.setString(3, event.getEventName());
             preparedStatement.setString(4, event.getDescription());
@@ -58,7 +58,7 @@ public class ClubDAO {
             preparedStatement2.setString(1,clubStatus);
             resultSet = preparedStatement2.executeQuery();
             while (resultSet.next()){
-                String clubId = resultSet.getString("club_id");
+                int clubId = resultSet.getInt("club_id");
                 String clubName=resultSet.getString("club_name");
                 String descriptions= resultSet.getString("description");
                 String category= resultSet.getString("category");
