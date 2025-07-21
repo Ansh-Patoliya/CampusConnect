@@ -3,11 +3,10 @@ package com.eventApp.Model;
 public class Club {
     private String clubName,descriptions,category,founderId,status;
     private int memberCount;
-    private String clubId;
+    private int clubId;
     static int clubCount=1;
 
     public Club(String clubName, String descriptions, String category, String founderId, int memberCount) {
-        this.clubId=createClubID();
         this.clubName = clubName;
         this.descriptions = descriptions;
         this.category = category;
@@ -16,7 +15,7 @@ public class Club {
         this.status="Pending";
     }
 
-    public Club(String clubName, String descriptions, String category, String founderId, String status, int memberCount, String clubId) {
+    public Club(String clubName, String descriptions, String category, String founderId, String status, int memberCount, int clubId) {
         this.clubName = clubName;
         this.descriptions = descriptions;
         this.category = category;
@@ -26,9 +25,6 @@ public class Club {
         this.clubId = clubId;
     }
 
-    public Club() {
-        this.clubId=createClubID();
-    }
 
     public String getStatus() {
         return status;
@@ -38,11 +34,11 @@ public class Club {
         this.status = status;
     }
 
-    public String getClubId() {
+    public int getClubId() {
         return clubId;
     }
 
-    public void setClubId(String clubId) {
+    public void setClubId(int clubId) {
         this.clubId = clubId;
     }
 

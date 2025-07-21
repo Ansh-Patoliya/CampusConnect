@@ -245,7 +245,7 @@ public class RegistrationController {
             // Handle joining existing club logic here
             String selectClub = (String) selectClubField.getValue();
             if (!(selectClub == null || selectClub.isEmpty())) {
-                String clubId = UserDAO.getClubId(selectClub);
+                int clubId = UserDAO.getClubId(selectClub);
                 ClubMember clubMember = new ClubMember(enrollmentNo,name,email,password,"club_member".toUpperCase(),"Member",clubId);
                 boolean success = userService.registerClubMember(clubMember);
                 if (success) {

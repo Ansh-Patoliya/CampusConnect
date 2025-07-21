@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    private String eventId, eventName, venue, description, approvalStatus,completionStatus, clubId, userId;
-    private int maxParticipants;
+    private String eventName, venue, description, approvalStatus,completionStatus, clubId, userId;
+    private int maxParticipants,eventId;
     private double ticketPrice;
     private boolean discountApplicable;
     private static int registeredCount;
@@ -13,7 +13,6 @@ public class Event {
     static int eventCount = 1;
 
     public Event(String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable) {
-        this.eventId=createEventID();
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -30,7 +29,7 @@ public class Event {
         //get club head's id from clubId and assign
     }
 
-    public Event(String eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus) {
+    public Event(int eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
@@ -49,7 +48,7 @@ public class Event {
 
     //make method to get count of registrations
 
-    public String getEventId() { return eventId; }
+    public int getEventId() { return eventId; }
 
     public String getEventName() { return eventName; }
 
@@ -69,7 +68,7 @@ public class Event {
 
     public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
 
-    public void setEventId(String eventId) { this.eventId = eventId; }
+    public void setEventId(int eventId) { this.eventId = eventId; }
 
     public void setEventName(String eventName) { this.eventName = eventName; }
 
