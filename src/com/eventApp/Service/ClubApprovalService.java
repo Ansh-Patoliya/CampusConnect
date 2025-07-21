@@ -67,6 +67,5 @@ public class ClubApprovalService {
             queue = clubDAO.getClubList("Pending");
         }
         return queue;
-
     }
 }
