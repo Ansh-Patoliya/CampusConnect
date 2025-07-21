@@ -33,13 +33,18 @@
                            <children>
                               <Button fx:id="viewEventButton" maxWidth="Infinity" mnemonicParsing="false"  prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="View Events" textFill="WHITE" />
                               <Button fx:id="eventHistoryButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Event History" textFill="WHITE" />
-                              <Button fx:id="cancelMyEventButton" maxWidth="Infinity" mnemonicParsing="false"  prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Cancel My Events" textFill="WHITE" />
+
+                              <Button fx:id="cancelMyEventButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleClubApproval" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Cancel My Events" textFill="WHITE" />
+                              <Button fx:id="myParticipationButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="My Participation" textFill="WHITE" />
+                              <Button fx:id="viewMyProfileButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="View My Profile" textFill="WHITE" />
+                         <Button fx:id="cancelMyEventButton" maxWidth="Infinity" mnemonicParsing="false"  prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Cancel My Events" textFill="WHITE" />
                               <Button fx:id="viewMyProfileButton"
                                       text="View My Profile"
                                       onAction="#handleViewProfile"
                                       maxWidth="Infinity"
                                       prefHeight="50.0"
                                       style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 10; -fx-cursor: hand; -fx-font-size: 15;" />
+
 
 
                               <Region VBox.vgrow="ALWAYS" />
