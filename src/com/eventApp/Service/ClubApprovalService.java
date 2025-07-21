@@ -24,7 +24,7 @@ public class ClubApprovalService {
 
     public boolean approveNextClub() {
         // Approve and remove club from queue
-        Club nextClub = queue.dequeue();
+        Club nextClub = viewNextPendingClub();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'Approved' WHERE club_id = ? AND status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -43,7 +43,7 @@ public class ClubApprovalService {
 
     public boolean rejectNextClub() {
         // Reject and remove club from queue
-        Club nextClub = queue.dequeue();
+        Club nextClub = viewNextPendingClub();
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'Rejected' WHERE club_id = ? AND status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -51,6 +51,7 @@ public class ClubApprovalService {
             preparedStatement.setString(2,"Pending");
             int rowsUpdated = preparedStatement.executeUpdate();
             if(rowsUpdated>0){
+                queue.dequeue();
                 return true;
             } else{
                 return false;
