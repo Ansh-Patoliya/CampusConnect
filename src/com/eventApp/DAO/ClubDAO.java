@@ -58,12 +58,14 @@ public class ClubDAO {
             preparedStatement2.setString(1,clubStatus);
             resultSet = preparedStatement2.executeQuery();
             while (resultSet.next()){
+                String clubId = resultSet.getString("club_id");
                 String clubName=resultSet.getString("club_name");
                 String descriptions= resultSet.getString("description");
                 String category= resultSet.getString("category");
                 String founderId=resultSet.getString("founder_Id");
                 int memberCount=resultSet.getInt("member_count");
-                clubList.enqueue(new Club(clubName, descriptions, category, founderId, memberCount));
+                String status = resultSet.getString("status");
+                clubList.enqueue(new Club(clubName,descriptions,category,founderId,status,memberCount,clubId));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

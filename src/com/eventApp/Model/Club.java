@@ -16,6 +16,16 @@ public class Club {
         this.status="Pending";
     }
 
+    public Club(String clubName, String descriptions, String category, String founderId, String status, int memberCount, String clubId) {
+        this.clubName = clubName;
+        this.descriptions = descriptions;
+        this.category = category;
+        this.founderId = founderId;
+        this.status = status;
+        this.memberCount = memberCount;
+        this.clubId = clubId;
+    }
+
     public Club() {
         this.clubId=createClubID();
     }
