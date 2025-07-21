@@ -4,53 +4,84 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.Cursor?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.eventApp.Controller.StudentController"
-            prefWidth="600" prefHeight="450"
-            style="-fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);">
+            prefWidth="720" prefHeight="580"
+            style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);">
 
-    <VBox alignment="CENTER" spacing="20.0" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20"
-          AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+    <!-- Background elements -->
+    <Circle radius="120" fill="rgba(255,255,255,0.08)" layoutX="80" layoutY="120"/>
+    <Circle radius="70" fill="rgba(255,255,255,0.05)" layoutX="640" layoutY="440"/>
 
-        <Label text="Student Profile" textFill="WHITE">
+    <VBox alignment="TOP_CENTER" spacing="25" AnchorPane.topAnchor="40" AnchorPane.leftAnchor="50"
+          AnchorPane.rightAnchor="50" AnchorPane.bottomAnchor="40">
+
+        <!-- Header -->
+        <Label text="STUDENT PROFILE" textFill="WHITE" style="-fx-font-weight: bold;">
             <font>
-                <Font size="24.0" />
+                <Font name="Arial Rounded MT Bold" size="32.0" />
             </font>
+            <effect>
+                <DropShadow color="rgba(0,0,0,0.1)" radius="3" offsetX="2" offsetY="2"/>
+            </effect>
+            <padding>
+                <Insets bottom="10"/>
+            </padding>
         </Label>
 
-        <GridPane hgap="10" vgap="15">
+        <!-- Profile Card with uniform field boxes -->
+        <GridPane hgap="20" vgap="20" style="-fx-background-color: rgba(255,255,255,0.18);
+                    -fx-background-radius: 15; -fx-padding: 30;
+                    -fx-border-color: rgba(255,255,255,0.25); -fx-border-radius: 15; -fx-border-width: 1;
+                    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.3, 0, 2);">
+
             <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" />
-                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints halignment="RIGHT" minWidth="120" />
+                <ColumnConstraints hgrow="ALWAYS" minWidth="250" />
             </columnConstraints>
 
             <!-- Name -->
-            <Label text="Name:" textFill="white" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <Label fx:id="nameLabel" textFill="white" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Name:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="0"/>
+            <TextField fx:id="nameField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+                       -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
+                       GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
             <!-- Email -->
-            <Label text="Email:" textFill="white" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <Label fx:id="emailLabel" textFill="white" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Email:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="1"/>
+            <TextField fx:id="emailField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+                       -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
+                       GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
             <!-- Department -->
-            <Label text="Department:" textFill="white" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <Label fx:id="departmentLabel" textFill="white" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label text="Department:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="2"/>
+            <TextField fx:id="departmentField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+                       -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
+                       GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
             <!-- Semester -->
-            <Label text="Semester:" textFill="white" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-            <Label fx:id="semesterLabel" textFill="white" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+            <Label text="Semester:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="3"/>
+            <TextField fx:id="semesterField" editable="false" style="-fx-background-color: rgba(255,255,255,0.9);
+                       -fx-background-radius: 5; -fx-border-radius: 5; -fx-padding: 8;"
+                       GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
             <!-- Interests -->
-            <Label text="Interests:" textFill="white" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-            <TextArea fx:id="interestArea" editable="false" wrapText="true"
-                      prefRowCount="3" style="-fx-background-radius: 5; -fx-control-inner-background: #eeeeee;"
+            <Label text="Interests:" textFill="white" style="-fx-font-weight: bold; -fx-font-size: 14;" GridPane.rowIndex="4"/>
+            <TextArea fx:id="interestArea" editable="false" wrapText="true" prefRowCount="3"
+                      style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 5;
+                     -fx-border-radius: 5; -fx-padding: 8; -fx-font-size: 14;"
                       GridPane.rowIndex="4" GridPane.columnIndex="1"/>
         </GridPane>
 
-        <Button text="Close"
-                style="-fx-background-color: white; -fx-text-fill: #1e3c72; -fx-font-weight: bold; -fx-background-radius: 10;"
-                prefWidth="100"/>
+        <!-- Action Button -->
+        <Button text="CLOSE" style="-fx-background-color: white; -fx-text-fill: #654ea3;
+                  -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 20;
+                  -fx-padding: 8 35; -fx-cursor: hand;
+                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);"/>
     </VBox>
 </AnchorPane>
