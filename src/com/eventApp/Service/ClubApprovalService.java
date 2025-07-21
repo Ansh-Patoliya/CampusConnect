@@ -28,7 +28,7 @@ public class ClubApprovalService {
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'Approved' WHERE club_id = ? AND status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, nextClub.getClubId());
+            preparedStatement.setInt(1, nextClub.getClubId());
             preparedStatement.setString(2,"Pending");
             int rowsUpdated = preparedStatement.executeUpdate();
             if(rowsUpdated>0){
@@ -47,7 +47,7 @@ public class ClubApprovalService {
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "UPDATE clubs SET status = 'Rejected' WHERE club_id = ? AND status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, nextClub.getClubId());
+            preparedStatement.setInt(1, nextClub.getClubId());
             preparedStatement.setString(2,"Pending");
             int rowsUpdated = preparedStatement.executeUpdate();
             if(rowsUpdated>0){

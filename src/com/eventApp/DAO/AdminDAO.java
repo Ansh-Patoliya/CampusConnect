@@ -1,6 +1,7 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.Model.Admin;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -101,6 +102,30 @@ public class AdminDAO {
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public Admin getAdmin(String userId) {
+        String sql = "SELECT userId, name, email, password, role FROM users WHERE userId = ? AND role = 'admin'";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Admin(
+                        rs.getString("userId"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // not found
     }
 
 }
