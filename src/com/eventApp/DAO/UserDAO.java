@@ -111,14 +111,14 @@ public class UserDAO {
         return false;
     }
     
-    public static String getClubId(String clubName){
-        String clubId = null;
+    public static int getClubId(String clubName){
+        int clubId = 0;
         try {
             Connection connection=DatabaseConnection.getConnection();
             PreparedStatement preparedStatement=connection.prepareStatement("select club_id from clubs where club_name=?");
             preparedStatement.setString(1,clubName);
             ResultSet resultSet=preparedStatement.executeQuery();
-            clubId=resultSet.getString(1);
+            clubId=resultSet.getInt(1);
 //            while (resultSet.next()){
 //                clubId=resultSet.getString(1);
 //            }
@@ -134,7 +134,7 @@ public class UserDAO {
 
             PreparedStatement preparedStatement=connection.prepareStatement("insert into club_members values(?,?,?)");
             preparedStatement.setString(1,clubMember.getUserId());
-            preparedStatement.setString(2,clubMember.getClubId());
+            preparedStatement.setInt(2,clubMember.getClubId());
             preparedStatement.setString(3,clubMember.getPosition());
 
             int clubMemberInsert=preparedStatement.executeUpdate();
@@ -156,7 +156,7 @@ public class UserDAO {
             Connection connection=DatabaseConnection.getConnection();
 
             PreparedStatement preparedStatement=connection.prepareStatement("insert into clubs(club_id,club_name,category,description,founder_id,status) values(?,?,?,?,?,?)");
-            preparedStatement.setString(1,club.getClubId());
+            preparedStatement.setInt(1,club.getClubId());
             preparedStatement.setString(2,club.getClubName());
             preparedStatement.setString(3,club.getCategory());
             preparedStatement.setString(4,club.getDescriptions());
