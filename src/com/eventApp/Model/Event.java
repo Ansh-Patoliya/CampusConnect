@@ -7,7 +7,7 @@ public class Event {
     private int maxParticipants,eventId;
     private double ticketPrice;
     private boolean discountApplicable;
-    private static int registeredCount;
+    private int registeredCount;
     LocalDate eventDate;
     LocalTime startTime, endTime;
     static int eventCount = 1;
@@ -45,6 +45,19 @@ public class Event {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    public Event(int eventId, String eventName, String clubId, String venue, Double ticketPrice,LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
+        this.eventId = eventId;
+        this.eventName = eventName;
+        this.venue = venue;
+        this.clubId = clubId;
+        this.ticketPrice = ticketPrice;
+        this.eventDate = eventDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.registeredCount = totalParticipants;
+    }
+
 
     //make method to get count of registrations
 
@@ -113,12 +126,12 @@ public class Event {
         this.discountApplicable = discountApplicable;
     }
 
-    public static int getRegisteredCount() {
+    public static int getRegisteredCount(int registeredCount) {
         return registeredCount;
     }
 
-    public static void setRegisteredCount(int registeredCount) {
-        Event.registeredCount = registeredCount;
+    public void setRegisteredCount(int registeredCount) {
+        this.registeredCount = registeredCount;
     }
 
     public String createEventID(){

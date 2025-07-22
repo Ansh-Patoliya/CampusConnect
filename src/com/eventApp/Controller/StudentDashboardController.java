@@ -1,5 +1,7 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.StudentDAO;
+import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
 import javafx.event.ActionEvent;
@@ -8,6 +10,7 @@ import javafx.scene.control.Button;
 
 public class StudentDashboardController {
 
+    StudentDAO studentDAO;
     public Button eventHistoryButton;
 
     @FXML
@@ -20,6 +23,6 @@ public class StudentDashboardController {
     }
 
     public void handleViewEventHistory(ActionEvent actionEvent) {
-
+       MyEventLL eventHistory =  studentDAO.viewEventsHistory();
     }
 }

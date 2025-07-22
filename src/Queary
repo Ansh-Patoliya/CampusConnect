@@ -92,10 +92,10 @@ returnUserData(in uid varchar)
 returns users
 language plpgsql
 as $$
-declare udata users%rowtype;
+declare user_data users%rowtype;
 begin
-select * into udata from users where user_id = uid;
-return udata;
+select * into user_data from users where user_id = uid;
+return user_data;
 end;
 $$
 
@@ -104,10 +104,10 @@ returnClubData(in cid int)
 returns clubs
 language plpgsql
 as $$
-declare cdata clubs%rowtype;
+declare club_data clubs%rowtype;
 begin
-select * into cdata from clubs where club_id = cid;
-return cdata;
+select * into club_data from clubs where club_id = cid;
+return club_data;
 end;
 $$
 
@@ -116,9 +116,12 @@ returnEventData(in eid int)
 returns events
 language plpgsql
 as $$
-declare edata events%rowtype;
+declare event_data events%rowtype;
 begin
-select * into edata from events where event_id = eid;
-return edata;
+select * into event_data from events where event_id = eid;
+return event_data;
 end;
 $$
+
+--discount
+--trigger to send data into history table
