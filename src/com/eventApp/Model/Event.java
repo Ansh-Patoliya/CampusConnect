@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    private String eventName, venue, description, approvalStatus,completionStatus, clubId, userId;
+    private String eventName, venue, description, approvalStatus,completionStatus, clubId, userId,category;
     private int maxParticipants,eventId;
     private double ticketPrice;
     private boolean discountApplicable;
@@ -29,7 +29,7 @@ public class Event {
         //get club head's id from clubId and assign
     }
 
-    public Event(int eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus) {
+    public Event(int eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus,String category) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
@@ -44,6 +44,7 @@ public class Event {
         this.eventDate = eventDate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.category = category;
     }
 
     //make method to get count of registrations
@@ -141,24 +142,19 @@ public class Event {
         this.completionStatus = completionStatus;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventId='" + eventId + '\'' +
-                ", eventName='" + eventName + '\'' +
-                ", venue='" + venue + '\'' +
-                ", description='" + description + '\'' +
-                ", approvalStatus='" + approvalStatus + '\'' +
-                ", completionStatus='" + completionStatus + '\'' +
-                ", clubId='" + clubId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", maxParticipants=" + maxParticipants +
-                ", ticketPrice=" + ticketPrice +
-                ", discountApplicable=" + discountApplicable +
-                ", eventDate=" + eventDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                "eventDate=" + eventDate +
+                "category"+category+
                 '}';
     }
 }

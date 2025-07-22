@@ -79,7 +79,7 @@
         </GridPane>
 
         <!-- Action Button -->
-        <Button text="CLOSE" style="-fx-background-color: white; -fx-text-fill: #654ea3;
+        <Button text="CLOSE" onAction="#onBack" style="-fx-background-color: white; -fx-text-fill: #654ea3;
                   -fx-font-weight: bold; -fx-font-size: 14; -fx-background-radius: 20;
                   -fx-padding: 8 35; -fx-cursor: hand;
                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0.5, 0, 1);"/>

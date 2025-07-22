@@ -30,6 +30,7 @@ public class AdminDAO {
                 String clubId = resultSet.getString("club_id");
                 String userId = resultSet.getString("created_by");
 
+                String category = resultSet.getString("category");
                 int maxParticipants = resultSet.getInt("max_participants");
 
                 LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
@@ -44,7 +45,7 @@ public class AdminDAO {
 
 
                 eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus));
+                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -69,6 +70,8 @@ public class AdminDAO {
                 String clubId = resultSet.getString("club_id");
                 String userId = resultSet.getString("created_by");
 
+                String category = resultSet.getString("category");
+
                 int maxParticipants = resultSet.getInt("max_participants");
 
                 LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
@@ -82,7 +85,7 @@ public class AdminDAO {
                 String completionStatus = resultSet.getString("completion_status");
 
                 eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus));
+                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
 
             }
         } catch (SQLException | ClassNotFoundException e) {
