@@ -3,8 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    private String eventName, venue, description, approvalStatus,completionStatus, clubId, userId;
-    private int maxParticipants,eventId;
+    private String eventName, venue, description, approvalStatus,completionStatus, userId,category;
+    private int maxParticipants,eventId,clubId;
     private double ticketPrice;
     private boolean discountApplicable;
     private int registeredCount;
@@ -12,7 +12,7 @@ public class Event {
     LocalTime startTime, endTime;
     static int eventCount = 1;
 
-    public Event(String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable) {
+    public Event(String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -29,7 +29,7 @@ public class Event {
         //get club head's id from clubId and assign
     }
 
-    public Event(int eventId,String eventName, String description, String venue,String clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus) {
+    public Event(int eventId,String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus,String category) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
@@ -44,6 +44,7 @@ public class Event {
         this.eventDate = eventDate;
         this.startTime = startTime;
         this.endTime = endTime;
+        this.category = category;
     }
 
     public Event(int eventId, String eventName, String clubId, String venue, Double ticketPrice,LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
@@ -75,9 +76,9 @@ public class Event {
 
     public int getMaxParticipants() { return maxParticipants; }
 
-    public String getClubId() { return clubId; }
+    public int getClubId() { return clubId; }
 
-    public void setClubId(String clubId) { this.clubId = clubId; }
+    public void setClubId(int clubId) { this.clubId = clubId; }
 
     public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
 
@@ -154,24 +155,19 @@ public class Event {
         this.completionStatus = completionStatus;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     @Override
     public String toString() {
         return "Event{" +
-                "eventId='" + eventId + '\'' +
-                ", eventName='" + eventName + '\'' +
-                ", venue='" + venue + '\'' +
-                ", description='" + description + '\'' +
-                ", approvalStatus='" + approvalStatus + '\'' +
-                ", completionStatus='" + completionStatus + '\'' +
-                ", clubId='" + clubId + '\'' +
-                ", userId='" + userId + '\'' +
-                ", maxParticipants=" + maxParticipants +
-                ", ticketPrice=" + ticketPrice +
-                ", discountApplicable=" + discountApplicable +
-                ", eventDate=" + eventDate +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
+                "eventDate=" + eventDate +
+                "category"+category+
                 '}';
     }
 }

@@ -40,8 +40,7 @@
                   <Button fx:id="clubRequestsButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleClubApproval" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Club Requests" textFill="WHITE" />
                   <Button fx:id="viewClubMemberButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Club Members" textFill="WHITE" />
                   <Button fx:id="exportClubListButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Export Club List" textFill="WHITE" />
-                  <Button fx:id="viewMyProfileButton" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0"
-                          onAction="#handleViewProfile"
+                  <Button fx:id="viewMyProfileButton" onAction="#handleViewProfile" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0"
                           style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 10; -fx-cursor: hand; -fx-font-size: 15;"
                           text="View My Profile" textFill="WHITE" />
 

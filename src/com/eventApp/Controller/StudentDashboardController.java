@@ -25,4 +25,8 @@ public class StudentDashboardController {
     public void handleViewEventHistory(ActionEvent actionEvent) {
        MyEventLL eventHistory =  studentDAO.viewEventsHistory();
     }
+
+    public void handleViewEvent(ActionEvent event) {
+        FXMLScreenLoader.openStudentViewEvent(event);
+    }
 }

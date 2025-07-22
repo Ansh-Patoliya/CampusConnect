@@ -1,14 +1,13 @@
 package com.eventApp.Service;
 
 
+import com.eventApp.DAO.StudentDAO;
 import com.eventApp.DAO.UserDAO;
-import com.eventApp.Model.Admin;
-import com.eventApp.Model.Club;
+import com.eventApp.Model.*;
 import com.eventApp.Utils.DatabaseConnection;
 
 import com.eventApp.DAO.AdminDAO;
 import com.eventApp.DataStructures.MyEventLL;
-import com.eventApp.Model.Event;
 
 
 import java.io.BufferedWriter;
@@ -47,9 +46,7 @@ public class AdminService {
 
     private final AdminDAO adminDAO = new AdminDAO();
 
-    // Get Admin by ID via DAO
-    public Admin getAdmin(String userId) {
-        return adminDAO.getAdmin(userId);
+    public Admin getAdmin(User user) {
+        return AdminDAO.getAdmin(user);
     }
-
 }
