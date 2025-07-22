@@ -15,4 +15,8 @@ public class StudentDashboardController {
     public void onBack(ActionEvent event) {
         FXMLScreenLoader.openLoginPage(event);
     }
+
+    public void handleViewEvent(ActionEvent event) {
+        FXMLScreenLoader.openStudentViewEvent(event);
+    }
 }

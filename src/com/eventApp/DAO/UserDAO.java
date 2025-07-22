@@ -193,15 +193,15 @@ public class UserDAO {
         return clubNames;
     }
 
-    public static String getClubIdByUserId(String userId) {
-        String clubId = null;
+    public static int getClubIdByUserId(String userId) {
+        int clubId = 0;
         try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where user_id=?");
             preparedStatement.setString(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                clubId = resultSet.getString(1);
+                clubId = resultSet.getInt(1);
             }
         } catch (Exception e) {
             e.printStackTrace();

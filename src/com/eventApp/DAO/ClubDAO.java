@@ -16,7 +16,7 @@ public class ClubDAO {
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
             preparedStatement.setInt(1, event.getEventId());
-            preparedStatement.setString(2, event.getClubId());
+            preparedStatement.setInt(2, event.getClubId());
             preparedStatement.setString(3, event.getEventName());
             preparedStatement.setString(4, event.getDescription());
             preparedStatement.setDate(5, Date.valueOf(event.getEventDate()));
@@ -73,12 +73,12 @@ public class ClubDAO {
         return clubList;
     }
 
-    public String getClubNameBy(String clubId) {
+    public String getClubNameBy(int clubId) {
         String clubName = null;
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "SELECT club_name FROM clubs WHERE club_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, clubId);
+            preparedStatement.setInt(1, clubId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 clubName = resultSet.getString("club_name");

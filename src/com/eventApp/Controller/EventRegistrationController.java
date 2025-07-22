@@ -72,7 +72,7 @@ public class EventRegistrationController {
         User currentUser = CurrentUser.getCurrentUser();
         String
                 userId= currentUser.getUserId();
-        String clubId= UserDAO.getClubIdByUserId(currentUser.getUserId());
+        int clubId= UserDAO.getClubIdByUserId(currentUser.getUserId());
         boolean discountApplicable = variableRadio.isSelected();
 
         if(validateFields(eventName, description, venue, maxParticipants, eventDate, startTime, endTime, ticketPrice)) {
