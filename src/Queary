@@ -85,3 +85,40 @@ CREATE TABLE payment (
     CONSTRAINT fk_payment_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_payment_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
 );
+
+--functions
+create or replace function
+returnUserData(in uid varchar)
+returns users
+language plpgsql
+as $$
+declare udata users%rowtype;
+begin
+select * into udata from users where user_id = uid;
+return udata;
+end;
+$$
+
+create or replace function
+returnClubData(in cid int)
+returns clubs
+language plpgsql
+as $$
+declare cdata clubs%rowtype;
+begin
+select * into cdata from clubs where club_id = cid;
+return cdata;
+end;
+$$
+
+create or replace function
+returnEventData(in eid int)
+returns events
+language plpgsql
+as $$
+declare edata events%rowtype;
+begin
+select * into edata from events where event_id = eid;
+return edata;
+end;
+$$
