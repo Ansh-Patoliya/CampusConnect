@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="473.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ViewEventsStudentController">
+    <children>
+
+        <Button alignment="CENTER" layoutX="65.0" layoutY="584.0" mnemonicParsing="false" onAction="#onBack" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Back">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+
+        <Button alignment="CENTER" layoutX="64.0" layoutY="521.0" mnemonicParsing="false" onAction="#onNext" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Next">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+        <Button alignment="CENTER" layoutX="268.0" layoutY="521.0" mnemonicParsing="false" onAction="#onPrevious" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Previous">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </Button>
+      <AnchorPane fx:id="back" layoutX="13.0" layoutY="28.0" prefHeight="478.0" prefWidth="455.0" visible="false">
+         <children>
+            <Label layoutX="26.0" layoutY="34.0" prefHeight="26.0" prefWidth="83.0" text="Event Name:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="eventName" layoutX="123.0" layoutY="34.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="26.0" layoutY="76.0" prefHeight="26.0" prefWidth="83.0" text="Description:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="description" layoutX="123.0" layoutY="76.0" prefHeight="51.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="47.0" layoutY="163.0" prefHeight="26.0" prefWidth="76.0" text="Event date:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="47.0" layoutY="204.0" prefHeight="26.0" prefWidth="83.0" text="Start time:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="startTime" layoutX="137.0" layoutY="204.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="eventDate" layoutX="137.0" layoutY="163.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="47.0" layoutY="243.0" prefHeight="26.0" prefWidth="83.0" text="End time:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="endTime" layoutX="137.0" layoutY="243.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="61.0" layoutY="277.0" prefHeight="26.0" prefWidth="56.0" text="Venue:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="venue" layoutX="137.0" layoutY="277.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="312.0" prefHeight="26.0" prefWidth="83.0" text="Club Name:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="clubName" layoutX="137.0" layoutY="312.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="348.0" prefHeight="26.0" prefWidth="83.0" text="Created by:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="382.0" prefHeight="26.0" prefWidth="119.0" text="Max Participate:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="37.0" layoutY="415.0" prefHeight="26.0" prefWidth="83.0" text="Ticket Price:" textFill="#873fa6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="256.0" layoutY="407.0" prefHeight="42.0" prefWidth="83.0" text="Discount available:" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="createdBy" layoutX="137.0" layoutY="348.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="maxParticipate" layoutX="137.0" layoutY="382.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="ticketPrice" layoutX="137.0" layoutY="415.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="discountAvailabel" layoutX="339.0" layoutY="415.0" prefHeight="26.0" prefWidth="56.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+      <AnchorPane fx:id="front" onMouseClicked="#onClickFront" layoutX="37.0" layoutY="67.0" prefHeight="200.0" prefWidth="409.0">
+         <children>
+              <Label layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="83.0" text="Event Name:" textFill="#873fa6">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+              <Label layoutX="18.0" layoutY="60.0" prefHeight="26.0" prefWidth="76.0" text="Event date:" textFill="#873fa6">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+              <Label fx:id="eventDate1" layoutX="104.0" layoutY="60.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+              <Label fx:id="eventName1" layoutX="104.0" layoutY="14.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+      
+                    <Label layoutX="29.0" layoutY="102.0" prefHeight="26.0" prefWidth="56.0" text="Venue:" textFill="#873fa6">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+              <Label fx:id="venue1" layoutX="104.0" layoutY="102.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+      
+                    <Label layoutX="15.0" layoutY="140.0" prefHeight="26.0" prefWidth="83.0" text="Ticket Price:" textFill="#873fa6">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+      
+                    <Label fx:id="ticketPrice1" layoutX="104.0" layoutY="140.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+                  <font>
+                      <Font name="System Bold" size="14.0" />
+                  </font>
+              </Label>
+         </children>
+      </AnchorPane>
+
+    </children>
+</AnchorPane>

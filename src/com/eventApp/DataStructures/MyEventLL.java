@@ -20,6 +20,10 @@ public class MyEventLL {
         return temp.data;
     }
 
+    public boolean isEmpty() {
+        return first==null;
+    }
+
     class Node {
         Node next, prev;
         Event data;
@@ -38,7 +42,7 @@ public class MyEventLL {
     public void insert(Event data) {
         Node n = new Node(data);
 
-        if (first == null) {
+        if (isEmpty()) {
             first = n;
             current = first;
         } else {
@@ -65,7 +69,7 @@ public class MyEventLL {
     }
 
     public Event deleteAtCurrent() {
-        if (current == null) {
+        if (isEmpty()) {
             return null;
         }
 
@@ -91,7 +95,7 @@ public class MyEventLL {
         return data;
     }
     public Event viewCurrentEvent() {
-        if (current == null) {
+        if (isEmpty()) {
             return null;
         } else {
             return current.data;
@@ -112,7 +116,7 @@ public class MyEventLL {
     }
 
     public Event viewPreviousEvent() {
-        if (current != null) {
+        if (!isEmpty()) {
             if (current.prev != null) {
                 current = current.prev;
                 return current.data;
@@ -130,7 +134,7 @@ public class MyEventLL {
 
     public void addLast(Event data) {
         Node n = new Node(data);
-        if (first == null) {
+        if (isEmpty()) {
             first = n;
             current = first;
         } else {

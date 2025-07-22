@@ -62,19 +62,24 @@ CREATE TABLE events (
     CONSTRAINT fk_event_creator FOREIGN KEY (created_by) REFERENCES users(user_id) ON DELETE SET NULL
 );
 
--- EVENT HISTORY TABLE
 CREATE TABLE event_history (
     history_id SERIAL PRIMARY KEY,
     event_id INT NOT NULL,
+    club_id INT NOT NULL,
     event_name VARCHAR(100) NOT NULL,
-    club_name VARCHAR(100),
+    description VARCHAR(1000),
     event_date DATE,
     start_time TIME,
     end_time TIME,
     venue VARCHAR(200),
+    ticket_price DECIMAL(8,2) DEFAULT 0 CHECK (ticket_price >= 0),
     total_participants INT,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_history_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
+    CONSTRAINT fk_history_club FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
 );
+
 
 -- PAYMENT TABLE
 CREATE TABLE payment (
