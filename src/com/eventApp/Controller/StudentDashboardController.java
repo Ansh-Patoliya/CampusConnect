@@ -4,8 +4,11 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public class StudentDashboardController {
+
+    public Button eventHistoryButton;
 
     @FXML
     private void handleViewProfile(ActionEvent event) {
@@ -14,5 +17,9 @@ public class StudentDashboardController {
 
     public void onBack(ActionEvent event) {
         FXMLScreenLoader.openLoginPage(event);
+    }
+
+    public void handleViewEventHistory(ActionEvent actionEvent) {
+
     }
 }
