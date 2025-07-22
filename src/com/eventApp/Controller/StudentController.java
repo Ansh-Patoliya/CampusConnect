@@ -1,9 +1,11 @@
 package com.eventApp.Controller;
 
+import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.StudentService;
 import com.eventApp.Utils.CurrentUser;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -41,5 +43,11 @@ public class StudentController {
                 interestArea.setText(interests != null ? String.join(", ", interests) : "");
             }
         }
+    }
+
+    public void onBack(ActionEvent event) {
+        // Logic to go back to the previous screen, e.g., Student Dashboard
+        // This could be implemented using a method from FXMLScreenLoader or similar
+        FXMLScreenLoader.openStudentDashboard(event);
     }
 }

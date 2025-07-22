@@ -127,4 +127,20 @@ public class MyEventLL {
     public void resetPointer() {
         current = first;
     }
+
+    public void addLast(Event data) {
+        Node n = new Node(data);
+        if (first == null) {
+            first = n;
+            current = first;
+        } else {
+            Node temp = first;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = n;
+            n.prev = temp;
+        }
+        size++;
+    }
 }

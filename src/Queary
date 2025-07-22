@@ -51,6 +51,7 @@ CREATE TABLE events (
     venue VARCHAR(200),
     registered_count INT DEFAULT 0,
     max_participants INT DEFAULT 0,
+    category VARCHAR(50),
     discount_available BOOLEAN DEFAULT FALSE,
     approval_status VARCHAR(20) DEFAULT 'Pending' CHECK (approval_status IN ('Pending', 'Approved', 'Rejected')),
     completion_status VARCHAR(20) DEFAULT 'Not Completed' CHECK (completion_status IN ('Completed', 'Not Completed')),
@@ -84,4 +85,14 @@ CREATE TABLE payment (
     payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_payment_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_payment_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE
+);
+
+CREATE TABLE event_registration (
+    registration_id SERIAL PRIMARY KEY,
+    user_id VARCHAR(50) NOT NULL,
+    event_id INT NOT NULL,
+    registration_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_registration_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    CONSTRAINT fk_registration_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
 );
