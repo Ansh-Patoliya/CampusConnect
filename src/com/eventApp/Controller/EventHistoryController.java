@@ -1,63 +1,41 @@
 package com.eventApp.Controller;
 
-
+import com.eventApp.DAO.StudentDAO;
 import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
-import com.eventApp.DAO.AdminDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.time.format.DateTimeFormatter;
 
-public class ViewEventsController {
+public class EventHistoryController {
 
+    private final StudentDAO studentDAO = new StudentDAO();
 
     @FXML
-    private TableView<Event> eventTable;
-    @FXML
-    private TableColumn<Event, String> nameCol;
-    @FXML
-    private TableColumn<Event, String> statusCol;
-    @FXML
-    private TableColumn<Event, String> dateCol;
-    @FXML
-    private TableColumn<Event, String> creatorCol;
-    @FXML
-    private TableColumn<Event, String> completedCol;
-    @FXML
-    private Button refreshBtn;
-
+    public TableView<Event> eventHistoryTable;
+    public TableColumn<Event, String> nameCol;
+    public TableColumn<Event, String> dateCol;
+    public TableColumn<Event, String> creatorCol;
+    public TableColumn<Event, String> categoryCol;
+    public Button refreshBtn;
     private MyEventLL eventList;
 
-    private final AdminDAO adminDAO = new AdminDAO();
-
-    @FXML
-    public void initialize() {
+    public void initialize(){
         loadEventList();
         setupColumns();
-
-        refreshBtn.setOnAction(e -> {
-            loadEventList();
-            showDataInTable();
-        });
-
         showDataInTable();
-    }
-
-    private void loadEventList() {
-        this.eventList = adminDAO.getEventList();
     }
 
     private void setupColumns() {
         nameCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEventName()));
-
-        statusCol.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getApprovalStatus()));
 
         dateCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(
@@ -65,11 +43,10 @@ public class ViewEventsController {
 
         creatorCol.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUserId()));
+    }
 
-        completedCol.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(
-                        cellData.getValue().getCompletionStatus() ));
-
+    private void loadEventList() {
+        this.eventList = studentDAO.viewEventsHistory();
     }
 
     private void showDataInTable() {
@@ -79,10 +56,8 @@ public class ViewEventsController {
                 observableEvents.add(eventList.get(i));
             }
         }
-        eventTable.setItems(observableEvents);
+        eventHistoryTable.setItems(observableEvents);
     }
 
-    public void onBack(ActionEvent event) {
-        FXMLScreenLoader.openAdminDashboard(event);
-    }
+    public void onBack(ActionEvent actionEvent) { FXMLScreenLoader.openStudentDashboard(actionEvent);}
 }

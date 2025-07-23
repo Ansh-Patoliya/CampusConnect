@@ -8,6 +8,7 @@ public class DatabaseConnection {
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
         Connection connection = null;
             Class.forName("org.postgresql.Driver");
-            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/CampusConnect", "postgres", "Ap1420@810");
+            return DriverManager.getConnection("jdbc:postgresql://localhost:5432/CampusConnect",
+                    "postgres", "Ap1420@810");
     }
 }

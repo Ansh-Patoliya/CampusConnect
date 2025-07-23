@@ -204,6 +204,7 @@ public class FXMLScreenLoader {
 
     }
 
+
     public static void openClubMemberProfile(ActionEvent event, ClubMember clubMember) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubMemberViewProfile.fxml"));
@@ -214,6 +215,14 @@ public class FXMLScreenLoader {
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Club Member Profile");
+
+    public static void openViewEventHistory(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEventHistory.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("View Event History");
+
             stage.setScene(new Scene(root, 1400, 800));
             stage.show();
         } catch (IOException e) {
