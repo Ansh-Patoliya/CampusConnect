@@ -69,7 +69,7 @@ public class StudentDAO {
             while (resultSet.next()){
                 int eventId=resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
-                String clubId = resultSet.getString("club_id");
+                int clubId = resultSet.getInt("club_id");
                 LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
                 LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
                 LocalTime endTime = resultSet.getTime("end_time").toLocalTime();

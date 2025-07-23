@@ -47,7 +47,7 @@ public class Event {
         this.category = category;
     }
 
-    public Event(int eventId, String eventName, String clubId, String venue, Double ticketPrice,LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
+    public Event(int eventId, String eventName, int clubId, String venue, Double ticketPrice,LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
