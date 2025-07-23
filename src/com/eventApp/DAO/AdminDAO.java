@@ -28,7 +28,7 @@ public class AdminDAO {
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
 
-                String clubId = resultSet.getString("club_id");
+                int clubId = resultSet.getInt("club_id");
                 String userId = resultSet.getString("created_by");
 
                 String category = resultSet.getString("category");
@@ -68,7 +68,7 @@ public class AdminDAO {
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
 
-                String clubId = resultSet.getString("club_id");
+                int clubId = resultSet.getInt("club_id");
                 String userId = resultSet.getString("created_by");
 
                 String category = resultSet.getString("category");

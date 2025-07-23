@@ -14,6 +14,8 @@ import java.util.List;
 
 public class StudentService {
 
+    MyEventLL myEventLL ;
+
     public Student getStudentByUser(User user) {
         return StudentDAO.getStudent(user);
     }
@@ -35,10 +37,30 @@ public class StudentService {
         }
         return myEventLL;
     }
+    //    public boolean registerStudentToEvent(String studentId, String eventId)  // registration logic
 
-//    public void loadStudentEvents(String studentId)           // loads list and sets index = 0
-//    public Event viewCurrentEvent()                           // returns event at currentIndex
-//    public Event getNextEvent()                               // increments index, returns next
-//    public Event getPreviousEvent()                           // decrements index, returns previous
-//    public boolean registerStudentToEvent(String studentId, String eventId)  // registration logic
+    public void loadStudentEvents() {
+        myEventLL=sortEventList();
+    }
+
+    public Event viewCurrentEvent() {
+        if (myEventLL.isEmpty()) {
+            return null; // or throw an exception
+        }
+        return myEventLL.viewCurrentEvent();
+    }
+
+    public Event getNextEvent() {
+        if (myEventLL.isEmpty()) {
+            return null; // or throw an exception
+        }
+        return myEventLL.viewNextEvent();
+    }
+
+    public Event getPreviousEvent() {
+        if (myEventLL.isEmpty()) {
+            return null; // or throw an exception
+        }
+        return myEventLL.viewPreviousEvent();
+    }
 }

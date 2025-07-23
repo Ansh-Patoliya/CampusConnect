@@ -29,7 +29,7 @@ public class EventDAO {
                 String venue = resultSet.getString("venue");
                 String category = resultSet.getString("category");
 
-                String clubId = resultSet.getString("club_id");
+                int clubId = resultSet.getInt("club_id");
                 String userId = resultSet.getString("created_by");
 
                 int maxParticipants = resultSet.getInt("max_participants");
