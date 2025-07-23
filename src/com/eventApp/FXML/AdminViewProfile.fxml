@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.shape.*?>
@@ -15,84 +16,109 @@
             prefHeight="620.0" prefWidth="850.0"
             style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);">
 
-    <!-- Decorative background elements -->
-    <Circle radius="180" fill="rgba(255,255,255,0.04)" layoutX="100" layoutY="100"/>
-    <Circle radius="120" fill="rgba(255,255,255,0.03)" layoutX="750" layoutY="480"/>
+    <!-- Center Container -->
+    <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+               AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-    <!-- Main Content Container -->
-    <VBox alignment="TOP_CENTER" spacing="35" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="80" AnchorPane.rightAnchor="80">
+        <!-- Main Content Container -->
+        <VBox alignment="CENTER" spacing="35" maxWidth="650" maxHeight="500">
 
-        <!-- STUNNING TITLE DESIGN -->
-        <VBox alignment="CENTER" spacing="5">
-            <!-- Main Title -->
-            <Label text="ADMIN PROFILE" style="
-                -fx-text-fill: white;
-                -fx-font-size: 42px;
-                -fx-font-family: 'Segoe UI';
-                -fx-font-weight: 700;
-                -fx-letter-spacing: 2px;
-                -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 0, 0, 0, 2);"/>
-
-            <!-- Decorative underline -->
-            <Rectangle width="120" height="3" fill="white" arcWidth="3" arcHeight="3"
-                       style="-fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.1), 0, 0, 0, 1);"/>
-        </VBox>
-
-        <!-- White Profile Card with elegant shadow -->
-        <VBox style="
-            -fx-background-color: white;
-            -fx-background-radius: 22;
-            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 15, 0, 0, 5);
-            -fx-padding: 45 55;
-            -fx-spacing: 35;"
-              alignment="CENTER_LEFT" prefWidth="650">
-
-            <!-- Name Field -->
-            <VBox spacing="10">
-                <Label text="FULL NAME" style="
-                    -fx-text-fill: #654ea3;
-                    -fx-font-size: 15px;
-                    -fx-font-family: 'Segoe UI Semibold';
-                    -fx-opacity: 0.9;"/>
-                <Label fx:id="nameLabel" text="Loading..." style="
-                    -fx-text-fill: #2d2d2d;
-                    -fx-font-size: 24px;
-                    -fx-font-family: 'Segoe UI';
-                    -fx-padding: 8 0 0 20;
-                    -fx-border-color: #eeeeee;
-                    -fx-border-width: 0 0 1 0;"/>
-            </VBox>
-
-            <!-- Email Field -->
-            <VBox spacing="10">
-                <Label text="EMAIL ADDRESS" style="
-                    -fx-text-fill: #654ea3;
-                    -fx-font-size: 15px;
-                    -fx-font-family: 'Segoe UI Semibold';
-                    -fx-opacity: 0.9;"/>
-                <Label fx:id="emailLabel" text="Loading..." style="
-                    -fx-text-fill: #2d2d2d;
-                    -fx-font-size: 24px;
-                    -fx-font-family: 'Segoe UI';
-                    -fx-padding: 8 0 0 20;
-                    -fx-border-color: #eeeeee;
-                    -fx-border-width: 0 0 1 0;"/>
-            </VBox>
-        </VBox>
-
-        <!-- Attractive Back Button -->
-        <Button layoutX="20" onAction="#onBack" text="GO BACK"
-                style="
-                    -fx-background-color: transparent;
+            <!-- STUNNING TITLE DESIGN -->
+            <VBox alignment="CENTER" spacing="8">
+                <!-- Main Title -->
+                <Label text="ADMIN PROFILE" style="
                     -fx-text-fill: white;
-                    -fx-font-size: 16px;
-                    -fx-font-family: 'Segoe UI Semibold';
-                    -fx-background-radius: 22;
-                    -fx-border-radius: 22;
-                    -fx-border-color: white;
-                    -fx-border-width: 1.5px;
-                    -fx-padding: 12 50;
-                    -fx-cursor: hand;
-                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 0, 0, 0, 2);"/>
-    </VBox>
+                    -fx-font-size: 42px;
+                    -fx-font-family: 'Segoe UI';
+                    -fx-font-weight: 700;
+                    -fx-letter-spacing: 2px;
+                    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 8, 0, 0, 3);"/>
+
+                <!-- Decorative underline -->
+                <Rectangle width="120" height="4" fill="white" arcWidth="4" arcHeight="4"
+                           style="-fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);"/>
+            </VBox>
+
+            <!-- White Profile Card with elegant shadow -->
+            <VBox style="
+                -fx-background-color: rgba(255, 255, 255, 0.98);
+                -fx-background-radius: 25;
+                -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 8);
+                -fx-padding: 50 60;
+                -fx-spacing: 35;"
+                  alignment="CENTER_LEFT" prefWidth="600" prefHeight="280">
+
+                <!-- Name Field -->
+                <VBox spacing="12">
+                    <Label text="FULL NAME" style="
+                        -fx-text-fill: #654ea3;
+                        -fx-font-size: 14px;
+                        -fx-font-family: 'Segoe UI Semibold';
+                        -fx-font-weight: 600;
+                        -fx-letter-spacing: 1px;
+                        -fx-opacity: 0.9;"/>
+                    <Label fx:id="nameLabel" text="Loading..." style="
+                        -fx-text-fill: #2d2d2d;
+                        -fx-font-size: 26px;
+                        -fx-font-family: 'Segoe UI';
+                        -fx-font-weight: 400;
+                        -fx-padding: 12 0 12 25;
+                        -fx-background-color: rgba(101, 78, 163, 0.05);
+                        -fx-background-radius: 12;
+                        -fx-border-color: rgba(101, 78, 163, 0.1);
+                        -fx-border-width: 0 0 0 4;
+                        -fx-border-radius: 12;"/>
+                </VBox>
+
+                <!-- Email Field -->
+                <VBox spacing="12">
+                    <Label text="EMAIL ADDRESS" style="
+                        -fx-text-fill: #654ea3;
+                        -fx-font-size: 14px;
+                        -fx-font-family: 'Segoe UI Semibold';
+                        -fx-font-weight: 600;
+                        -fx-letter-spacing: 1px;
+                        -fx-opacity: 0.9;"/>
+                    <Label fx:id="emailLabel" text="Loading..." style="
+                        -fx-text-fill: #2d2d2d;
+                        -fx-font-size: 26px;
+                        -fx-font-family: 'Segoe UI';
+                        -fx-font-weight: 400;
+                        -fx-padding: 12 0 12 25;
+                        -fx-background-color: rgba(234, 175, 200, 0.15);
+                        -fx-background-radius: 12;
+                        -fx-border-color: rgba(234, 175, 200, 0.3);
+                        -fx-border-width: 0 0 0 4;
+                        -fx-border-radius: 12;"/>
+                </VBox>
+            </VBox>
+
+            <!-- Attractive Back Button -->
+            <Button onAction="#onBack" text="← GO BACK" prefWidth="180" prefHeight="50"
+                    style="
+                        -fx-background-color: rgba(255, 255, 255, 0.15);
+                        -fx-text-fill: white;
+                        -fx-font-size: 16px;
+                        -fx-font-family: 'Segoe UI Semibold';
+                        -fx-font-weight: 600;
+                        -fx-background-radius: 25;
+                        -fx-border-radius: 25;
+                        -fx-border-color: rgba(255, 255, 255, 0.6);
+                        -fx-border-width: 2px;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);"/>
+        </VBox>
+
+    </StackPane>
+
+    <!-- Decorative background elements -->
+    <Circle radius="150" fill="rgba(255,255,255,0.06)"
+            AnchorPane.topAnchor="50" AnchorPane.leftAnchor="50"/>
+    <Circle radius="100" fill="rgba(255,255,255,0.04)"
+            AnchorPane.bottomAnchor="60" AnchorPane.rightAnchor="80"/>
+    <Circle radius="60" fill="rgba(255,255,255,0.03)"
+            AnchorPane.topAnchor="120" AnchorPane.rightAnchor="150"/>
+    <Circle radius="40" fill="rgba(255,255,255,0.05)"
+            AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="120"/>
+
 </AnchorPane>
