@@ -298,7 +298,7 @@
                                     <Font name="System Bold" size="14.0" />
                                 </font>
                             </Label>
-                            <Label fx:id="ticketPrice1" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;"
+                            <Label fx:id ="ticketPrice1" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;"
                                    prefHeight="26.0" prefWidth="150.0" textFill="#654ea3" wrapText="true">
                                 <font>
                                     <Font name="System Bold" size="14.0" />
