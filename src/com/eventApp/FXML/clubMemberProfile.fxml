@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.eventApp.Controller.ClubController"
+            prefWidth="600" prefHeight="400">
+
+    <VBox spacing="20" alignment="CENTER" layoutX="100" layoutY="50">
+        <children>
+            <Label text="Club Member Profile" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+            <HBox spacing="10">
+                <Label text="Name:"/>
+                <Label fx:id="nameLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Email:"/>
+                <Label fx:id="emailLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Position:"/>
+                <Label fx:id="positionLabel"/>
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Club ID:"/>
+                <Label fx:id="clubIdLabel"/>
+            </HBox>
+        </children>
+        <padding><Insets top="20" left="20" right="20" bottom="20"/></padding>
+    </VBox>
+</AnchorPane>
