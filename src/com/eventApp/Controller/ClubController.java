@@ -44,7 +44,11 @@ public class ClubController {
     }
 
     public void onBack(ActionEvent event) {
-        FXMLScreenLoader.openAdminDashboard(event);
+        FXMLScreenLoader.openLoginPage(event);
+    }
+
+    public void onBack1(ActionEvent event) {
+        FXMLScreenLoader.openClubDashboard(event);
     }
 
     public void handleViewEvents(ActionEvent event) {

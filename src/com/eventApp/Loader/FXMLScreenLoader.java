@@ -221,4 +221,7 @@ public class FXMLScreenLoader {
         }
     }
 
+    public static void openViewEventHistory(ActionEvent actionEvent) {
+
+    }
 }
