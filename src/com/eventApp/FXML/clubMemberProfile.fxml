@@ -8,7 +8,9 @@
 <?import javafx.scene.shape.Circle?>
 <?import java.lang.String?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.eventApp.Controller.ClubController"
+
+            fx:controller="com.eventApp.Controller.ClubViewProfileController"
+
             prefWidth="600" prefHeight="400"
             style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);">
 
@@ -99,7 +101,9 @@
                 </VBox>
 
                 <!-- Back Button -->
-                <Button text="← Back" onAction="#onBack1" prefWidth="140" prefHeight="45"
+
+                <Button text="← Back" onAction="#onBack" prefWidth="140" prefHeight="45"
+
                         style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8b7bb8);
                            -fx-text-fill: white;
                            -fx-font-size: 16px;

@@ -8,12 +8,14 @@ import javafx.scene.control.Label;
 
 public class ClubController {
 
-    @FXML private Label nameLabel;
-    @FXML private Label emailLabel;
-    @FXML private Label positionLabel;
-    @FXML private Label clubIdLabel;
-
-    private ClubMember loggedInClubMember;
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label emailLabel;
+    @FXML
+    private Label positionLabel;
+    @FXML
+    private Label clubIdLabel;
 
 
     public void setClubMember(ClubMember clubMember) {
@@ -27,11 +29,8 @@ public class ClubController {
 
     @FXML
     private void viewProfile(ActionEvent event) {
-        if (loggedInClubMember != null) {
-            FXMLScreenLoader.openClubMemberProfile(event, loggedInClubMember);
-        } else {
-            System.out.println("ClubMember object is null. Cannot load profile.");
-        }
+        FXMLScreenLoader.openClubMemberProfile(event);
+
     }
 
 

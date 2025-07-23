@@ -19,18 +19,18 @@ public class ClubMemberDAO {
 
             ps.setString(1, user.getUserId());
 
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return new ClubMember(
-                            user.getUserId(),
-                            rs.getString("name"),
-                            rs.getString("email"),
-                            rs.getString("password"),
-                            rs.getString("role"),
-                            rs.getString("position"),
-                            rs.getInt("club_id")
-                    );
-                }
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                System.out.println("ClubMemberDAO: Found club member for user ID: " + user.getUserId());
+                return new ClubMember(
+                        user.getUserId(),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("role"),
+                        rs.getString("position"),
+                        rs.getInt("club_id")
+                );
             }
         } catch (Exception e) {
             e.printStackTrace();
