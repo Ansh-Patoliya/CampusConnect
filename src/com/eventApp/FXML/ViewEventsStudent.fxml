@@ -9,56 +9,17 @@
 <?import javafx.scene.effect.DropShadow?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="658.0" prefWidth="473.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);"
+            prefHeight="658.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.eventApp.Controller.ViewEventsStudentController">
 
     <children>
-        <!-- Back Button -->
-        <Button alignment="CENTER" layoutX="65.0" layoutY="584.0" mnemonicParsing="false"
-                onAction="#onBack" prefHeight="40.0" prefWidth="354.0"
-                style="-fx-background-color: rgba(255,255,255,0.2);
-                       -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
-                       -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
-                       -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
-                text="Back">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-
-        <!-- Navigation Buttons -->
-        <Button alignment="CENTER" layoutX="64.0" layoutY="521.0" mnemonicParsing="false"
-                onAction="#onNext" prefHeight="40.0" prefWidth="150.0"
-                style="-fx-background-color: rgba(255,255,255,0.2);
-                       -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
-                       -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
-                       -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
-                text="Next">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-
-        <Button alignment="CENTER" layoutX="268.0" layoutY="521.0" mnemonicParsing="false"
-                onAction="#onPrevious" prefHeight="40.0" prefWidth="150.0"
-                style="-fx-background-color: rgba(255,255,255,0.2);
-                       -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
-                       -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
-                       -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
-                text="Previous">
-            <font>
-                <Font name="System Bold" size="16.0" />
-            </font>
-        </Button>
-
-        <!-- Detailed View Panel (hidden by default) -->
-        <AnchorPane fx:id="back" layoutX="13.0" layoutY="28.0" prefHeight="478.0" prefWidth="455.0"
+        <!-- Left Side - Event Details Panel -->
+        <AnchorPane fx:id="back" layoutX="20.0" layoutY="20.0" prefHeight="618.0" prefWidth="500.0"
                     style="-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 15;
-                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"
-                    visible="false">
+                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);">
             <children>
-                <VBox layoutX="20" layoutY="20" spacing="15">
+                <VBox layoutX="20" layoutY="20" spacing="15" prefWidth="460">
                     <children>
                         <!-- Event Name -->
                         <VBox spacing="5">
@@ -83,7 +44,7 @@
                                 </font>
                             </Label>
                             <Label fx:id="description" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;"
-                                   prefHeight="51.0" prefWidth="400.0" textFill="#654ea3" wrapText="true">
+                                   prefHeight="80.0" prefWidth="400.0" textFill="#654ea3" wrapText="true">
                                 <font>
                                     <Font name="System Bold" size="14.0" />
                                 </font>
@@ -239,11 +200,48 @@
             </children>
         </AnchorPane>
 
-        <!-- Front Card View -->
+        <!-- Right Side - Navigation Buttons -->
+        <VBox layoutX="550.0" layoutY="250.0" spacing="20" alignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#onPrevious" prefHeight="40.0" prefWidth="200.0"
+                    style="-fx-background-color: rgba(255,255,255,0.2);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
+                           -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+                           -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
+                    text="Previous">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+
+            <Button mnemonicParsing="false" onAction="#onNext" prefHeight="40.0" prefWidth="200.0"
+                    style="-fx-background-color: rgba(255,255,255,0.2);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
+                           -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+                           -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
+                    text="Next">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+
+            <Button mnemonicParsing="false" onAction="#onBack" prefHeight="40.0" prefWidth="200.0"
+                    style="-fx-background-color: rgba(255,255,255,0.2);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;
+                           -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);
+                           -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;"
+                    text="Back">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+        </VBox>
+
+        <!-- Front Card View (hidden by default) -->
         <AnchorPane fx:id="front" onMouseClicked="#onClickFront" layoutX="37.0" layoutY="67.0"
                     prefHeight="200.0" prefWidth="409.0"
                     style="-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 15;
-                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);"
+                    visible="false">
             <children>
                 <VBox layoutX="20" layoutY="20" spacing="15">
                     <children>
