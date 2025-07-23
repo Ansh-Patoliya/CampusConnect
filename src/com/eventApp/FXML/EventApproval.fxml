@@ -5,144 +5,144 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.EventApprovalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="469.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.EventApprovalController">
    <children>
-      <Label layoutX="50.0" layoutY="70.0" prefHeight="26.0" prefWidth="83.0" text="Event Name:" textFill="#873fa6">
+      <Label layoutX="50.0" layoutY="70.0" prefHeight="26.0" prefWidth="83.0" text="Event Name:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="103.0" prefHeight="26.0" prefWidth="83.0" text="Description:" textFill="#873fa6">
+      <Label layoutX="50.0" layoutY="103.0" prefHeight="26.0" prefWidth="83.0" text="Description:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="168.0" prefHeight="26.0" prefWidth="76.0" text="Event date:" textFill="#873fa6">
+      <Label layoutX="50.0" layoutY="168.0" prefHeight="26.0" prefWidth="76.0" text="Event date:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="209.0" prefHeight="26.0" prefWidth="83.0" text="Start time:" textFill="#873fa6">
+      <Label layoutX="50.0" layoutY="209.0" prefHeight="26.0" prefWidth="83.0" text="Start time:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="startTime" layoutX="140.0" layoutY="209.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="startTime" layoutX="140.0" layoutY="209.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="eventDate" layoutX="140.0" layoutY="168.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="eventDate" layoutX="140.0" layoutY="168.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="description" layoutX="140.0" layoutY="103.0" prefHeight="51.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="description" layoutX="140.0" layoutY="103.0" prefHeight="51.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="eventName" layoutX="140.0" layoutY="70.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="eventName" layoutX="140.0" layoutY="70.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" layoutX="64.0" layoutY="473.0" mnemonicParsing="false" onAction="#onApprove" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Approve">
+      <Button alignment="CENTER" layoutX="64.0" layoutY="473.0" mnemonicParsing="false" onAction="#onApprove" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: white; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;" text="Approve">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="268.0" layoutY="473.0" mnemonicParsing="false" onAction="#onReject" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Reject">
+      <Button alignment="CENTER" layoutX="268.0" layoutY="473.0" mnemonicParsing="false" onAction="#onReject" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: white; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;" text="Reject">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="65.0" layoutY="584.0" mnemonicParsing="false" onAction="#onBack" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Back">
+      <Button alignment="CENTER" layoutX="65.0" layoutY="584.0" mnemonicParsing="false" onAction="#onBack" prefHeight="35.0" prefWidth="354.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: white; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;" text="Back">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="51.0" prefWidth="334.0" text="Event Approval" textFill="#873fa6">
+      <Label alignment="CENTER" layoutX="50.0" layoutY="10.0" prefHeight="51.0" prefWidth="334.0" text="Event Approval" style="-fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0.5, 0, 1);">
          <font>
             <Font name="System Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="50.0" layoutY="248.0" prefHeight="26.0" prefWidth="83.0" text="End time:" textFill="#873fa6">
+      <Label layoutX="50.0" layoutY="248.0" prefHeight="26.0" prefWidth="83.0" text="End time:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="endTime" layoutX="140.0" layoutY="248.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="endTime" layoutX="140.0" layoutY="248.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="282.0" prefHeight="26.0" prefWidth="56.0" text="Venue:" textFill="#873fa6">
+      <Label layoutX="64.0" layoutY="282.0" prefHeight="26.0" prefWidth="56.0" text="Venue:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="venue" layoutX="140.0" layoutY="282.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="venue" layoutX="140.0" layoutY="282.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="317.0" prefHeight="26.0" prefWidth="83.0" text="Club Name:" textFill="#873fa6">
+      <Label layoutX="40.0" layoutY="317.0" prefHeight="26.0" prefWidth="83.0" text="Club Name:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="clubName" layoutX="140.0" layoutY="317.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="clubName" layoutX="140.0" layoutY="317.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" layoutX="64.0" layoutY="521.0" mnemonicParsing="false" onAction="#onNext" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Next">
+      <Button alignment="CENTER" layoutX="64.0" layoutY="521.0" mnemonicParsing="false" onAction="#onNext" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: white; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;" text="Next">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Button alignment="CENTER" layoutX="268.0" layoutY="521.0" mnemonicParsing="false" onAction="#onPrevious" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #8e44ad; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;" text="Previous">
+      <Button alignment="CENTER" layoutX="268.0" layoutY="521.0" mnemonicParsing="false" onAction="#onPrevious" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.2); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-border-color: white; -fx-border-radius: 8; -fx-border-width: 1; -fx-cursor: hand;" text="Previous">
          <font>
             <Font size="15.0" />
          </font>
       </Button>
-      <Label layoutX="40.0" layoutY="353.0" prefHeight="26.0" prefWidth="83.0" text="Created by:" textFill="#873fa6">
+      <Label layoutX="40.0" layoutY="353.0" prefHeight="26.0" prefWidth="83.0" text="Created by:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="22.0" layoutY="387.0" prefHeight="26.0" prefWidth="119.0" text="Max Participate:" textFill="#873fa6">
+      <Label layoutX="22.0" layoutY="387.0" prefHeight="26.0" prefWidth="119.0" text="Max Participate:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="420.0" prefHeight="26.0" prefWidth="83.0" text="Ticket Price:" textFill="#873fa6">
+      <Label layoutX="40.0" layoutY="420.0" prefHeight="26.0" prefWidth="83.0" text="Ticket Price:" style="-fx-text-fill: white;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="259.0" layoutY="412.0" prefHeight="42.0" prefWidth="83.0" text="Discount available:" textFill="#873fa6" wrapText="true">
+      <Label layoutX="259.0" layoutY="412.0" prefHeight="42.0" prefWidth="83.0" text="Discount available:" style="-fx-text-fill: white;" wrapText="true">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="createdBy" layoutX="140.0" layoutY="353.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="createdBy" layoutX="140.0" layoutY="353.0" prefHeight="26.0" prefWidth="283.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="maxParticipate" layoutX="140.0" layoutY="387.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="maxParticipate" layoutX="140.0" layoutY="387.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="ticketPrice" layoutX="140.0" layoutY="420.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="ticketPrice" layoutX="140.0" layoutY="420.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="discountAvailabel" layoutX="342.0" layoutY="420.0" prefHeight="26.0" prefWidth="56.0" style="-fx-border-color: #a569bd;" textFill="#873fa6" wrapText="true">
+      <Label fx:id="discountAvailabel" layoutX="342.0" layoutY="420.0" prefHeight="26.0" prefWidth="56.0" style="-fx-border-color: white; -fx-text-fill: white; -fx-border-radius: 3; -fx-padding: 3;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
