@@ -15,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ViewEventsController {
 
+
     @FXML
     private TableView<Event> eventTable;
     @FXML
