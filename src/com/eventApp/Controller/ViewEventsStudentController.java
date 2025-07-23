@@ -31,6 +31,7 @@ public class ViewEventsStudentController {
     public Label discountAvailabel;
     public AnchorPane front;
     public AnchorPane back;
+    public Label categoryField;
 
     public void onBack(ActionEvent event) {
         FXMLScreenLoader.openStudentDashboard(event);
@@ -72,6 +73,8 @@ public class ViewEventsStudentController {
     private void setTextBack(Event event) {
         eventName.setText(event.getEventName());
         description.setText(event.getDescription());
+        categoryField
+                .setText(event.getCategory());
         startTime.setText(event.getStartTime().toString());
         endTime.setText(event.getEndTime().toString());
         eventDate.setText(event.getEventDate().toString());
