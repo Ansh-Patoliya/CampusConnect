@@ -205,12 +205,10 @@ public class FXMLScreenLoader {
     }
 
 
-    public static void openClubMemberProfile(ActionEvent event, ClubMember clubMember) {
+    public static void openClubMemberProfile(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubMemberProfile.fxml"));
             Parent root = loader.load();
-            ClubController clubController = loader.getController();
-            clubController.setClubMember(clubMember);
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setTitle("Club Member Profile");
             stage.setScene(new Scene(root, 1400, 800));
