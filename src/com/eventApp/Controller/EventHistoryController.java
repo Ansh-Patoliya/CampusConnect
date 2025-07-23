@@ -30,6 +30,7 @@ public class EventHistoryController {
     public void initialize(){
         loadEventList();
         setupColumns();
+        showDataInTable();
     }
 
     private void setupColumns() {
