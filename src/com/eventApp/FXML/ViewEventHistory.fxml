@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;"
+            xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.eventApp.Controller.EventHistoryController">
+    <children>
+        <VBox spacing="25" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
+              AnchorPane.topAnchor="20">
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25"/>
+            </padding>
+            <children>
+                <VBox spacing="15"
+                      style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 20; -fx-border-color: rgba(255, 255, 255, 0.4); -fx-border-radius: 20; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.3, 0, 5);">
+                    <padding>
+                        <Insets bottom="20" left="25" right="25" top="20"/>
+                    </padding>
+                    <children>
+                        <Label style="-fx-font-size: 18px; -fx-text-fill: #654ea3; -fx-font-weight: bold; -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                               text="📊 Past Events Overview"/>
+                        <TableView fx:id="eventHistoryTable" prefHeight="350.0" prefWidth="744.0"
+                                   style="-fx-background-color: white;                               -fx-table-cell-border-color: rgba(101, 78, 163, 0.1);                               -fx-background-radius: 12;                               -fx-border-color: rgba(101, 78, 163, 0.2);                               -fx-border-radius: 12;                               -fx-border-width: 1;                               -fx-control-inner-background: white;                               -fx-selection-bar: rgba(101, 78, 163, 0.3);                               -fx-selection-bar-non-focused: rgba(101, 78, 163, 0.2);">
+                            <columns>
+                                <TableColumn fx:id="nameCol" prefWidth="260.7999978065491"
+                                             style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;"
+                                             text="🎯 Event Name"/>
+                                <TableColumn fx:id="dateCol" prefWidth="173.5999755859375"
+                                             style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;"
+                                             text="📅 Event Date"/>
+                                <TableColumn fx:id="creatorCol" prefWidth="180.800048828125"
+                                             style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;"
+                                             text="👤 Created By"/>
+                                <TableColumn fx:id="categoryCol" prefWidth="140.79998779296875"
+                                             style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;"
+                                             text="📂Category"/>
+                            </columns>
+                        </TableView>
+                    </children>
+                </VBox>
+                <HBox alignment="CENTER_RIGHT" spacing="15">
+                    <children>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="45.0"
+                                prefWidth="140.0"
+                                style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);"
+                                text="⬅ Back">
+                            <font>
+                                <Font name="Segoe UI Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                        <Button fx:id="refreshBtn" prefHeight="45.0" prefWidth="140.0"
+                                style="-fx-background-color: linear-gradient(to right, #4CAF50, #45a049);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);"
+                                text="🔄 Refresh">
+                            <font>
+                                <Font name="Segoe UI Bold" size="14.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" spacing="20"
+                      style="-fx-background-color: rgba(255, 255, 255, 0.15);                      -fx-background-radius: 20;                      -fx-border-color: rgba(255, 255, 255, 0.3);                      -fx-border-radius: 20;                      -fx-border-width: 1.5;                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0.2, 0, 3);">
+                    <padding>
+                        <Insets bottom="15" left="25" right="25" top="15"/>
+                    </padding>
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <children>
+                                <Label style="-fx-font-size: 22px;" text="🔄"/>
+                                <VBox spacing="2">
+                                    <children>
+                                        <Label style="-fx-font-size: 13px;                                   -fx-text-fill: white;                                   -fx-font-weight: bold;                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Refresh Button"/>
+                                        <Label style="-fx-font-size: 11px;                                   -fx-text-fill: rgba(255, 255, 255, 0.85);                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Click to reload latest event data"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <Label style="-fx-font-size: 16px;                           -fx-text-fill: rgba(255, 255, 255, 0.4);"
+                               text="•"/>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <children>
+                                <Label style="-fx-font-size: 22px;" text="⬅"/>
+                                <VBox spacing="2">
+                                    <children>
+                                        <Label style="-fx-font-size: 13px;                                   -fx-text-fill: white;                                   -fx-font-weight: bold;                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Back Button"/>
+                                        <Label style="-fx-font-size: 11px;                                   -fx-text-fill: rgba(255, 255, 255, 0.85);                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Return to previous menu or dashboard"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                        <Label style="-fx-font-size: 16px;                           -fx-text-fill: rgba(255, 255, 255, 0.4);"
+                               text="•"/>
+                        <HBox alignment="CENTER_LEFT" spacing="8">
+                            <children>
+                                <Label style="-fx-font-size: 22px;" text="✨"/>
+                                <VBox spacing="2">
+                                    <children>
+                                        <Label style="-fx-font-size: 13px;                                   -fx-text-fill: white;                                   -fx-font-weight: bold;                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Pro Tip"/>
+                                        <Label style="-fx-font-size: 11px;                                   -fx-text-fill: rgba(255, 255, 255, 0.85);                                   -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                                               text="Use Ctrl+R for quick refresh shortcut"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

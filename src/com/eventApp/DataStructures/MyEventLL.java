@@ -88,7 +88,7 @@ public class MyEventLL {
         if (current == first) {
             current = first; // Reset current to first node
         } else {
-            current = current.prev; // Move current to previous node
+            current = current.next; // Move current to next node
         }
 
         size--;

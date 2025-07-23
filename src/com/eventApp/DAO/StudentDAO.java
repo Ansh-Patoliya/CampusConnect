@@ -1,5 +1,7 @@
 package com.eventApp.DAO;
 
+import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.Model.Event;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Utils.DatabaseConnection;
@@ -8,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +60,31 @@ public class StudentDAO {
         return null;
     }
 
+    public MyEventLL viewEventsHistory(){
+        MyEventLL eventList = new MyEventLL();
+        try(Connection connection = DatabaseConnection.getConnection()){
+            String fetchEventsQuery = "select * from event_history";
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(fetchEventsQuery);
+            while (resultSet.next()){
+                int eventId=resultSet.getInt("event_id");
+                String eventName = resultSet.getString("event_name");
+                int clubId = resultSet.getInt("club_id");
+                LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
+                LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
+                LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
+                String venue = resultSet.getString("venue");
+                int totalParticipants = resultSet.getInt("total_participants");
+                double ticketPrice = resultSet.getDouble("ticket_price");
+
+                eventList.insert(new Event(eventId, eventName, clubId, venue, ticketPrice, eventDate, startTime, endTime, totalParticipants ));
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return eventList;
+    }
     public List<String> getInterestList(String studentId) {
         List<String> interestList = new ArrayList<>();
         String query = "SELECT interests FROM students WHERE student_id = ?";

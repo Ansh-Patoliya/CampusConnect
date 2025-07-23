@@ -51,7 +51,6 @@ CREATE TABLE events (
     venue VARCHAR(200),
     registered_count INT DEFAULT 0,
     max_participants INT DEFAULT 0,
-    category VARCHAR(50),
     discount_available BOOLEAN DEFAULT FALSE,
     approval_status VARCHAR(20) DEFAULT 'Pending' CHECK (approval_status IN ('Pending', 'Approved', 'Rejected')),
     completion_status VARCHAR(20) DEFAULT 'Not Completed' CHECK (completion_status IN ('Completed', 'Not Completed')),
@@ -62,24 +61,19 @@ CREATE TABLE events (
     CONSTRAINT fk_event_creator FOREIGN KEY (created_by) REFERENCES users(user_id) ON DELETE SET NULL
 );
 
+-- EVENT HISTORY TABLE
 CREATE TABLE event_history (
     history_id SERIAL PRIMARY KEY,
     event_id INT NOT NULL,
-    club_id INT NOT NULL,
     event_name VARCHAR(100) NOT NULL,
-    description VARCHAR(1000),
+    club_name VARCHAR(100),
     event_date DATE,
     start_time TIME,
     end_time TIME,
     venue VARCHAR(200),
-    ticket_price DECIMAL(8,2) DEFAULT 0 CHECK (ticket_price >= 0),
     total_participants INT,
-    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT fk_history_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
-    CONSTRAINT fk_history_club FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE
+    recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
 
 -- PAYMENT TABLE
 CREATE TABLE payment (
@@ -101,3 +95,43 @@ CREATE TABLE event_registration (
     CONSTRAINT fk_registration_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
     CONSTRAINT fk_registration_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
 );
+
+--functions
+create or replace function
+returnUserData(in uid varchar)
+returns users
+language plpgsql
+as $$
+declare user_data users%rowtype;
+begin
+select * into user_data from users where user_id = uid;
+return user_data;
+end;
+$$
+
+create or replace function
+returnClubData(in cid int)
+returns clubs
+language plpgsql
+as $$
+declare club_data clubs%rowtype;
+begin
+select * into club_data from clubs where club_id = cid;
+return club_data;
+end;
+$$
+
+create or replace function
+returnEventData(in eid int)
+returns events
+language plpgsql
+as $$
+declare event_data events%rowtype;
+begin
+select * into event_data from events where event_id = eid;
+return event_data;
+end;
+$$
+
+--discount
+--trigger to send data into history table
