@@ -1,5 +1,6 @@
 package com.eventApp.Utils;
 
+import com.eventApp.DAO.ClubDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 
 import java.sql.Connection;
@@ -204,7 +205,11 @@ public class ValidationUtils {
             -> Validates that the given input string contains only alphabetic letters (A-Z, a-z).
             -> This method ignores spaces, digits, and special characters — it returns false if any are present.
         */
-        return checkName(clubName);
+        ClubDAO clubDAO=new ClubDAO();
+        if(clubDAO.checkClubNameExist(clubName))
+            return checkName(clubName) ;
+        FXMLScreenLoader.showMessage("Club name already exists.", "clubName", "error");
+        return false;
     }
 
     public static boolean checkDescription(String description) {

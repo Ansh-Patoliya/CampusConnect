@@ -10,23 +10,23 @@ import java.sql.*;
 public class ClubDAO {
     public boolean createEvent(Event event) {
         try {
-            String sql = "INSERT INTO events (event_id,club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO events (club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = con.prepareStatement(sql);
 
-            preparedStatement.setInt(1, event.getEventId());
-            preparedStatement.setInt(2, event.getClubId());
-            preparedStatement.setString(3, event.getEventName());
-            preparedStatement.setString(4, event.getDescription());
-            preparedStatement.setDate(5, Date.valueOf(event.getEventDate()));
-            preparedStatement.setDouble(6, event.getTicketPrice());
-            preparedStatement.setString(7, event.getUserId());
-            preparedStatement.setBoolean(8, event.isDiscountApplicable());
-            preparedStatement.setTime(9, Time.valueOf(event.getStartTime()));
-            preparedStatement.setTime(10, Time.valueOf(event.getEndTime()));
-            preparedStatement.setString(11, event.getVenue());
-            preparedStatement.setInt(12, event.getMaxParticipants());
+
+            preparedStatement.setInt(1, event.getClubId());
+            preparedStatement.setString(2, event.getEventName());
+            preparedStatement.setString(3, event.getDescription());
+            preparedStatement.setDate(4, Date.valueOf(event.getEventDate()));
+            preparedStatement.setDouble(5, event.getTicketPrice());
+            preparedStatement.setString(6, event.getUserId());
+            preparedStatement.setBoolean(7, event.isDiscountApplicable());
+            preparedStatement.setTime(8, Time.valueOf(event.getStartTime()));
+            preparedStatement.setTime(9, Time.valueOf(event.getEndTime()));
+            preparedStatement.setString(10, event.getVenue());
+            preparedStatement.setInt(11, event.getMaxParticipants());
 
             int r = preparedStatement.executeUpdate();
 
@@ -87,5 +87,20 @@ public class ClubDAO {
             e.printStackTrace();
         }
         return clubName;
+    }
+
+    public boolean checkClubNameExist(String clubName){
+        try{
+            Connection connection=DatabaseConnection.getConnection();
+            String query="select * from clubs where club_name=?";
+            PreparedStatement preparedStatement=connection.prepareStatement(query);
+            preparedStatement.setString(1,clubName);
+            ResultSet resultSet=preparedStatement.executeQuery();
+            return !resultSet.next();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+        return true;
     }
 }
