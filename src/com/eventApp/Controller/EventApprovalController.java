@@ -71,15 +71,8 @@ public class EventApprovalController {
     public void onApprove(ActionEvent event) {
         boolean isApproved = eventService.approveEvent();
         if (isApproved) {
-            FXMLScreenLoader.showMessage("Event approved successfully.", "Event Approval", "success");
-            Event nextEvent = eventService.viewNextEvent();
-            if (nextEvent != null) {
-                loadNextOrPreviousEvent(nextEvent);
-            } else {
-                clearLabels();
-                FXMLScreenLoader.showMessage("No more events to approve.", "Event Approval", "info");
-                openAdminDashboard();
-            }
+            FXMLScreenLoader.showMessage("Event approved successfully.", "Event Approval", "info");
+            onNext(event);
         } else {
             FXMLScreenLoader.showMessage("Failed to approve the event. Please try again.", "Event Approval", "error");
         }
@@ -89,14 +82,7 @@ public class EventApprovalController {
         boolean isRejected = eventService.rejectEvent();
         if (isRejected) {
             FXMLScreenLoader.showMessage("Event rejected successfully.", "Event Approval", "success");
-            Event nextEvent = eventService.viewNextEvent();
-            if (nextEvent != null) {
-                loadNextOrPreviousEvent(nextEvent);
-            } else {
-                clearLabels();
-                FXMLScreenLoader.showMessage("No more events to approve.", "Event Approval", "info");
-                openAdminDashboard();
-            }
+            onNext(event);
         } else {
             FXMLScreenLoader.showMessage("Failed to reject the event. Please try again.", "Event Approval", "error");
         }
@@ -107,9 +93,12 @@ public class EventApprovalController {
     }
 
     public void loadNextOrPreviousEvent(Event event) {
-        currentEvent = event;
-        setText(currentEvent);
-        setVisible(true);
+        if (event != null) {
+            setText(event);
+            setVisible(true);
+        } else {
+            FXMLScreenLoader.showMessage("No event data available.", "Event Approval", "warning");
+        }
     }
 
     public void onNext(ActionEvent event) {
@@ -134,6 +123,7 @@ public class EventApprovalController {
     }
 
     void setText(Event event){
+        if (event == null) return;
         eventName.setText(event.getEventName());
         description.setText(event.getDescription());
         startTime.setText(event.getStartTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")));

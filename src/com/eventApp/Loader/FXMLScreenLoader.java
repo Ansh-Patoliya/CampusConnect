@@ -1,6 +1,8 @@
 package com.eventApp.Loader;
 
+import com.eventApp.Controller.ClubController;
 import com.eventApp.Controller.StudentController;
+import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
 import javafx.event.ActionEvent;
@@ -199,6 +201,28 @@ public class FXMLScreenLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+
+
+    public static void openClubMemberProfile(ActionEvent event) {
+
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubMemberViewProfile.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+
+            stage.setTitle("Club Member Profile");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void openViewEventHistory(ActionEvent actionEvent) {
 
     }
 }

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.effect.DropShadow?>
+
+<?import javafx.scene.shape.Circle?>
+<?import java.lang.String?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+
+            fx:controller="com.eventApp.Controller.ClubViewProfileController"
+
+            prefWidth="600" prefHeight="400"
+            style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);">
+
+    <!-- Center Container -->
+    <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+               AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <!-- Main Content Card -->
+        <VBox spacing="25" alignment="CENTER"
+              AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+              style="-fx-background-color: rgba(255, 255, 255, 0.95);
+                 -fx-background-radius: 20px;
+                 -fx-border-radius: 20px;
+                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 5);"
+              maxWidth="450" maxHeight="300">
+
+            <children>
+                <!-- Title -->
+                <Label text="Club Member Profile"
+                       style="-fx-font-size: 28px;
+                          -fx-font-weight: bold;
+                          -fx-text-fill: #654ea3;
+                          -fx-font-family: 'Segoe UI', Arial, sans-serif;"/>
+
+                <!-- Profile Information Container -->
+                <VBox spacing="15" alignment="CENTER" style="-fx-padding: 0 30 0 30;">
+
+                    <!-- Name Row -->
+                    <HBox spacing="15" alignment="CENTER_LEFT"
+                          style="-fx-background-color: rgba(101, 78, 163, 0.1);
+                             -fx-background-radius: 10px;
+                             -fx-padding: 12 20 12 20;">
+                        <Label text="Name:"
+                               style="-fx-font-size: 16px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #654ea3;
+                                  -fx-min-width: 80px;"/>
+                        <Label fx:id="nameLabel"
+                               style="-fx-font-size: 16px;
+                                  -fx-text-fill: #333333;"/>
+                    </HBox>
+
+                    <!-- Email Row -->
+                    <HBox spacing="15" alignment="CENTER_LEFT"
+                          style="-fx-background-color: rgba(234, 175, 200, 0.3);
+                             -fx-background-radius: 10px;
+                             -fx-padding: 12 20 12 20;">
+                        <Label text="Email:"
+                               style="-fx-font-size: 16px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #654ea3;
+                                  -fx-min-width: 80px;"/>
+                        <Label fx:id="emailLabel"
+                               style="-fx-font-size: 16px;
+                                  -fx-text-fill: #333333;"/>
+                    </HBox>
+
+                    <!-- Position Row -->
+                    <HBox spacing="15" alignment="CENTER_LEFT"
+                          style="-fx-background-color: rgba(101, 78, 163, 0.1);
+                             -fx-background-radius: 10px;
+                             -fx-padding: 12 20 12 20;">
+                        <Label text="Position:"
+                               style="-fx-font-size: 16px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #654ea3;
+                                  -fx-min-width: 80px;"/>
+                        <Label fx:id="positionLabel"
+                               style="-fx-font-size: 16px;
+                                  -fx-text-fill: #333333;"/>
+                    </HBox>
+
+                    <!-- Club ID Row -->
+                    <HBox spacing="15" alignment="CENTER_LEFT"
+                          style="-fx-background-color: rgba(234, 175, 200, 0.3);
+                             -fx-background-radius: 10px;
+                             -fx-padding: 12 20 12 20;">
+                        <Label text="Club ID:"
+                               style="-fx-font-size: 16px;
+                                  -fx-font-weight: bold;
+                                  -fx-text-fill: #654ea3;
+                                  -fx-min-width: 80px;"/>
+                        <Label fx:id="clubIdLabel"
+                               style="-fx-font-size: 16px;
+                                  -fx-text-fill: #333333;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Back Button -->
+
+                <Button text="← Back" onAction="#onBack" prefWidth="140" prefHeight="45"
+
+                        style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8b7bb8);
+                           -fx-text-fill: white;
+                           -fx-font-size: 16px;
+                           -fx-font-weight: bold;
+                           -fx-background-radius: 25px;
+                           -fx-border-radius: 25px;
+                           -fx-cursor: hand;
+                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);">
+                    <styleClass>
+                        <String fx:value="custom-button"/>
+                    </styleClass>
+                </Button>
+            </children>
+
+            <padding><Insets top="30" left="40" right="40" bottom="30"/></padding>
+        </VBox>
+
+    </StackPane>
+
+    <!-- Decorative Elements -->
+    <Circle centerX="550" centerY="80" radius="30"
+            style="-fx-fill: rgba(255, 255, 255, 0.2);" />
+    <Circle centerX="80" centerY="320" radius="20"
+            style="-fx-fill: rgba(255, 255, 255, 0.15);" />
+    <Circle centerX="520" centerY="350" radius="15"
+            style="-fx-fill: rgba(255, 255, 255, 0.1);" />
+
+</AnchorPane>

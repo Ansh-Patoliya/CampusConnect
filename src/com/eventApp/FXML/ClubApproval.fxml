@@ -8,127 +8,224 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ClubApprovalController">
 
-   <!-- Background Bubble Circles - Added more variety in sizes and positions -->
-   <!-- Large Bubbles -->
-   <Circle fill="rgba(255,255,255,0.08)" layoutX="50" layoutY="50" radius="90" />
-   <Circle fill="rgba(255,255,255,0.08)" layoutX="650" layoutY="450" radius="100" />
-   <Circle fill="rgba(255,255,255,0.08)" layoutX="350" layoutY="450" radius="80" />
+   <!-- Center Container -->
+   <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-   <!-- Medium Bubbles -->
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="74.0" layoutY="450.0" radius="60" />
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="600" layoutY="400" radius="70" />
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="200" layoutY="400" radius="50" />
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="650" layoutY="100" radius="55" />
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="400" layoutY="50" radius="45" />
-   <Circle fill="rgba(255,255,255,0.1)" layoutX="300" layoutY="300" radius="65" />
+      <!-- Modern Card Container -->
+      <HBox alignment="CENTER" maxWidth="620" maxHeight="420"
+            style="-fx-background-color: rgba(255, 255, 255, 0.98);
+                   -fx-background-radius: 20;
+                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 25, 0, 0, 8);">
+         <clip>
+            <Rectangle arcHeight="20" arcWidth="20" height="420" width="620" />
+         </clip>
 
-   <!-- Small Bubbles -->
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="150" layoutY="200" radius="25" />
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="500" layoutY="150" radius="20" />
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="250" layoutY="450" radius="30" />
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="550" layoutY="250" radius="15" />
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="700" layoutY="350" radius="35" />
-   <Circle fill="rgba(255,255,255,0.12)" layoutX="50" layoutY="300" radius="40" />
-
-   <!-- Modern Card Container -->
-   <HBox alignment="CENTER" layoutX="50.0" layoutY="50.0" prefHeight="420.0" prefWidth="620.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 25, 0, 0, 5);">
-      <clip>
-         <Rectangle arcHeight="15" arcWidth="15" height="420" width="620" />
-      </clip>
-
-      <!-- Left Panel - Club Details -->
-      <VBox alignment="TOP_LEFT" prefWidth="420.0" spacing="15.0" style="-fx-padding: 30;">
-         <children>
-            <Label style="-fx-font-weight: bold; -fx-text-fill: #654ea3;" text="Club Approval">
-               <font>
-                  <Font name="System Bold" size="20.0" />
-               </font>
-            </Label>
-
-            <Separator prefWidth="360.0" style="-fx-background-color: linear-gradient(to right, #654ea3, #eaafc8); -fx-padding: 1 0 0 0;" />
-
-            <!-- Club Details Container -->
-            <VBox spacing="15" style="-fx-padding: 10 0 0 0;">
-               <!-- Club Name -->
-               <VBox spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-text-fill: #888; -fx-font-size: 12;" text="CLUB NAME">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="clubName" style="-fx-text-fill: #333; -fx-font-size: 14; -fx-font-weight: bold;" wrapText="true" />
-               </VBox>
-
-               <!-- Description -->
-               <VBox spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-text-fill: #888; -fx-font-size: 12;" text="DESCRIPTION">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="description" style="-fx-text-fill: #555; -fx-font-size: 13;" wrapText="true" />
-               </VBox>
-
-               <!-- Created By -->
-               <VBox spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-text-fill: #888; -fx-font-size: 12;" text="CREATED BY">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="createdBy" style="-fx-text-fill: #555; -fx-font-size: 13;" wrapText="true" />
-               </VBox>
-
-               <!-- Category -->
-               <VBox spacing="5">
-                  <Label style="-fx-font-weight: bold; -fx-text-fill: #888; -fx-font-size: 12;" text="CATEGORY">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="category" style="-fx-text-fill: #555; -fx-font-size: 13;" wrapText="true" />
-               </VBox>
-            </VBox>
-         </children>
-      </VBox>
-
-      <!-- Right Panel - Approval Actions -->
-      <VBox alignment="CENTER" prefWidth="200.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: #f9f9f9; -fx-background-radius: 0 15 15 0;">
-         <children>
-            <VBox alignment="CENTER" spacing="25">
-               <Label prefHeight="26.0" prefWidth="142.0" style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 16;" text="  Approve club?">
+         <!-- Left Panel - Club Details -->
+         <VBox alignment="TOP_LEFT" prefWidth="420.0" spacing="18.0" style="-fx-padding: 35;">
+            <children>
+               <Label style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 22px;" text="Club Approval">
                   <font>
-                     <Font name="System Bold" size="16.0" />
+                     <Font name="System Bold" size="22.0" />
                   </font>
                </Label>
 
-               <VBox alignment="CENTER" spacing="15">
-                  <Button mnemonicParsing="false" onAction="#onApprove" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #654ea3; -fx-text-fill: white; -fx-background-radius: 20; -fx-font-weight: bold;" text="APPROVE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <effect>
-                        <DropShadow color="rgba(101,78,163,0.3)" radius="5" spread="0.2" />
-                     </effect>
-                  </Button>
+               <Separator prefWidth="350.0"
+                          style="-fx-background-color: linear-gradient(to right, #654ea3, #eaafc8);
+                                -fx-padding: 2 0 0 0;
+                                -fx-pref-height: 3;" />
 
-                  <Button mnemonicParsing="false" onAction="#onReject" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #eaafc8; -fx-text-fill: white; -fx-background-radius: 20; -fx-font-weight: bold;" text="REJECT">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <effect>
-                        <DropShadow color="rgba(234,175,200,0.3)" radius="5" spread="0.2" />
-                     </effect>
-                  </Button>
+               <!-- Club Details Container -->
+               <VBox spacing="18" style="-fx-padding: 15 0 0 0;">
+                  <!-- Club Name -->
+                  <VBox spacing="8">
+                     <Label style="-fx-font-weight: 600; -fx-text-fill: #654ea3; -fx-font-size: 12px; -fx-letter-spacing: 0.5px;" text="CLUB NAME">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="clubName"
+                            style="-fx-text-fill: #2d2d2d;
+                                  -fx-font-size: 16px;
+                                  -fx-font-weight: 600;
+                                  -fx-padding: 12 0 12 20;
+                                  -fx-background-color: rgba(101, 78, 163, 0.08);
+                                  -fx-background-radius: 10;
+                                  -fx-border-color: rgba(101, 78, 163, 0.2);
+                                  -fx-border-width: 0 0 0 3;
+                                  -fx-border-radius: 10;"
+                            wrapText="true" />
+                  </VBox>
+
+                  <!-- Description -->
+                  <VBox spacing="8">
+                     <Label style="-fx-font-weight: 600; -fx-text-fill: #654ea3; -fx-font-size: 12px; -fx-letter-spacing: 0.5px;" text="DESCRIPTION">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="description"
+                            style="-fx-text-fill: #444;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 12 0 12 20;
+                                  -fx-background-color: rgba(234, 175, 200, 0.12);
+                                  -fx-background-radius: 10;
+                                  -fx-border-color: rgba(234, 175, 200, 0.25);
+                                  -fx-border-width: 0 0 0 3;
+                                  -fx-border-radius: 10;"
+                            wrapText="true" />
+                  </VBox>
+
+                  <!-- Created By -->
+                  <VBox spacing="8">
+                     <Label style="-fx-font-weight: 600; -fx-text-fill: #654ea3; -fx-font-size: 12px; -fx-letter-spacing: 0.5px;" text="CREATED BY">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="createdBy"
+                            style="-fx-text-fill: #444;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 12 0 12 20;
+                                  -fx-background-color: rgba(101, 78, 163, 0.08);
+                                  -fx-background-radius: 10;
+                                  -fx-border-color: rgba(101, 78, 163, 0.2);
+                                  -fx-border-width: 0 0 0 3;
+                                  -fx-border-radius: 10;"
+                            wrapText="true" />
+                  </VBox>
+
+                  <!-- Category -->
+                  <VBox spacing="8">
+                     <Label style="-fx-font-weight: 600; -fx-text-fill: #654ea3; -fx-font-size: 12px; -fx-letter-spacing: 0.5px;" text="CATEGORY">
+                        <font>
+                           <Font name="System Bold" size="12.0" />
+                        </font>
+                     </Label>
+                     <Label fx:id="category"
+                            style="-fx-text-fill: #444;
+                                  -fx-font-size: 14px;
+                                  -fx-padding: 12 0 12 20;
+                                  -fx-background-color: rgba(234, 175, 200, 0.12);
+                                  -fx-background-radius: 10;
+                                  -fx-border-color: rgba(234, 175, 200, 0.25);
+                                  -fx-border-width: 0 0 0 3;
+                                  -fx-border-radius: 10;"
+                            wrapText="true" />
+                  </VBox>
                </VBox>
-            </VBox>
+            </children>
+         </VBox>
 
-            <Button mnemonicParsing="false" onAction="#onBack" prefWidth="160.0" style="-fx-background-color: transparent; -fx-text-fill: #654ea3; -fx-border-color: #654ea3; -fx-border-radius: 20; -fx-font-weight: bold; -fx-border-width: 2;" text="BACK TO LIST">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
-   </HBox>
+         <!-- Right Panel - Approval Actions -->
+         <VBox alignment="CENTER" prefWidth="200.0" spacing="25.0"
+               style="-fx-padding: 35;
+                      -fx-background-color: rgba(249, 249, 249, 0.8);
+                      -fx-background-radius: 0 20 20 0;">
+            <children>
+               <VBox alignment="CENTER" spacing="30">
+                  <Label prefHeight="30.0" prefWidth="160.0"
+                         style="-fx-font-weight: bold;
+                               -fx-text-fill: #654ea3;
+                               -fx-font-size: 18px;
+                               -fx-alignment: center;"
+                         text="Approve Club?">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+
+                  <VBox alignment="CENTER" spacing="18">
+                     <Button mnemonicParsing="false" onAction="#onApprove"
+                             prefHeight="45.0" prefWidth="170.0"
+                             style="-fx-background-color: linear-gradient(to bottom, #654ea3, #7a68b8);
+                                   -fx-text-fill: white;
+                                   -fx-background-radius: 25;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 14px;
+                                   -fx-cursor: hand;"
+                             text="✓ APPROVE">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                        <effect>
+                           <DropShadow color="rgba(101,78,163,0.4)" radius="8" spread="0.2" />
+                        </effect>
+                     </Button>
+
+                     <Button mnemonicParsing="false" onAction="#onReject"
+                             prefHeight="45.0" prefWidth="170.0"
+                             style="-fx-background-color: linear-gradient(to bottom, #eaafc8, #f0c4d8);
+                                   -fx-text-fill: white;
+                                   -fx-background-radius: 25;
+                                   -fx-font-weight: bold;
+                                   -fx-font-size: 14px;
+                                   -fx-cursor: hand;"
+                             text="✗ REJECT">
+                        <font>
+                           <Font name="System Bold" size="14.0" />
+                        </font>
+                        <effect>
+                           <DropShadow color="rgba(234,175,200,0.4)" radius="8" spread="0.2" />
+                        </effect>
+                     </Button>
+                  </VBox>
+               </VBox>
+
+               <Button mnemonicParsing="false" onAction="#onBack"
+                       prefWidth="170.0" prefHeight="40.0"
+                       style="-fx-background-color: transparent;
+                             -fx-text-fill: #654ea3;
+                             -fx-border-color: #654ea3;
+                             -fx-border-radius: 20;
+                             -fx-font-weight: bold;
+                             -fx-border-width: 2;
+                             -fx-font-size: 12px;
+                             -fx-cursor: hand;"
+                       text="← BACK TO LIST">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Button>
+            </children>
+         </VBox>
+      </HBox>
+
+   </StackPane>
+
+   <!-- Background Bubble Circles - Positioned with AnchorPane constraints -->
+   <!-- Large Bubbles -->
+   <Circle fill="rgba(255,255,255,0.08)" radius="90"
+           AnchorPane.topAnchor="50" AnchorPane.leftAnchor="50" />
+   <Circle fill="rgba(255,255,255,0.08)" radius="100"
+           AnchorPane.bottomAnchor="50" AnchorPane.rightAnchor="50" />
+   <Circle fill="rgba(255,255,255,0.08)" radius="80"
+           AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="350" />
+
+   <!-- Medium Bubbles -->
+   <Circle fill="rgba(255,255,255,0.1)" radius="60"
+           AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="74" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="70"
+           AnchorPane.bottomAnchor="100" AnchorPane.rightAnchor="100" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="50"
+           AnchorPane.bottomAnchor="100" AnchorPane.leftAnchor="200" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="55"
+           AnchorPane.topAnchor="100" AnchorPane.rightAnchor="50" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="45"
+           AnchorPane.topAnchor="50" AnchorPane.leftAnchor="400" />
+
+   <!-- Small Bubbles -->
+   <Circle fill="rgba(255,255,255,0.12)" radius="25"
+           AnchorPane.topAnchor="200" AnchorPane.leftAnchor="150" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="20"
+           AnchorPane.topAnchor="150" AnchorPane.leftAnchor="500" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="30"
+           AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="250" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="15"
+           AnchorPane.topAnchor="250" AnchorPane.leftAnchor="550" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="35"
+           AnchorPane.topAnchor="350" AnchorPane.rightAnchor="0" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="40"
+           AnchorPane.topAnchor="300" AnchorPane.leftAnchor="50" />
+
 </AnchorPane>

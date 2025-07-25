@@ -59,7 +59,7 @@ public class AdminDAO {
         try(Connection connection = DatabaseConnection.getConnection()){
             String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,statusOfEvent.toUpperCase());
+            preparedStatement.setString(1,statusOfEvent);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int eventId=resultSet.getInt("event_id");
@@ -98,7 +98,7 @@ public class AdminDAO {
         try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, approvalStatus.toUpperCase());
+            preparedStatement.setString(1, approvalStatus);
             preparedStatement.setInt(2, eventId);
             int rowsUpdated = preparedStatement.executeUpdate();
             return rowsUpdated > 0;

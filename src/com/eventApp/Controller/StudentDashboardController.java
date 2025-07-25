@@ -23,9 +23,11 @@ public class StudentDashboardController {
     }
 
     public void handleViewEventHistory(ActionEvent actionEvent) {
+        FXMLScreenLoader.openViewEventHistory(actionEvent);
     }
 
     public void handleViewEvent(ActionEvent event) {
         FXMLScreenLoader.openStudentViewEvent(event);
     }
+
 }
