@@ -210,7 +210,7 @@ public class RegistrationController {
                 boolean success = userService.registerStudent(student, user);
                 if (success) {
                     FXMLScreenLoader.openLoginPage(event);
-                    FXMLScreenLoader.showMessage("✅ Registration successful! You can now log in.", "registration", "success");
+                    FXMLScreenLoader.showMessage("✅ Registration successful! You can now log in.", "registration", "info");
                     return;
                 }
                 FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
@@ -220,7 +220,6 @@ public class RegistrationController {
             if (joinExistingRadio.isSelected()) {
                 // Handle joining existing club logic here
                 String selectClub = (String) selectClubField.getValue();
-                System.out.println(selectClub);
                 if (!(selectClub == null || selectClub.isEmpty())) {
                     int clubId = UserDAO.getClubId(selectClub);
                     User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
@@ -228,6 +227,7 @@ public class RegistrationController {
                     boolean success = userService.registerClubMember(clubMember, user);
                     if (success) {
                         FXMLScreenLoader.openLoginPage(event);
+                        FXMLScreenLoader.showMessage("✅ Successfully joined the club! You can now log in.", "registration", "info");
                     } else {
                         FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
                     }
@@ -252,11 +252,16 @@ public class RegistrationController {
                     boolean success = userService.registerClub(club, clubMember, user);
                     if (success) {
                         FXMLScreenLoader.openLoginPage(event);
+                        FXMLScreenLoader.showMessage("✅ Club registration successful! You can now log in.", "registration", "info");
                     } else {
                         FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
                     }
                 }
             }
+            else{
+                FXMLScreenLoader.showMessage("❌ Please select a club registration option.", "registration", "error");
+            }
+
         } else {
             FXMLScreenLoader.showMessage("❌ Please select a registration option.", "registration", "error");
         }
