@@ -8,12 +8,12 @@ import com.eventApp.Model.User;
 
 public class UserService {
     private final UserDAO userDAO= new UserDAO();
-    public boolean registerStudent(Student student) {
-        return userDAO.registrationStudent(student);
+    public boolean registerStudent(Student student,User user) {
+        return userDAO.registrationUser(user)&&userDAO.registrationStudent(student);
     }
 
-    public boolean registerClubMember(ClubMember clubMember){
-        return userDAO.registrationClubMember(clubMember);
+    public boolean registerClubMember(ClubMember clubMember,User user){
+        return userDAO.registrationUser(user)&&userDAO.registrationClubMember(clubMember);
     }
 
     public boolean checklogin(String emailInput, String passwordInput) { return userDAO.checkLoginDetails(emailInput, passwordInput); }

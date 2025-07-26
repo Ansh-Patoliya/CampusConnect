@@ -18,10 +18,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AdminController {
-
-
-
-
     public void handleClubApproval(ActionEvent event) {
         FXMLScreenLoader.openClubApproval(event);
     }
