@@ -192,6 +192,10 @@ public class RegistrationController {
         String enrollmentNo = enrollmentField.getText();
         String confirmPassword = confirmPasswordField.getText();
         if (studentRadio.isSelected()) {
+            if (departmentField.getValue() == null) {
+                FXMLScreenLoader.showMessage("❌ Please select a department.", "department", "error");
+                return;
+            }
             String department = departmentField.getValue().toString();
             String semester = semesterField.getText();
             List<String> interest = interestListView.getSelectionModel().getSelectedItems();
@@ -201,16 +205,15 @@ public class RegistrationController {
             }
             if (validateStudentFields(name, email, password, confirmPassword, department, semester, enrollmentNo)) {
                 int sem = Integer.parseInt(semester);
-                User user=new User(enrollmentNo,name,email,password,"student".toUpperCase());
+                User user = new User(enrollmentNo, name, email, password, "student".toUpperCase());
                 Student student = new Student(enrollmentNo, name, email, password, "student".toUpperCase(), department, sem, interest);
-                boolean success = userService.registerStudent(student,user);
+                boolean success = userService.registerStudent(student, user);
                 if (success) {
                     FXMLScreenLoader.openLoginPage(event);
-                } else {
-                    FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
+                    FXMLScreenLoader.showMessage("✅ Registration successful! You can now log in.", "registration", "success");
+                    return;
                 }
-            } else {
-
+                FXMLScreenLoader.showMessage("❌ Registration failed. Please try again.", "registration", "error");
             }
         } else if (clubRadio.isSelected()) {
 
@@ -220,9 +223,9 @@ public class RegistrationController {
                 System.out.println(selectClub);
                 if (!(selectClub == null || selectClub.isEmpty())) {
                     int clubId = UserDAO.getClubId(selectClub);
-                    User user=new User(enrollmentNo,name,email,password,"club_member".toUpperCase());
+                    User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
                     ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "Member", clubId);
-                    boolean success = userService.registerClubMember(clubMember,user);
+                    boolean success = userService.registerClubMember(clubMember, user);
                     if (success) {
                         FXMLScreenLoader.openLoginPage(event);
                     } else {
@@ -242,7 +245,6 @@ public class RegistrationController {
                     maxMembers = Integer.parseInt(maxMember);
                 }
 
-                System.out.println(category);
                 if (validateClubFields(name, email, password, confirmPassword, clubName, description, category, enrollmentNo)) {
                     User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
                     Club club = new Club(clubName, description, category, enrollmentNo, maxMembers);
