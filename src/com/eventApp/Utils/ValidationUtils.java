@@ -180,11 +180,32 @@ public class ValidationUtils {
         return true;
     }
 
+    public static boolean checkDuplicateEnrollment(String enrollment) {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "SELECT user_id FROM users WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, enrollment);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (!rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        FXMLScreenLoader.showMessage("Enrollment number already exists.", "enrollment", "error");
+        return false;
+    }
     public static boolean checkEnrollment(String enrollment) {
     /*
         -> Validates that the given input contains only numeric digits (0–9).
         -> This method returns false if the input includes letters, spaces, or special characters.
      */
+        if (!checkDuplicateEnrollment(enrollment)) {
+            return false;
+        }
         if (enrollment == null || enrollment.isEmpty()) {
             FXMLScreenLoader.showMessage("Enrollment number cannot be empty.", "enrollment", "error");
             return false;
