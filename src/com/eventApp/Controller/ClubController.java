@@ -11,7 +11,6 @@ public class ClubController {
     @FXML
     private void viewProfile(ActionEvent event) {
         FXMLScreenLoader.openClubMemberProfile(event);
-
     }
 
     public void handleEventCreate(ActionEvent event) {
