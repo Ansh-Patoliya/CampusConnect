@@ -1,5 +1,7 @@
 package com.eventApp.DAO;
 
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
@@ -48,7 +50,41 @@ public class UserDAO {
         return clubId;
     }
 
-    public boolean registrationUser(User user) {
+    public static void checkDuplicateEmail(String newEmail) throws ValidationException {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "SELECT email FROM Users WHERE email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newEmail);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                throw new ValidationException("Email already exists.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void checkDuplicateEnrollment(String enrollment) throws ValidationException {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "SELECT user_id FROM users WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, enrollment);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                throw new ValidationException("Enrollment number already exists.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean registrationUser(User user) throws DatabaseExceptionHandler {
         try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
@@ -64,7 +100,9 @@ public class UserDAO {
             } else {
                 return false;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            throw new DatabaseExceptionHandler(e.getMessage());
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return false;

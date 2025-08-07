@@ -1,6 +1,7 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
@@ -36,6 +37,7 @@ public class EventRegistrationController {
 
     @FXML
     private ComboBox<String> endTimeCombo;
+    private final ClubService clubService = new ClubService();
 
     @FXML
     public void initialize() {
@@ -50,76 +52,76 @@ public class EventRegistrationController {
         startTimeCombo.setItems(timeOptions);
         endTimeCombo.setItems(timeOptions);
 
-        variableRadio.setOnAction(e-> {
-            discountNote.setVisible(true);
-        });
-        fixedRadio.setOnAction(e-> {
-            discountNote.setVisible(false);
-        });
+        variableRadio.setOnAction(_ -> discountNote.setVisible(true));
+        fixedRadio.setOnAction(_ -> discountNote.setVisible(false));
     }
 
-    private ClubService clubService = new ClubService();
     public void handleEventRegistration(ActionEvent event) {
-        String eventName = eventNameField.getText();
-        String description = descriptionField.getText();
-        String venue = venueField.getText();
-        String maxParticipants= capacityField.getText();
-        String ticketPrice = ticketPriceField.getText();
-        LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
-        LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
-        LocalDate eventDate = datePicker.getValue();
+        try {
+            String eventName = eventNameField.getText();
+            String description = descriptionField.getText();
+            String venue = venueField.getText();
+            int maxParticipants = Integer.parseInt(capacityField.getText());
+            double ticketPrice = Double.parseDouble(ticketPriceField.getText());
+            LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+            LocalDate eventDate = datePicker.getValue();
 
-        User currentUser = CurrentUser.getCurrentUser();
-        String
-                userId= currentUser.getUserId();
-        int clubId= UserDAO.getClubIdByUserId(currentUser.getUserId());
-        boolean discountApplicable = variableRadio.isSelected();
+            User currentUser = CurrentUser.getCurrentUser();
+            String userId = currentUser.getUserId();
+            int clubId = UserDAO.getClubIdByUserId(currentUser.getUserId());
+            boolean discountApplicable = variableRadio.isSelected();
 
-        if(validateFields(eventName, description, venue, maxParticipants, eventDate, startTime, endTime, ticketPrice)) {
-            int maxParticipantsInt = Integer.parseInt(maxParticipants);
-            double ticketPriceDouble = Double.parseDouble(ticketPrice);
-            Event event1=new Event(eventName,description,venue,clubId,userId,maxParticipantsInt,eventDate,startTime,endTime,ticketPriceDouble, discountApplicable);
-            if(clubService.addEvent(event1)){
-                FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
-                handleBack(event);
-            } else {
-                FXMLScreenLoader.showMessage("Failed to create event. Please try again.", "Error", "error");
+            if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {
+                Event event1 = new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate, startTime, endTime, ticketPrice, discountApplicable);
+                if (clubService.addEvent(event1)) {
+                    FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
+                    handleBack(event);
+                } else {
+                    FXMLScreenLoader.showMessage("Failed to create event. Please try again.", "Error", "error");
+                }
             }
+        } catch (NumberFormatException e) {
+            FXMLScreenLoader.showMessage("Please enter valid numeric values for capacity and ticket price.", "Input Error", "error");
         }
     }
 
-    public boolean validateFields(String eventName, String description, String venue, String maxParticipants, LocalDate eventDate, LocalTime startTime, LocalTime endTime, String ticketPrice) {
-        if(!ValidationUtils.checkName(eventName)){
+    public boolean validateFields(String eventName, String description, String venue, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
+        try {
+            ValidationUtils.checkName(eventName);
+        } catch (ValidationException e) {
             eventNameField.clear();
-            return false;
+            FXMLScreenLoader.showMessage(e.getMessage(), "Event Name", "error");
         }
-        if(!ValidationUtils.checkDescription(description)){
-            descriptionField.clear();
 
-            return false;
+        try {
+            ValidationUtils.checkDescription(description);
+        } catch (ValidationException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Description", "error");
+            descriptionField.clear();
         }
-        if(!ValidationUtils.checkName(venue)){
+
+        try {
+            ValidationUtils.checkName(venue);
+        } catch (ValidationException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Venue", "error");
             venueField.clear();
-            return false;
         }
-        if(!ValidationUtils.checkNumber(maxParticipants)){
-            capacityField.clear();
-            return false;
-        }
-        if(!ValidationUtils.checkEventTime(startTime, endTime)){
+
+        try {
+            ValidationUtils.checkEventTime(startTime, endTime);
+        } catch (ValidationException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Event Time", "error");
             startTimeCombo.getSelectionModel().clearSelection();
             endTimeCombo.getSelectionModel().clearSelection();
-            return false;
-        }
-        if(!ValidationUtils.dateValidator(eventDate)){
-            datePicker.setValue(LocalDate.now());
-            return false;
-        }
-        if(!ValidationUtils.checkNumber(ticketPrice)){
-            ticketPriceField.clear();
-            return false;
         }
 
+        try {
+            ValidationUtils.dateValidator(eventDate);
+        } catch (ValidationException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Event Date", "error");
+            datePicker.setValue(LocalDate.now());
+        }
         return true;
     }
 

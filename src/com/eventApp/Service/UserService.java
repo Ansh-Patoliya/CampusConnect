@@ -1,6 +1,7 @@
 package com.eventApp.Service;
 
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
@@ -8,11 +9,11 @@ import com.eventApp.Model.User;
 
 public class UserService {
     private final UserDAO userDAO= new UserDAO();
-    public boolean registerStudent(Student student,User user) {
+    public boolean registerStudent(Student student,User user) throws DatabaseExceptionHandler {
         return userDAO.registrationUser(user)&&userDAO.registrationStudent(student);
     }
 
-    public boolean registerClubMember(ClubMember clubMember,User user){
+    public boolean registerClubMember(ClubMember clubMember,User user) throws DatabaseExceptionHandler {
         return userDAO.registrationUser(user)&&userDAO.registrationClubMember(clubMember);
     }
 
@@ -22,7 +23,7 @@ public class UserService {
         return userDAO.resetPass(emailInput,newPassword,confirmPassword);
     }
 
-    public boolean registerClub(Club club, ClubMember clubMember, User user) {
+    public boolean registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler {
         return userDAO.registrationUser(user)&&userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
     }
 
