@@ -1,6 +1,7 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyClubQueue;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
@@ -89,18 +90,19 @@ public class ClubDAO {
         return clubName;
     }
 
-    public boolean checkClubNameExist(String clubName){
+    public void checkClubNameExist(String clubName) throws ValidationException {
         try{
             Connection connection=DatabaseConnection.getConnection();
             String query="select * from clubs where club_name=?";
             PreparedStatement preparedStatement=connection.prepareStatement(query);
             preparedStatement.setString(1,clubName);
             ResultSet resultSet=preparedStatement.executeQuery();
-            return !resultSet.next();
+            if(resultSet.next()){
+                throw new ValidationException("Club name already exists.");
+            }
         }
-        catch (Exception e){
-            System.out.println(e);
+        catch (SQLException | ClassNotFoundException e){
+            throw new RuntimeException(e);
         }
-        return true;
     }
 }

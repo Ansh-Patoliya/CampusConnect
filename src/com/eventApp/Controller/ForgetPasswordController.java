@@ -31,20 +31,4 @@ public class ForgetPasswordController {
             FXMLScreenLoader.showMessage("Password reset failed. Please try again.","Error","error");
         }
     }
-
-    public boolean validateField(String email,String password,String confirmPassword){
-        if(!ValidationUtils.checkEmail(email)){
-            emailField.clear();
-        }
-        if(!ValidationUtils.checkPassword(password)){
-            passwordField.clear();
-            confirmPasswordField.clear();
-        }
-         if(!password.equals(confirmPassword)){
-            passwordField.clear();
-            confirmPasswordField.clear();
-        }
-
-        return true;
-    }
 }
