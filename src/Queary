@@ -202,3 +202,30 @@ BEGIN
     END IF;
 END;
 $$ ;
+
+CREATE OR REPLACE PROCEDURE deleteClub(id in INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM clubs WHERE club_id = id;
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION delete_club_members()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM club_members
+    WHERE club_id = OLD.club_id;
+    DELETE FROM users
+    WHERE user_id = OLD.founder_id;
+    RETURN OLD;
+END;
+$$;
+
+CREATE TRIGGER trg_delete_club_members
+AFTER DELETE ON clubs
+FOR EACH ROW
+EXECUTE FUNCTION delete_club_members();
