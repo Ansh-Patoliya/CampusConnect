@@ -78,7 +78,7 @@ public class ClubApprovalController {
 
     @FXML
     private void onReject() {
-        if (clubApprovalService.rejectNextClub()) {
+        if (!clubApprovalService.rejectNextClub()) {
             FXMLScreenLoader.showMessage("Club rejected successfully.", "Club Approval", "info");
         } else {
             FXMLScreenLoader.showMessage("Error rejecting club.", "Club Approval", "error");

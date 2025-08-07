@@ -141,7 +141,6 @@ public class UserDAO {
             while (rs.next()) {
                 String storedPassword = rs.getString("password");
                 if (Objects.equals(passwordInput, storedPassword)) {
-                    System.out.println("Login verified");
                     return true;
                 }
             }
