@@ -90,6 +90,28 @@ public class ClubDAO {
         return clubName;
     }
 
+    public Club getClubById(int clubId) {
+        Club club = null;
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "SELECT * FROM clubs WHERE club_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, clubId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String clubName = resultSet.getString("club_name");
+                String description = resultSet.getString("description");
+                String category = resultSet.getString("category");
+                String founderId = resultSet.getString("founder_Id");
+                int memberCount = resultSet.getInt("member_count");
+                String status = resultSet.getString("status");
+                club = new Club(clubName, description, category, founderId, status, memberCount, clubId);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return club;
+    }
+
     public void checkClubNameExist(String clubName) throws ValidationException {
         try{
             Connection connection=DatabaseConnection.getConnection();
