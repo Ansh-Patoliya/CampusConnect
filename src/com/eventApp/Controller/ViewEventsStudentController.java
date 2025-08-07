@@ -2,9 +2,11 @@ package com.eventApp.Controller;
 
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
+import com.eventApp.Service.EventRegistrationService;
 import com.eventApp.Service.StudentService;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
@@ -12,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
+import java.sql.SQLException;
 
 public class ViewEventsStudentController {
     public Label venue;
@@ -152,5 +156,17 @@ public class ViewEventsStudentController {
             front.setVisible(true);
             back.setVisible(false);
         }
+    }
+
+    public void onRegistration(ActionEvent event) {
+        EventRegistrationService eventRegistrationService = new EventRegistrationService();
+        int eventId = studentService.viewCurrentEvent().getEventId();
+        try {
+            eventRegistrationService.registerForEvent(eventId);
+            FXMLScreenLoader.showMessage("Registration successful for event: " + studentService.viewCurrentEvent().getEventName(), "Registration Success", "info");
+        } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Registration Error", "error");
+        }
+
     }
 }

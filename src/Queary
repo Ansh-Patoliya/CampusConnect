@@ -135,3 +135,70 @@ $$
 
 --discount
 --trigger to send data into history table
+
+
+CREATE OR REPLACE FUNCTION update_event_reg_count()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE events
+    SET registered_count = registered_count + 1
+    WHERE event_id = NEW.event_id;
+
+    RETURN NEW;
+END;
+$$;
+
+
+CREATE TRIGGER trg_after_insert_event_reg
+AFTER INSERT ON event_registration
+FOR EACH ROW
+EXECUTE FUNCTION update_event_reg_count();
+
+CREATE OR REPLACE FUNCTION checkcount(event_id INT)
+RETURNS BOOLEAN
+ LANGUAGE plpgsql
+ AS $$
+DECLARE
+    reg_count INT;
+    max_participant INT;
+    c CURSOR FOR
+        SELECT registered_count, max_participants
+        FROM events
+        WHERE event_id = event_id;
+BEGIN
+    OPEN c;
+    LOOP
+        FETCH c INTO reg_count, max_participant;
+        EXIT WHEN NOT FOUND;
+        IF registered_count >= max_participants THEN
+            CLOSE c;
+            RETURN FALSE;
+        ELSE
+            CLOSE c;
+            RETURN TRUE;
+        END IF;
+    END LOOP;
+    CLOSE c;
+    RETURN FALSE;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION checkAlreadyRegistered(u_id varchar, e_id INT)
+RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+user varchar;
+BEGIN
+    SELECT user_id into user FROM event_registration
+    WHERE event_id = e_id AND user_id = u_id;
+
+    IF FOUND THEN
+        RETURN FALSE;
+    ELSE
+        RETURN TRUE;
+    END IF;
+END;
+$$ ;
