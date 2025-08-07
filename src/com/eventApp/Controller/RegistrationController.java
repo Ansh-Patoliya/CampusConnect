@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RegistrationController {
-
     private final UserService userService = new UserService();
     public TextField nameField;
     public TextField emailField;
