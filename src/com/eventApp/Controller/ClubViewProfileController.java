@@ -30,7 +30,6 @@ public class ClubViewProfileController {
     }
 
     private void loadClubMemberProfile() {
-        System.out.println("Loading club member profile for user: " + user.getUserId());
         ClubMember clubMember = clubMemberService.getClubMemberByUser(user);
         if (clubMember != null) {
             nameLabel.setText(clubMember.getName());
@@ -43,6 +42,6 @@ public class ClubViewProfileController {
     public void onBack(ActionEvent event) {
         // Logic to go back to the previous screen, e.g., Student Dashboard
         // This could be implemented using a method from FXMLScreenLoader or similar
-        FXMLScreenLoader.openStudentDashboard(event);
+        FXMLScreenLoader.openClubDashboard(event);
     }
 }
