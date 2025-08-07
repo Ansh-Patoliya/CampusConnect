@@ -6,25 +6,46 @@ import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
+import com.eventApp.Utils.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserService {
-    private final UserDAO userDAO= new UserDAO();
-    public boolean registerStudent(Student student,User user) throws DatabaseExceptionHandler {
-        return userDAO.registrationUser(user)&&userDAO.registrationStudent(student);
+    private final UserDAO userDAO = new UserDAO();
+
+    public void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
+        userDAO.registrationUser(user);
+        userDAO.registrationStudent(student);
     }
 
-    public boolean registerClubMember(ClubMember clubMember,User user) throws DatabaseExceptionHandler {
-        return userDAO.registrationUser(user)&&userDAO.registrationClubMember(clubMember);
+    public void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT checkclubcount(?)");
+        preparedStatement.setInt(1, clubMember.getClubId());
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        if (resultSet.getBoolean(1)) {
+            userDAO.registrationUser(user);
+            userDAO.registrationClubMember(clubMember);
+        } else
+            throw new DatabaseExceptionHandler("club member limit exceeded.");
     }
 
-    public boolean checklogin(String emailInput, String passwordInput) { return userDAO.checkLoginDetails(emailInput, passwordInput); }
+    public boolean checklogin(String emailInput, String passwordInput) {
+        return userDAO.checkLoginDetails(emailInput, passwordInput);
+    }
 
     public boolean resetPassword(String emailInput, String newPassword, String confirmPassword) {
-        return userDAO.resetPass(emailInput,newPassword,confirmPassword);
+        return userDAO.resetPass(emailInput, newPassword, confirmPassword);
     }
 
-    public boolean registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler {
-        return userDAO.registrationUser(user)&&userDAO.registrationClub(club) && userDAO.registrationClubMember(clubMember);
+    public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
+        userDAO.registrationUser(user);
+        userDAO.registrationClub(club);
+        userDAO.registrationClubMember(clubMember);
     }
 
     public User getUserByEmail(String emailInput) {

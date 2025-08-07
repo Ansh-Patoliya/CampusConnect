@@ -84,34 +84,25 @@ public class UserDAO {
         }
     }
 
-    public boolean registrationUser(User user) throws DatabaseExceptionHandler {
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
-            preparedStatement.setString(1, user.getUserId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getRole().toUpperCase());
+    public void registrationUser(User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
 
-            int userInsert = preparedStatement.executeUpdate();
-            if (userInsert > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException e) {
-            throw new DatabaseExceptionHandler(e.getMessage());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
+        preparedStatement.setString(1, user.getUserId());
+        preparedStatement.setString(2, user.getName());
+        preparedStatement.setString(3, user.getEmail());
+        preparedStatement.setString(4, user.getPassword());
+        preparedStatement.setString(5, user.getRole().toUpperCase());
+
+        int userInsert = preparedStatement.executeUpdate();
+        if (userInsert > 0) {
+            return;
         }
-        return false;
+        throw new DatabaseExceptionHandler("User registration failed. Please try again.");
     }
 
-    public boolean registrationStudent(Student student) {
-        try {
+    public void registrationStudent(Student student) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
             Connection connection = DatabaseConnection.getConnection();
-
             PreparedStatement preparedStatement = connection.prepareStatement("insert into students values(?,?,?,?)");
             preparedStatement.setString(1, student.getUserId());
             preparedStatement.setString(2, student.getDepartment());
@@ -120,15 +111,9 @@ public class UserDAO {
 
             int studentInsert = preparedStatement.executeUpdate();
             if (studentInsert > 0) {
-                System.out.println("registration complete");
-                return true;
-            } else {
-                System.out.println("registration fail..");
+                return;
             }
-        } catch (Exception e) {
-        }
-
-        return false;
+            throw new DatabaseExceptionHandler("Student registration failed. Please try again.");
     }
 
     public boolean checkLoginDetails(String emailInput, String passwordInput) {
@@ -172,10 +157,9 @@ public class UserDAO {
         return false;
     }
 
-    public boolean registrationClubMember(ClubMember clubMember) {
-        try {
-            Connection connection = DatabaseConnection.getConnection();
+    public void registrationClubMember(ClubMember clubMember) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
 
+            Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into club_members values(?,?,?)");
             preparedStatement.setString(1, clubMember.getUserId());
             preparedStatement.setInt(2, clubMember.getClubId());
@@ -183,15 +167,9 @@ public class UserDAO {
 
             int clubMemberInsert = preparedStatement.executeUpdate();
             if (clubMemberInsert > 0) {
-                return true;
-            } else {
-                return false;
+                return;
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+            throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
     }
 
     public boolean registrationClub(Club club) {
