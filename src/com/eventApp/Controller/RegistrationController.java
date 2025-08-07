@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -219,13 +220,14 @@ public class RegistrationController {
             Club club = new Club(clubName, description, category, enrollmentNo, maxMember);
             ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "President", club.getClubId());
             try {
-                boolean success = userService.registerClub(club, clubMember, user);
-                if (success) {
+                userService.
+                        registerClub(club, clubMember, user);
+
                     FXMLScreenLoader.openLoginPage(event);
                     FXMLScreenLoader.showMessage("✅ Club registration successful! You can now log in.", "registration", "info");
-                }
-            } catch (DatabaseExceptionHandler e) {
-                FXMLScreenLoader.showMessage("❌ Registration failed due to a database error. Please try again later.", "registration", "error");
+
+            } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
+                FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
             }
         }
     }
@@ -251,12 +253,9 @@ public class RegistrationController {
                 FXMLScreenLoader.openLoginPage(event);
                 FXMLScreenLoader.showMessage("✅ Registration successful! You can now log in.", "registration", "info");
             }
-        } catch (DatabaseExceptionHandler e) {
-            FXMLScreenLoader.showMessage("❌ Registration failed due to a database error. Please try again later.", "registration", "error");
-        } catch (ValidationException e) {
+        } catch (DatabaseExceptionHandler | ValidationException | SQLException | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             FXMLScreenLoader.showMessage("❌ Please enter a valid semester number.", "semester", "error");
             semesterField.clear();
         }
@@ -270,13 +269,12 @@ public class RegistrationController {
             User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
             ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "Member", clubId);
             try {
-                boolean success = userService.registerClubMember(clubMember, user);
-                if (success) {
-                    FXMLScreenLoader.openLoginPage(event);
-                    FXMLScreenLoader.showMessage("✅ Successfully joined the club! You can now log in.", "registration", "info");
-                }
-            } catch (DatabaseExceptionHandler e) {
-                FXMLScreenLoader.showMessage("❌ Registration failed due to a database error. Please try again later.", "registration", "error");
+                userService.registerClubMember(clubMember, user);
+                FXMLScreenLoader.openLoginPage(event);
+                FXMLScreenLoader.showMessage("✅ Successfully joined the club! You can now log in.", "registration", "info");
+
+            } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
+                FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
             }
         } else {
             FXMLScreenLoader.showMessage("❌ Please select a club to join.", "registration", "error");
@@ -336,14 +334,14 @@ public class RegistrationController {
             return false; // General validations failed
         }
 
-        try{
+        try {
             ValidationUtils.checkName(clubName);
         } catch (ValidationException e) {
             clubNameField.clear();
             FXMLScreenLoader.showMessage(e.getMessage(), "clubName", "error");
             return false;
         }
-        try{
+        try {
             ValidationUtils.checkDescription(description);
         } catch (ValidationException e) {
             descriptionField.clear();
@@ -351,7 +349,7 @@ public class RegistrationController {
             return false;
         }
 
-        try{
+        try {
             ValidationUtils.checkClubName(clubName);
         } catch (ValidationException e) {
             clubNameField.clear();
