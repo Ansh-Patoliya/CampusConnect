@@ -51,7 +51,7 @@ public class EventHistoryController {
 
     private void showDataInTable() {
         ObservableList<Event> observableEvents = FXCollections.observableArrayList();
-        if (eventList != null && eventList.size() > 0) {
+        if (eventList != null && !eventList.isEmpty()) {
             for (int i = 0; i < eventList.size(); i++) {
                 observableEvents.add(eventList.get(i));
             }
