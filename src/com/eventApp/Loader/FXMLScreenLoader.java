@@ -236,4 +236,17 @@ public class FXMLScreenLoader {
             e.printStackTrace();
         }
     }
+
+    public static void openViewMember(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewMembers.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("View Members");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
