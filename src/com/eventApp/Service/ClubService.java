@@ -39,8 +39,8 @@ public class ClubService {
         return clubMembers;
     }
 
-    public List<Student> getParticipant(User user){
-        List<Student> participants = eventRegistrationDAO.getParticipantList(user.getUserId());
+    public List<Student> getParticipant(int eventId) {
+        List<Student> participants = eventRegistrationDAO.getParticipantList(eventId);
         participants.sort(Comparator.comparing(Student::getName));
         return participants;
     }
@@ -63,7 +63,7 @@ public class ClubService {
         writer.close();
     }
 
-    public List<String> getAllEventNames(User user) {
+    public List<String> getAllEventNames() {
         List<String> eventNameList = eventDAO.getEventNames();
         Collections.sort(eventNameList);
         return eventNameList;
