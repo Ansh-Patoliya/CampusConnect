@@ -11,7 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ViewParticipantController">
+
 
    <children>
       <VBox layoutX="71.0" layoutY="20.0" prefHeight="560.0" prefWidth="770.0" spacing="25" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="59.4" AnchorPane.topAnchor="20.0">
@@ -25,12 +27,14 @@
                <Insets bottom="20" left="30" right="30" top="20" />
             </padding>
             <children>
+
                <Label style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold;                              -fx-font-family: 'Segoe UI', Arial, sans-serif;                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);" text="📅 Club Dashboard" />
                <Label style="-fx-font-size: 14px; -fx-text-fill: rgba(255, 255, 255, 0.8);                              -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="Manage student participation" />
             </children>
          </VBox>
 
          <!-- Event Selection ComboBox -->
+
          <HBox alignment="CENTER_LEFT" spacing="15">
             <Label style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" text="Select Event:" />
             <ComboBox fx:id="eventComboBox" prefWidth="200.0" promptText="Choose Event" style="-fx-background-color: white;" />

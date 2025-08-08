@@ -38,7 +38,7 @@ public class UserDAO {
         int clubId = 0;
         try {
             Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where user_id=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where member_id=?");
             preparedStatement.setString(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {

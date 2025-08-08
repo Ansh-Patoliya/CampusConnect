@@ -25,7 +25,7 @@ public class ValidationUtils {
 
         for (int i = 0; i < name.length(); i++) {
             char c = name.charAt(i);
-            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z')) {
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z') && (c != ' ')) {
                 throw new ValidationException("Name can only contain letters.");
             }
         }
@@ -194,13 +194,15 @@ public class ValidationUtils {
     public static void dateValidator(LocalDate inputDate) throws ValidationException {
         /**
          * Checks if the given date is in the future or present.
-         * Returns true if the input has not passed yet.
+         * Throws ValidationException if the date is in the past or null.
          */
-        if (inputDate == null)
-            throw new ValidationException("Date cannot be null.");
 
+        if (inputDate == null) {
+            throw new ValidationException("Date cannot be null.");
+        }
         LocalDate currentDate = LocalDate.now();
-        if (!inputDate.isBefore(currentDate))
-            throw new ValidationException("Date must be in the future or present.");
+        if (inputDate.isBefore(currentDate)) {
+            throw new ValidationException("Date cannot be in the past.");
+        }
     }
 }
