@@ -4,14 +4,10 @@ import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.Model.*;
-import com.eventApp.Utils.DatabaseConnection;
 
 import com.eventApp.DAO.AdminDAO;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class AdminService {
 
@@ -20,7 +16,7 @@ public class AdminService {
 
     public void exportClubData(Club club) {
         String clubDetailsFile = "D:\\" + club.getClubName() + "Data.txt";
-        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile));) {
+        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile))) {
             String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();

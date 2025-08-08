@@ -43,7 +43,7 @@ public class ClubDAO {
     }
 
     public MyClubQueue getClubList(String clubStatus) {
-        MyClubQueue clubList = null;
+        MyClubQueue clubList;
         int rowCount = 0;
         try (Connection connection = DatabaseConnection.getConnection()) {
             String fetchClubCount = "select count(*) from clubs where status = ?";
