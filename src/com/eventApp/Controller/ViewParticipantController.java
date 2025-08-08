@@ -16,6 +16,7 @@ import javafx.scene.control.TableView;
 import java.util.List;
 
 public class ViewParticipantController {
+
     public TableColumn<Student, String> nameCol;
     public TableColumn<Student, String> userIdCol;
     public TableColumn<Student, String> deptCol;

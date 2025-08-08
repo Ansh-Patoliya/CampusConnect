@@ -47,6 +47,7 @@ public class ClubController {
     }
 
     public void handleViewParticipate(ActionEvent event) {
+        FXMLScreenLoader.openViewParticipant(event);
     }
 
     public void handleViewClubDetails(ActionEvent event) {

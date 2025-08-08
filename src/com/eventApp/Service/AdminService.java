@@ -37,25 +37,8 @@ public class AdminService {
     UserDAO userDAO = new UserDAO();
     ClubDAO clubDAO = new ClubDAO();
 
-    public void exportClubData(Club club) {
-        String clubDetailsFile = "D:\\" + club.getClubName() + "Data.txt";
-        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile))) {
-            String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
-            clubFile.write(formattedLine);
-            clubFile.newLine();
-            formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", club.getClubId(), club.getClubName(), userDAO.getUserNameBy(club.getFounderId()),
-                    club.getDescriptions());
-            clubFile.write(formattedLine);
-            clubFile.newLine();
-            clubFile.flush();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void getAllClubData(){
+    public void getAllClubData(String clubFilename){
         MyClubQueue allClubs = clubDAO.getAllClubList();
-        String clubFilename = "D:\\ClubList.txt";
         try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubFilename))) {
             String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
@@ -77,7 +60,7 @@ public class AdminService {
         return AdminDAO.getAdmin(user);
     }
 
-    public List<ClubMember> getClubMemberList() throws SQLException, ClassNotFoundException {
-        return new ClubMemberDAO().getClubMemberList();
+    public List<ClubMember> getClubMemberList(int clubId) throws SQLException, ClassNotFoundException {
+        return new ClubMemberDAO().getClubMemberList(clubId);
     }
 }
