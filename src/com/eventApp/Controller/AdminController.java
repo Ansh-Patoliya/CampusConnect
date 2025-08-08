@@ -37,4 +37,8 @@ public class AdminController {
     public void handleViewProfile(ActionEvent event) {
         FXMLScreenLoader.openAdminProfile(event);
     }
+
+    public void handleViewClubMembers(ActionEvent event) {
+        FXMLScreenLoader.openClubMemberList(event);
+    }
 }
