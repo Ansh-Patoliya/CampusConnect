@@ -12,6 +12,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
+
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -78,11 +80,15 @@ public class ViewParticipantController {
     }
 
     private void loadEventNames() {
-        eventNames = clubService.getAllEventNames();
+        eventNames = clubService.getAllEventNames(currentUser.getUserId());
     }
 
     private void loadParticipantList(int eventId) {
-        this.participantList = clubService.getParticipant(eventId);
+        try {
+            this.participantList = clubService.getParticipant(eventId);
+        } catch (SQLException | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Error", "error");
+        }
     }
 
     private void setupColumns() {

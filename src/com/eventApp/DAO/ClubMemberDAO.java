@@ -51,7 +51,7 @@ public class ClubMemberDAO {
         preparedStatement.setString(1, userId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            clubMemberList.add(new ClubMember(userId, resultSet.getString("name"),
+            clubMemberList.add(new ClubMember(resultSet.getString("user_id"), resultSet.getString("name"),
                     resultSet.getString("email"), null, null,
                     resultSet.getString("position"), 0));
         }
