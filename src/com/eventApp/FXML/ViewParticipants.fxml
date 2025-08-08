@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,48 +11,101 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ViewParticipantController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0"
+            style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.eventApp.Controller.ViewParticipantController">
+
    <children>
-      <VBox layoutX="71.0" layoutY="20.0" prefHeight="560.0" prefWidth="770.0" spacing="25" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="71.0" AnchorPane.rightAnchor="59.39999999999998" AnchorPane.topAnchor="20.0">
+      <VBox layoutX="71.0" layoutY="20.0" prefHeight="560.0" prefWidth="770.0" spacing="25"
+            AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="71.0"
+            AnchorPane.rightAnchor="59.4" AnchorPane.topAnchor="20.0">
          <padding>
-            <Insets bottom="25" left="25" right="25" top="25" />
+            <Insets bottom="25" left="25" right="25" top="25"/>
          </padding>
-         <children>
-            <VBox alignment="CENTER" spacing="5" style="-fx-background-color: rgba(255, 255, 255, 0.15);                      -fx-background-radius: 15;                      -fx-border-color: rgba(255, 255, 255, 0.3);                      -fx-border-radius: 15;                      -fx-border-width: 1;">
-               <padding>
-                  <Insets bottom="20" left="30" right="30" top="20" />
-               </padding>
-               <children>
-                  <Label style="-fx-font-size: 32px;                           -fx-text-fill: white;                           -fx-font-weight: bold;                           -fx-font-family: 'Segoe UI', Arial, sans-serif;                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);" text="📅 Student Dashboard" />
-                  <Label style="-fx-font-size: 14px;                           -fx-text-fill: rgba(255, 255, 255, 0.8);                           -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="Manage student participation" />
-               </children>
-            </VBox>
-            <VBox prefHeight="310.0" prefWidth="754.0" spacing="15" style="-fx-background-color: rgba(255, 255, 255, 0.95);                      -fx-background-radius: 20;                      -fx-border-color: rgba(255, 255, 255, 0.4);                      -fx-border-radius: 20;                      -fx-border-width: 1;                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.3, 0, 5);">
-               <padding>
-                  <Insets bottom="20" left="25" right="25" top="20" />
-               </padding>
-               <children>
-                  <Label style="-fx-font-size: 18px;                           -fx-text-fill: #654ea3;                           -fx-font-weight: bold;                           -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="📊 Student Participation List" />
-                  <TableView fx:id="participantTable" prefHeight="229.0" prefWidth="758.0" style="-fx-background-color: white;                               -fx-table-cell-border-color: rgba(101, 78, 163, 0.1);                               -fx-background-radius: 12;                               -fx-border-color: rgba(101, 78, 163, 0.2);                               -fx-border-radius: 12;                               -fx-border-width: 1;                               -fx-control-inner-background: white;                               -fx-selection-bar: rgba(101, 78, 163, 0.3);                               -fx-selection-bar-non-focused: rgba(101, 78, 163, 0.2);">
-                     <columns>
-                        <TableColumn fx:id="nameCol" prefWidth="200.00002908706665" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Student Name" />
-                        <TableColumn fx:id="userId" prefWidth="153.5999755859375" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="User Id" />
-                        <TableColumn fx:id="deptcol" prefWidth="192.79998779296875" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Department" />
-                        <TableColumn fx:id="semCol" prefWidth="117.5999755859375" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Semester" />
-                     </columns>
-                  </TableView>
-               </children>
-            </VBox>
-            <HBox alignment="CENTER_RIGHT" spacing="15">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="⬅ Back">
-                     <font>
-                        <Font name="Segoe UI Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
+
+         <!-- Header Section -->
+         <VBox alignment="CENTER" spacing="5"
+               style="-fx-background-color: rgba(255, 255, 255, 0.15); -fx-background-radius: 15;
+                      -fx-border-color: rgba(255, 255, 255, 0.3); -fx-border-radius: 15; -fx-border-width: 1;">
+            <padding>
+               <Insets bottom="20" left="30" right="30" top="20"/>
+            </padding>
+            <children>
+               <Label style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold;
+                             -fx-font-family: 'Segoe UI', Arial, sans-serif;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);"
+                      text="📅 Student Dashboard"/>
+               <Label style="-fx-font-size: 14px; -fx-text-fill: rgba(255, 255, 255, 0.8);
+                             -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                      text="Manage student participation"/>
+            </children>
+         </VBox>
+
+         <!-- Event Selection ComboBox -->
+         <HBox spacing="15" alignment="CENTER_LEFT">
+            <Label style="-fx-font-size: 18px; -fx-text-fill: white; -fx-font-weight: bold;" text="Select Event:"/>
+            <ComboBox fx:id="eventComboBox" promptText="Choose Event" prefWidth="200.0"/>
+         </HBox>
+
+         <!-- Participant Table -->
+         <VBox prefHeight="310.0" prefWidth="754.0" spacing="15"
+               style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 20;
+                      -fx-border-color: rgba(255, 255, 255, 0.4); -fx-border-radius: 20; -fx-border-width: 1;
+                      -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.3, 0, 5);">
+            <padding>
+               <Insets bottom="20" left="25" right="25" top="20"/>
+            </padding>
+            <children>
+               <Label style="-fx-font-size: 18px; -fx-text-fill: #654ea3; -fx-font-weight: bold;
+                             -fx-font-family: 'Segoe UI', Arial, sans-serif;"
+                      text="📊 Student Participation List"/>
+               <TableView fx:id="participantTable" prefHeight="229.0" prefWidth="758.0"
+                          style="-fx-background-color: white; -fx-table-cell-border-color: rgba(101, 78, 163, 0.1);
+                                 -fx-background-radius: 12; -fx-border-color: rgba(101, 78, 163, 0.2);
+                                 -fx-border-radius: 12; -fx-border-width: 1;
+                                 -fx-control-inner-background: white;
+                                 -fx-selection-bar: rgba(101, 78, 163, 0.3);
+                                 -fx-selection-bar-non-focused: rgba(101, 78, 163, 0.2);">
+                  <columns>
+                     <TableColumn fx:id="nameCol" prefWidth="200.0"
+                                  style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);
+                                         -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                                  text="Student Name"/>
+                     <TableColumn fx:id="userIdCol" prefWidth="153.6"
+                                  style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);
+                                         -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                                  text="User Id"/>
+                     <TableColumn fx:id="deptCol" prefWidth="192.8"
+                                  style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);
+                                         -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                                  text="Department"/>
+                     <TableColumn fx:id="semCol" prefWidth="117.6"
+                                  style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);
+                                         -fx-text-fill: white; -fx-font-weight: bold; -fx-alignment: CENTER;"
+                                  text="Semester"/>
+                  </columns>
+               </TableView>
+            </children>
+         </VBox>
+
+         <!-- Back Button -->
+         <HBox alignment="CENTER_RIGHT" spacing="15">
+            <children>
+               <Button onAction="#onBack" prefHeight="45.0" prefWidth="140.0"
+                       style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);
+                              -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 25;
+                              -fx-cursor: hand; -fx-border-color: rgba(255, 255, 255, 0.3);
+                              -fx-border-radius: 25; -fx-border-width: 1;
+                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);"
+                       text="⬅ Back">
+                  <font>
+                     <Font name="Segoe UI Bold" size="14.0"/>
+                  </font>
+               </Button>
+            </children>
+         </HBox>
       </VBox>
    </children>
 </AnchorPane>

@@ -9,6 +9,6 @@ public class DatabaseConnection {
         Connection connection = null;
             Class.forName("org.postgresql.Driver");
             return DriverManager.getConnection("jdbc:postgresql://localhost:5432/CampusConnect",
-                    "postgres", "Ap1420@810");
+                    "postgres", "india2000");
     }
 }

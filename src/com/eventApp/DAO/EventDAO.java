@@ -1,6 +1,5 @@
 package com.eventApp.DAO;
 
-import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -52,5 +51,21 @@ public class EventDAO {
             throw new RuntimeException(e);
         }
         return eventList;
+    }
+
+    public List<String> getEventNames(){
+        List<String> eventNameList = new ArrayList<>();
+        try(Connection connection = DatabaseConnection.getConnection()){
+            String query = "select event_name from events where approval_status = 'approved'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                eventNameList.add(resultSet.getString("event_name"));
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        return eventNameList;
     }
 }

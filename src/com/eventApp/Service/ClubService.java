@@ -2,6 +2,7 @@ package com.eventApp.Service;
 
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.ClubMemberDAO;
+import com.eventApp.DAO.EventDAO;
 import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.Model.*;
 
@@ -9,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -18,6 +18,7 @@ public class ClubService {
     public final ClubDAO clubDAO = new ClubDAO();
     public final ClubMemberDAO clubMemberDAO = new ClubMemberDAO();
     public final EventRegistrationDAO eventRegistrationDAO = new EventRegistrationDAO();
+    public final EventDAO eventDAO= new EventDAO();
 
     public boolean addEvent(Event event) {
         return clubDAO.createEvent(event);
@@ -60,5 +61,11 @@ public class ClubService {
         }
         writer.flush();
         writer.close();
+    }
+
+    public List<String> getAllEventNames(User user) {
+        List<String> eventNameList = eventDAO.getEventNames();
+        Collections.sort(eventNameList);
+        return eventNameList;
     }
 }
