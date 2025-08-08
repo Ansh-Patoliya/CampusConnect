@@ -53,4 +53,10 @@ public class EventDAO {
         }
         return eventList;
     }
+
+    public List<String> getEventNames(){
+        List<String> eventNameList = new ArrayList<>();
+
+        return eventNameList;
+    }
 }

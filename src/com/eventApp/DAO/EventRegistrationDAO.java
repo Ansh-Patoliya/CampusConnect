@@ -23,17 +23,19 @@ public class EventRegistrationDAO {
             throw new DatabaseExceptionHandler("Registration failed. Please try again.");
     }
 
-    public List<Student> getParticipantList(String userId) {
+    public List<Student> getParticipantList(String eventId) {
         List<Student> participantList = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection()){
-            String query = "SELECT u.user_id, u.name, s.department, s.semester " +
-                    "FROM users u INNER JOIN students s ON u.user_id = s.student_id " +
-                    "WHERE u.user_id = ?";
+            String query = "select u.user_id, u.name, s.department, s.semester " +
+                    "from event_registration er " +
+                    "inner join users u ON er.student_id = u.user_id " +
+                    "inner join students s ON u.user_id = s.student_id " +
+                    "where er.event_id = ? order by u.name";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,"userId");
+            preparedStatement.setString(1,eventId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                participantList.add(new Student(userId, resultSet.getString("name"), null, null,null,
+                participantList.add(new Student(resultSet.getString("user_id"), resultSet.getString("name"), null, null,null,
                         resultSet.getString("department"),resultSet.getInt("semester"), null));
             }
             return participantList;

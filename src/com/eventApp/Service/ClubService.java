@@ -2,6 +2,7 @@ package com.eventApp.Service;
 
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.ClubMemberDAO;
+import com.eventApp.DAO.EventDAO;
 import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.Model.*;
 
@@ -18,6 +19,7 @@ public class ClubService {
     public final ClubDAO clubDAO = new ClubDAO();
     public final ClubMemberDAO clubMemberDAO = new ClubMemberDAO();
     public final EventRegistrationDAO eventRegistrationDAO = new EventRegistrationDAO();
+    public final EventDAO eventDAO= new EventDAO();
 
     public boolean addEvent(Event event) {
         return clubDAO.createEvent(event);
@@ -60,5 +62,10 @@ public class ClubService {
         }
         writer.flush();
         writer.close();
+    }
+
+    public List<String> getAllEventNames(User user) {
+        List<String> eventNameList = eventDAO.getEventNames();
+        eventNameList.sort(Comparator.comparing(Event::getEventName));
     }
 }
