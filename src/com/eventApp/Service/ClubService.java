@@ -9,6 +9,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -36,6 +38,12 @@ public class ClubService {
         return clubMembers;
     }
 
+    public List<Student> getParticipant(User user){
+        List<Student> participants = eventRegistrationDAO.getParticipantList(user.getUserId());
+        participants.sort(Comparator.comparing(Student::getName));
+        return participants;
+    }
+
 
     public void exportClubsToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
@@ -52,10 +60,5 @@ public class ClubService {
         }
         writer.flush();
         writer.close();
-
-    public List<Student> getParticipant(User user){
-        List<Student> participants = eventRegistrationDAO.getParticipantList(user.getUserId());
-        participants.sort(Comparator.comparing(Student::getName));
-        return participants;
     }
 }
