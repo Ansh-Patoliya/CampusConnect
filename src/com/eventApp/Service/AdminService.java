@@ -12,7 +12,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class AdminService {
 
@@ -21,8 +20,7 @@ public class AdminService {
 
     public void exportClubData(Club club) {
         String clubDetailsFile = "D:\\" + club.getClubName() + "Data.txt";
-        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile));
-             Connection connection = DatabaseConnection.getConnection()) {
+        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile));) {
             String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();
@@ -31,7 +29,7 @@ public class AdminService {
             clubFile.write(formattedLine);
             clubFile.newLine();
             clubFile.flush();
-        } catch (IOException | SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -39,8 +37,7 @@ public class AdminService {
     public void getAllClubData(){
         MyClubQueue allClubs = clubDAO.getAllClubList();
         String clubFilename = "D:\\ClubList.txt";
-        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubFilename));
-             Connection connection = DatabaseConnection.getConnection()) {
+        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubFilename))) {
             String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();

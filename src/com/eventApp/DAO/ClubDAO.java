@@ -3,7 +3,6 @@ package com.eventApp.DAO;
 import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Club;
-import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -130,7 +129,7 @@ public class ClubDAO {
     }
 
     public MyClubQueue getAllClubList() {
-        MyClubQueue clubList = null;
+        MyClubQueue clubList;
         int rowCount = 0;
         try (Connection connection = DatabaseConnection.getConnection()) {
             String fetchClubCount = "select count(*) from clubs";
