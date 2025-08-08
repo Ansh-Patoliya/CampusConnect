@@ -47,10 +47,10 @@ public class ClubService {
 
     public void exportClubMembersToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
-        writer.write(String.format("%-10s | %-32s | %-32s | %-32s", "User ID", "Name", "Email", "Position"));
+        writer.write(String.format("%s , %s , %s , %s", "User ID", "Name", "Email", "Position"));
         writer.newLine();
         for (ClubMember clubMember : clubMemberList) {
-            String formattedLine = String.format("%-10s | %-32s | %-32s | %-32s",
+            String formattedLine = String.format("%s , %s , %s , %s",
                     clubMember.getUserId(),
                     clubMember.getName(),
                     clubMember.getEmail(),

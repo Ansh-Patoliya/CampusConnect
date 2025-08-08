@@ -58,13 +58,14 @@ public class ClubMemberDAO {
         return clubMemberList;
     }
 
-    public List<ClubMember> getClubMemberList() throws SQLException, ClassNotFoundException {
+    public List<ClubMember> getClubMemberList(int clubId) throws SQLException, ClassNotFoundException {
         List<ClubMember> clubMemberList = new ArrayList<>();
         Connection connection = DatabaseConnection.getConnection();
         String query = "SELECT u.name, u.email, cm.position,cm.club_id, u.user_id FROM users u " +
                 "INNER JOIN club_members cm ON cm.member_id = u.user_id " +
-                "order by u.name";
+                "where cm.club_id=? order by u.name";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, clubId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             clubMemberList.add(new ClubMember(resultSet.getString("user_id"), resultSet.getString("name"),

@@ -50,7 +50,7 @@ public class AdminService {
         return AdminDAO.getAdmin(user);
     }
 
-    public List<ClubMember> getClubMemberList() throws SQLException, ClassNotFoundException {
-        return new ClubMemberDAO().getClubMemberList();
+    public List<ClubMember> getClubMemberList(int clubId) throws SQLException, ClassNotFoundException {
+        return new ClubMemberDAO().getClubMemberList(clubId);
     }
 }

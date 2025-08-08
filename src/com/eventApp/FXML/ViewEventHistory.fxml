@@ -29,7 +29,8 @@
                     <children>
                         <Label style="-fx-font-size: 18px; -fx-text-fill: #654ea3; -fx-font-weight: bold; -fx-font-family: 'Segoe UI', Arial, sans-serif;"
                                text="📊 Past Events Overview"/>
-                        <TableView fx:id="eventHistoryTable" prefHeight="350.0" prefWidth="744.0"
+                        <TableView
+                                fx:id="eventHistoryTable" prefHeight="350.0" prefWidth="744.0"
                                    style="-fx-background-color: white;                               -fx-table-cell-border-color: rgba(101, 78, 163, 0.1);                               -fx-background-radius: 12;                               -fx-border-color: rgba(101, 78, 163, 0.2);                               -fx-border-radius: 12;                               -fx-border-width: 1;                               -fx-control-inner-background: white;                               -fx-selection-bar: rgba(101, 78, 163, 0.3);                               -fx-selection-bar-non-focused: rgba(101, 78, 163, 0.2);">
                             <columns>
                                 <TableColumn fx:id="nameCol" prefWidth="260.7999978065491"

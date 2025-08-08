@@ -7,6 +7,8 @@ import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClubDAO {
     public boolean createEvent(Event event) {
@@ -90,6 +92,19 @@ public class ClubDAO {
         return clubName;
     }
 
+    public int getClubIdBy(String clubName) throws SQLException, ClassNotFoundException {
+        int clubId = -1; // Default value if club not found
+        Connection connection = DatabaseConnection.getConnection();
+        String query = "SELECT club_id FROM clubs WHERE club_name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, clubName);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            clubId = resultSet.getInt("club_id");
+        }
+        return clubId;
+    }
+
     public Club getClubById(int clubId) {
         Club club = null;
         try (Connection connection = DatabaseConnection.getConnection()) {
@@ -156,6 +171,18 @@ public class ClubDAO {
             throw new RuntimeException(e);
         }
         return clubList;
+    }
+
+    public List<String> getAllClubNames() throws SQLException, ClassNotFoundException {
+        List<String> clubNames = new ArrayList<>();
+        Connection connection = DatabaseConnection.getConnection();
+        String query = "SELECT club_name FROM clubs where status = 'Approved' order by club_name";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            clubNames.add(resultSet.getString("club_name"));
+        }
+        return clubNames;
     }
 
 }
