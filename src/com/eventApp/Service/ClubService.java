@@ -60,5 +60,5 @@ public class ClubService {
         }
         writer.flush();
         writer.close();
-        }
+    }
 }
