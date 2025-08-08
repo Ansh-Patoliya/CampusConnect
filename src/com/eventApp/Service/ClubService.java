@@ -10,7 +10,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -66,6 +65,7 @@ public class ClubService {
 
     public List<String> getAllEventNames(User user) {
         List<String> eventNameList = eventDAO.getEventNames();
-        eventNameList.sort(Comparator.comparing(Event::getEventName));
+        Collections.sort(eventNameList);
+        return eventNameList;
     }
 }
