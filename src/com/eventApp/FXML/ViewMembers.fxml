@@ -53,11 +53,16 @@
         <!-- Enhanced Action Buttons -->
         <HBox alignment="CENTER_RIGHT" spacing="15">
             <!-- Back Button with Gradient -->
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="⬅ Back">
+            <Button alignment="CENTER" fx:id="export" mnemonicParsing="false" onAction="#onExport" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="Export List">
                 <font>
                     <Font name="Segoe UI Bold" size="14.0" />
                 </font>
             </Button>
+         <Button alignment="CENTER" mnemonicParsing="false" onAction="#onBack" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="⬅ Back">
+            <font>
+               <Font name="Segoe UI Bold" size="14.0" />
+            </font>
+         </Button>
         </HBox>
     </VBox>
 </AnchorPane>
