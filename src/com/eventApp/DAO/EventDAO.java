@@ -1,7 +1,5 @@
 package com.eventApp.DAO;
 
-import com.eventApp.DataStructures.MyEventLL;
-import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
