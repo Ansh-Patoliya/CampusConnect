@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.EventDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.Student;
@@ -13,6 +14,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public class ViewParticipantController {
@@ -22,25 +26,35 @@ public class ViewParticipantController {
     public TableColumn<Student, String> deptCol;
     public TableColumn<Student, String> semCol;
     public TableView<Student> participantTable;
+    public VBox tablePane;
     @FXML
     private ComboBox<String> eventComboBox;
 
     List<Student> participantList;
+    List<String> eventNames;
     ClubService clubService = new ClubService();
+    EventDAO eventDAO = new EventDAO();
     User currentUser= CurrentUser.getCurrentUser();
     @FXML
     public void initialize() {
-        loadParticipantList();
-        setupColumns();
+        participantTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        loadEventNames();
+        eventComboBox.getItems().addAll(eventNames);
+
+        eventComboBox.setOnAction(event -> {
+            String selectedEvent = (String) eventComboBox.getValue();
+            loadParticipantList(eventDAO.getEventIdBy(selectedEvent));
+            tablePane.setVisible(true);
+            setupColumns();
+        });
     }
 
     private void loadEventNames() {
-        List<String> eventNames = clubService.getAllEventNames(currentUser);
-        eventComboBox.setItems(FXCollections.observableArrayList(eventNames));
+        eventNames = clubService.getAllEventNames();
     }
 
-    private void loadParticipantList() {
-        this.participantList = clubService.getParticipant(currentUser);
+    private void loadParticipantList(int eventId) {
+        this.participantList = clubService.getParticipant(eventId);
     }
 
     private void setupColumns() {
@@ -52,8 +66,6 @@ public class ViewParticipantController {
         participantTable.getItems().setAll(participantList);
     }
 
-    public void onBack(ActionEvent actionEvent) { FXMLScreenLoader.openStudentDashboard(actionEvent); }
+    public void onBack(ActionEvent actionEvent) { FXMLScreenLoader.openClubDashboard(actionEvent); }
 
-    public void onEventSelected(ActionEvent actionEvent) {
-    }
 }

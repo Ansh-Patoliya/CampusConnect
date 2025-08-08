@@ -56,7 +56,7 @@ public class EventDAO {
     public List<String> getEventNames(){
         List<String> eventNameList = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection()){
-            String query = "select event_name from events where approval_status = 'approved'";
+            String query = "select event_name from events where approval_status = 'Approved'";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
@@ -67,5 +67,20 @@ public class EventDAO {
         }
 
         return eventNameList;
+    }
+
+    public int getEventIdBy(String eventName) {
+        try(Connection connection = DatabaseConnection.getConnection()){
+            String query = "select event_id from events where event_name = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,eventName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("event_id");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return -1; // Return -1 if no event found
     }
 }
