@@ -3,7 +3,6 @@ package com.eventApp.DAO;
 import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Club;
-import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -44,7 +43,7 @@ public class ClubDAO {
     }
 
     public MyClubQueue getClubList(String clubStatus) {
-        MyClubQueue clubList = null;
+        MyClubQueue clubList;
         int rowCount = 0;
         try (Connection connection = DatabaseConnection.getConnection()) {
             String fetchClubCount = "select count(*) from clubs where status = ?";
@@ -128,4 +127,35 @@ public class ClubDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public MyClubQueue getAllClubList() {
+        MyClubQueue clubList;
+        int rowCount = 0;
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String fetchClubCount = "select count(*) from clubs";
+            PreparedStatement preparedStatement = connection.prepareStatement(fetchClubCount);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                rowCount = resultSet.getInt(1);
+            }
+            clubList = new MyClubQueue(rowCount);
+            String fetchClubRecord = "select * from clubs order by created_at";
+            PreparedStatement preparedStatement2 = connection.prepareStatement(fetchClubRecord);
+            resultSet = preparedStatement2.executeQuery();
+            while (resultSet.next()) {
+                int clubId = resultSet.getInt("club_id");
+                String clubName = resultSet.getString("club_name");
+                String descriptions = resultSet.getString("description");
+                String category = resultSet.getString("category");
+                String founderId = resultSet.getString("founder_Id");
+                int memberCount = resultSet.getInt("member_count");
+                String status = resultSet.getString("status");
+                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return clubList;
+    }
+
 }
