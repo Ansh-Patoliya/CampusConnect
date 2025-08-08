@@ -1,7 +1,9 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyClubQueue;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Club;
+import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
@@ -35,37 +37,37 @@ public class ClubDAO {
             } else {
                 return false;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    public MyClubQueue getClubList(String clubStatus){
-        MyClubQueue clubList=null;
-        int rowCount=0;
-        try(Connection connection = DatabaseConnection.getConnection()){
+
+    public MyClubQueue getClubList(String clubStatus) {
+        MyClubQueue clubList = null;
+        int rowCount = 0;
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String fetchClubCount = "select count(*) from clubs where status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(fetchClubCount);
-            preparedStatement.setString(1,clubStatus);
+            preparedStatement.setString(1, clubStatus);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 rowCount = resultSet.getInt(1);
             }
             clubList = new MyClubQueue(rowCount);
             String fetchClubRecord = "select * from clubs where status = ?";
             PreparedStatement preparedStatement2 = connection.prepareStatement(fetchClubRecord);
-            preparedStatement2.setString(1,clubStatus);
+            preparedStatement2.setString(1, clubStatus);
             resultSet = preparedStatement2.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int clubId = resultSet.getInt("club_id");
-                String clubName=resultSet.getString("club_name");
-                String descriptions= resultSet.getString("description");
-                String category= resultSet.getString("category");
-                String founderId=resultSet.getString("founder_Id");
-                int memberCount=resultSet.getInt("member_count");
+                String clubName = resultSet.getString("club_name");
+                String descriptions = resultSet.getString("description");
+                String category = resultSet.getString("category");
+                String founderId = resultSet.getString("founder_Id");
+                int memberCount = resultSet.getInt("member_count");
                 String status = resultSet.getString("status");
-                clubList.enqueue(new Club(clubName,descriptions,category,founderId,status,memberCount,clubId));
+                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -89,18 +91,41 @@ public class ClubDAO {
         return clubName;
     }
 
-    public boolean checkClubNameExist(String clubName){
-        try{
-            Connection connection=DatabaseConnection.getConnection();
-            String query="select * from clubs where club_name=?";
-            PreparedStatement preparedStatement=connection.prepareStatement(query);
-            preparedStatement.setString(1,clubName);
-            ResultSet resultSet=preparedStatement.executeQuery();
-            return !resultSet.next();
+    public Club getClubById(int clubId) {
+        Club club = null;
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            String query = "SELECT * FROM clubs WHERE club_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, clubId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                String clubName = resultSet.getString("club_name");
+                String description = resultSet.getString("description");
+                String category = resultSet.getString("category");
+                String founderId = resultSet.getString("founder_Id");
+                int memberCount = resultSet.getInt("member_count");
+                String status = resultSet.getString("status");
+                club = new Club(clubName, description, category, founderId, status, memberCount, clubId);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            System.out.println(e);
+        return club;
+    }
+
+
+    public void checkClubNameExist(String clubName) throws ValidationException {
+        try {
+            Connection connection = DatabaseConnection.getConnection();
+            String query = "select * from clubs where club_name=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, clubName);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                throw new ValidationException("Club name already exists.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        return true;
     }
 }

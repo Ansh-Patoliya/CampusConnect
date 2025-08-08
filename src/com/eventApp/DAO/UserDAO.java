@@ -1,5 +1,7 @@
 package com.eventApp.DAO;
 
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
@@ -48,32 +50,59 @@ public class UserDAO {
         return clubId;
     }
 
-    public boolean registrationUser(User user) {
+    public static void checkDuplicateEmail(String newEmail) throws ValidationException {
         try {
             Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
-            preparedStatement.setString(1, user.getUserId());
-            preparedStatement.setString(2, user.getName());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setString(4, user.getPassword());
-            preparedStatement.setString(5, user.getRole().toUpperCase());
+            String query = "SELECT email FROM Users WHERE email = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, newEmail);
 
-            int userInsert = preparedStatement.executeUpdate();
-            if (userInsert > 0) {
-                return true;
-            } else {
-                return false;
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                throw new ValidationException("Email already exists.");
             }
-        } catch (Exception e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
-    public boolean registrationStudent(Student student) {
+    public static void checkDuplicateEnrollment(String enrollment) throws ValidationException {
         try {
             Connection connection = DatabaseConnection.getConnection();
+            String query = "SELECT user_id FROM users WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, enrollment);
 
+            ResultSet rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                throw new ValidationException("Enrollment number already exists.");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void registrationUser(User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
+
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_id,name,email,password,role) VALUES(?,?,?,?,?)");
+        preparedStatement.setString(1, user.getUserId());
+        preparedStatement.setString(2, user.getName());
+        preparedStatement.setString(3, user.getEmail());
+        preparedStatement.setString(4, user.getPassword());
+        preparedStatement.setString(5, user.getRole().toUpperCase());
+
+        int userInsert = preparedStatement.executeUpdate();
+        if (userInsert > 0) {
+            return;
+        }
+        throw new DatabaseExceptionHandler("User registration failed. Please try again.");
+    }
+
+    public void registrationStudent(Student student) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+            Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into students values(?,?,?,?)");
             preparedStatement.setString(1, student.getUserId());
             preparedStatement.setString(2, student.getDepartment());
@@ -82,15 +111,9 @@ public class UserDAO {
 
             int studentInsert = preparedStatement.executeUpdate();
             if (studentInsert > 0) {
-                System.out.println("registration complete");
-                return true;
-            } else {
-                System.out.println("registration fail..");
+                return;
             }
-        } catch (Exception e) {
-        }
-
-        return false;
+            throw new DatabaseExceptionHandler("Student registration failed. Please try again.");
     }
 
     public boolean checkLoginDetails(String emailInput, String passwordInput) {
@@ -103,7 +126,6 @@ public class UserDAO {
             while (rs.next()) {
                 String storedPassword = rs.getString("password");
                 if (Objects.equals(passwordInput, storedPassword)) {
-                    System.out.println("Login verified");
                     return true;
                 }
             }
@@ -135,10 +157,9 @@ public class UserDAO {
         return false;
     }
 
-    public boolean registrationClubMember(ClubMember clubMember) {
-        try {
-            Connection connection = DatabaseConnection.getConnection();
+    public void registrationClubMember(ClubMember clubMember) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
 
+            Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into club_members values(?,?,?)");
             preparedStatement.setString(1, clubMember.getUserId());
             preparedStatement.setInt(2, clubMember.getClubId());
@@ -146,15 +167,9 @@ public class UserDAO {
 
             int clubMemberInsert = preparedStatement.executeUpdate();
             if (clubMemberInsert > 0) {
-                return true;
-            } else {
-                return false;
+                return;
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+            throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
     }
 
     public boolean registrationClub(Club club) {

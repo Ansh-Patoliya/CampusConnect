@@ -135,3 +135,145 @@ $$
 
 --discount
 --trigger to send data into history table
+
+
+CREATE OR REPLACE FUNCTION update_event_reg_count()
+RETURNS trigger
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE events
+    SET registered_count = registered_count + 1
+    WHERE event_id = NEW.event_id;
+
+    RETURN NEW;
+END;
+$$;
+
+
+CREATE TRIGGER trg_after_insert_event_reg
+AFTER INSERT ON event_registration
+FOR EACH ROW
+EXECUTE FUNCTION update_event_reg_count();
+
+CREATE OR REPLACE FUNCTION checkcount(event_id INT)
+RETURNS BOOLEAN
+ LANGUAGE plpgsql
+ AS $$
+DECLARE
+    reg_count INT;
+    max_participant INT;
+    c CURSOR FOR
+        SELECT registered_count, max_participants
+        FROM events
+        WHERE event_id = event_id;
+BEGIN
+    OPEN c;
+    LOOP
+        FETCH c INTO reg_count, max_participant;
+        EXIT WHEN NOT FOUND;
+        IF registered_count >= max_participants THEN
+            CLOSE c;
+            RETURN FALSE;
+        ELSE
+            CLOSE c;
+            RETURN TRUE;
+        END IF;
+    END LOOP;
+    CLOSE c;
+    RETURN FALSE;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION checkAlreadyRegistered(u_id varchar, e_id INT)
+RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+user varchar;
+BEGIN
+    SELECT user_id into user FROM event_registration
+    WHERE event_id = e_id AND user_id = u_id;
+
+    IF FOUND THEN
+        RETURN FALSE;
+    ELSE
+        RETURN TRUE;
+    END IF;
+END;
+$$ ;
+
+CREATE OR REPLACE PROCEDURE deleteClub(id in INT)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM clubs WHERE club_id = id;
+END;
+$$;
+
+
+CREATE OR REPLACE FUNCTION delete_club_members()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    DELETE FROM club_members
+    WHERE club_id = OLD.club_id;
+    DELETE FROM users
+    WHERE user_id = OLD.founder_id;
+    RETURN OLD;
+END;
+$$;
+
+CREATE TRIGGER trg_delete_club_members
+AFTER DELETE ON clubs
+FOR EACH ROW
+EXECUTE FUNCTION delete_club_members();
+
+CREATE OR REPLACE FUNCTION update_member_count()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE clubs
+    SET member_count = member_count + 1
+    WHERE club_id = NEW.club_id;
+    RETURN NEW;
+END;
+$$;
+
+CREATE TRIGGER trg_after_member_join
+AFTER INSERT ON club_members
+FOR EACH ROW
+EXECUTE FUNCTION update_member_count();
+
+CREATE OR REPLACE FUNCTION checkclubcount(id INT)
+RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    current_count INT;
+    max_limit INT;
+    c CURSOR FOR
+        SELECT member_count, max_member
+        FROM clubs
+        WHERE club_id = id;
+BEGIN
+    OPEN c;
+
+    FETCH c INTO current_count, max_limit;
+
+    IF NOT FOUND THEN
+        CLOSE c;
+        RETURN FALSE;  -- No such club
+    END IF;
+
+    CLOSE c;
+
+    IF current_count >= max_limit THEN
+        RETURN FALSE;  -- Club is full
+    ELSE
+        RETURN TRUE;   -- Can join
+    END IF;
+END;
+$$;

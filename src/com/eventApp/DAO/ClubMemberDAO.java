@@ -7,6 +7,9 @@ import com.eventApp.Utils.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClubMemberDAO {
     public static ClubMember getClubMember(User user) {
@@ -36,6 +39,23 @@ public class ClubMemberDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<ClubMember> getClubMemberList(String userId) throws SQLException, ClassNotFoundException {
+        List<ClubMember> clubMemberList = new ArrayList<>();
+        Connection connection = DatabaseConnection.getConnection();
+        String query = "select u.name,u.email,cm.position,u.user_id from users u \n" +
+                "inner join club_members cm on cm.member_id = u.user_id\n" +
+                "inner join clubs c on c.club_id=cm.club_id WHERE c.founder_id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            clubMemberList.add(new ClubMember(userId, resultSet.getString("name"),
+                    resultSet.getString("email"), null, null,
+                    resultSet.getString("position"), 0));
+        }
+        return clubMemberList;
     }
 
 }
