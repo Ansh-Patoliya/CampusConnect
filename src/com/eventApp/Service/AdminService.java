@@ -1,6 +1,7 @@
 package com.eventApp.Service;
 
 
+import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.DAO.StudentDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.Model.*;
@@ -17,6 +18,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class AdminService {
 
@@ -48,5 +50,9 @@ public class AdminService {
 
     public Admin getAdmin(User user) {
         return AdminDAO.getAdmin(user);
+    }
+
+    public List<ClubMember> getClubMemberList() throws SQLException, ClassNotFoundException {
+        return new ClubMemberDAO().getClubMemberList();
     }
 }
