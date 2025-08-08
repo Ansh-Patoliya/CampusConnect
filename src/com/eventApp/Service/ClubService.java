@@ -5,7 +5,12 @@ import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.Model.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,5 +42,23 @@ public class ClubService {
         List<Student> participants = eventRegistrationDAO.getParticipantList(user.getUserId());
         participants.sort(Comparator.comparing(Student::getName));
         return participants;
+    }
+
+
+    public void exportClubsToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write(String.format("%-10s | %-32s | %-32s | %-32s", "User ID", "Name", "Email", "Position"));
+        writer.newLine();
+        for (ClubMember clubMember : clubMemberList) {
+            String formattedLine = String.format("%-10s | %-32s | %-32s | %-32s",
+                    clubMember.getUserId(),
+                    clubMember.getName(),
+                    clubMember.getEmail(),
+                    clubMember.getPosition());
+            writer.write(formattedLine);
+            writer.newLine();
+        }
+        writer.flush();
+        writer.close();
     }
 }
