@@ -7,6 +7,9 @@ import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Collections;
@@ -34,5 +37,22 @@ public class ClubService {
         List<ClubMember> clubMembers = clubMemberDAO.getClubMemberList(user.getUserId());
         clubMembers.sort(Comparator.comparing(ClubMember::getName));
         return clubMembers;
+    }
+
+    public void exportClubsToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write(String.format("%-10s | %-32s | %-32s | %-32s", "User ID", "Name", "Email", "Position"));
+        writer.newLine();
+        for (ClubMember clubMember : clubMemberList) {
+            String formattedLine = String.format("%-10s | %-32s | %-32s | %-32s",
+                    clubMember.getUserId(),
+                    clubMember.getName(),
+                    clubMember.getEmail(),
+                    clubMember.getPosition());
+            writer.write(formattedLine);
+            writer.newLine();
+        }
+        writer.flush();
+        writer.close();
     }
 }
