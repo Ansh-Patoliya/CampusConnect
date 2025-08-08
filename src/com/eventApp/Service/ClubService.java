@@ -44,6 +44,7 @@ public class ClubService {
         return participants;
     }
 
+
     public void exportClubsToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
         writer.write(String.format("%-10s | %-32s | %-32s | %-32s", "User ID", "Name", "Email", "Position"));
@@ -59,5 +60,5 @@ public class ClubService {
         }
         writer.flush();
         writer.close();
-    }
+        }
 }

@@ -1,16 +1,17 @@
 package com.eventApp.Service;
 
 
+import com.eventApp.DAO.ClubDAO;
+
+
 import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.DAO.StudentDAO;
+
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.Model.*;
-import com.eventApp.Utils.DatabaseConnection;
 
 import com.eventApp.DAO.AdminDAO;
-import com.eventApp.DataStructures.MyEventLL;
-
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,19 +21,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+
 public class AdminService {
 
     UserDAO userDAO = new UserDAO();
+    ClubDAO clubDAO = new ClubDAO();
 
-    public void exportClubData(String clubDetailsFile, Club club) {
-        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile, true));
-             Connection connection = DatabaseConnection.getConnection()) {
-//            callable procedure to fetchClubPresident here
-//            String fetchClubPresident="{call fetchClubPresident(?)}";
-//            CallableStatement callableStatement = connection.prepareCall(fetchClubPresident);
-//            callableStatement.setString(1,club.getClubId());
-//            String presidentName = callableStatement.execute();
-//            clubFile.write(presidentName);
+    public void exportClubData(Club club) {
+        String clubDetailsFile = "D:\\" + club.getClubName() + "Data.txt";
+        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubDetailsFile))) {
             String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();
@@ -41,12 +38,30 @@ public class AdminService {
             clubFile.write(formattedLine);
             clubFile.newLine();
             clubFile.flush();
-        } catch (IOException | SQLException | ClassNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    private final AdminDAO adminDAO = new AdminDAO();
+    public void getAllClubData(){
+        MyClubQueue allClubs = clubDAO.getAllClubList();
+        String clubFilename = "D:\\ClubList.txt";
+        try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubFilename))) {
+            String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
+            clubFile.write(formattedLine);
+            clubFile.newLine();
+            while (!allClubs.isEmpty()){
+                Club currentClub = allClubs.dequeue();
+                formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", currentClub.getClubId(),currentClub.getClubName(),
+                        userDAO.getUserNameBy(currentClub.getFounderId()), currentClub.getDescriptions());
+                clubFile.write(formattedLine);
+                clubFile.newLine();
+                clubFile.flush();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public Admin getAdmin(User user) {
         return AdminDAO.getAdmin(user);
