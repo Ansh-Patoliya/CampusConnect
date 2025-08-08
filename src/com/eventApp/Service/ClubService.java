@@ -2,10 +2,8 @@ package com.eventApp.Service;
 
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.ClubMemberDAO;
-import com.eventApp.Model.Club;
-import com.eventApp.Model.ClubMember;
-import com.eventApp.Model.Event;
-import com.eventApp.Model.User;
+import com.eventApp.DAO.EventRegistrationDAO;
+import com.eventApp.Model.*;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -19,6 +17,7 @@ import java.util.List;
 public class ClubService {
     public final ClubDAO clubDAO = new ClubDAO();
     public final ClubMemberDAO clubMemberDAO = new ClubMemberDAO();
+    public final EventRegistrationDAO eventRegistrationDAO = new EventRegistrationDAO();
 
     public boolean addEvent(Event event) {
         return clubDAO.createEvent(event);
@@ -37,6 +36,12 @@ public class ClubService {
         List<ClubMember> clubMembers = clubMemberDAO.getClubMemberList(user.getUserId());
         clubMembers.sort(Comparator.comparing(ClubMember::getName));
         return clubMembers;
+    }
+
+    public List<Student> getParticipant(User user){
+        List<Student> participants = eventRegistrationDAO.getParticipantList(user.getUserId());
+        participants.sort(Comparator.comparing(Student::getName));
+        return participants;
     }
 
     public void exportClubsToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException {
