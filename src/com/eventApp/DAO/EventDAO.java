@@ -53,11 +53,12 @@ public class EventDAO {
         return eventList;
     }
 
-    public List<String> getEventNames(){
+    public List<String> getEventNames(String userId) {
         List<String> eventNameList = new ArrayList<>();
         try(Connection connection = DatabaseConnection.getConnection()){
-            String query = "select event_name from events where approval_status = 'Approved'";
+            String query = "SELECT e.event_name from events e INNER join club_members cm on cm.club_id=e.club_id where cm.member_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 eventNameList.add(resultSet.getString("event_name"));

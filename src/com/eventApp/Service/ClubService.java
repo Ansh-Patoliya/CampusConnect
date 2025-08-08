@@ -39,7 +39,7 @@ public class ClubService {
         return clubMembers;
     }
 
-    public List<Student> getParticipant(int eventId) {
+    public List<Student> getParticipant(int eventId) throws SQLException, ClassNotFoundException {
         List<Student> participants = eventRegistrationDAO.getParticipantList(eventId);
         participants.sort(Comparator.comparing(Student::getName));
         return participants;
@@ -63,8 +63,8 @@ public class ClubService {
         writer.close();
     }
 
-    public List<String> getAllEventNames() {
-        List<String> eventNameList = eventDAO.getEventNames();
+    public List<String> getAllEventNames(String userId) {
+        List<String> eventNameList = eventDAO.getEventNames(userId);
         Collections.sort(eventNameList);
         return eventNameList;
     }
