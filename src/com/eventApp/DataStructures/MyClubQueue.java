@@ -2,6 +2,8 @@ package com.eventApp.DataStructures;
 
 import com.eventApp.Model.Club;
 
+import java.util.List;
+
 public class MyClubQueue {
     int rear, front, size;
     Club clubQueue[];
@@ -47,5 +49,13 @@ public class MyClubQueue {
 
     public boolean isEmpty() {
         return front == -1;
+    }
+
+    public List<Club> getAllClubs() {
+        List<Club> clubs = new java.util.ArrayList<>();
+        while (!isEmpty()) {
+            clubs.add(dequeue());
+        }
+        return clubs;
     }
 }

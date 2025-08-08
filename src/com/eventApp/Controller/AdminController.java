@@ -41,4 +41,8 @@ public class AdminController {
     public void handleViewClubMembers(ActionEvent event) {
         FXMLScreenLoader.openClubMemberList(event);
     }
+
+    public void handleExportClub(ActionEvent actionEvent) {
+        FXMLScreenLoader.openExportClub(actionEvent);
+    }
 }

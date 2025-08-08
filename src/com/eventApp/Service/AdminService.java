@@ -37,15 +37,15 @@ public class AdminService {
     UserDAO userDAO = new UserDAO();
     ClubDAO clubDAO = new ClubDAO();
 
-    public void getAllClubData(String clubFilename){
+    public void exportClubData(String clubFilename){
         MyClubQueue allClubs = clubDAO.getAllClubList();
         try (BufferedWriter clubFile = new BufferedWriter(new FileWriter(clubFilename))) {
-            String formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", "Club ID", "Club Name", "President Name", "Description");
+            String formattedLine = String.format("%s , %s , %s , %s", "Club ID", "Club Name", "President Name", "Description");
             clubFile.write(formattedLine);
             clubFile.newLine();
             while (!allClubs.isEmpty()){
                 Club currentClub = allClubs.dequeue();
-                formattedLine = String.format("%-10s | %-32s | %-32s | %-256s", currentClub.getClubId(),currentClub.getClubName(),
+                formattedLine = String.format("%s , %s , %s , %s", currentClub.getClubId(),currentClub.getClubName(),
                         userDAO.getUserNameBy(currentClub.getFounderId()), currentClub.getDescriptions());
                 clubFile.write(formattedLine);
                 clubFile.newLine();
@@ -54,6 +54,10 @@ public class AdminService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public MyClubQueue getAllClubs(){
+        return clubDAO.getAllClubList();
     }
 
     public Admin getAdmin(User user) {
