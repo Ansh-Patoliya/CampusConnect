@@ -76,7 +76,7 @@ public class ViewMemberController {
 
             File file = fileChooser.showSaveDialog(stage);
             if (file != null) {
-                clubService.exportClubsToCSV(clubMemberList, file.getAbsolutePath());
+                clubService.exportClubMembersToCSV(clubMemberList, file.getAbsolutePath());
                 FXMLScreenLoader.showMessage("Club members exported successfully to " + file.getAbsolutePath(), "Success", "info");
             }
         } catch (ValidationException | IOException e) {
