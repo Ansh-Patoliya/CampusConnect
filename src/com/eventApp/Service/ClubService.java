@@ -70,7 +70,7 @@ public class ClubService {
         return eventNameList;
     }
 
-    CircularLL myEventLL;
+    CircularLL circularLL;
 
     public ClubService(User user) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
         loadMyEventList(user);
@@ -78,15 +78,15 @@ public class ClubService {
 
     public void loadMyEventList(User user) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         int clubId = ClubMemberDAO.getClubMember(user).getClubId();
-        this.myEventLL = eventDAO.getEventListByClubId(clubId);
+        this.circularLL = eventDAO.getEventListByClubId(clubId);
     }
 
     public Event viewCurrentEvent() {
-        return myEventLL.viewCurrentEvent();
+        return circularLL.viewCurrentEvent();
     }
 
     public Event viewNextEvent() {
-        return myEventLL.viewNextEvent();
+        return circularLL.viewNextEvent();
     }
 
     public void cancelEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {

@@ -10,7 +10,6 @@ import javafx.scene.control.Button;
 
 public class StudentDashboardController {
 
-    StudentDAO studentDAO;
     public Button eventHistoryButton;
 
     @FXML
@@ -30,4 +29,7 @@ public class StudentDashboardController {
         FXMLScreenLoader.openStudentViewEvent(event);
     }
 
+    public void handleMyParticipation(ActionEvent actionEvent) {
+        FXMLScreenLoader.openMyParticipation(actionEvent);
+    }
 }

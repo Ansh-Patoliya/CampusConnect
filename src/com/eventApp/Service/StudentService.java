@@ -63,13 +63,13 @@ public class StudentService {
         return myEventLL.viewPreviousEvent();
     }
 
-    public  List<Event> myEventListByDate(int userId){
+    public  List<Event> myEventListByDate(String userId){
         List<Event> myEvents = eventDAO.getMyEventList(userId);
         myEvents.sort(Comparator.comparing(Event::getEventDate));
         return myEvents;
     }
 
-    public  List<Event> myEventListByPrice(int userId){
+    public  List<Event> myEventListByPrice(String userId){
         List<Event> myEvents = eventDAO.getMyEventList(userId);
         myEvents.sort(Comparator.comparing(Event::getTicketPrice));
         return myEvents;

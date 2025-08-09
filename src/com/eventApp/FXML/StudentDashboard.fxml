@@ -40,13 +40,11 @@
                                                 style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;"
                                                 text="Event History" textFill="WHITE"/>
                                         <Button fx:id="myParticipationButton" maxWidth="Infinity"
+                                                onAction="#handleMyParticipation"
                                                 mnemonicParsing="false" prefHeight="50.0"
                                                 style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;"
                                                 text="My Participation" textFill="WHITE"/>
-                                        <Button fx:id="cancelMyEventButton" maxWidth="Infinity" mnemonicParsing="false"
-                                                prefHeight="50.0"
-                                                style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;"
-                                                text="Cancel My Events" textFill="WHITE"/>
+
                                         <Button fx:id="viewMyProfileButton" maxWidth="Infinity"
                                                 onAction="#handleViewProfile" prefHeight="50.0"
                                                 style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 10; -fx-cursor: hand; -fx-font-size: 15;"
