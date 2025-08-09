@@ -88,6 +88,21 @@ public class EventDAO {
         return -1; // Return -1 if no event found
     }
 
+    public List<Event> getMyEventList(int userId){
+        List<Event> myEvents = new ArrayList<>();
+        try (Connection connection = DatabaseConnection.getConnection()){
+            String query = "select * from events e inner join event_registration er on e.event_id = er.event_id where er.user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                myEvents.add(new Event(0, resultSet.getString("event_name"),resultSet.getInt("club_id"),null,
+                        resultSet.getDouble("ticket_price"),resultSet.getDate("event_date").toLocalDate(),null,null,0));
+            }
+        } catch (Exception e){
+            throw new RuntimeException(e);
+        }
+        return myEvents;
     public CircularLL getEventListByClubId(int clubId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         CircularLL ll= new CircularLL();
         Connection connection = DatabaseConnection.getConnection();
@@ -132,6 +147,6 @@ public class EventDAO {
             preparedStatement.setInt(2, eventId);
             int i=preparedStatement.executeUpdate();
             if(i<0)
-                throw new DatabaseExceptionHandler("Failed to cancel the event. Please try again later.");
+                throw new DatabaseExceptionHandler("Failed to cancel the event. Please try again later.";
     }
 }
