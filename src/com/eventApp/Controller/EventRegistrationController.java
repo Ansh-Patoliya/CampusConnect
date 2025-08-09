@@ -21,6 +21,8 @@ import javafx.scene.layout.AnchorPane;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 public class EventRegistrationController {
     public RadioButton fixedRadio;
@@ -32,6 +34,7 @@ public class EventRegistrationController {
     public DatePicker datePicker;
     public TextField venueField;
     public TextField ticketPriceField;
+    public ComboBox categoryField;
     @FXML
     private ComboBox<String> startTimeCombo;
 
@@ -41,6 +44,36 @@ public class EventRegistrationController {
 
     @FXML
     public void initialize() {
+        List<String> categories = Arrays.asList(
+                // Technical
+                "Coding",
+                "Robotics",
+                "AI/ML",
+                "Cybersecurity",
+                "Web & App Development",
+                "Electronics",
+                "Open Source",
+
+                // Cultural
+                "Dance",
+                "Music",
+                "Drama/Theatre",
+                "Literature",
+                "Fine Arts",
+                "Photography",
+                "Film & Media",
+
+                // Academic / Leadership
+                "Entrepreneurship",
+                "Finance & Business",
+                "Debate",
+                "Public Speaking",
+                "Management",
+                "Innovation",
+                "Science & Research"
+        );
+
+        categoryField.getItems().addAll(categories);
         ObservableList<String> timeOptions = FXCollections.observableArrayList();
 
         LocalTime time = LocalTime.of(8, 0);

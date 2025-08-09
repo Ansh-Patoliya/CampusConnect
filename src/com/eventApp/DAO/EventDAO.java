@@ -1,7 +1,6 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.CircularLL;
-import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
@@ -47,7 +46,7 @@ public class EventDAO {
                 String completionStatus = resultSet.getString("completion_status");
 
                 eventList.add(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus, category));
+                        startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus,category));
 
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -88,23 +87,25 @@ public class EventDAO {
         return -1; // Return -1 if no event found
     }
 
-    public List<Event> getMyEventList(int userId){
+    public List<Event> getMyEventList(String userId) {
         List<Event> myEvents = new ArrayList<>();
-        try (Connection connection = DatabaseConnection.getConnection()){
+        try (Connection connection = DatabaseConnection.getConnection()) {
             String query = "select * from events e inner join event_registration er on e.event_id = er.event_id where er.user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,userId);
+            preparedStatement.setString(1, userId);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
-                myEvents.add(new Event(0, resultSet.getString("event_name"),resultSet.getInt("club_id"),null,
-                        resultSet.getDouble("ticket_price"),resultSet.getDate("event_date").toLocalDate(),null,null,0));
+            while (resultSet.next()) {
+                myEvents.add(new Event(0, resultSet.getString("event_name"), resultSet.getInt("club_id"), null,
+                        resultSet.getDouble("ticket_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return myEvents;
+    }
+
     public CircularLL getEventListByClubId(int clubId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        CircularLL ll= new CircularLL();
+        CircularLL ll = new CircularLL();
         Connection connection = DatabaseConnection.getConnection();
         String query = "SELECT * FROM events WHERE club_id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -141,12 +142,12 @@ public class EventDAO {
 
     public void cancelEvent(int eventId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         Connection connection = DatabaseConnection.getConnection();
-            String query = "UPDATE events SET completion_status = ? WHERE event_id = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, "Cancel");
-            preparedStatement.setInt(2, eventId);
-            int i=preparedStatement.executeUpdate();
-            if(i<0)
-                throw new DatabaseExceptionHandler("Failed to cancel the event. Please try again later.";
+        String query = "UPDATE events SET completion_status = ? WHERE event_id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, "Cancel");
+        preparedStatement.setInt(2, eventId);
+        int i = preparedStatement.executeUpdate();
+        if (i < 0)
+            throw new DatabaseExceptionHandler("Failed to cancel the event. Please try again later.");
     }
 }
