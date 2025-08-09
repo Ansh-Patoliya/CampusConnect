@@ -275,4 +275,17 @@ public class FXMLScreenLoader {
             e.printStackTrace();
         }
     }
+
+    public static void openExportClub(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewClubs.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("Export Club");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

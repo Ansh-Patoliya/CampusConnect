@@ -53,7 +53,7 @@ CREATE TABLE events (
     max_participants INT DEFAULT 0,
     discount_available BOOLEAN DEFAULT FALSE,
     approval_status VARCHAR(20) DEFAULT 'Pending' CHECK (approval_status IN ('Pending', 'Approved', 'Rejected')),
-    completion_status VARCHAR(20) DEFAULT 'Not Completed' CHECK (completion_status IN ('Completed', 'Not Completed')),
+    completion_status VARCHAR(20) DEFAULT 'Not Completed' CHECK (completion_status IN ('Completed', 'Not Completed', 'Cancel')),
     created_by VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
