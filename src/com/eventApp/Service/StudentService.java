@@ -9,7 +9,6 @@ import com.eventApp.Model.User;
 import com.eventApp.Utils.CurrentUser;
 
 import java.util.Comparator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class StudentService {
@@ -62,5 +61,17 @@ public class StudentService {
             return null; // or throw an exception
         }
         return myEventLL.viewPreviousEvent();
+    }
+
+    public  List<Event> myEventListByDate(int userId){
+        List<Event> myEvents = eventDAO.getMyEventList(userId);
+        myEvents.sort(Comparator.comparing(Event::getEventDate));
+        return myEvents;
+    }
+
+    public  List<Event> myEventListByPrice(int userId){
+        List<Event> myEvents = eventDAO.getMyEventList(userId);
+        myEvents.sort(Comparator.comparing(Event::getTicketPrice));
+        return myEvents;
     }
 }
