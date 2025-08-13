@@ -1,6 +1,7 @@
 package com.eventApp.Loader;
 
 import com.eventApp.Controller.ClubController;
+import com.eventApp.Controller.EventUpdateController;
 import com.eventApp.Controller.StudentController;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
@@ -308,6 +309,23 @@ public class FXMLScreenLoader {
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setTitle("View/Create Events");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void openUpdateEvent(ActionEvent actionEvent ,Event event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventUpdateForm.fxml"));
+            Parent root = loader.load();
+
+            EventUpdateController eventUpdateController = loader.getController();
+            eventUpdateController.setEvent(event);
+
+            Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("Update Event");
             stage.setScene(new Scene(root, 1400, 800));
             stage.show();
         } catch (IOException e) {

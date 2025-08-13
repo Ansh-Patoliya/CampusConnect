@@ -150,4 +150,31 @@ public class EventDAO {
         if (i < 0)
             throw new DatabaseExceptionHandler("Failed to cancel the event. Please try again later.");
     }
+
+    public void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        Connection connection=DatabaseConnection.getConnection();
+        
+        String query = "UPDATE events SET event_name = ?, description = ?, venue = ?, event_date = ?, start_time = ? , end_time = ?, ticket_price = ?, discount_available = ?, category = ? , max_participants = ? , club_id = ? , created_by = ? where event_id = ? ";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setString(1, currentEvent.getEventName());
+        preparedStatement.setString(2, currentEvent.getDescription());
+        preparedStatement.setString(3, currentEvent.getVenue());
+        preparedStatement.setDate(4, java.sql.Date.valueOf(currentEvent.getEventDate()));
+        preparedStatement.setTime(5, java.sql.Time.valueOf(currentEvent.getStartTime()));
+        preparedStatement.setTime(6, java.sql.Time.valueOf(currentEvent.getEndTime()));
+        preparedStatement.setDouble(7, currentEvent.getTicketPrice());
+        preparedStatement.setBoolean(8, currentEvent.isDiscountApplicable());
+        preparedStatement.setString(9, currentEvent.getCategory());
+        preparedStatement.setInt(10, currentEvent.getMaxParticipants());
+        preparedStatement.setInt(11, currentEvent.getClubId());
+        preparedStatement.setString(12, currentEvent.getUserId());
+        preparedStatement.setInt(13, currentEvent.getEventId());
+        
+        int r=preparedStatement.executeUpdate();
+        if (r<0){
+            throw new DatabaseExceptionHandler("Failed to update the event. Please try again later.");
+        }
+        
+    }
 }

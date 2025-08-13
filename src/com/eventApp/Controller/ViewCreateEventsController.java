@@ -37,6 +37,7 @@ public class ViewCreateEventsController {
     public AnchorPane back;
     public Label approvalStatusLabel;
     public Label completionStatusLabel;
+    public AnchorPane updateButtonPane;
 
     User currentUser = CurrentUser.getCurrentUser();
     ClubService clubService;
@@ -51,6 +52,7 @@ public class ViewCreateEventsController {
 
             Event currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
+                updateButtonPane.setVisible(!currentEvent.getApprovalStatus().equalsIgnoreCase("Approved"));
                 setTextFront(currentEvent);
                 setTextBack(currentEvent);
                 setVisibleFront(true);
@@ -154,5 +156,6 @@ public class ViewCreateEventsController {
     }
 
     public void onUpdate(ActionEvent actionEvent) {
+        FXMLScreenLoader.openUpdateEvent(actionEvent, clubService.viewCurrentEvent());
     }
 }
