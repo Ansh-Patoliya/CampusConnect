@@ -37,6 +37,7 @@ public class ViewEventsController {
 
     @FXML
     public void initialize() {
+        eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         loadEventList();
         setupColumns();
 
