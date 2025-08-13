@@ -2,7 +2,6 @@ package com.eventApp.DAO;
 
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
-import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
@@ -18,25 +17,25 @@ import java.util.List;
 import java.util.Objects;
 
 public class UserDAO {
-    public static int getClubId(String clubName) {
+
+    public static int getClubId(String clubName) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         int clubId = 0;
-        try {
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select club_id from clubs where club_name=?");
             preparedStatement.setString(1, clubName);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
+        if (resultSet.next()) {
             clubId = resultSet.getInt(1);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            throw new DatabaseExceptionHandler("Club not found.");
         }
         return clubId;
     }
 
-    public static int getClubIdByUserId(String userId) {
+    public static int getClubIdByUserId(String userId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         int clubId = 0;
-        try {
+
             Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where member_id=?");
             preparedStatement.setString(1, userId);
@@ -44,14 +43,15 @@ public class UserDAO {
             if (resultSet.next()) {
                 clubId = resultSet.getInt(1);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            else{
+                throw new DatabaseExceptionHandler("Club not found.");
+            }
+
         return clubId;
     }
 
-    public static void checkDuplicateEmail(String newEmail) throws ValidationException {
-        try {
+    public static void checkDuplicateEmail(String newEmail) throws ValidationException, SQLException, ClassNotFoundException {
+
             Connection connection = DatabaseConnection.getConnection();
             String query = "SELECT email FROM Users WHERE email = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -62,9 +62,6 @@ public class UserDAO {
             if (rs.next()) {
                 throw new ValidationException("Email already exists.");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void checkDuplicateEnrollment(String enrollment) throws ValidationException {

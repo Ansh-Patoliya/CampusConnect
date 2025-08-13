@@ -223,8 +223,8 @@ public class RegistrationController {
                 userService.
                         registerClub(club, clubMember, user);
 
-                    FXMLScreenLoader.openLoginPage(event);
-                    FXMLScreenLoader.showMessage("✅ Club registration successful! You can now log in.", "registration", "info");
+                FXMLScreenLoader.openLoginPage(event);
+                FXMLScreenLoader.showMessage("✅ Club registration successful! You can now log in.", "registration", "info");
 
             } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
                 FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
@@ -265,10 +265,11 @@ public class RegistrationController {
         // Handle joining existing club logic here
         String selectClub = (String) selectClubField.getValue();
         if (!(selectClub == null || selectClub.isEmpty())) {
-            int clubId = UserDAO.getClubId(selectClub);
-            User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
-            ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "Member", clubId);
             try {
+                int clubId = UserDAO.getClubId(selectClub);
+                User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
+                ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "Member", clubId);
+
                 userService.registerClubMember(clubMember, user);
                 FXMLScreenLoader.openLoginPage(event);
                 FXMLScreenLoader.showMessage("✅ Successfully joined the club! You can now log in.", "registration", "info");
@@ -296,6 +297,8 @@ public class RegistrationController {
             FXMLScreenLoader.showMessage(e.getMessage(), "email", "error");
             emailField.clear();
             return false;
+        } catch (SQLException | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "email", "error");
         }
 
         try {
