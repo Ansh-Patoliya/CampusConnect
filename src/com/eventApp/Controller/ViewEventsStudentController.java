@@ -117,7 +117,7 @@ public class ViewEventsStudentController {
         if (nextEvent != null) {
             loadNextOrPreviousEvent(nextEvent);
         } else {
-            FXMLScreenLoader.showMessage("No more events to approve.", "Event Approval", "info");
+            FXMLScreenLoader.showMessage("No more events to view.", "Event Approval", "info");
             onBack(event);
         }
     }
