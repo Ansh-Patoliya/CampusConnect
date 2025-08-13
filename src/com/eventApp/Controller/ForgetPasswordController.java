@@ -1,5 +1,7 @@
 package com.eventApp.Controller;
 
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Service.UserService;
 import com.eventApp.Utils.ValidationUtils;
@@ -7,8 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+
 public class ForgetPasswordController {
 
+    private final UserService userService = new UserService();
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
     public TextField emailField;
@@ -17,18 +22,25 @@ public class ForgetPasswordController {
         FXMLScreenLoader.openLoginPage(event);
     }
 
-    private final UserService userService=new UserService();
     public void handleForgotPassword(ActionEvent event) {
-        String email=emailField.getText();
-        String password=passwordField.getText();
-        String confirmPassword=confirmPasswordField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
 
-        if(userService.resetPassword(email,password,confirmPassword)){
+        try {
+            ValidationUtils.checkPassword(password);
+            userService.resetPassword(email, password, confirmPassword);
+            FXMLScreenLoader.showMessage("Password reset successfully!", "Success", "info");
             FXMLScreenLoader.openLoginPage(event);
-        } else {
-            // Handle the case where the password reset failed
-            // You can show an error message or take appropriate action
-            FXMLScreenLoader.showMessage("Password reset failed. Please try again.","Error","error");
+        } catch (ValidationException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Error", "error");
+            passwordField.clear();
+            confirmPasswordField.clear();
+        } catch (SQLException | DatabaseExceptionHandler | ClassNotFoundException e) {
+            emailField.clear();
+            passwordField.clear();
+            confirmPasswordField.clear();
+            FXMLScreenLoader.showMessage(e.getMessage(), "Error", "error");
         }
     }
 }

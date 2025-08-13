@@ -1,6 +1,7 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
@@ -128,6 +129,8 @@ public class EventRegistrationController {
             FXMLScreenLoader.showMessage("Please enter valid numeric values for capacity and ticket price.", "Input Error", "error");
         } catch (ValidationException | SQLException | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Validation Error", "error");
+        } catch (DatabaseExceptionHandler e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Database Error", "error");
         }
     }
 

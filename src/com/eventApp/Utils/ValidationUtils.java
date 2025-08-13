@@ -4,6 +4,7 @@ import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.ValidationException;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -31,7 +32,7 @@ public class ValidationUtils {
         }
     }
 
-    public static void checkEmail(String email) throws ValidationException {
+    public static void checkEmail(String email) throws ValidationException, SQLException, ClassNotFoundException {
         UserDAO.checkDuplicateEmail(email);
 
         if (email == null || email.isEmpty()) {
