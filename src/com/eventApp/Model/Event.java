@@ -6,13 +6,13 @@ public class Event {
     private String eventName, venue, description, approvalStatus,completionStatus, userId,category;
     private int maxParticipants,eventId,clubId;
     private double ticketPrice;
+    private int registeredCount = 0;
     private boolean discountApplicable;
-    private int registeredCount;
     LocalDate eventDate;
     LocalTime startTime, endTime;
     static int eventCount = 1;
 
-    public Event(String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable) {
+    public Event(String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable, String category) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -26,7 +26,7 @@ public class Event {
         this.completionStatus = "not_completed";
         this.ticketPrice= ticketPrice;
         this.discountApplicable= discountApplicable;
-        //get club head's id from clubId and assign
+        this.category=category;
     }
 
     public Event(int eventId,String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus,String category) {

@@ -14,8 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
 
 public class ViewCreateEventsController {
 
@@ -37,6 +35,8 @@ public class ViewCreateEventsController {
     public Label eventName1;
     public AnchorPane front;
     public AnchorPane back;
+    public Label approvalStatusLabel;
+    public Label completionStatusLabel;
 
     User currentUser = CurrentUser.getCurrentUser();
     ClubService clubService;
@@ -76,6 +76,8 @@ public class ViewCreateEventsController {
         maxParticipate.setVisible(b);
         discountAvailabel.setVisible(b);
         categoryField.setVisible(b);
+        approvalStatusLabel.setVisible(b);
+        completionStatusLabel.setVisible(b);
     }
 
     private void setVisibleFront(boolean b) {
@@ -98,6 +100,8 @@ public class ViewCreateEventsController {
         maxParticipate.setText(String.valueOf(currentEvent.getMaxParticipants()));
         discountAvailabel.setText(String.valueOf(currentEvent.isDiscountApplicable()));
         categoryField.setText(currentEvent.getCategory());
+        approvalStatusLabel.setText(currentEvent.getApprovalStatus());
+        completionStatusLabel.setText(currentEvent.getCompletionStatus());
     }
 
     private void setTextFront(Event currentEvent) {

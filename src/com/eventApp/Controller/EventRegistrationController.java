@@ -18,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EventRegistrationController {
+    private final ClubService clubService = new ClubService();
     public RadioButton fixedRadio;
     public RadioButton variableRadio;
     public AnchorPane discountNote;
@@ -37,10 +39,8 @@ public class EventRegistrationController {
     public ComboBox categoryField;
     @FXML
     private ComboBox<String> startTimeCombo;
-
     @FXML
     private ComboBox<String> endTimeCombo;
-    private final ClubService clubService = new ClubService();
 
     @FXML
     public void initialize() {
@@ -94,8 +94,21 @@ public class EventRegistrationController {
             String eventName = eventNameField.getText();
             String description = descriptionField.getText();
             String venue = venueField.getText();
+            String category = (String) categoryField.getValue();
+            if (category == null || category.isEmpty()) {
+                FXMLScreenLoader.showMessage("Please select a category.", "Category Error", "error");
+                return;
+            }
             int maxParticipants = Integer.parseInt(capacityField.getText());
+            if( maxParticipants <= 0) {
+                FXMLScreenLoader.showMessage("Maximum participants must be greater than zero.", "Capacity Error", "error");
+                return;
+            }
             double ticketPrice = Double.parseDouble(ticketPriceField.getText());
+            if (ticketPrice < 0) {
+                FXMLScreenLoader.showMessage("Ticket price cannot be negative.", "Ticket Price Error", "error");
+                return;
+            }
             LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
             LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
             LocalDate eventDate = datePicker.getValue();
@@ -106,16 +119,15 @@ public class EventRegistrationController {
             boolean discountApplicable = variableRadio.isSelected();
 
             if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {
-                Event event1 = new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate, startTime, endTime, ticketPrice, discountApplicable);
-                if (clubService.addEvent(event1)) {
-                    FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
-                    handleBack(event);
-                } else {
-                    FXMLScreenLoader.showMessage("Failed to create event. Please try again.", "Error", "error");
-                }
+                Event event1 = new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate, startTime, endTime, ticketPrice, discountApplicable, category);
+                clubService.addEvent(event1);
+                FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
+                handleBack(event);
             }
         } catch (NumberFormatException e) {
             FXMLScreenLoader.showMessage("Please enter valid numeric values for capacity and ticket price.", "Input Error", "error");
+        } catch (ValidationException | SQLException | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Validation Error", "error");
         }
     }
 
@@ -125,6 +137,7 @@ public class EventRegistrationController {
         } catch (ValidationException e) {
             eventNameField.clear();
             FXMLScreenLoader.showMessage(e.getMessage(), "Event Name", "error");
+            return false;
         }
 
         try {
@@ -132,6 +145,7 @@ public class EventRegistrationController {
         } catch (ValidationException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Description", "error");
             descriptionField.clear();
+            return false;
         }
 
         try {
@@ -139,6 +153,7 @@ public class EventRegistrationController {
         } catch (ValidationException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Venue", "error");
             venueField.clear();
+            return false;
         }
 
         try {
@@ -147,6 +162,7 @@ public class EventRegistrationController {
             FXMLScreenLoader.showMessage(e.getMessage(), "Event Time", "error");
             startTimeCombo.getSelectionModel().clearSelection();
             endTimeCombo.getSelectionModel().clearSelection();
+            return false;
         }
 
         try {
@@ -154,6 +170,7 @@ public class EventRegistrationController {
         } catch (ValidationException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Event Date", "error");
             datePicker.setValue(LocalDate.now());
+            return false;
         }
         return true;
     }

@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClubDAO {
-    public boolean createEvent(Event event) {
-        try {
-            String sql = "INSERT INTO events (club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void createEvent(Event event) throws SQLException, ClassNotFoundException, ValidationException {
+
+            String sql = "INSERT INTO events (club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants,category) VALUES ( ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             Connection con = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = con.prepareStatement(sql);
@@ -30,18 +30,12 @@ public class ClubDAO {
             preparedStatement.setTime(9, Time.valueOf(event.getEndTime()));
             preparedStatement.setString(10, event.getVenue());
             preparedStatement.setInt(11, event.getMaxParticipants());
+            preparedStatement.setString(12, event.getCategory());
 
             int r = preparedStatement.executeUpdate();
-
-            if (r > 0) {
-                return true;
-            } else {
-                return false;
+            if (r < 0) {
+                throw new ValidationException("Event creation failed. Please try again.");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
     public MyClubQueue getClubList(String clubStatus) {
