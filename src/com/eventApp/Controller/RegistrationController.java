@@ -303,7 +303,7 @@ public class RegistrationController {
 
         try {
             ValidationUtils.checkEnrollment(enrollmentNo);
-        } catch (ValidationException e) {
+        } catch (ValidationException | SQLException | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "enrollment", "error");
             enrollmentField.clear();
             return false;

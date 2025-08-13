@@ -64,8 +64,8 @@ public class UserDAO {
             }
     }
 
-    public static void checkDuplicateEnrollment(String enrollment) throws ValidationException {
-        try {
+    public static void checkDuplicateEnrollment(String enrollment) throws ValidationException, SQLException, ClassNotFoundException {
+
             Connection connection = DatabaseConnection.getConnection();
             String query = "SELECT user_id FROM users WHERE user_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -76,9 +76,7 @@ public class UserDAO {
             if (rs.next()) {
                 throw new ValidationException("Enrollment number already exists.");
             }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void registrationUser(User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {

@@ -132,7 +132,7 @@ public class ValidationUtils {
     }
 
 
-    public static void checkEnrollment(String enrollment) throws ValidationException {
+    public static void checkEnrollment(String enrollment) throws ValidationException, SQLException, ClassNotFoundException {
     /*
         -> Validates that the given input contains only numeric digits (0–9).
         -> This method returns false if the input includes letters, spaces, or special characters.
