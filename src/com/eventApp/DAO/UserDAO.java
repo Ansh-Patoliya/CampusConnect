@@ -134,8 +134,8 @@ public class UserDAO {
         return false;
     }
 
-    public boolean resetPass(String emailInput, String newPassword, String confirmPassword) {
-        try {
+    public void resetPass(String emailInput, String newPassword, String confirmPassword) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+
             Connection connection = DatabaseConnection.getConnection();
 
             String query = "UPDATE users SET password = ? WHERE email = ?";
@@ -144,17 +144,10 @@ public class UserDAO {
             preparedStatement.setString(2, emailInput);
 
             int r = preparedStatement.executeUpdate();
-            if (r > 0) {
+            if (r < 0) {
                 System.out.println("Password updated successfully.");
-                return true;
-            } else {
-                FXMLScreenLoader.showMessage("Password update failed. Please try again.", "Error", "error");
+                throw new DatabaseExceptionHandler("Password update failed. Please try again.");
             }
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return false;
     }
 
     public void registrationClubMember(ClubMember clubMember) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {

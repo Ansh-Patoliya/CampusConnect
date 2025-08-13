@@ -38,8 +38,8 @@ public class UserService {
         return userDAO.checkLoginDetails(emailInput, passwordInput);
     }
 
-    public boolean resetPassword(String emailInput, String newPassword, String confirmPassword) {
-        return userDAO.resetPass(emailInput, newPassword, confirmPassword);
+    public void resetPassword(String emailInput, String newPassword, String confirmPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
+         userDAO.resetPass(emailInput, newPassword, confirmPassword);
     }
 
     public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
