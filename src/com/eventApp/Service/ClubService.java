@@ -6,6 +6,7 @@ import com.eventApp.DAO.EventDAO;
 import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.DataStructures.CircularLL;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.*;
 
 import java.io.BufferedWriter;
@@ -26,8 +27,8 @@ public class ClubService {
         // Default constructor
     }
 
-    public boolean addEvent(Event event) {
-        return clubDAO.createEvent(event);
+    public void addEvent(Event event) throws ValidationException, SQLException, ClassNotFoundException {
+         clubDAO.createEvent(event);
     }
 
     public Club getClubByUser(User user) {
