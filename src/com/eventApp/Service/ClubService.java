@@ -94,4 +94,7 @@ public class ClubService {
         eventDAO.cancelEvent(viewCurrentEvent().getEventId());
     }
 
+    public void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        eventDAO.updateEvent(currentEvent);
+    }
 }
