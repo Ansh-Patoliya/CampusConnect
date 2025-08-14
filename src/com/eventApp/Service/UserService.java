@@ -39,12 +39,14 @@ public class UserService {
     }
 
     public void resetPassword(String emailInput, String newPassword, String confirmPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
-         userDAO.resetPass(emailInput, newPassword, confirmPassword);
+        userDAO.resetPass(emailInput, newPassword, confirmPassword);
     }
 
     public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
         userDAO.registrationUser(user);
         userDAO.registrationClub(club);
+        int clubId=UserDAO.getClubId(club.getClubName());
+        clubMember.setClubId(clubId);
         userDAO.registrationClubMember(clubMember);
     }
 

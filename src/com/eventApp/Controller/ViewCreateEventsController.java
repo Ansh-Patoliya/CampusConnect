@@ -58,7 +58,6 @@ public class ViewCreateEventsController {
 
             Event currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
-                updateButtonPane.setVisible(!currentEvent.getApprovalStatus().equalsIgnoreCase("Approved"));
                 setTextFront(currentEvent);
                 setTextBack(currentEvent);
                 setVisibleFront(true);
@@ -113,6 +112,12 @@ public class ViewCreateEventsController {
     }
 
     private void setTextFront(Event currentEvent) {
+        if(!currentEvent.getApprovalStatus().equalsIgnoreCase("Approved")) {
+            updateButtonPane.setVisible(true);
+        }
+        else {
+            updateButtonPane.setVisible(false);
+        }
         eventName1.setText(currentEvent.getEventName());
         eventDate1.setText(currentEvent.getEventDate().toString());
         ticketPrice1.setText(String.valueOf(currentEvent.getTicketPrice()));

@@ -24,7 +24,6 @@ public class UserDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("select club_id from clubs where club_name=?");
             preparedStatement.setString(1, clubName);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
         if (resultSet.next()) {
             clubId = resultSet.getInt(1);
         } else {
@@ -90,10 +89,9 @@ public class UserDAO {
         preparedStatement.setString(5, user.getRole().toUpperCase());
 
         int userInsert = preparedStatement.executeUpdate();
-        if (userInsert > 0) {
-            return;
+        if (userInsert < 0) {
+            throw new DatabaseExceptionHandler("User registration failed. Please try again.");
         }
-        throw new DatabaseExceptionHandler("User registration failed. Please try again.");
     }
 
     public void registrationStudent(Student student) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
@@ -140,7 +138,6 @@ public class UserDAO {
 
             int r = preparedStatement.executeUpdate();
             if (r < 0) {
-                System.out.println("Password updated successfully.");
                 throw new DatabaseExceptionHandler("Password update failed. Please try again.");
             }
     }
@@ -154,33 +151,27 @@ public class UserDAO {
             preparedStatement.setString(3, clubMember.getPosition());
 
             int clubMemberInsert = preparedStatement.executeUpdate();
-            if (clubMemberInsert > 0) {
-                return;
+            if (clubMemberInsert < 0) {
+                throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
             }
-            throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
     }
 
-    public boolean registrationClub(Club club) {
-        try {
+    public void registrationClub(Club club) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+
             Connection connection = DatabaseConnection.getConnection();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into clubs(club_name,category,description,founder_id,status) values(?,?,?,?,?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("insert into clubs(club_name,category,description,founder_id,status,max_member) values(?,?,?,?,?,?)");
             preparedStatement.setString(1, club.getClubName());
             preparedStatement.setString(2, club.getCategory());
             preparedStatement.setString(3, club.getDescriptions());
             preparedStatement.setString(4, club.getFounderId());
             preparedStatement.setString(5, club.getStatus());
+            preparedStatement.setInt(6, club.getMaxMemberCount());
 
             int insertClub = preparedStatement.executeUpdate();
-            if (insertClub > 0) {
-                return true;
-            } else {
-                return false;
+            if (insertClub < 0) {
+                throw new DatabaseExceptionHandler("Club registration failed. Please try again.");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public List<String> getAllClubsName() {
