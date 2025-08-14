@@ -275,3 +275,52 @@ BEGIN
     END IF;
 END;
 $$;
+
+CREATE or replace PROCEDURE event_complete()
+LANGUAGE plpgsql
+as $$
+DECLARE
+c cursor for
+	select event_id,club_id,event_name,description,event_date,start_time,end_time,venue,ticket_price,registered_count
+	from events
+	where now()>(event_date + end_time);
+v_event_id events.event_id%type;
+v_club_id events.club_id%type;
+v_event_name events.event_name%type;
+v_description events.description%TYPE;
+v_event_date events.event_date%TYPE;
+v_start_time events.start_time%TYPE;
+v_end_time events.end_time%TYPE;
+v_venue events.venue%TYPE;
+v_ticket_price events.ticket_price%TYPE;
+v_total_participants events.registered_count%TYPE;
+id int;
+begin
+open c;
+loop
+	fetch c into v_event_id,v_club_id,v_event_name,v_description,v_event_date,v_start_time,v_end_time,v_venue,v_ticket_price,v_total_participants;
+	exit when not found;
+	select event_id into id from event_history where event_id=v_event_id;
+		if not found then
+			insert into event_history(event_id,club_id,event_name,description,event_date,start_time,end_time,venue,ticket_price,total_participants)
+				values(v_event_id,v_club_id,v_event_name,v_description,v_event_date,v_start_time,v_end_time,v_venue,v_ticket_price,v_total_participants);
+		end if;
+end loop;
+close c;
+end;
+$$
+
+CREATE or REPLACE function update_events()
+RETURNS trigger
+language plpgsql
+as $$
+begin
+update events set completion_status='Completed' where event_id=new.event_id;
+return new;
+end;
+$$;
+
+CREATE TRIGGER trigger_update_events
+after insert on event_history
+for each row
+execute function update_events();
