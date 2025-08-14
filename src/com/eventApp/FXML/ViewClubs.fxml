@@ -23,10 +23,10 @@
                 <Insets bottom="20" left="30" right="30" top="20" />
             </padding>
 
-            <Label style="-fx-font-size: 32px;                           -fx-text-fill: white;                           -fx-font-weight: bold;                           -fx-font-family: 'Segoe UI', Arial, sans-serif;                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);" text="📅 Club Dashboard">
+            <Label style="-fx-font-size: 32px;                           -fx-text-fill: white;                           -fx-font-weight: bold;                           -fx-font-family: 'Segoe UI', Arial, sans-serif;                           -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);" text="📅 Admin Dashboard">
             </Label>
 
-            <Label style="-fx-font-size: 14px;                           -fx-text-fill: rgba(255, 255, 255, 0.8);                           -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="Manage and monitor members">
+            <Label style="-fx-font-size: 14px;                           -fx-text-fill: rgba(255, 255, 255, 0.8);                           -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="Manage and monitor clubs">
             </Label>
         </VBox>
 
@@ -42,10 +42,10 @@
 
             <TableView fx:id="clubTable" prefHeight="229.0" prefWidth="758.0" style="-fx-background-color: white;                               -fx-table-cell-border-color: rgba(101, 78, 163, 0.1);                               -fx-background-radius: 12;                               -fx-border-color: rgba(101, 78, 163, 0.2);                               -fx-border-radius: 12;                               -fx-border-width: 1;                               -fx-control-inner-background: white;                               -fx-selection-bar: rgba(101, 78, 163, 0.3);                               -fx-selection-bar-non-focused: rgba(101, 78, 163, 0.2);">
                 <columns>
-                    <TableColumn fx:id="idCol" prefWidth="200" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Member Name" />
-                    <TableColumn fx:id="clubNameCol" prefWidth="200" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Email" />
-                    <TableColumn fx:id="presidentNameCol" prefWidth="200" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Position" />
-                    <TableColumn fx:id="descriptionCol" prefWidth="200" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="User Id" />
+                    <TableColumn fx:id="idCol" prefWidth="149.60000467300415" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Club Id" />
+                    <TableColumn fx:id="clubNameCol" prefWidth="222.4000244140625" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Club Name" />
+                    <TableColumn fx:id="presidentNameCol" prefWidth="196.800048828125" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Founder Name" />
+                    <TableColumn fx:id="descriptionCol" prefWidth="232.0" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8e44ad);                                        -fx-text-fill: white;                                        -fx-font-weight: bold;                                        -fx-alignment: CENTER;" text="Description" />
                 </columns>
             </TableView>
         </VBox>
@@ -53,7 +53,7 @@
         <!-- Enhanced Action Buttons -->
         <HBox alignment="CENTER_RIGHT" spacing="15">
             <!-- Back Button with Gradient -->
-            <Button alignment="CENTER" fx:id="export" mnemonicParsing="false" onAction="#onExport" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="Export List">
+            <Button fx:id="export" alignment="CENTER" mnemonicParsing="false" onAction="#onExport" prefHeight="45.0" prefWidth="140.0" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6);                            -fx-text-fill: white;                            -fx-font-weight: bold;                            -fx-background-radius: 25;                            -fx-cursor: hand;                            -fx-border-color: rgba(255, 255, 255, 0.3);                            -fx-border-radius: 25;                            -fx-border-width: 1;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="Export List">
                 <font>
                     <Font name="Segoe UI Bold" size="14.0" />
                 </font>
