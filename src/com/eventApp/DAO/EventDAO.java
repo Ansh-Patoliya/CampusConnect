@@ -90,9 +90,10 @@ public class EventDAO {
     public List<Event> getMyEventList(String userId) {
         List<Event> myEvents = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "select * from events e inner join event_registration er on e.event_id = er.event_id where er.user_id = ?";
+            String query = "select * from events e inner join event_registration er on e.event_id = er.event_id where er.user_id = ? and e.completion_status = ? ";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, userId);
+            preparedStatement.setString(2, "Not Completed");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 myEvents.add(new Event(0, resultSet.getString("event_name"), resultSet.getInt("club_id"), null,

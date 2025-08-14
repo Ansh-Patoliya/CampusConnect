@@ -1,19 +1,25 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.ClubDAO;
+import com.eventApp.DAO.NotificationDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
+import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Optional;
 
 public class ViewCreateEventsController {
 
@@ -148,7 +154,31 @@ public class ViewCreateEventsController {
         setTextBack(nextEvent);
     }
 
+    NotificationDAO notificationDAO = new NotificationDAO();
     public void onCanel(ActionEvent actionEvent) {
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Cancel Event");
+        confirmationAlert.setHeaderText("Are you sure you want to cancel this event?");
+        confirmationAlert.setContentText("This action cannot be undone.");
+
+        // Show dialog and wait for user response
+        Optional<ButtonType> result = confirmationAlert.showAndWait();
+
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            try {
+                clubService.cancelEvent();
+                List<Student> participant = clubService.getParticipant(clubService.viewCurrentEvent().getEventId());
+                for (Student student:participant){
+                    notificationDAO.createNotification(student.getUserId(), "The event '" + clubService.viewCurrentEvent().getEventName() + "' has been cancelled.");
+                }
+                FXMLScreenLoader.showMessage("Event cancelled successfully.", "Event Cancellation", "info");
+                FXMLScreenLoader.openClubDashboard(actionEvent);
+            } catch (SQLException | DatabaseExceptionHandler | ClassNotFoundException e) {
+                FXMLScreenLoader.showMessage(e.getMessage(), "Database Error", "error");
+            }
+        } else {
+            FXMLScreenLoader.showMessage("Event cancellation aborted.", "Event Cancellation", "info");
+        }
     }
 
     public void onBack(ActionEvent actionEvent) {
