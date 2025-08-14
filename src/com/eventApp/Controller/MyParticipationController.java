@@ -27,6 +27,7 @@ public class MyParticipationController {
     List<Event> eventList;
     User currentUser = CurrentUser.getCurrentUser();
     public void initialize() {
+        eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         setupColumns();
         showDataInTable();
     }

@@ -1,20 +1,26 @@
 package com.eventApp.Controller;
 
-import com.eventApp.DAO.StudentDAO;
-import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
+import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class StudentDashboardController {
 
     public Button eventHistoryButton;
+    public Label nameLabel;
+
+    public void initialize() {
+        User currentUser = CurrentUser.getCurrentUser();
+        nameLabel.setText(currentUser.getName());
+    }
 
     @FXML
     private void handleViewProfile(ActionEvent event) {
-            FXMLScreenLoader.openStudentProfile(event);
+        FXMLScreenLoader.openStudentProfile(event);
     }
 
     public void onBack(ActionEvent event) {

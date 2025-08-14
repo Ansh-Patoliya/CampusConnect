@@ -222,7 +222,16 @@ public class FXMLScreenLoader {
     }
 
     public static void openViewEventHistory(ActionEvent actionEvent) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEventHistory.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setTitle("Event History");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void openClubDetails(ActionEvent event) {
