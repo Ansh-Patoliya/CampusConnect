@@ -1,6 +1,5 @@
 package com.eventApp.Controller;
 
-
 import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
@@ -14,7 +13,6 @@ import javafx.scene.control.*;
 import java.time.format.DateTimeFormatter;
 
 public class ViewEventsController {
-
 
     @FXML
     private TableView<Event> eventTable;

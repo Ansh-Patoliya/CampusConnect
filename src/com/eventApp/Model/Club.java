@@ -2,20 +2,20 @@ package com.eventApp.Model;
 
 public class Club {
     private String clubName,descriptions,category,founderId,status;
-    private int memberCount;
+    private int memberCount,maxMemberCount;
     private int clubId;
     static int clubCount=1;
 
-    public Club(String clubName, String descriptions, String category, String founderId, int memberCount) {
+    public Club(String clubName, String descriptions, String category, String founderId, int maxMemberCount) {
         this.clubName = clubName;
         this.descriptions = descriptions;
         this.category = category;
         this.founderId = founderId;
-        this.memberCount = memberCount;
+        this.maxMemberCount = maxMemberCount;
         this.status="Pending";
     }
 
-    public Club(String clubName, String descriptions, String category, String founderId, String status, int memberCount, int clubId) {
+    public Club(String clubName, String descriptions, String category, String founderId, String status, int memberCount, int clubId, int maxMemberCount) {
         this.clubName = clubName;
         this.descriptions = descriptions;
         this.category = category;
@@ -25,6 +25,13 @@ public class Club {
         this.clubId = clubId;
     }
 
+    public int getMaxMemberCount() {
+        return maxMemberCount;
+    }
+
+    public void setMaxMemberCount(int maxMemberCount) {
+        this.maxMemberCount = maxMemberCount;
+    }
 
     public String getStatus() {
         return status;
