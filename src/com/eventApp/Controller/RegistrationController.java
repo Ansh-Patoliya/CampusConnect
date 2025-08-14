@@ -216,12 +216,11 @@ public class RegistrationController {
         int maxMember = Integer.parseInt(maxMemberField.getText());
 
         if (validateClubFields(name, email, password, confirmPassword, clubName, description, category, enrollmentNo)) {
-            User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
+            User user = new User(enrollmentNo, name, email, password, "CLUB_MEMBER");
             Club club = new Club(clubName, description, category, enrollmentNo, maxMember);
-            ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "President", club.getClubId());
+            ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "CLUB_MEMBER", "President", club.getClubId());
             try {
-                userService.
-                        registerClub(club, clubMember, user);
+                userService.registerClub(club, clubMember, user);
 
                 FXMLScreenLoader.openLoginPage(event);
                 FXMLScreenLoader.showMessage("✅ Club registration successful! You can now log in.", "registration", "info");

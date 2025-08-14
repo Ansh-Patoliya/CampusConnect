@@ -62,7 +62,8 @@ public class ClubDAO {
                 String founderId = resultSet.getString("founder_Id");
                 int memberCount = resultSet.getInt("member_count");
                 String status = resultSet.getString("status");
-                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId));
+                int memberLimit = resultSet.getInt("max_member");
+                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId, memberLimit));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -113,7 +114,8 @@ public class ClubDAO {
                 String founderId = resultSet.getString("founder_Id");
                 int memberCount = resultSet.getInt("member_count");
                 String status = resultSet.getString("status");
-                club = new Club(clubName, description, category, founderId, status, memberCount, clubId);
+                int memberLimit = resultSet.getInt("max_member");
+                club = new Club(clubName, description, category, founderId, status, memberCount, clubId, memberLimit);
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -159,7 +161,8 @@ public class ClubDAO {
                 String founderId = resultSet.getString("founder_Id");
                 int memberCount = resultSet.getInt("member_count");
                 String status = resultSet.getString("status");
-                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId));
+                int memberLimit = resultSet.getInt("max_member");
+                clubList.enqueue(new Club(clubName, descriptions, category, founderId, status, memberCount, clubId, memberLimit));
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
