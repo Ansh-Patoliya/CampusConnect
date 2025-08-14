@@ -24,7 +24,7 @@
                                         <Font name="System Bold" size="28.0" />
                                     </font>
                                 </Label>
-                                <Region HBox.hgrow="ALWAYS" />
+                                    <VBox alignment="CENTER" spacing="15" />
                             </children>
                         </HBox>
                         <HBox prefHeight="560.0">
@@ -49,16 +49,21 @@
                                     <children>
                                         <VBox alignment="CENTER" spacing="30">
                                             <children>
-                                                <VBox alignment="CENTER" spacing="15">
-                                                    <children>
-                                                        <Label style="-fx-font-weight: bold;" text="Welcome Club Member" textFill="#6a3093">
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                                        <Label layoutX="24.0" layoutY="52.0" style="-fx-font-weight: bold;" text="Welcome " textFill="#6a3093">
                                                             <font>
                                                                 <Font name="System Bold" size="36.0" />
                                                             </font>
                                                         </Label>
-                                                        <Text fill="#6a3093" style="-fx-font-size: 18; -fx-font-style: italic;" text="Stay in Sync with the Squad—All Club Updates Here!" textAlignment="CENTER" wrappingWidth="450.0" />
-                                                    </children>
-                                                </VBox>
+                                                        <Text fill="#6a3093" layoutX="-10.0" layoutY="141.0" style="-fx-font-size: 18; -fx-font-style: italic;" text="Stay in Sync with the Squad—All Club Updates Here!" textAlignment="CENTER" wrappingWidth="450.0" />
+                                          <Label fx:id="nameLabel" layoutX="192.0" layoutY="51.0" prefHeight="54.0" prefWidth="255.0" style="-fx-font-weight: bold;" textFill="#6a3093">
+                                             <font>
+                                                <Font name="System Bold" size="36.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
                                                 <VBox alignment="CENTER_LEFT" prefWidth="450.0" spacing="20" style="-fx-background-color: white;                                         -fx-background-radius: 15; -fx-padding: 30;                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
                                                     <children>
                                                         <Text fill="#6a3093" fontSmoothingType="LCD" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Quick Actions:" />

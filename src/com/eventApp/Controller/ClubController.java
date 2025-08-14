@@ -13,10 +13,11 @@ import javafx.scene.layout.AnchorPane;
 public class ClubController {
 
     public AnchorPane viewClubDetailsPane;
+    public Label nameLabel;
 
     public void initialize() {
-        // Initialization logic can go here if needed
         User user= CurrentUser.getCurrentUser();
+        nameLabel.setText(user.getName());
         ClubMember clubMember = ClubMemberDAO.getClubMember(user);
         if(clubMember.getPosition().equalsIgnoreCase("President")) {
             viewClubDetailsPane.setVisible(true);

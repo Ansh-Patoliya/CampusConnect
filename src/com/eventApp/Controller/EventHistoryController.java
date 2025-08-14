@@ -28,6 +28,7 @@ public class EventHistoryController {
     private MyEventLL eventList;
 
     public void initialize(){
+        eventHistoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         loadEventList();
         setupColumns();
         showDataInTable();

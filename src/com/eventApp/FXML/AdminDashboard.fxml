@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.AdminController">
+<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.AdminController">
 
    <!-- Centered Content Container -->
    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
@@ -27,7 +27,7 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Region HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER" spacing="15" />
                </children>
             </HBox>
 
@@ -38,11 +38,9 @@
                   <Button fx:id="viewEventButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleViewEvents" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="View Events" textFill="WHITE" />
                   <Button fx:id="eventRequestsButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleEventApproval" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Event Requests" textFill="WHITE" />
                   <Button fx:id="clubRequestsButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleClubApproval" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Club Requests" textFill="WHITE" />
-                  <Button fx:id="viewClubMemberButton" onAction="#handleViewClubMembers" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Club Members" textFill="WHITE" />
-                  <Button fx:id="exportClubListButton" onAction="#handleExportClub" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Export Club List" textFill="WHITE" />
-                  <Button fx:id="viewMyProfileButton" onAction="#handleViewProfile" maxWidth="Infinity" mnemonicParsing="false" prefHeight="50.0"
-                          style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 10; -fx-cursor: hand; -fx-font-size: 15;"
-                          text="View My Profile" textFill="WHITE" />
+                  <Button fx:id="viewClubMemberButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleViewClubMembers" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Club Members" textFill="WHITE" />
+                  <Button fx:id="exportClubListButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleExportClub" prefHeight="50.0" style="-fx-background-color: transparent;                                        -fx-border-color: rgba(255,255,255,0.3);                                        -fx-border-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;" text="Export Club List" textFill="WHITE" />
+                  <Button fx:id="viewMyProfileButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#handleViewProfile" prefHeight="50.0" style="-fx-background-color: transparent; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 10; -fx-cursor: hand; -fx-font-size: 15;" text="View My Profile" textFill="WHITE" />
 
                   <Region VBox.vgrow="ALWAYS" />
                   <Button fx:id="backButton" maxWidth="Infinity" onAction="#handleBack" prefHeight="50.0" style="-fx-background-color: #f5f5f5;                                        -fx-background-radius: 10; -fx-cursor: hand;                                        -fx-font-size: 15;                                        -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);" text="← Back" textFill="#6a3093" />
@@ -51,14 +49,21 @@
                <!-- Content Panel -->
                <StackPane style="-fx-padding: 60 40;">
                   <VBox alignment="CENTER" spacing="30">
-                     <VBox alignment="CENTER" spacing="15">
-                        <Label style="-fx-font-weight: bold;" text="Welcome Admin" textFill="#6a3093">
-                           <font>
-                              <Font name="System Bold" size="36.0" />
-                           </font>
-                        </Label>
-                        <Text fill="#6a3093" style="-fx-font-size: 18; -fx-font-style: italic;" text="Run Campus Right—Manage Clubs &amp; Events with Ease." textAlignment="CENTER" wrappingWidth="450.0" />
-                     </VBox>
+                     <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <children>
+                           <Label layoutX="14.0" layoutY="44.0" style="-fx-font-weight: bold;" text="Welcome " textFill="#6a3093">
+                              <font>
+                                 <Font name="System Bold" size="36.0" />
+                              </font>
+                           </Label>
+                           <Text fill="#6a3093" layoutX="-9.0" layoutY="133.0" style="-fx-font-size: 18; -fx-font-style: italic;" text="Run Campus Right—Manage Clubs &amp; Events with Ease." textAlignment="CENTER" wrappingWidth="450.0" />
+                           <Label fx:id="nameLabel" layoutX="182.0" layoutY="44.0" prefHeight="54.0" prefWidth="266.0" style="-fx-font-weight: bold;" textFill="#6a3093">
+                              <font>
+                                 <Font name="System Bold" size="36.0" />
+                              </font>
+                           </Label>
+                        </children>
+                     </AnchorPane>
 
                      <VBox alignment="CENTER_LEFT" prefWidth="450.0" spacing="20" style="-fx-background-color: white;                                         -fx-background-radius: 15; -fx-padding: 30;                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 5);">
                         <Text fill="#6a3093" fontSmoothingType="LCD" style="-fx-font-weight: bold; -fx-font-size: 20;" text="Quick Actions:" />
