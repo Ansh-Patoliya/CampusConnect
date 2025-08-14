@@ -13,14 +13,16 @@ public class CircularLL {
         Node(Event data) {
             this.data = data;
             this.next = null;
+            current=head;
         }
     }
     private Node head=null;
-    private Node current=null;
+    private Node current;
 
     // insert sorted by date
     public void add(Event data){
         Node n = new Node(data);
+
         if (head == null) {
             head = n;
             n.next = head;
@@ -53,7 +55,6 @@ public class CircularLL {
         }
         return false;
     }
-
 
     public Event viewCurrentEvent() {
         if (current == null) {

@@ -6,6 +6,7 @@ import com.eventApp.DAO.EventDAO;
 import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.DataStructures.CircularLL;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.*;
 
 import java.io.BufferedWriter;
@@ -26,8 +27,8 @@ public class ClubService {
         // Default constructor
     }
 
-    public boolean addEvent(Event event) {
-        return clubDAO.createEvent(event);
+    public void addEvent(Event event) throws ValidationException, SQLException, ClassNotFoundException {
+         clubDAO.createEvent(event);
     }
 
     public Club getClubByUser(User user) {
@@ -70,7 +71,7 @@ public class ClubService {
         return eventNameList;
     }
 
-    CircularLL myEventLL;
+    CircularLL circularLL;
 
     public ClubService(User user) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
         loadMyEventList(user);
@@ -78,19 +79,22 @@ public class ClubService {
 
     public void loadMyEventList(User user) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
         int clubId = ClubMemberDAO.getClubMember(user).getClubId();
-        this.myEventLL = eventDAO.getEventListByClubId(clubId);
+        this.circularLL = eventDAO.getEventListByClubId(clubId);
     }
 
     public Event viewCurrentEvent() {
-        return myEventLL.viewCurrentEvent();
+        return circularLL.viewCurrentEvent();
     }
 
     public Event viewNextEvent() {
-        return myEventLL.viewNextEvent();
+        return circularLL.viewNextEvent();
     }
 
     public void cancelEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
         eventDAO.cancelEvent(viewCurrentEvent().getEventId());
     }
 
+    public void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        eventDAO.updateEvent(currentEvent);
+    }
 }

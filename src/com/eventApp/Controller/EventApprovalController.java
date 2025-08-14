@@ -12,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -29,6 +31,13 @@ public class EventApprovalController {
     public Label maxParticipate;
     public Label ticketPrice;
     public Label discountAvailabel;
+    public Label categoryField;
+    public AnchorPane front;
+    public Label eventName1;
+    public Label eventDate1;
+    public Label venue1;
+    public Label ticketPrice1;
+    public AnchorPane back;
     private Event currentEvent;
     private ClubDAO clubDAO = new ClubDAO();
     private UserDAO userDAO = new UserDAO();
@@ -40,9 +49,14 @@ public class EventApprovalController {
     }
 
     private void loadCurrentEvent() {
+        front.setVisible(true);
+        back.setVisible(false);
+        setVisibleFront(true);
+        setVisibleBack(false);
         currentEvent = eventService.viewCurrentEvent();
         if (currentEvent != null) {
-            setText(currentEvent);
+            setTextFront(currentEvent);
+            setTextBack(currentEvent);
             setVisible(true);
         } else {
             // Handle case when there are no more events to approve
@@ -50,6 +64,27 @@ public class EventApprovalController {
             clearLabels();
             openAdminDashboard();
         }
+    }
+
+    private void setTextFront(Event event) {
+        eventName1.setText(event.getEventName());
+        eventDate1.setText(event.getEventDate().format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        ticketPrice1.setText(String.valueOf(event.getTicketPrice()));
+        venue1.setText(event.getVenue());
+    }
+
+    private void setTextBack(Event event) {
+        eventName.setText(event.getEventName());
+        description.setText(event.getDescription());
+        startTime.setText(event.getStartTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")));
+        endTime.setText(event.getEndTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")));
+        eventDate.setText(event.getEventDate().format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        venue.setText(event.getVenue());
+        clubName.setText(clubDAO.getClubNameBy(event.getClubId()));
+        createdBy.setText(userDAO.getUserNameBy(event.getUserId()));
+        maxParticipate.setText(String.valueOf(event.getMaxParticipants()));
+        ticketPrice.setText(String.valueOf(event.getTicketPrice()));
+        discountAvailabel.setText(String.valueOf(event.isDiscountApplicable()));
     }
 
     private void clearLabels() {
@@ -71,8 +106,8 @@ public class EventApprovalController {
     public void onApprove(ActionEvent event) {
         boolean isApproved = eventService.approveEvent();
         if (isApproved) {
+            loadCurrentEvent();
             FXMLScreenLoader.showMessage("Event approved successfully.", "Event Approval", "info");
-            onNext(event);
         } else {
             FXMLScreenLoader.showMessage("Failed to approve the event. Please try again.", "Event Approval", "error");
         }
@@ -82,7 +117,7 @@ public class EventApprovalController {
         boolean isRejected = eventService.rejectEvent();
         if (isRejected) {
             FXMLScreenLoader.showMessage("Event rejected successfully.", "Event Approval", "success");
-            onNext(event);
+            loadCurrentEvent();
         } else {
             FXMLScreenLoader.showMessage("Failed to reject the event. Please try again.", "Event Approval", "error");
         }
@@ -94,7 +129,8 @@ public class EventApprovalController {
 
     public void loadNextOrPreviousEvent(Event event) {
         if (event != null) {
-            setText(event);
+            setTextFront(event);
+            setTextBack(event);
             setVisible(true);
         } else {
             FXMLScreenLoader.showMessage("No event data available.", "Event Approval", "warning");
@@ -102,6 +138,10 @@ public class EventApprovalController {
     }
 
     public void onNext(ActionEvent event) {
+        front.setVisible(true);
+        back.setVisible(false);
+        setVisibleFront(true);
+        setVisibleBack(false);
         Event nextEvent = eventService.viewNextEvent();
         if (nextEvent != null) {
             loadNextOrPreviousEvent(nextEvent);
@@ -113,6 +153,10 @@ public class EventApprovalController {
 
 
     public void onPrevious(ActionEvent event) {
+        front.setVisible(true);
+        back.setVisible(false);
+        setVisibleFront(true);
+        setVisibleBack(false);
         Event previousEvent = eventService.viewPreviousEvent();
         if (event != null) {
             loadNextOrPreviousEvent(previousEvent);
@@ -120,21 +164,6 @@ public class EventApprovalController {
             FXMLScreenLoader.showMessage("No previous events to view.", "Event Approval", "info");
             openAdminDashboard();
         }
-    }
-
-    void setText(Event event){
-        if (event == null) return;
-        eventName.setText(event.getEventName());
-        description.setText(event.getDescription());
-        startTime.setText(event.getStartTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")));
-        endTime.setText(event.getEndTime().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm")));
-        eventDate.setText(event.getEventDate().format(java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        venue.setText(event.getVenue());
-        clubName.setText(clubDAO.getClubNameBy(event.getClubId()));
-        createdBy.setText(userDAO.getUserNameBy(event.getUserId()));
-        maxParticipate.setText(String.valueOf(event.getMaxParticipants()));
-        ticketPrice.setText(String.valueOf(event.getTicketPrice()));
-        discountAvailabel.setText(String.valueOf(event.isDiscountApplicable()));
     }
 
     void setVisible(boolean visible) {
@@ -160,5 +189,43 @@ public class EventApprovalController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void onClickFront(MouseEvent mouseEvent) {
+        if (front.isVisible()) {
+            onClick();
+            setVisibleFront(false);
+            setVisibleBack(true);
+        } else {
+            front.setVisible(true);
+            back.setVisible(false);
+        }
+    }
+
+    private void setVisibleBack(boolean b) {
+        eventName.setVisible(b);
+        eventDate.setVisible(b);
+        ticketPrice.setVisible(b);
+        venue.setVisible(b);
+        endTime.setVisible(b);
+        description.setVisible(b);
+        startTime.setVisible(b);
+        clubName.setVisible(b);
+        createdBy.setVisible(b);
+        maxParticipate.setVisible(b);
+        discountAvailabel.setVisible(b);
+        categoryField.setVisible(b);
+    }
+
+    private void setVisibleFront(boolean b) {
+        eventName1.setVisible(b);
+        eventDate1.setVisible(b);
+        ticketPrice1.setVisible(b);
+        venue1.setVisible(b);
+    }
+
+    private void onClick() {
+        front.setVisible(false);
+        back.setVisible(true);
     }
 }

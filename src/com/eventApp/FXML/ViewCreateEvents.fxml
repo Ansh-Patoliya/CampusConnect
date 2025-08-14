@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.EventApprovalController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="658.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ViewCreateEventsController">
 
     <children>
         <!-- Left Side - Event Details Panel -->
@@ -194,22 +191,40 @@
                         </VBox>
                     </children>
                 </VBox>
+            <VBox layoutX="20.0" layoutY="549.0" spacing="5">
+               <children>
+                  <Label text="Approval Status:" textFill="#654ea3" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="approvalStatusLabel" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="219.0" layoutY="549.0" spacing="5">
+               <children>
+                  <Label text="Completion Status:" textFill="#654ea3" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="completionStatusLabel" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
             </children>
         </AnchorPane>
 
         <!-- Right Side - Navigation Buttons -->
-        <VBox alignment="CENTER" layoutX="553.0" layoutY="174.0" spacing="20">
-            <Button mnemonicParsing="false" onAction="#onApprove" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Approve">
-                <font>
-                    <Font name="System Bold" size="16.0" />
-                </font>
-            </Button>
-         <Button mnemonicParsing="false" onAction="#onReject" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Reject">
-            <font>
-               <Font name="System Bold" size="16.0" />
-            </font>
-         </Button>
-            <Button mnemonicParsing="false" onAction="#onPrevious" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Previous">
+        <VBox alignment="CENTER" layoutX="550.0" layoutY="250.0" spacing="20">
+            <Button mnemonicParsing="false" onAction="#onCanel" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Cancel">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -292,5 +307,15 @@
                 </VBox>
             </children>
         </AnchorPane>
+      <AnchorPane fx:id="updateButtonPane" layoutX="550.0" layoutY="102.0" prefHeight="130.0" prefWidth="200.0">
+         <children>
+      
+               <Button layoutY="90.0" mnemonicParsing="false" onAction="#onUpdate" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Update ?">
+                   <font>
+                       <Font name="System Bold" size="16.0" />
+                   </font>
+               </Button>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

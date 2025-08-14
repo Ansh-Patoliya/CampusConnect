@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
-public class EventRegistrationController {
+public class EventUpdateController {
     private final ClubService clubService = new ClubService();
     public RadioButton fixedRadio;
     public RadioButton variableRadio;
@@ -42,6 +42,12 @@ public class EventRegistrationController {
     private ComboBox<String> startTimeCombo;
     @FXML
     private ComboBox<String> endTimeCombo;
+    Event currentEvent;
+
+    public void setEvent(Event event) {
+        this.currentEvent = event;
+        loadDetails();
+    }
 
     @FXML
     public void initialize() {
@@ -88,50 +94,27 @@ public class EventRegistrationController {
 
         variableRadio.setOnAction(_ -> discountNote.setVisible(true));
         fixedRadio.setOnAction(_ -> discountNote.setVisible(false));
+
+
     }
 
-    public void handleEventRegistration(ActionEvent event) {
-        try {
-            String eventName = eventNameField.getText();
-            String description = descriptionField.getText();
-            String venue = venueField.getText();
-            String category = (String) categoryField.getValue();
-            if (category == null || category.isEmpty()) {
-                FXMLScreenLoader.showMessage("Please select a category.", "Category Error", "error");
-                return;
-            }
-            int maxParticipants = Integer.parseInt(capacityField.getText());
-            if( maxParticipants <= 0) {
-                FXMLScreenLoader.showMessage("Maximum participants must be greater than zero.", "Capacity Error", "error");
-                return;
-            }
-            double ticketPrice = Double.parseDouble(ticketPriceField.getText());
-            if (ticketPrice < 0) {
-                FXMLScreenLoader.showMessage("Ticket price cannot be negative.", "Ticket Price Error", "error");
-                return;
-            }
-            LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
-            LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
-            LocalDate eventDate = datePicker.getValue();
-
-            User currentUser = CurrentUser.getCurrentUser();
-            String userId = currentUser.getUserId();
-            int clubId = UserDAO.getClubIdByUserId(currentUser.getUserId());
-            boolean discountApplicable = variableRadio.isSelected();
-
-            if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {
-                Event event1 = new Event(eventName, description, venue, clubId, userId, maxParticipants, eventDate, startTime, endTime, ticketPrice, discountApplicable, category);
-                clubService.addEvent(event1);
-                FXMLScreenLoader.showMessage("Event Created Successfully!", "Success", "info");
-                handleBack(event);
-            }
-        } catch (NumberFormatException e) {
-            FXMLScreenLoader.showMessage("Please enter valid numeric values for capacity and ticket price.", "Input Error", "error");
-        } catch (ValidationException | SQLException | ClassNotFoundException e) {
-            FXMLScreenLoader.showMessage(e.getMessage(), "Validation Error", "error");
-        } catch (DatabaseExceptionHandler e) {
-            FXMLScreenLoader.showMessage(e.getMessage(), "Database Error", "error");
+    private void loadDetails() {
+        eventNameField.setText(currentEvent.getEventName());
+        datePicker.setValue(currentEvent.getEventDate());
+        ticketPriceField.setText(String.valueOf(currentEvent.getTicketPrice()));
+        venueField.setText(currentEvent.getVenue());
+        endTimeCombo.setValue(currentEvent.getEndTime().toString());
+        startTimeCombo.setValue(currentEvent.getStartTime().toString());
+        descriptionField.setText(currentEvent.getDescription());
+        capacityField.setText(String.valueOf(currentEvent.getMaxParticipants()));
+        if(currentEvent.isDiscountApplicable()){
+            variableRadio.setSelected(true);
+            discountNote.setVisible(true);
+        } else {
+            fixedRadio.setSelected(true);
+            discountNote.setVisible(false);
         }
+        categoryField.setValue(currentEvent.getCategory());
     }
 
     public boolean validateFields(String eventName, String description, String venue, LocalDate eventDate, LocalTime startTime, LocalTime endTime) {
@@ -178,7 +161,62 @@ public class EventRegistrationController {
         return true;
     }
 
+    public void handleEventUpdate(ActionEvent event){
+        try {
+            String eventName = eventNameField.getText();
+            String description = descriptionField.getText();
+            String venue = venueField.getText();
+            String category = (String) categoryField.getValue();
+            if (category == null || category.isEmpty()) {
+                FXMLScreenLoader.showMessage("Please select a category.", "Category Error", "error");
+                return;
+            }
+            int maxParticipants = Integer.parseInt(capacityField.getText());
+            if (maxParticipants <= 0) {
+                FXMLScreenLoader.showMessage("Maximum participants must be greater than zero.", "Capacity Error", "error");
+                return;
+            }
+            double ticketPrice = Double.parseDouble(ticketPriceField.getText());
+            if (ticketPrice < 0) {
+                FXMLScreenLoader.showMessage("Ticket price cannot be negative.", "Ticket Price Error", "error");
+                return;
+            }
+            LocalTime startTime = LocalTime.parse(startTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime endTime = LocalTime.parse(endTimeCombo.getValue(), DateTimeFormatter.ofPattern("HH:mm"));
+            LocalDate eventDate = datePicker.getValue();
+
+            User currentUser = CurrentUser.getCurrentUser();
+            String userId = currentUser.getUserId();
+            int clubId = UserDAO.getClubIdByUserId(currentUser.getUserId());
+            boolean discountApplicable = variableRadio.isSelected();
+
+            if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {
+                currentEvent.setEventName(eventName);
+                currentEvent.setDescription(description);
+                currentEvent.setVenue(venue);
+                currentEvent.setEventDate(eventDate);
+                currentEvent.setStartTime(startTime);
+                currentEvent.setEndTime(endTime);
+                currentEvent.setTicketPrice(ticketPrice);
+                currentEvent.setDiscountApplicable(discountApplicable);
+                currentEvent.setCategory(category);
+                currentEvent.setMaxParticipants(maxParticipants);
+                currentEvent.setClubId(clubId);
+                currentEvent.setUserId(userId);
+
+                clubService.updateEvent(currentEvent);
+                FXMLScreenLoader.showMessage("Event Update Successfully!", "Success", "info");
+                handleBack(event);
+            }
+        } catch (NumberFormatException e) {
+            FXMLScreenLoader.showMessage("Please enter valid numeric values for capacity and ticket price.", "Input Error", "error");
+        } catch (SQLException | ClassNotFoundException | DatabaseExceptionHandler e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Database Error", "error");
+        }
+    }
+
     public void handleBack(ActionEvent event) {
         FXMLScreenLoader.openClubDashboard(event);
     }
+
 }

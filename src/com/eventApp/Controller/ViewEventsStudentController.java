@@ -5,12 +5,9 @@ import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
-import com.eventApp.Model.User;
 import com.eventApp.Service.EventRegistrationService;
 import com.eventApp.Service.StudentService;
-import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -41,7 +38,6 @@ public class ViewEventsStudentController {
         FXMLScreenLoader.openStudentDashboard(event);
     }
 
-//    User currentUser = CurrentUser.getCurrentUser();
     public void initialize() {
         front.setVisible(true);
         back.setVisible(false);
@@ -77,8 +73,7 @@ public class ViewEventsStudentController {
     private void setTextBack(Event event) {
         eventName.setText(event.getEventName());
         description.setText(event.getDescription());
-        categoryField
-                .setText(event.getCategory());
+        categoryField.setText(event.getCategory());
         startTime.setText(event.getStartTime().toString());
         endTime.setText(event.getEndTime().toString());
         eventDate.setText(event.getEventDate().toString());
@@ -122,7 +117,7 @@ public class ViewEventsStudentController {
         if (nextEvent != null) {
             loadNextOrPreviousEvent(nextEvent);
         } else {
-            FXMLScreenLoader.showMessage("No more events to approve.", "Event Approval", "info");
+            FXMLScreenLoader.showMessage("No more events to view.", "Event Approval", "info");
             onBack(event);
         }
     }
@@ -163,6 +158,7 @@ public class ViewEventsStudentController {
         int eventId = studentService.viewCurrentEvent().getEventId();
         try {
             eventRegistrationService.registerForEvent(eventId);
+            onNext(event);
             FXMLScreenLoader.showMessage("Registration successful for event: " + studentService.viewCurrentEvent().getEventName(), "Registration Success", "info");
         } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Registration Error", "error");
