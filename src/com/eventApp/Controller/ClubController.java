@@ -43,7 +43,6 @@ public class ClubController {
         FXMLScreenLoader.openViewCreateEvents(event);
     }
 
-
     public void handleViewClubMembers(ActionEvent event) {
         FXMLScreenLoader.openViewMember(event);
     }
