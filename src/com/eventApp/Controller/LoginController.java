@@ -1,10 +1,10 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
 import com.eventApp.Utils.CurrentUser;
-import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
@@ -36,7 +36,12 @@ public class LoginController {
                     if (user.getRole().equalsIgnoreCase("admin")) {
                         FXMLScreenLoader.openAdminDashboard(event);
                     } else if (user.getRole().equalsIgnoreCase("club_member")) {
-                        FXMLScreenLoader.openClubDashboard(event);
+                        if(new ClubMemberDAO().isPresidentOfApprovedClub(user.getUserId())){
+                            FXMLScreenLoader.openClubDashboard(event);
+                        } else{
+                            FXMLScreenLoader.showMessage("❌Your club is not approved yet", "login", "warning");
+                        }
+
                     } else if (user.getRole().equalsIgnoreCase("student")) {
                         FXMLScreenLoader.openStudentDashboard(event);
                     }

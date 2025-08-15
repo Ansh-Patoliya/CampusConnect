@@ -14,8 +14,10 @@ import java.sql.SQLException;
 public class Main extends Application {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareCall("call event_complete()");
-        preparedStatement.executeUpdate();
+        PreparedStatement preparedStatement1 = connection.prepareCall("call event_complete()");
+        preparedStatement1.executeUpdate();
+        PreparedStatement preparedStatement2 = connection.prepareCall("call apply_ticket_price_rules()");
+        preparedStatement2.executeUpdate();
         launch(args);
     }
 

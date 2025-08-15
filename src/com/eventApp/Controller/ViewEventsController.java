@@ -26,8 +26,6 @@ public class ViewEventsController {
     private TableColumn<Event, String> creatorCol;
     @FXML
     private TableColumn<Event, String> completedCol;
-    @FXML
-    private Button refreshBtn;
 
     private MyEventLL eventList;
 
@@ -38,11 +36,6 @@ public class ViewEventsController {
         eventTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         loadEventList();
         setupColumns();
-
-        refreshBtn.setOnAction(e -> {
-            loadEventList();
-            showDataInTable();
-        });
 
         showDataInTable();
     }

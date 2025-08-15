@@ -15,7 +15,8 @@ public class ClubMemberDAO {
     public static ClubMember getClubMember(User user) {
         if (user == null || user.getUserId() == null) return null;
 
-        String query = "SELECT cm.club_id, cm.position ,u.name, u.email, u.password, u.role FROM club_members cm JOIN users u ON cm.member_id = u.user_id WHERE cm.member_id = ?";
+        String query = "SELECT cm.club_id, cm.position ,u.name, u.email, u.password, u.role " +
+                "FROM club_members cm JOIN users u ON cm.member_id = u.user_id WHERE cm.member_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
@@ -75,4 +76,30 @@ public class ClubMemberDAO {
         return clubMemberList;
     }
 
+    public boolean isPresidentOfApprovedClub(String user_id){
+        try(Connection connection = DatabaseConnection.getConnection()){
+            String query = "select position from club_members where member_id = ?";
+            PreparedStatement preparedStatement1 = connection.prepareStatement(query);
+            preparedStatement1.setString(1,user_id);
+            ResultSet resultSet1 = preparedStatement1.executeQuery();
+            if (resultSet1.next()) {
+                String position = resultSet1.getString(1);
+                if (position.equalsIgnoreCase("President")) {
+                    query = "select status from clubs where founder_id = ?";
+                    PreparedStatement preparedStatement2 = connection.prepareStatement(query);
+                    preparedStatement2.setString(1, user_id);
+                    ResultSet resultSet2 = preparedStatement2.executeQuery();
+                    if (resultSet2.next()) {
+                        String status = resultSet2.getString(1);
+                        if (!status.equalsIgnoreCase("Approved")) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return true;
+    }
 }

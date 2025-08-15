@@ -53,7 +53,6 @@ public class AdminDAO {
         return eventList;
     }
 
-    //bring list of pending event, make method in DAO return type list
     public MyEventLL getEventList(String statusOfEvent){
         MyEventLL eventList = new MyEventLL();
         try(Connection connection = DatabaseConnection.getConnection()){
