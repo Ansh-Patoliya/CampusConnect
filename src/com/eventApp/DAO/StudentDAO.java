@@ -60,12 +60,13 @@ public class StudentDAO {
         return null;
     }
 
-    public MyEventLL viewEventsHistory(){
+    public MyEventLL viewEventsHistory(String userId){
         MyEventLL eventList = new MyEventLL();
         try(Connection connection = DatabaseConnection.getConnection()){
-            String fetchEventsQuery = "select * from event_history";
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(fetchEventsQuery);
+            String fetchEventsQuery = "select * from event_history eh inner join event_registration er on eh.event_id = er.event_id where er.user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(fetchEventsQuery);
+            preparedStatement.setString(1,userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
                 int eventId=resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
@@ -76,8 +77,10 @@ public class StudentDAO {
                 String venue = resultSet.getString("venue");
                 int totalParticipants = resultSet.getInt("total_participants");
                 double ticketPrice = resultSet.getDouble("ticket_price");
+                Event newEvent = new Event(eventId, eventName, clubId, venue, ticketPrice, eventDate, startTime, endTime, totalParticipants );
+                newEvent.setUserId(resultSet.getString("founder_id"));
 
-                eventList.insert(new Event(eventId, eventName, clubId, venue, ticketPrice, eventDate, startTime, endTime, totalParticipants ));
+                eventList.insert(newEvent);
 
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -85,6 +88,7 @@ public class StudentDAO {
         }
         return eventList;
     }
+
     public List<String> getInterestList(String studentId) {
         List<String> interestList = new ArrayList<>();
         String query = "SELECT interests FROM students WHERE student_id = ?";

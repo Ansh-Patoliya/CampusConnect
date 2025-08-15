@@ -276,39 +276,44 @@ BEGIN
 END;
 $$;
 
-CREATE or replace PROCEDURE event_complete()
+CREATE OR REPLACE PROCEDURE event_complete()
 LANGUAGE plpgsql
-as $$
+AS $$
 DECLARE
-c cursor for
-	select event_id,club_id,event_name,description,event_date,start_time,end_time,venue,ticket_price,registered_count
-	from events
-	where now()>(event_date + end_time);
-v_event_id events.event_id%type;
-v_club_id events.club_id%type;
-v_event_name events.event_name%type;
-v_description events.description%TYPE;
-v_event_date events.event_date%TYPE;
-v_start_time events.start_time%TYPE;
-v_end_time events.end_time%TYPE;
-v_venue events.venue%TYPE;
-v_ticket_price events.ticket_price%TYPE;
-v_total_participants events.registered_count%TYPE;
-id int;
-begin
-open c;
-loop
-	fetch c into v_event_id,v_club_id,v_event_name,v_description,v_event_date,v_start_time,v_end_time,v_venue,v_ticket_price,v_total_participants;
-	exit when not found;
-	select event_id into id from event_history where event_id=v_event_id;
-		if not found then
-			insert into event_history(event_id,club_id,event_name,description,event_date,start_time,end_time,venue,ticket_price,total_participants)
-				values(v_event_id,v_club_id,v_event_name,v_description,v_event_date,v_start_time,v_end_time,v_venue,v_ticket_price,v_total_participants);
-		end if;
-end loop;
-close c;
-end;
-$$
+    c CURSOR FOR
+        SELECT event_id, club_id, event_name, description, event_date, start_time, end_time, venue, ticket_price, registered_count, created_by, category
+        FROM events
+        WHERE now() > (event_date + end_time);
+
+    v_event_id events.event_id%TYPE;
+    v_club_id events.club_id%TYPE;
+    v_event_name events.event_name%TYPE;
+    v_description events.description%TYPE;
+    v_event_date events.event_date%TYPE;
+    v_start_time events.start_time%TYPE;
+    v_end_time events.end_time%TYPE;
+    v_venue events.venue%TYPE;
+    v_ticket_price events.ticket_price%TYPE;
+    v_total_participants events.registered_count%TYPE;
+    v_created_by events.created_by%TYPE;
+    v_category events.category%TYPE;
+
+    id INT;
+BEGIN
+    OPEN c;
+    LOOP
+        FETCH c INTO v_event_id, v_club_id, v_event_name, v_description, v_event_date, v_start_time, v_end_time, v_venue, v_ticket_price, v_total_participants, v_created_by, v_category;
+        EXIT WHEN NOT FOUND;
+
+        SELECT event_id INTO id FROM event_history WHERE event_id = v_event_id;
+        IF NOT FOUND THEN
+            INSERT INTO event_history(event_id, club_id, event_name, description, event_date, start_time, end_time, venue, ticket_price, total_participants, founder_id, category)
+            VALUES (v_event_id, v_club_id, v_event_name, v_description, v_event_date, v_start_time, v_end_time, v_venue, v_ticket_price, v_total_participants, v_created_by, v_category);
+        END IF;
+    END LOOP;
+    CLOSE c;
+END;
+$$;
 
 CREATE or REPLACE function update_events()
 RETURNS trigger
