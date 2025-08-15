@@ -1,9 +1,12 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.StudentDAO;
+import com.eventApp.DAO.UserDAO;
 import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
+import com.eventApp.Model.User;
+import com.eventApp.Utils.CurrentUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +27,6 @@ public class EventHistoryController {
     public TableColumn<Event, String> dateCol;
     public TableColumn<Event, String> creatorCol;
     public TableColumn<Event, String> categoryCol;
-    public Button refreshBtn;
     private MyEventLL eventList;
 
     public void initialize(){
@@ -42,12 +44,23 @@ public class EventHistoryController {
                 new javafx.beans.property.SimpleStringProperty(
                         cellData.getValue().getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
-        creatorCol.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUserId()));
+//        creatorCol.setCellValueFactory(cellData ->
+//                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUserId()));
+        creatorCol.setCellValueFactory(cellData -> {
+            String userId = cellData.getValue().getUserId();
+            System.out.println(userId);
+            String username = new UserDAO().getUserNameBy(userId);
+            System.out.println(username);
+            return new javafx.beans.property.SimpleStringProperty(username);
+        });
+
+        categoryCol.setCellValueFactory(cellData ->
+                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getCategory()));
     }
 
     private void loadEventList() {
-        this.eventList = studentDAO.viewEventsHistory();
+        User user = CurrentUser.getCurrentUser();
+        this.eventList = studentDAO.viewEventsHistory(user.getUserId());
     }
 
     private void showDataInTable() {
