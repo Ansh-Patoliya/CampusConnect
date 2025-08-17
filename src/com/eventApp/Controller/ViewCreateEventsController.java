@@ -10,13 +10,19 @@ import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
 import com.eventApp.Utils.CurrentUser;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -50,11 +56,16 @@ public class ViewCreateEventsController {
     ClubService clubService;
     UserDAO userDAO = new UserDAO();
     ClubDAO clubDAO = new ClubDAO();
+    Event currentEvent;
 
     public void initialize() {
+        Platform.runLater(this::loadCurrentEvent);
+    }
+
+    private void loadCurrentEvent() {
         try {
             clubService = new ClubService(currentUser);
-            Event currentEvent = clubService.viewCurrentEvent();
+            currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
                 front.setVisible(true);
                 back.setVisible(false);
@@ -66,9 +77,23 @@ public class ViewCreateEventsController {
                 setVisibleBack(false);
             } else {
                 FXMLScreenLoader.showMessage("No more events to view.", "View Events", "info");
+                openClubDashboard();
             }
         } catch (SQLException | DatabaseExceptionHandler | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Database Error", "error");
+        }
+    }
+
+    private void openClubDashboard() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/ClubDashboard.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) clubName.getScene().getWindow();
+            stage.setTitle("club Dashboard");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
