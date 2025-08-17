@@ -53,12 +53,11 @@ public class ViewCreateEventsController {
 
     public void initialize() {
         try {
-            front.setVisible(true);
-            back.setVisible(false);
             clubService = new ClubService(currentUser);
-
             Event currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
+                front.setVisible(true);
+                back.setVisible(false);
                 setUpdateButtonPane(currentEvent);
                 setCancelButtonPane(currentEvent);
                 setTextFront(currentEvent);
@@ -120,6 +119,10 @@ public class ViewCreateEventsController {
             updateButtonPane.setVisible(false);
             return;
         }
+        if(currentEvent.getApprovalStatus().equalsIgnoreCase("Rejected")) {
+            updateButtonPane.setVisible(false);
+            return;
+        }
         if (currentEvent.getCompletionStatus().equalsIgnoreCase("Completed")) {
             updateButtonPane.setVisible(false);
             return;
@@ -132,6 +135,10 @@ public class ViewCreateEventsController {
 
     private void setCancelButtonPane(Event currentEvent) {
         cancelButtonPane.setVisible(true);
+        if(currentEvent.getApprovalStatus().equalsIgnoreCase("Rejected")) {
+            cancelButtonPane.setVisible(false);
+            return;
+        }
         if (currentEvent.getCompletionStatus().equalsIgnoreCase("Completed")) {
             cancelButtonPane.setVisible(false);
             return;
