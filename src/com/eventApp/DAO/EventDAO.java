@@ -39,7 +39,7 @@ public class EventDAO {
                 LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
                 LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
 
-                double ticketPrice = resultSet.getDouble("ticket_price");
+                double ticketPrice = resultSet.getDouble("discounted_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
                 String approvalStatus = resultSet.getString("approval_status");
@@ -97,7 +97,7 @@ public class EventDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 myEvents.add(new Event(0, resultSet.getString("event_name"), resultSet.getInt("club_id"), null,
-                        resultSet.getDouble("ticket_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
+                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -126,7 +126,7 @@ public class EventDAO {
             LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
             LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
 
-            double ticketPrice = resultSet.getDouble("ticket_price");
+            double ticketPrice = resultSet.getDouble("discounted_price");
             boolean discountApplicable = resultSet.getBoolean("discount_available");
 
             String approvalStatus = resultSet.getString("approval_status");
