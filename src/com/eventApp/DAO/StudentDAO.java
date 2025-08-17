@@ -94,12 +94,12 @@ public class StudentDAO {
         String query = "SELECT interests FROM students WHERE student_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
-
             ps.setString(1, studentId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String interest = rs.getString("interests");
-                    interestList.add(interest);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String[] interests = rs.getString("interests").split(",");
+                for (String i: interests) {
+                    interestList.add(i.trim());
                 }
             }
         } catch (Exception e) {

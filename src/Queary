@@ -317,17 +317,23 @@ BEGIN
 END;
 $$;
 
+
 CREATE or REPLACE function update_events()
 RETURNS trigger
 language plpgsql
 as $$
+DECLARE
+cstatus VARCHAR;
+astatus VARCHAR;
 begin
-	if old.completion_status <> 'Cancel' and old.approval_status <> 'Rejected' then
-		update events set new.completion_status='Completed' where event_id=new.event_id;
+	select completion_status,approval_status into cstatus,astatus from events where event_id=new.event_id;
+	if cstatus <> 'Cancel' and astatus <> 'Rejected' then
+		update events set completion_status='Completed' where event_id=new.event_id;
 	end if;
 	return new;
 end;
 $$;
+
 CREATE TRIGGER trigger_update_events
 after insert on event_history
 for each row
