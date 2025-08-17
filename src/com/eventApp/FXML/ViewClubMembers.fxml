@@ -1,59 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="836.0"
-            style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.eventApp.Controller.ViewClubMemberController">
+<AnchorPane prefHeight="600.0" prefWidth="836.0" style="-fx-background: linear-gradient(to bottom right, #654ea3, #eaafc8); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ViewClubMemberController">
 
-    <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-        <VBox spacing="20" alignment="CENTER" maxWidth="800">
+    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <VBox alignment="CENTER" maxWidth="800" spacing="20">
             <padding>
-                <Insets top="30" right="30" bottom="30" left="30"/>
+                <Insets bottom="30" left="30" right="30" top="30" />
             </padding>
 
             <!-- Title -->
             <VBox alignment="CENTER" spacing="5" style="-fx-background-color: rgba(255,255,255,0.15); -fx-background-radius: 15; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 15; -fx-border-width: 1;">
                 <padding>
-                    <Insets top="20" bottom="20" left="30" right="30"/>
+                    <Insets bottom="20" left="30" right="30" top="20" />
                 </padding>
-                <Label text="📅 Admin Dashboard" style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Segoe UI'; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);"/>
-                <Label text="Manage and monitor members" style="-fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.8); -fx-font-family: 'Segoe UI';"/>
+                <Label style="-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-family: 'Segoe UI'; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 2, 0.5, 0, 1);" text="📅 Admin Dashboard" />
+                <Label style="-fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.8); -fx-font-family: 'Segoe UI';" text="Manage and monitor members" />
             </VBox>
 
             <!-- Club selection -->
             <HBox alignment="CENTER" spacing="10">
-                <Label text="Select Club:" style="-fx-font-size: 16px; -fx-text-fill: white; -fx-font-weight: bold;"/>
-                <ComboBox fx:id="selectMenu" promptText="Select Club" prefWidth="150"/>
+                <Label style="-fx-font-size: 16px; -fx-text-fill: white; -fx-font-weight: bold;" text="Select Club:" />
+                <ComboBox fx:id="selectMenu" prefWidth="150" promptText="Select Club" style="-fx-background-color: white;" />
             </HBox>
 
             <!-- Member Table -->
-            <VBox spacing="10" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 20; -fx-border-color: rgba(255,255,255,0.4); -fx-border-radius: 20; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.3, 0, 5);">
+            <VBox fx:id="tablePane" spacing="10" style="-fx-background-color: rgba(255,255,255,0.95); -fx-background-radius: 20; -fx-border-color: rgba(255,255,255,0.4); -fx-border-radius: 20; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 15, 0.3, 0, 5);">
                 <padding>
-                    <Insets top="20" bottom="20" left="25" right="25"/>
+                    <Insets bottom="20" left="25" right="25" top="20" />
                 </padding>
-                <Label text="📊 Member Overview" style="-fx-font-size: 18px; -fx-text-fill: #654ea3; -fx-font-weight: bold;"/>
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #654ea3; -fx-font-weight: bold;" text="📊 Member Overview" />
                 <TableView fx:id="memberTable" prefHeight="250">
                     <columns>
-                        <TableColumn fx:id="nameCol" text="Member Name" prefWidth="150"/>
-                        <TableColumn fx:id="emailCol" text="Email" prefWidth="150"/>
-                        <TableColumn fx:id="positionCol" text="Position" prefWidth="130"/>
-                        <TableColumn fx:id="clubNameCol" text="Club Name" prefWidth="130"/>
-                        <TableColumn fx:id="userIdCol" text="User Id" prefWidth="100"/>
+                        <TableColumn fx:id="nameCol" prefWidth="150" text="Member Name" />
+                        <TableColumn fx:id="emailCol" prefWidth="150" text="Email" />
+                        <TableColumn fx:id="positionCol" prefWidth="130" text="Position" />
+                        <TableColumn fx:id="clubNameCol" prefWidth="130" text="Club Name" />
+                        <TableColumn fx:id="userIdCol" prefWidth="100" text="User Id" />
                     </columns>
                 </TableView>
             </VBox>
 
             <!-- Back Button -->
-            <Button text="⬅ Back" onAction="#onBack" prefHeight="45" prefWidth="140"
-                    style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 25; -fx-cursor: hand; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 25; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);">
+            <Button onAction="#onBack" prefHeight="45" prefWidth="140" style="-fx-background-color: linear-gradient(to right, #8e44ad, #9b59b6); -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 25; -fx-cursor: hand; -fx-border-color: rgba(255,255,255,0.3); -fx-border-radius: 25; -fx-border-width: 1; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 8, 0.3, 0, 3);" text="⬅ Back">
                 <font>
-                    <Font name="Segoe UI Bold" size="14"/>
+                    <Font name="Segoe UI Bold" size="14" />
                 </font>
             </Button>
         </VBox>

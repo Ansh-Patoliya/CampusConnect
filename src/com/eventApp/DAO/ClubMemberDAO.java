@@ -84,6 +84,7 @@ public class ClubMemberDAO {
             ResultSet resultSet1 = preparedStatement1.executeQuery();
             if (resultSet1.next()) {
                 String position = resultSet1.getString(1);
+
                 if (position.equalsIgnoreCase("President")) {
                     query = "select status from clubs where founder_id = ?";
                     PreparedStatement preparedStatement2 = connection.prepareStatement(query);
