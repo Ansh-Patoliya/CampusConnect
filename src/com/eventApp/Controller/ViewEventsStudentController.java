@@ -155,11 +155,12 @@ public class ViewEventsStudentController {
 
     public void onRegistration(ActionEvent event) {
         EventRegistrationService eventRegistrationService = new EventRegistrationService();
-        int eventId = studentService.viewCurrentEvent().getEventId();
+        Event currentEvent = studentService.viewCurrentEvent();
+        int eventId = currentEvent.getEventId();
         try {
             eventRegistrationService.registerForEvent(eventId);
             onNext(event);
-            FXMLScreenLoader.showMessage("Registration successful for event: " + studentService.viewCurrentEvent().getEventName(), "Registration Success", "info");
+            FXMLScreenLoader.showMessage("Registration successful for event: " + currentEvent.getEventName(), "Registration Success", "info");
         } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
             FXMLScreenLoader.showMessage(e.getMessage(), "Registration Error", "error");
         }
