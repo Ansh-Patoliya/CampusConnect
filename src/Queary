@@ -322,10 +322,10 @@ RETURNS trigger
 language plpgsql
 as $$
 begin
-if old.completion_status <> 'Cancel' and old.approval_status <> 'Rejected' then
-update events set new.completion_status='Completed' where event_id=new.event_id;
-end if;
-return new;
+	if old.completion_status <> 'Cancel' and old.approval_status <> 'Rejected' then
+		update events set new.completion_status='Completed' where event_id=new.event_id;
+	end if;
+	return new;
 end;
 $$;
 
