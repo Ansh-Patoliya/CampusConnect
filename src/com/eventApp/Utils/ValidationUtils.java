@@ -144,8 +144,9 @@ public class ValidationUtils {
 
         for (int i = 0; i < enrollment.length(); i++) {
             char c = enrollment.charAt(i);
-            if (c < '0' || c > '9')
-                throw new ValidationException("Enrollment number must contain only digits (0-9).");
+            if (!(c >= 'A' && c <= 'Z') && !(c >= 'a' && c <= 'z') && !(c >= '0' && c <= '9') ) {
+                throw new ValidationException("Enrollment number can only contain alphanumeric characters.");
+            }
         }
     }
 
