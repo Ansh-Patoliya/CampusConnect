@@ -22,7 +22,7 @@ public class StudentService {
     EventDAO eventDAO= new EventDAO();
     StudentDAO studentDAO= new StudentDAO();
     public MyEventLL sortEventList(){
-        List<Event> eventList=eventDAO.getEventList("Approved");
+        List<Event> eventList=eventDAO.getEventList("Approved","Not Completed");
         User currentUser=CurrentUser.getCurrentUser();
         List<String > interestList = studentDAO.getInterestList(currentUser.getUserId());
         eventList.sort(Comparator.comparingInt((Event e) -> {

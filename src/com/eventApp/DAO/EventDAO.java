@@ -16,12 +16,14 @@ import java.util.List;
 
 public class EventDAO {
 
-    public List<Event> getEventList(String status) {
+    public List<Event> getEventList(String approvalStatus,String completionStatus) {
         List<Event> eventList = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "select * from events where approval_status = ?";
+            String query = "select * from events where approval_status = ? and completion_status=? ";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, status);
+            preparedStatement.setString(1, approvalStatus);
+            preparedStatement.setString(2,completionStatus);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int eventId = resultSet.getInt("event_id");
@@ -42,8 +44,8 @@ public class EventDAO {
                 double ticketPrice = resultSet.getDouble("ticket_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
-                String approvalStatus = resultSet.getString("approval_status");
-                String completionStatus = resultSet.getString("completion_status");
+                approvalStatus = resultSet.getString("approval_status");
+                completionStatus = resultSet.getString("completion_status");
 
                 eventList.add(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants, eventDate,
                         startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus,category));
@@ -134,9 +136,6 @@ public class EventDAO {
 
             ll.add(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants,
                     eventDate, startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus, category));
-        }
-        if (ll.isEmpty()) {
-            throw new DatabaseExceptionHandler("No events found for the specified club.");
         }
         return ll;
     }
