@@ -86,6 +86,7 @@ public class ClubApprovalController {
         loadNextClub();
     }
 
+
     @FXML
     private void onBack(ActionEvent event) {
         // You can implement navigation back to dashboard here

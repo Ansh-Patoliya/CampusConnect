@@ -215,6 +215,10 @@ public class RegistrationController {
         String category = (String) categoryField.getValue();
         int maxMember = Integer.parseInt(maxMemberField.getText());
 
+        if(maxMember <= 0) {
+            throw new NumberFormatException("❌ Maximum members must be greater than 0.");
+        }
+
         if (validateClubFields(name, email, password, confirmPassword, clubName, description, category, enrollmentNo)) {
             User user = new User(enrollmentNo, name, email, password, "CLUB_MEMBER");
             Club club = new Club(clubName, description, category, enrollmentNo, maxMember);
@@ -227,6 +231,10 @@ public class RegistrationController {
 
             } catch (DatabaseExceptionHandler | SQLException | ClassNotFoundException e) {
                 FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
+            }
+            catch (NumberFormatException e) {
+                FXMLScreenLoader.showMessage(e.getMessage(), "maxMember", "error");
+                maxMemberField.clear();
             }
         }
     }
@@ -336,13 +344,6 @@ public class RegistrationController {
             return false; // General validations failed
         }
 
-        try {
-            ValidationUtils.checkName(clubName);
-        } catch (ValidationException e) {
-            clubNameField.clear();
-            FXMLScreenLoader.showMessage(e.getMessage(), "clubName", "error");
-            return false;
-        }
         try {
             ValidationUtils.checkDescription(description);
         } catch (ValidationException e) {

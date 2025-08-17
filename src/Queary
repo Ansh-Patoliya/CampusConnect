@@ -201,6 +201,7 @@ BEGIN
 END;
 $$ ;
 
+// if admin rejects a club, delete club
 CREATE OR REPLACE PROCEDURE deleteClub(id in INT)
 LANGUAGE plpgsql
 AS $$
@@ -209,7 +210,7 @@ BEGIN
 END;
 $$;
 
-
+// when a club is deleted, delete all members (President) and users associated with that club
 CREATE OR REPLACE FUNCTION delete_club_members()
 RETURNS TRIGGER
 LANGUAGE plpgsql
@@ -217,6 +218,7 @@ AS $$
 BEGIN
     DELETE FROM club_members
     WHERE club_id = OLD.club_id;
+
     DELETE FROM users
     WHERE user_id = OLD.founder_id;
     RETURN OLD;

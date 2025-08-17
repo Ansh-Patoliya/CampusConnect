@@ -29,7 +29,8 @@ public class ForgetPasswordController {
 
         try {
             ValidationUtils.checkPassword(password);
-            userService.resetPassword(email, password, confirmPassword);
+            ValidationUtils.isMatchingPasswords(password,confirmPassword);
+            userService.resetPassword(email, password);
             FXMLScreenLoader.showMessage("Password reset successfully!", "Success", "info");
             FXMLScreenLoader.openLoginPage(event);
         } catch (ValidationException e) {
