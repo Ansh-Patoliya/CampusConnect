@@ -77,11 +77,11 @@ public class StudentDAO {
                 String venue = resultSet.getString("venue");
                 int totalParticipants = resultSet.getInt("total_participants");
                 double ticketPrice = resultSet.getDouble("ticket_price");
+                String category = resultSet.getString("category");
                 Event newEvent = new Event(eventId, eventName, clubId, venue, ticketPrice, eventDate, startTime, endTime, totalParticipants );
                 newEvent.setUserId(resultSet.getString("founder_id"));
-
+                newEvent.setCategory(category);
                 eventList.insert(newEvent);
-
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
