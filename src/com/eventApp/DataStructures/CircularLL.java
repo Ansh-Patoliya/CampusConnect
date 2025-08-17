@@ -3,24 +3,15 @@ package com.eventApp.DataStructures;
 import com.eventApp.Model.Event;
 
 public class CircularLL {
+    private Node head = null;
+    private Node current;
+
     public boolean isEmpty() {
         return head == null;
     }
 
-    class Node{
-        Event data;
-        Node next;
-        Node(Event data) {
-            this.data = data;
-            this.next = null;
-            current=head;
-        }
-    }
-    private Node head=null;
-    private Node current;
-
     // insert sorted by date
-    public void add(Event data){
+    public void add(Event data) {
         Node n = new Node(data);
 
         if (head == null) {
@@ -51,9 +42,18 @@ public class CircularLL {
             return true;
         }
         if (a.getEventDate().isEqual(b.getEventDate())) {
-            return a.getApprovalStatus().compareTo(b.getApprovalStatus()) < 0;
+            int pa = getPriority(a.getApprovalStatus());
+            int pb = getPriority(b.getApprovalStatus());
+            return pa < pb;
         }
         return false;
+    }
+
+    private int getPriority(String status) {
+        if (status.equalsIgnoreCase("Approved")) return 0;
+        if (status.equalsIgnoreCase("Pending")) return 1;
+        if (status.equalsIgnoreCase("Rejected")) return 2;
+        return 3;
     }
 
     public Event viewCurrentEvent() {
@@ -69,5 +69,16 @@ public class CircularLL {
         }
         current = current.next;
         return current.data;
+    }
+
+    class Node {
+        Event data;
+        Node next;
+
+        Node(Event data) {
+            this.data = data;
+            this.next = null;
+            current = head;
+        }
     }
 }

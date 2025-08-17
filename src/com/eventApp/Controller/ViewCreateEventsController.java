@@ -44,6 +44,7 @@ public class ViewCreateEventsController {
     public Label approvalStatusLabel;
     public Label completionStatusLabel;
     public AnchorPane updateButtonPane;
+    public AnchorPane cancelButtonPane;
 
     User currentUser = CurrentUser.getCurrentUser();
     ClubService clubService;
@@ -58,6 +59,8 @@ public class ViewCreateEventsController {
 
             Event currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
+                setUpdateButtonPane(currentEvent);
+                setCancelButtonPane(currentEvent);
                 setTextFront(currentEvent);
                 setTextBack(currentEvent);
                 setVisibleFront(true);
@@ -111,13 +114,35 @@ public class ViewCreateEventsController {
         completionStatusLabel.setText(currentEvent.getCompletionStatus());
     }
 
-    private void setTextFront(Event currentEvent) {
-        if(!currentEvent.getApprovalStatus().equalsIgnoreCase("Approved")) {
-            updateButtonPane.setVisible(true);
-        }
-        else {
+    private void setUpdateButtonPane(Event currentEvent) {
+        updateButtonPane.setVisible(true);
+        if(currentEvent.getApprovalStatus().equalsIgnoreCase("Approved")) {
             updateButtonPane.setVisible(false);
+            return;
         }
+        if (currentEvent.getCompletionStatus().equalsIgnoreCase("Completed")) {
+            updateButtonPane.setVisible(false);
+            return;
+        }
+        if (currentEvent.getCompletionStatus().equalsIgnoreCase("Cancel")) {
+            updateButtonPane.setVisible(false);
+            return;
+        }
+    }
+
+    private void setCancelButtonPane(Event currentEvent) {
+        cancelButtonPane.setVisible(true);
+        if (currentEvent.getCompletionStatus().equalsIgnoreCase("Completed")) {
+            cancelButtonPane.setVisible(false);
+            return;
+        }
+        if (currentEvent.getCompletionStatus().equalsIgnoreCase("Cancel")) {
+            cancelButtonPane.setVisible(false);
+            return;
+        }
+    }
+
+    private void setTextFront(Event currentEvent) {
         eventName1.setText(currentEvent.getEventName());
         eventDate1.setText(currentEvent.getEventDate().toString());
         ticketPrice1.setText(String.valueOf(currentEvent.getTicketPrice()));
@@ -155,6 +180,8 @@ public class ViewCreateEventsController {
     }
 
     private void loadNextEvent(Event nextEvent) {
+        setUpdateButtonPane(nextEvent);
+        setCancelButtonPane(nextEvent);
         setTextFront(nextEvent);
         setTextBack(nextEvent);
     }
