@@ -317,6 +317,7 @@ BEGIN
 END;
 $$;
 
+
 CREATE or REPLACE function update_events()
 RETURNS trigger
 language plpgsql
@@ -332,6 +333,7 @@ begin
 	return new;
 end;
 $$;
+
 CREATE TRIGGER trigger_update_events
 after insert on event_history
 for each row

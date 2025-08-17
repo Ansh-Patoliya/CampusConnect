@@ -11,7 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -29,7 +28,7 @@ public class EventHistoryController {
     public TableColumn<Event, String> categoryCol;
     private MyEventLL eventList;
 
-    public void initialize(){
+    public void initialize() {
         eventHistoryTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
         loadEventList();
         setupColumns();
@@ -44,13 +43,9 @@ public class EventHistoryController {
                 new javafx.beans.property.SimpleStringProperty(
                         cellData.getValue().getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 
-//        creatorCol.setCellValueFactory(cellData ->
-//                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getUserId()));
         creatorCol.setCellValueFactory(cellData -> {
             String userId = cellData.getValue().getUserId();
-            System.out.println(userId);
             String username = new UserDAO().getUserNameBy(userId);
-            System.out.println(username);
             return new javafx.beans.property.SimpleStringProperty(username);
         });
 
@@ -73,5 +68,7 @@ public class EventHistoryController {
         eventHistoryTable.setItems(observableEvents);
     }
 
-    public void onBack(ActionEvent actionEvent) { FXMLScreenLoader.openStudentDashboard(actionEvent);}
+    public void onBack(ActionEvent actionEvent) {
+        FXMLScreenLoader.openStudentDashboard(actionEvent);
+    }
 }

@@ -77,11 +77,11 @@ public class StudentDAO {
                 String venue = resultSet.getString("venue");
                 int totalParticipants = resultSet.getInt("total_participants");
                 double ticketPrice = resultSet.getDouble("ticket_price");
+                String category = resultSet.getString("category");
                 Event newEvent = new Event(eventId, eventName, clubId, venue, ticketPrice, eventDate, startTime, endTime, totalParticipants );
                 newEvent.setUserId(resultSet.getString("founder_id"));
-
+                newEvent.setCategory(category);
                 eventList.insert(newEvent);
-
             }
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -94,12 +94,12 @@ public class StudentDAO {
         String query = "SELECT interests FROM students WHERE student_id = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
-
             ps.setString(1, studentId);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    String interest = rs.getString("interests");
-                    interestList.add(interest);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                String[] interests = rs.getString("interests").split(",");
+                for (String i: interests) {
+                    interestList.add(i.trim());
                 }
             }
         } catch (Exception e) {
