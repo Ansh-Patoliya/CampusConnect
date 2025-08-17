@@ -20,7 +20,7 @@ public class ClubApprovalService {
 
     public Club viewNextPendingClub() {
         // Returns next pending club
-        return queue.peek();
+        return queue.viewFirst();
     }
 
     public boolean approveNextClub() {
@@ -56,11 +56,9 @@ public class ClubApprovalService {
         }
     }
 
-    public MyClubQueue getAllPendingClubs() {
-        // Return pending clubs from DB
+    public void getAllPendingClubs() {
         if (queue == null) {
             queue = clubDAO.getClubList("Pending");
         }
-        return queue;
     }
 }

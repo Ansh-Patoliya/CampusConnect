@@ -32,17 +32,18 @@ public class LoginController {
                 User user = userService.getUserByEmail(emailInput);
                 if (user != null) {
                     CurrentUser.setCurrentUser(user);
-                    FXMLScreenLoader.showMessage("✅Login successful", "login","info");
                     if (user.getRole().equalsIgnoreCase("admin")) {
+                        FXMLScreenLoader.showMessage("🔐 Welcome,"+ user.getName()+"! Login Successful.", "Login", "info");
                         FXMLScreenLoader.openAdminDashboard(event);
                     } else if (user.getRole().equalsIgnoreCase("club_member")) {
                         if(new ClubMemberDAO().isPresidentOfApprovedClub(user.getUserId())){
+                            FXMLScreenLoader.showMessage("🔐 Welcome,"+ user.getName()+"! Login Successful.", "Login", "info");
                             FXMLScreenLoader.openClubDashboard(event);
                         } else{
                             FXMLScreenLoader.showMessage("❌Your club is not approved yet", "login", "warning");
                         }
-
                     } else if (user.getRole().equalsIgnoreCase("student")) {
+                        FXMLScreenLoader.showMessage("🔐 Welcome,"+ user.getName()+"! Login Successful.", "Login", "info");
                         FXMLScreenLoader.openStudentDashboard(event);
                     }
                 } else {

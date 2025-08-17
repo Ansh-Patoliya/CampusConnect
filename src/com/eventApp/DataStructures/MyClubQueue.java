@@ -40,7 +40,7 @@ public class MyClubQueue {
         return temp;
     }
 
-    public Club peek() {
+    public Club viewFirst() {
         if (isEmpty()) {
             return null;
         }

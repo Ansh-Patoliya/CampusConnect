@@ -127,7 +127,7 @@ public class UserDAO {
         return false;
     }
 
-    public void resetPass(String emailInput, String newPassword, String confirmPassword) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+    public void resetPass(String emailInput, String newPassword) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
 
             Connection connection = DatabaseConnection.getConnection();
 
@@ -138,7 +138,7 @@ public class UserDAO {
 
             int r = preparedStatement.executeUpdate();
             if (r < 0) {
-                throw new DatabaseExceptionHandler("Password update failed. Please try again.");
+                throw new DatabaseExceptionHandler("User not found. Please try again.");
             }
     }
 
