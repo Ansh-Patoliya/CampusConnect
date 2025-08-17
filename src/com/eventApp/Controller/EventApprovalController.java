@@ -184,8 +184,9 @@ public class EventApprovalController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/AdminDashboard.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) clubName.getScene().getWindow();
-            stage.setScene(new Scene(root));
             stage.setTitle("Admin Dashboard");
+            stage.setScene(new Scene(root, 1400, 800));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
