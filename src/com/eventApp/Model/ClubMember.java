@@ -39,6 +39,7 @@ public class ClubMember extends User {
     public ClubMember(String userId, String name, String email, String position, int clubId) {
         super(userId, name, email);
         this.position = position;
+        this.clubId = clubId;
     }
 
     /**
