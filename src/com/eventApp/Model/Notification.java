@@ -70,30 +70,4 @@ public class Notification {
         return message;
     }
 
-    /**
-     * Sets the content of the notification message.
-     *
-     * @param message the notification message to set
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
-     * Checks if the notification has been read.
-     *
-     * @return true if the notification is read, false otherwise
-     */
-    public boolean isRead() {
-        return isRead;
-    }
-
-    /**
-     * Updates the read status of the notification.
-     *
-     * @param read boolean flag to set the notification as read or unread
-     */
-    public void setRead(boolean read) {
-        isRead = read;
-    }
 }

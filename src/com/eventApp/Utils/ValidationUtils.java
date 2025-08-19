@@ -187,18 +187,6 @@ public class ValidationUtils {
     }
 
     /**
-     * Validates that the given category is not null.
-     *
-     * @param category category string to validate
-     * @throws ValidationException if null
-     */
-    public static void checkCategory(String category) throws ValidationException {
-        if (category == null) {
-            throw new ValidationException("Category cannot be empty.");
-        }
-    }
-
-    /**
      * Validates that an event's start time is strictly before its end time.
      *
      * @param startTime event start time

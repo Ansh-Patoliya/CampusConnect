@@ -44,10 +44,9 @@ public class Main extends Application {
      * initializing and displaying the primary stage of the JavaFX application.
      *
      * @param primaryStage The main window (stage) for the application
-     * @throws Exception If loading the FXML or setting the scene fails
      */
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage){
         try {
             // Load the Login page layout from FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/Loginpage.fxml"));

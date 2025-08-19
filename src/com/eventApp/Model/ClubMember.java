@@ -7,7 +7,6 @@ package com.eventApp.Model;
 public class ClubMember extends User {
 
     private String position;  // Position of the member in the club (e.g., President, Member)
-    private int clubId;       // ID of the club the member belongs to
 
     /**
      * Full constructor for ClubMember with all user and club-specific details.
@@ -18,12 +17,10 @@ public class ClubMember extends User {
      * @param password Password for user login
      * @param role     Role assigned to the user (e.g., "ClubMember")
      * @param position Position held in the club (e.g., President, Secretary)
-     * @param clubId   ID of the club the member belongs to
      */
-    public ClubMember(String userId, String name, String email, String password, String role, String position, int clubId) {
+    public ClubMember(String userId, String name, String email, String password, String role, String position) {
         super(userId, name, email, password, role);
         this.position = position;
-        this.clubId = clubId;
     }
 
     /**
@@ -34,29 +31,10 @@ public class ClubMember extends User {
      * @param name     Name of the user
      * @param email    Email address of the user
      * @param position Position held in the club
-     * @param clubId   ID of the associated club
      */
-    public ClubMember(String userId, String name, String email, String position, int clubId) {
+    public ClubMember(String userId, String name, String email, String position) {
         super(userId, name, email);
         this.position = position;
-    }
-
-    /**
-     * Retrieves the club ID the member is associated with.
-     *
-     * @return the club's unique identifier
-     */
-    public int getClubId() {
-        return clubId;
-    }
-
-    /**
-     * Sets the club ID for the member.
-     *
-     * @param clubId the unique identifier of the club to associate with
-     */
-    public void setClubId(int clubId) {
-        this.clubId = clubId;
     }
 
     /**

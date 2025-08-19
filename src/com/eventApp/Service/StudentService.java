@@ -113,15 +113,4 @@ public class StudentService {
         return myEvents;
     }
 
-    /**
-     * Returns the list of events the student is registered for, sorted by ticket price.
-     *
-     * @param userId The student's user ID
-     * @return List of Events sorted by price
-     */
-    public List<Event> myEventListByPrice(String userId) {
-        List<Event> myEvents = eventDAO.getMyEventList(userId);
-        myEvents.sort(Comparator.comparing(Event::getTicketPrice));
-        return myEvents;
-    }
 }

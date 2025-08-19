@@ -11,7 +11,6 @@ import com.eventApp.Model.Event;
 public class EventService {
     private MyEventLL LL;
 
-    AdminDAO adminDAO = new AdminDAO();
     EventDAO eventDAO = new EventDAO();
 
     /**
