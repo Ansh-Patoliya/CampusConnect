@@ -1,14 +1,13 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.CircularLL;
+import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
+import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Event;
 import com.eventApp.Utils.DatabaseConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -19,6 +18,42 @@ import java.util.List;
  * Handles CRUD operations for events, event filtering, and event management workflows.
  */
 public class EventDAO {
+
+    /**
+     * Creates a new event in the database for a specific club.
+     *
+     * @param event the Event object containing all event details to be inserted
+     * @throws SQLException if database operation fails
+     * @throws ClassNotFoundException if database driver is not found
+     * @throws ValidationException if event creation fails at database level
+     */
+    public void createEvent(Event event) throws SQLException, ClassNotFoundException, ValidationException {
+        // SQL query to insert new event with all required fields
+        String sql = "INSERT INTO events (club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants,category) VALUES ( ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        Connection con = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+
+        // Set all event parameters in the prepared statement
+        preparedStatement.setInt(1, event.getClubId());
+        preparedStatement.setString(2, event.getEventName());
+        preparedStatement.setString(3, event.getDescription());
+        preparedStatement.setDate(4, Date.valueOf(event.getEventDate()));
+        preparedStatement.setDouble(5, event.getTicketPrice());
+        preparedStatement.setString(6, event.getUserId());
+        preparedStatement.setBoolean(7, event.isDiscountApplicable());
+        preparedStatement.setTime(8, Time.valueOf(event.getStartTime()));
+        preparedStatement.setTime(9, Time.valueOf(event.getEndTime()));
+        preparedStatement.setString(10, event.getVenue());
+        preparedStatement.setInt(11, event.getMaxParticipants());
+        preparedStatement.setString(12, event.getCategory());
+
+        int r = preparedStatement.executeUpdate();
+        // Validate that the event was successfully inserted
+        if (r < 0) {
+            throw new ValidationException("Event creation failed. Please try again.");
+        }
+    }
 
     /**
      * Retrieves events filtered by both approval status and completion status.
@@ -67,6 +102,111 @@ public class EventDAO {
             throw new RuntimeException(e);
         }
         return eventList;
+    }
+
+    /**
+     * Retrieves all events from the database, regardless of approval or completion status.
+     *
+     * @return MyEventLL - a linked list of all Event objects from the database
+     */
+    public MyEventLL getEventList(){
+        MyEventLL eventList = new MyEventLL();
+        try(Connection connection = DatabaseConnection.getConnection()){
+            // Query to fetch all events
+            String query = "select * from events";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                // Extract event fields from the result set
+                int eventId = resultSet.getInt("event_id");
+                String eventName = resultSet.getString("event_name");
+                String description = resultSet.getString("description");
+                String venue = resultSet.getString("venue");
+                int clubId = resultSet.getInt("club_id");
+                String userId = resultSet.getString("created_by");
+                String category = resultSet.getString("category");
+                int maxParticipants = resultSet.getInt("max_participants");
+                LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
+                LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
+                LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
+                double ticketPrice = resultSet.getDouble("ticket_price");
+                boolean discountApplicable = resultSet.getBoolean("discount_available");
+                String approvalStatus = resultSet.getString("approval_status");
+                String completionStatus = resultSet.getString("completion_status");
+
+                // Insert the event into the linked list
+                eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            // Rethrow as unchecked exception for higher-level handling
+            throw new RuntimeException(e);
+        }
+        return eventList;
+    }
+
+    /**
+     * Retrieves all events with a specific approval status (e.g., "approved", "pending").
+     *
+     * @param statusOfEvent the approval status to filter events by
+     * @return MyEventLL - a linked list of Event objects with the given approval status
+     */
+    public MyEventLL getEventList(String statusOfEvent){
+        MyEventLL eventList = new MyEventLL();
+        try(Connection connection = DatabaseConnection.getConnection()){
+            // Query to fetch events by approval status
+            String query = "select * from events where approval_status = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,statusOfEvent);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                // Extract event fields from the result set
+                int eventId=resultSet.getInt("event_id");
+                String eventName = resultSet.getString("event_name");
+                String description = resultSet.getString("description");
+                String venue = resultSet.getString("venue");
+                int clubId = resultSet.getInt("club_id");
+                String userId = resultSet.getString("created_by");
+                String category = resultSet.getString("category");
+                int maxParticipants = resultSet.getInt("max_participants");
+                LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
+                LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
+                LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
+                double ticketPrice = resultSet.getDouble("ticket_price");
+                boolean discountApplicable = resultSet.getBoolean("discount_available");
+                String approvalStatus = resultSet.getString("approval_status");
+                String completionStatus = resultSet.getString("completion_status");
+
+                // Insert the event into the linked list
+                eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            // Rethrow as unchecked exception for higher-level handling
+            throw new RuntimeException(e);
+        }
+        return eventList;
+    }
+
+    /**
+     * Updates the approval status of a specific event in the database.
+     *
+     * @param approvalStatus the new approval status to set (e.g., "approved", "rejected")
+     * @param eventId the ID of the event to update
+     * @return true if the update was successful, false otherwise
+     */
+    public boolean approvalStatusUpdate(String approvalStatus,int eventId) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
+            // Prepare update statement for event approval status
+            String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, approvalStatus);
+            preparedStatement.setInt(2, eventId);
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -136,8 +276,8 @@ public class EventDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 // Create simplified Event objects with only essential information for user view
-                myEvents.add(new Event(0, resultSet.getString("event_name"), resultSet.getInt("club_id"), null,
-                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
+                myEvents.add(new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getInt("club_id"), resultSet.getString("venue"),
+                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), resultSet.getTime("start_time").toLocalTime(),resultSet.getTime("end_time").toLocalTime(), resultSet.getInt("max_participants")));
             }
         } catch (Exception e) {
             // Rethrow as unchecked exception for higher-level handling

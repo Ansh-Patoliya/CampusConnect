@@ -24,56 +24,6 @@ import java.util.Objects;
 public class UserDAO {
 
     /**
-     * Retrieves the club ID for a given club name.
-     * Throws an exception if the club is not found to ensure data integrity.
-     *
-     * @param clubName the name of the club to search for
-     * @return int club ID of the found club
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
-     * @throws DatabaseExceptionHandler if club is not found
-     */
-    public static int getClubId(String clubName) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        int clubId = 0;
-        Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select club_id from clubs where club_name=?");
-        preparedStatement.setString(1, clubName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            clubId = resultSet.getInt(1);
-        } else {
-            // Throw exception if club not found to prevent silent failures
-            throw new DatabaseExceptionHandler("Club not found.");
-        }
-        return clubId;
-    }
-
-    /**
-     * Retrieves the club ID for a club that a specific user is a member of.
-     * Used to determine which club a user belongs to for authorization purposes.
-     *
-     * @param userId the unique identifier of the user
-     * @return int club ID of the club the user is a member of
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
-     * @throws DatabaseExceptionHandler if user is not a member of any club
-     */
-    public static int getClubIdByUserId(String userId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        int clubId = 0;
-        Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where member_id=?");
-        preparedStatement.setString(1, userId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            clubId = resultSet.getInt(1);
-        } else {
-            // Throw exception if user is not a club member
-            throw new DatabaseExceptionHandler("Club not found.");
-        }
-        return clubId;
-    }
-
-    /**
      * Validates that an email address is not already registered in the system.
      * Part of the registration validation process to ensure unique email addresses.
      *
@@ -145,32 +95,6 @@ public class UserDAO {
     }
 
     /**
-     * Registers student-specific information in the students table.
-     * Called after successful user registration to add academic details.
-     * Converts interest list to comma-separated string for database storage.
-     *
-     * @param student the Student object containing academic information
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
-     * @throws DatabaseExceptionHandler if student registration fails
-     */
-    public void registrationStudent(Student student) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into students values(?,?,?,?)");
-        preparedStatement.setString(1, student.getUserId());
-        preparedStatement.setString(2, student.getDepartment());
-        preparedStatement.setInt(3, student.getSemester());
-        // Convert interest list to CSV string for database storage
-        preparedStatement.setString(4, String.join(",", student.getInterest()));
-
-        int studentInsert = preparedStatement.executeUpdate();
-        if (studentInsert > 0) {
-            return; // Success case
-        }
-        throw new DatabaseExceptionHandler("Student registration failed. Please try again.");
-    }
-
-    /**
      * Validates user login credentials by checking email and password.
      * Uses secure password comparison to verify authentication.
      *
@@ -223,28 +147,6 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Registers a user as a member of a specific club with a given position.
-     * Creates the many-to-many relationship between users and clubs.
-     *
-     * @param clubMember the ClubMember object containing membership information
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
-     * @throws DatabaseExceptionHandler if club member registration fails
-     */
-    public void registrationClubMember(ClubMember clubMember) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("insert into club_members values(?,?,?)");
-        preparedStatement.setString(1, clubMember.getUserId());
-        preparedStatement.setInt(2, clubMember.getClubId());
-        preparedStatement.setString(3, clubMember.getPosition());
-
-        int clubMemberInsert = preparedStatement.executeUpdate();
-        // Validate that the club membership was successfully created
-        if (clubMemberInsert < 0) {
-            throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
-        }
-    }
 
     /**
      * Registers a new club in the system.
@@ -271,29 +173,6 @@ public class UserDAO {
         if (insertClub < 0) {
             throw new DatabaseExceptionHandler("Club registration failed. Please try again.");
         }
-    }
-
-    /**
-     * Retrieves a list of all club names in the system.
-     * Used for dropdown menus and selection components in the UI.
-     *
-     * @return List<String> containing all club names, or empty list if none found
-     */
-    public List<String> getAllClubsName() {
-        List<String> clubNames = new ArrayList<>();
-        try {
-            Connection connection = DatabaseConnection.getConnection();
-            PreparedStatement ps = connection.prepareStatement("SELECT club_name FROM clubs");
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                String clubName = rs.getString(1);
-                clubNames.add(clubName);
-            }
-        } catch (Exception e) {
-            // Print stack trace for debugging, but don't throw exception
-            e.printStackTrace();
-        }
-        return clubNames;
     }
 
     /**

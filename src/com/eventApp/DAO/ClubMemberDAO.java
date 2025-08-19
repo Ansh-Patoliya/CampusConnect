@@ -1,5 +1,6 @@
 package com.eventApp.DAO;
 
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
 import com.eventApp.Utils.DatabaseConnection;
@@ -57,12 +58,35 @@ public class ClubMemberDAO {
     }
 
     /**
+     * Registers a user as a member of a specific club with a given position.
+     * Creates the many-to-many relationship between users and clubs.
+     *
+     * @param clubMember the ClubMember object containing membership information
+     * @throws SQLException             if database operation fails
+     * @throws ClassNotFoundException   if database driver is not found
+     * @throws DatabaseExceptionHandler if club member registration fails
+     */
+    public void registrationClubMember(ClubMember clubMember) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into club_members values(?,?,?)");
+        preparedStatement.setString(1, clubMember.getUserId());
+        preparedStatement.setInt(2, clubMember.getClubId());
+        preparedStatement.setString(3, clubMember.getPosition());
+
+        int clubMemberInsert = preparedStatement.executeUpdate();
+        // Validate that the club membership was successfully created
+        if (clubMemberInsert < 0) {
+            throw new DatabaseExceptionHandler("Club member registration failed. Please try again.");
+        }
+    }
+
+    /**
      * Retrieves all club members for clubs founded by a specific user.
      * Used by club founders to view members of their clubs.
      *
      * @param userId the ID of the club founder
      * @return List<ClubMember> containing all members of clubs founded by the given user
-     * @throws SQLException if database operation fails
+     * @throws SQLException           if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */
     public List<ClubMember> getClubMemberList(String userId) throws SQLException, ClassNotFoundException {
@@ -70,7 +94,7 @@ public class ClubMemberDAO {
         Connection connection = DatabaseConnection.getConnection();
 
         // Complex join query to get members of all clubs founded by the specified user
-        String query = "select u.name,u.email,cm.position,u.user_id from users u \n" +
+        String query = "select u.name,u.email,cm.position,u.user_id,c.club_id from users u \n" +
                 "inner join club_members cm on cm.member_id = u.user_id\n" +
                 "inner join clubs c on c.club_id=cm.club_id WHERE c.founder_id=?";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -81,8 +105,7 @@ public class ClubMemberDAO {
         while (resultSet.next()) {
             // Note: password and role are set to null for security, club_id is set to 0 as not needed here
             clubMemberList.add(new ClubMember(resultSet.getString("user_id"), resultSet.getString("name"),
-                    resultSet.getString("email"), null, null,
-                    resultSet.getString("position"), 0));
+                    resultSet.getString("email"), resultSet.getString("position"),resultSet.getInt("club_id")));
         }
         return clubMemberList;
     }
@@ -93,7 +116,7 @@ public class ClubMemberDAO {
      *
      * @param clubId the unique identifier of the club
      * @return List<ClubMember> containing all members of the specified club
-     * @throws SQLException if database operation fails
+     * @throws SQLException           if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */
     public List<ClubMember> getClubMemberList(int clubId) throws SQLException, ClassNotFoundException {
@@ -111,8 +134,7 @@ public class ClubMemberDAO {
         // Process each member record and include the club_id
         while (resultSet.next()) {
             clubMemberList.add(new ClubMember(resultSet.getString("user_id"), resultSet.getString("name"),
-                    resultSet.getString("email"), null, null,
-                    resultSet.getString("position"), resultSet.getInt("club_id")));
+                    resultSet.getString("email"), resultSet.getString("position"), resultSet.getInt("club_id")));
         }
         return clubMemberList;
     }
@@ -125,12 +147,12 @@ public class ClubMemberDAO {
      * @param user_id the ID of the user to check
      * @return true if the user is president of an approved club, false otherwise
      */
-    public boolean isPresidentOfApprovedClub(String user_id){
-        try(Connection connection = DatabaseConnection.getConnection()){
+    public boolean isPresidentOfApprovedClub(String user_id) {
+        try (Connection connection = DatabaseConnection.getConnection()) {
             // Step 1: Check if the user has a president position in any club
             String query = "select position from club_members where member_id = ?";
             PreparedStatement preparedStatement1 = connection.prepareStatement(query);
-            preparedStatement1.setString(1,user_id);
+            preparedStatement1.setString(1, user_id);
             ResultSet resultSet1 = preparedStatement1.executeQuery();
 
             if (resultSet1.next()) {
@@ -152,7 +174,7 @@ public class ClubMemberDAO {
                     }
                 }
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             // Print stack trace for debugging, but don't throw exception
             e.printStackTrace();
         }

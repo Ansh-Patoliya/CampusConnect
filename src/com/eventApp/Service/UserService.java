@@ -1,5 +1,8 @@
 package com.eventApp.Service;
 
+import com.eventApp.DAO.ClubDAO;
+import com.eventApp.DAO.ClubMemberDAO;
+import com.eventApp.DAO.StudentDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Club;
@@ -15,10 +18,12 @@ import java.sql.SQLException;
 
 public class UserService {
     private final UserDAO userDAO = new UserDAO();
+    private final StudentDAO studentDAO = new StudentDAO();
+    private final ClubMemberDAO clubMemberDAO = new ClubMemberDAO();
 
     public void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
         userDAO.registrationUser(user);
-        userDAO.registrationStudent(student);
+        studentDAO.registrationStudent(student);
     }
 
     public void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
@@ -29,7 +34,7 @@ public class UserService {
         resultSet.next();
         if (resultSet.getBoolean(1)) {
             userDAO.registrationUser(user);
-            userDAO.registrationClubMember(clubMember);
+            clubMemberDAO.registrationClubMember(clubMember);
         } else
             throw new DatabaseExceptionHandler("club member limit exceeded.");
     }
@@ -42,12 +47,13 @@ public class UserService {
         userDAO.resetPass(emailInput, newPassword);
     }
 
+    ClubDAO clubDAO = new ClubDAO();
     public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
         userDAO.registrationUser(user);
-        userDAO.registrationClub(club);
-        int clubId=UserDAO.getClubId(club.getClubName());
+        clubDAO.registrationClub(club);
+        int clubId=clubDAO.getClubIdBy(club.getClubName());
         clubMember.setClubId(clubId);
-        userDAO.registrationClubMember(clubMember);
+        clubMemberDAO.registrationClubMember(clubMember);
     }
 
     public User getUserByEmail(String emailInput) {

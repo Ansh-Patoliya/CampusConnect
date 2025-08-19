@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
@@ -176,10 +177,16 @@ public class RegistrationController {
     }
 
     private void loadExistingClubs() {
-        List<String> clubs = userDAO.getAllClubsName();
-        if (clubs != null && !clubs.isEmpty()) {
-            selectClubField.getItems().addAll(clubs);
+        List<String> clubs = null;
+        try {
+            clubs = clubDAO.getAllClubNames();
+            if (clubs != null && !clubs.isEmpty()) {
+                selectClubField.getItems().addAll(clubs);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "registration", "error");
         }
+
     }
 
     public void openLoginPage(ActionEvent event) {
@@ -268,12 +275,13 @@ public class RegistrationController {
         }
     }
 
+    ClubDAO clubDAO = new ClubDAO();
     private void handleJoinExistingClub(ActionEvent event, String enrollmentNo, String name, String email, String password) {
         // Handle joining existing club logic here
         String selectClub = (String) selectClubField.getValue();
         if (!(selectClub == null || selectClub.isEmpty())) {
             try {
-                int clubId = UserDAO.getClubId(selectClub);
+                int clubId = clubDAO.getClubIdBy(selectClub);
                 User user = new User(enrollmentNo, name, email, password, "club_member".toUpperCase());
                 ClubMember clubMember = new ClubMember(enrollmentNo, name, email, password, "club_member".toUpperCase(), "Member", clubId);
 
