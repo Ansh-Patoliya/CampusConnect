@@ -102,9 +102,9 @@ public class Event {
 
     public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
 
-    public int getClubId() { return clubId; }
-
     public void setClubId(int clubId) { this.clubId = clubId; }
+
+    public int getClubId() { return clubId; }
 
     public String getDescription() { return description; }
 
