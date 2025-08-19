@@ -45,13 +45,17 @@ public class EventDAO {
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
                 String category = resultSet.getString("category");
+
                 int clubId = resultSet.getInt("club_id");
                 String userId = resultSet.getString("created_by");
+
                 int maxParticipants = resultSet.getInt("max_participants");
+
                 LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
                 LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
                 LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
-                double ticketPrice = resultSet.getDouble("ticket_price");
+
+                double ticketPrice = resultSet.getDouble("discounted_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
                 // Re-read status from database to ensure consistency
@@ -136,7 +140,7 @@ public class EventDAO {
             while (resultSet.next()) {
                 // Create simplified Event objects with only essential information for user view
                 myEvents.add(new Event(0, resultSet.getString("event_name"), resultSet.getInt("club_id"), null,
-                        resultSet.getDouble("ticket_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
+                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), null, null, 0));
             }
         } catch (Exception e) {
             // Rethrow as unchecked exception for higher-level handling
@@ -170,13 +174,17 @@ public class EventDAO {
             String description = resultSet.getString("description");
             String venue = resultSet.getString("venue");
             String category = resultSet.getString("category");
+
             String userId = resultSet.getString("created_by");
             int maxParticipants = resultSet.getInt("max_participants");
+
             LocalDate eventDate = resultSet.getDate("event_date").toLocalDate();
             LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
             LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
-            double ticketPrice = resultSet.getDouble("ticket_price");
+
+            double ticketPrice = resultSet.getDouble("discounted_price");
             boolean discountApplicable = resultSet.getBoolean("discount_available");
+
             String approvalStatus = resultSet.getString("approval_status");
             String completionStatus = resultSet.getString("completion_status");
 
@@ -245,5 +253,6 @@ public class EventDAO {
         if (r<0){
             throw new DatabaseExceptionHandler("Failed to update the event. Please try again later.");
         }
+        
     }
 }
