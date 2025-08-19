@@ -94,47 +94,6 @@ CREATE TABLE event_registration (
     CONSTRAINT fk_registration_event FOREIGN KEY (event_id) REFERENCES events(event_id) ON DELETE CASCADE,
 );
 
---functions
-create or replace function
-returnUserData(in uid varchar)
-returns users
-language plpgsql
-as $$
-declare user_data users%rowtype;
-begin
-select * into user_data from users where user_id = uid;
-return user_data;
-end;
-$$
-
-create or replace function
-returnClubData(in cid int)
-returns clubs
-language plpgsql
-as $$
-declare club_data clubs%rowtype;
-begin
-select * into club_data from clubs where club_id = cid;
-return club_data;
-end;
-$$
-
-create or replace function
-returnEventData(in eid int)
-returns events
-language plpgsql
-as $$
-declare event_data events%rowtype;
-begin
-select * into event_data from events where event_id = eid;
-return event_data;
-end;
-$$
-
---discount
---trigger to send data into history table
-
-
 CREATE OR REPLACE FUNCTION update_event_reg_count()
 RETURNS trigger
 LANGUAGE plpgsql
@@ -147,7 +106,6 @@ BEGIN
     RETURN NEW;
 END;
 $$;
-
 
 CREATE TRIGGER trg_after_insert_event_reg
 AFTER INSERT ON event_registration

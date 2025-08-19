@@ -1,11 +1,7 @@
 package com.eventApp.Loader;
 
-import com.eventApp.Controller.ClubController;
 import com.eventApp.Controller.EventUpdateController;
-import com.eventApp.Controller.StudentController;
-import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Event;
-import com.eventApp.Model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -16,7 +12,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Utility class responsible for loading various FXML screens in the Event App.
+ * Provides static methods to open different pages and dialogs by handling
+ * FXMLLoader initialization, scene setup, and stage management.
+ */
 public class FXMLScreenLoader {
+
+    /**
+     * Opens the Login page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openLoginPage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/Loginpage.fxml"));
@@ -30,6 +37,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Signup/Registration page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openSignupPage(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/registration.fxml"));
@@ -43,6 +55,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Forgot Password page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openForgotPassword(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ForgotPassword.fxml"));
@@ -56,12 +73,17 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Event Registration form page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openEventRegistration(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventRegistrationForm.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setTitle("Forgot Password");
+            stage.setTitle("Forgot Password");  // Might want to fix this title to "Event Registration"
             stage.setScene(new Scene(root, 1400, 800));
             stage.show();
         } catch (IOException e) {
@@ -69,6 +91,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Admin Dashboard page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openAdminDashboard(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/AdminDashboard.fxml"));
@@ -82,6 +109,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Admin Profile page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openAdminProfile(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/AdminViewProfile.fxml"));
@@ -95,6 +127,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Student view for events.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openStudentViewEvent(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEventsStudent.fxml"));
@@ -108,6 +145,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Club Approval page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openClubApproval(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubApproval.fxml"));
@@ -121,6 +163,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Event Approval page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openEventApproval(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventApproval.fxml"));
@@ -134,6 +181,13 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Shows an alert message dialog.
+     *
+     * @param message the message to display
+     * @param title   the title of the alert window
+     * @param type    the type of alert ("error", "info", or other for warning)
+     */
     public static void showMessage(String message, String title, String type) {
         Alert alert;
         if (type.equalsIgnoreCase("error")) {
@@ -144,11 +198,16 @@ public class FXMLScreenLoader {
             alert = new Alert(Alert.AlertType.WARNING);
         }
         alert.setTitle(title);
-        alert.setHeaderText(null); // No header
+        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
 
+    /**
+     * Opens the View Events page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openViewEvents(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEvents.fxml"));
@@ -160,9 +219,13 @@ public class FXMLScreenLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    /**
+     * Opens the Club Dashboard page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openClubDashboard(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubDashboard.fxml"));
@@ -176,6 +239,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Student Profile page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openStudentProfile(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/StudentViewProfile.fxml"));
@@ -187,10 +255,13 @@ public class FXMLScreenLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-
+    /**
+     * Opens the Student Dashboard page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openStudentDashboard(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/StudentDashboard.fxml"));
@@ -202,13 +273,14 @@ public class FXMLScreenLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
-
-
+    /**
+     * Opens the Club Member Profile page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openClubMemberProfile(ActionEvent event) {
-
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubMemberProfile.fxml"));
             Parent root = loader.load();
@@ -221,6 +293,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Event History view page.
+     *
+     * @param actionEvent ActionEvent triggered from the UI
+     */
     public static void openViewEventHistory(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewEventHistory.fxml"));
@@ -234,6 +311,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Club Details page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openClubDetails(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ClubDetails.fxml"));
@@ -247,6 +329,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the View Members page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openViewMember(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewMembers.fxml"));
@@ -260,6 +347,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Club Member List page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openClubMemberList(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewClubMembers.fxml"));
@@ -273,6 +365,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the View Participants page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openViewParticipant(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewParticipants.fxml"));
@@ -286,6 +383,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the Export Club page.
+     *
+     * @param actionEvent ActionEvent triggered from the UI
+     */
     public static void openExportClub(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewClubs.fxml"));
@@ -299,6 +401,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the My Participation page.
+     *
+     * @param actionEvent ActionEvent triggered from the UI
+     */
     public static void openMyParticipation(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/MyParticipation.fxml"));
@@ -312,6 +419,11 @@ public class FXMLScreenLoader {
         }
     }
 
+    /**
+     * Opens the View/Create Events page.
+     *
+     * @param event ActionEvent triggered from the UI
+     */
     public static void openViewCreateEvents(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/ViewCreateEvents.fxml"));
@@ -325,11 +437,18 @@ public class FXMLScreenLoader {
         }
     }
 
-    public static void openUpdateEvent(ActionEvent actionEvent ,Event event) {
+    /**
+     * Opens the Event Update form and passes the event object for editing.
+     *
+     * @param actionEvent ActionEvent triggered from the UI
+     * @param event       Event object to be updated
+     */
+    public static void openUpdateEvent(ActionEvent actionEvent, Event event) {
         try {
             FXMLLoader loader = new FXMLLoader(FXMLScreenLoader.class.getResource("/com/eventApp/FXML/EventUpdateForm.fxml"));
             Parent root = loader.load();
 
+            // Pass the event object to the controller to prefill the update form
             EventUpdateController eventUpdateController = loader.getController();
             eventUpdateController.setEvent(event);
 
