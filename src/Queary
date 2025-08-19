@@ -345,9 +345,8 @@ AS $$
 DECLARE
     -- Cursor to loop through applicable events
     event_cursor CURSOR FOR
-        SELECT event_id, event_date, registered_count, max_participants, ticket_price
-        FROM events
-        WHERE discount_available = true;
+        SELECT event_id, event_date, registered_count, max_participants, ticket_price, discount_available
+        FROM events;
 
     -- Variables
     v_event_id INT;
@@ -356,7 +355,7 @@ DECLARE
     v_max_participants INT;
     v_ticket_price NUMERIC;
     v_discounted_price NUMERIC;
-
+	v_discount_available BOOLEAN;
     is_early_registrant BOOLEAN;
     is_event_soon BOOLEAN;
 BEGIN
@@ -364,15 +363,15 @@ BEGIN
 
     LOOP
         FETCH event_cursor INTO
-            v_event_id, v_event_date, v_registered_count, v_max_participants, v_ticket_price;
-
+            v_event_id, v_event_date, v_registered_count, v_max_participants, v_ticket_price,v_discount_available;
         EXIT WHEN NOT FOUND;
+		v_discounted_price := v_ticket_price;
 
+if v_discount_available then
         -- Check conditions
         is_early_registrant := v_registered_count <= CEIL(0.2 * v_max_participants);
         is_event_soon := v_event_date <= CURRENT_DATE + INTERVAL '7 days';
 
-        v_discounted_price := v_ticket_price;
 
        IF is_early_registrant = TRUE AND is_event_soon = TRUE THEN
             -- Both true: only apply 10% discount
@@ -389,13 +388,12 @@ BEGIN
         END IF;
 
         v_discounted_price := ROUND(v_discounted_price, 2);
-
-        UPDATE events
+		end if;
+		UPDATE events
         SET discounted_price = v_discounted_price
         WHERE event_id = v_event_id;
 
     END LOOP;
-
-    CLOSE event_cursor;
+	CLOSE event_cursor;
 END;
 $$;
