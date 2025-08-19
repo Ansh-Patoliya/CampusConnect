@@ -92,10 +92,6 @@ public class Club {
         return founderId;
     }
 
-    public void setFounderId(String founderId) {
-        this.founderId = founderId;
-    }
-
     public int getMemberCount() {
         return memberCount;
     }

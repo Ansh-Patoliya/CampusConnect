@@ -8,7 +8,6 @@ import java.util.List;
      * A fixed-size custom queue implementation for storing Club objects.
      * Supports basic queue operations such as enqueue, dequeue, and peek,
      * along with utility methods to check emptiness and retrieve all clubs.
-     *
      * Designed specifically for use in the Event App to manage Club-related workflows.
      */
 public class MyClubQueue {
