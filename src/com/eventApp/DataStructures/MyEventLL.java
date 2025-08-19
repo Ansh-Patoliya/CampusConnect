@@ -130,10 +130,8 @@ public class MyEventLL {
             current.next.prev = current.prev;
         }
 
-        if (current == first) {
-            current = first; // Reset current to first node
-        } else {
-            current = current.next; // Move current to next node
+        if(current != first){
+            current = current.next; // Move the current pointer forward only if it's not pointing to the new head
         }
 
         size--;

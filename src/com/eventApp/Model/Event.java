@@ -1,18 +1,27 @@
 package com.eventApp.Model;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Represents an Event in the Event Management System.
+ * Stores event details like name, date, time, venue, price, status, etc.
+ */
 public class Event {
-    private String eventName, venue, description, approvalStatus,completionStatus, userId,category;
-    private int maxParticipants,eventId,clubId;
+
+    // Basic event details
+    private String eventName, venue, description, approvalStatus, completionStatus, userId, category;
+    private int maxParticipants, eventId, clubId;
     private double ticketPrice;
     private int registeredCount = 0;
     private boolean discountApplicable;
     LocalDate eventDate;
     LocalTime startTime, endTime;
-    static int eventCount = 1;
 
-    public Event(String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable, String category) {
+    // Constructor for creating a new event
+    public Event(String eventName, String description, String venue, int clubId, String userId, int maxParticipants,
+                 LocalDate eventDate, LocalTime startTime, LocalTime endTime, double ticketPrice,
+                 boolean discountApplicable, String category) {
         this.eventName = eventName;
         this.description = description;
         this.venue = venue;
@@ -24,12 +33,16 @@ public class Event {
         this.userId = userId;
         this.approvalStatus = "pending";
         this.completionStatus = "not_completed";
-        this.ticketPrice= ticketPrice;
-        this.discountApplicable= discountApplicable;
-        this.category=category;
+        this.ticketPrice = ticketPrice;
+        this.discountApplicable = discountApplicable;
+        this.category = category;
     }
 
-    public Event(int eventId,String eventName, String description, String venue,int clubId,String userId, int maxParticipants, LocalDate eventDate, LocalTime startTime,LocalTime endTime ,double ticketPrice,boolean discountApplicable,String approvalStatus,String completionStatus,String category) {
+    // Constructor for loading event data from database
+    public Event(int eventId, String eventName, String description, String venue, int clubId, String userId,
+                 int maxParticipants, LocalDate eventDate, LocalTime startTime, LocalTime endTime,
+                 double ticketPrice, boolean discountApplicable, String approvalStatus,
+                 String completionStatus, String category) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
@@ -47,7 +60,9 @@ public class Event {
         this.category = category;
     }
 
-    public Event(int eventId, String eventName, int clubId, String venue, Double ticketPrice,LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
+    // Constructor for loading only required event data from database
+    public Event(int eventId, String eventName, int clubId, String venue, Double ticketPrice,
+                 LocalDate eventDate, LocalTime startTime, LocalTime endTime, int totalParticipants) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.venue = venue;
@@ -59,100 +74,60 @@ public class Event {
         this.registeredCount = totalParticipants;
     }
 
-
-    //make method to get count of registrations
+    // Getters and setters for all properties
 
     public int getEventId() { return eventId; }
 
     public String getEventName() { return eventName; }
 
+    public void setEventName(String eventName) { this.eventName = eventName; }
+
     public String getVenue() { return venue; }
+
+    public void setVenue(String venue) { this.venue = venue; }
 
     public LocalDate getEventDate() { return eventDate; }
 
+    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
+
     public LocalTime getStartTime() { return startTime; }
+
+    public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
 
     public LocalTime getEndTime() { return endTime; }
 
+    public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
+
     public int getMaxParticipants() { return maxParticipants; }
+
+    public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
 
     public int getClubId() { return clubId; }
 
     public void setClubId(int clubId) { this.clubId = clubId; }
 
-    public void setMaxParticipants(int maxParticipants) { this.maxParticipants = maxParticipants; }
+    public String getDescription() { return description; }
 
-    public void setEventId(int eventId) { this.eventId = eventId; }
+    public void setDescription(String description) { this.description = description; }
 
-    public void setEventName(String eventName) { this.eventName = eventName; }
+    public String getUserId() { return userId; }
 
-    public void setVenue(String venue) { this.venue = venue; }
+    public void setUserId(String userId) { this.userId = userId; }
 
-    public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
+    public double getTicketPrice() { return ticketPrice; }
 
-    public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
+    public void setTicketPrice(double ticketPrice) { this.ticketPrice = ticketPrice; }
 
-    public void setEventDate(LocalDate eventDate) { this.eventDate = eventDate; }
+    public boolean isDiscountApplicable() { return discountApplicable; }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public double getTicketPrice() {
-        return ticketPrice;
-    }
-
-    public void setTicketPrice(double ticketPrice) {
-        this.ticketPrice = ticketPrice;
-    }
-
-    public boolean isDiscountApplicable() {
-        return discountApplicable;
-    }
-
-    public void setDiscountApplicable(boolean discountApplicable) {
-        this.discountApplicable = discountApplicable;
-    }
-
-    public static int getRegisteredCount(int registeredCount) {
-        return registeredCount;
-    }
-
-    public void setRegisteredCount(int registeredCount) {
-        this.registeredCount = registeredCount;
-    }
-
-    public String createEventID(){
-        return "E" +eventCount++;
-    }
+    public void setDiscountApplicable(boolean discountApplicable) { this.discountApplicable = discountApplicable; }
 
     public String getApprovalStatus() {
         return approvalStatus;
     }
 
-    public void setApprovalStatus(String approvalStatus) {
-        this.approvalStatus = approvalStatus;
-    }
-
     public String getCompletionStatus() {
         return completionStatus;
-    }
-
-    public void setCompletionStatus(String completionStatus) {
-        this.completionStatus = completionStatus;
     }
 
     public String getCategory() {
@@ -163,11 +138,12 @@ public class Event {
         this.category = category;
     }
 
+    // Overriding to string method
     @Override
     public String toString() {
         return "Event{" +
                 "eventDate=" + eventDate +
-                "category"+category+
+                ", category=" + category +
                 '}';
     }
 }

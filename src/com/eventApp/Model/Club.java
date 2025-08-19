@@ -48,9 +48,7 @@ public class Club {
     }
 
     // Getters and setters for different fields
-    public int getMaxMemberCount() {
-        return maxMemberCount;
-    }
+    public int getMaxMemberCount() { return maxMemberCount; }
 
     public String getStatus() {
         return status;
