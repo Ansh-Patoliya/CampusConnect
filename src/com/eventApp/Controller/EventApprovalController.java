@@ -85,6 +85,7 @@ public class EventApprovalController {
         maxParticipate.setText(String.valueOf(event.getMaxParticipants()));
         ticketPrice.setText(String.valueOf(event.getTicketPrice()));
         discountAvailabel.setText(String.valueOf(event.isDiscountApplicable()));
+        categoryField.setText(event.getCategory());
     }
 
     private void clearLabels() {
@@ -178,6 +179,7 @@ public class EventApprovalController {
         maxParticipate.setVisible(visible);
         ticketPrice.setVisible(visible);
         discountAvailabel.setVisible(visible);
+        categoryField.setVisible(visible);
     }
     public void openAdminDashboard() {
         try {
