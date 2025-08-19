@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.EventDAO;
 import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
@@ -29,7 +30,7 @@ public class ViewEventsController {
 
     private MyEventLL eventList;
 
-    private final AdminDAO adminDAO = new AdminDAO();
+    private final EventDAO eventDAO = new EventDAO();
 
     @FXML
     public void initialize() {
@@ -41,7 +42,7 @@ public class ViewEventsController {
     }
 
     private void loadEventList() {
-        this.eventList = adminDAO.getEventList();
+        this.eventList = eventDAO.getEventList();
     }
 
     private void setupColumns() {

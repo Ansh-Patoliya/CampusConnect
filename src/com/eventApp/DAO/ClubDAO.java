@@ -1,6 +1,7 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyClubQueue;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.Event;
@@ -17,38 +18,29 @@ import java.util.List;
 public class ClubDAO {
 
     /**
-     * Creates a new event in the database for a specific club.
+     * Registers a new club in the system.
+     * Creates the club with pending status for admin approval.
      *
-     * @param event the Event object containing all event details to be inserted
+     * @param club the Club object containing club information
      * @throws SQLException if database operation fails
      * @throws ClassNotFoundException if database driver is not found
-     * @throws ValidationException if event creation fails at database level
+     * @throws DatabaseExceptionHandler if club registration fails
      */
-    public void createEvent(Event event) throws SQLException, ClassNotFoundException, ValidationException {
-        // SQL query to insert new event with all required fields
-        String sql = "INSERT INTO events (club_id,event_name,description,event_date,ticket_price,created_by,discount_available,start_time,end_time,venue,max_participants,category) VALUES ( ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public void registrationClub(Club club) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        Connection connection = DatabaseConnection.getConnection();
 
-        Connection con = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into clubs(club_name,category,description,founder_id,status,max_member) values(?,?,?,?,?,?)");
+        preparedStatement.setString(1, club.getClubName());
+        preparedStatement.setString(2, club.getCategory());
+        preparedStatement.setString(3, club.getDescriptions());
+        preparedStatement.setString(4, club.getFounderId());
+        preparedStatement.setString(5, club.getStatus());
+        preparedStatement.setInt(6, club.getMaxMemberCount());
 
-        // Set all event parameters in the prepared statement
-        preparedStatement.setInt(1, event.getClubId());
-        preparedStatement.setString(2, event.getEventName());
-        preparedStatement.setString(3, event.getDescription());
-        preparedStatement.setDate(4, Date.valueOf(event.getEventDate()));
-        preparedStatement.setDouble(5, event.getTicketPrice());
-        preparedStatement.setString(6, event.getUserId());
-        preparedStatement.setBoolean(7, event.isDiscountApplicable());
-        preparedStatement.setTime(8, Time.valueOf(event.getStartTime()));
-        preparedStatement.setTime(9, Time.valueOf(event.getEndTime()));
-        preparedStatement.setString(10, event.getVenue());
-        preparedStatement.setInt(11, event.getMaxParticipants());
-        preparedStatement.setString(12, event.getCategory());
-
-        int r = preparedStatement.executeUpdate();
-        // Validate that the event was successfully inserted
-        if (r < 0) {
-            throw new ValidationException("Event creation failed. Please try again.");
+        int insertClub = preparedStatement.executeUpdate();
+        // Validate that the club was successfully created
+        if (insertClub < 0) {
+            throw new DatabaseExceptionHandler("Club registration failed. Please try again.");
         }
     }
 
@@ -144,6 +136,7 @@ public class ClubDAO {
         return clubId;
     }
 
+
     /**
      * Retrieves complete club information for a given club ID.
      *
@@ -173,6 +166,31 @@ public class ClubDAO {
             e.printStackTrace();
         }
         return club;
+    }
+
+    /**
+     * Retrieves the club ID for a club that a specific user is a member of.
+     * Used to determine which club a user belongs to for authorization purposes.
+     *
+     * @param userId the unique identifier of the user
+     * @return int club ID of the club the user is a member of
+     * @throws SQLException if database operation fails
+     * @throws ClassNotFoundException if database driver is not found
+     * @throws DatabaseExceptionHandler if user is not a member of any club
+     */
+    public static int getClubIdByUserId(String userId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        int clubId = 0;
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("select club_id from club_members where member_id=?");
+        preparedStatement.setString(1, userId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            clubId = resultSet.getInt(1);
+        } else {
+            // Throw exception if user is not a club member
+            throw new DatabaseExceptionHandler("Club not found.");
+        }
+        return clubId;
     }
 
     /**
