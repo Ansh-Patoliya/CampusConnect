@@ -56,6 +56,9 @@ CREATE TABLE events (
     completion_status VARCHAR(20) DEFAULT 'Not Completed' CHECK (completion_status IN ('Completed', 'Not Completed', 'Cancel')),
     created_by VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    category VARCHAR(50) NOT NULL,
+    ticket_price numeric(8,2),
+    discounted_price numeric(8,2),
 
     CONSTRAINT fk_event_club FOREIGN KEY (club_id) REFERENCES clubs(club_id) ON DELETE CASCADE,
     CONSTRAINT fk_event_creator FOREIGN KEY (created_by) REFERENCES users(user_id) ON DELETE SET NULL
