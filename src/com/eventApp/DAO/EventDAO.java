@@ -53,7 +53,6 @@ public class EventDAO {
                 LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
 
                 double ticketPrice = resultSet.getDouble("discounted_price");
-
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
                 // Re-read status from database to ensure consistency
