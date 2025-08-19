@@ -164,18 +164,6 @@
                             </HBox>
 
                             <HBox spacing="50">
-                                <VBox spacing="5">
-                                    <Label text="Discount available:" textFill="#654ea3" wrapText="true">
-                                        <font>
-                                            <Font name="System Bold" size="14.0" />
-                                        </font>
-                                    </Label>
-                                    <Label fx:id="discountAvailabel" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
-                                        <font>
-                                            <Font name="System Bold" size="14.0" />
-                                        </font>
-                                    </Label>
-                                </VBox>
                         <VBox spacing="5">
                            <children>
                               <Label text="Category:" textFill="#654ea3">
@@ -200,7 +188,7 @@
         <!-- Right Side - Navigation Buttons -->
         <VBox alignment="CENTER" layoutX="550.0" layoutY="250.0" spacing="20">
 
-            <Button mnemonicParsing="false" onAction="#onRegistration" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Registration" >
+            <Button mnemonicParsing="false" onAction="#onRegistration" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.2);                            -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 20;                            -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0, 0, 2);                            -fx-border-color: white; -fx-border-width: 1; -fx-border-radius: 20;" text="Registration">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
