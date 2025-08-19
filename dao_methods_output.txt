@@ -1,0 +1,63 @@
+=== ALL METHOD NAMES IN DAO PACKAGE ===
+
+=== AdminDAO ===
+  approvalStatusUpdate
+  getAdmin
+  getEventList (overloaded 2 times)
+
+=== ClubDAO ===
+  checkClubNameExist
+  createEvent
+  getAllClubList
+  getAllClubNames
+  getClubById
+  getClubIdBy
+  getClubList
+  getClubNameBy
+
+=== ClubMemberDAO ===
+  getClubMember
+  getClubMemberList (overloaded 2 times)
+  isPresidentOfApprovedClub
+
+=== EventDAO ===
+  cancelEvent
+  getEventIdBy
+  getEventList
+  getEventListByClubId
+  getEventNames
+  getMyEventList
+  updateEvent
+
+=== EventRegistrationDAO ===
+  getParticipantList
+  registerForEvent
+
+=== NotificationDAO ===
+  createNotification
+  getNotifications
+  markNotificationAsRead
+
+=== StudentDAO ===
+  getInterestList
+  getStudent
+  viewEventsHistory
+
+=== UserDAO ===
+  checkDuplicateEmail
+  checkDuplicateEnrollment
+  checkLoginDetails
+  getAllClubsName
+  getClubId
+  getClubIdByUserId
+  getUserByemail
+  getUserNameBy
+  registrationClub
+  registrationClubMember
+  registrationStudent
+  registrationUser
+  resetPass
+
+=== SUMMARY ===
+Total DAO files: 8
+Total unique method names: 44

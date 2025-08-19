@@ -1,0 +1,59 @@
+AdminDAO:
+getEventList()
+getEventList(String statusOfEvent)
+approvalStatusUpdate(String approvalStatus, int eventId)
+getAdmin(User user)
+
+ClubDAO:
+createEvent(Event event)
+getClubList(String clubStatus)
+getClubNameBy(int clubId)
+getClubIdBy(String clubName)
+getClubById(int clubId)
+checkClubNameExist(String clubName)
+getAllClubList()
+getAllClubNames()
+
+ClubMemberDAO:
+getClubMember(User user)
+getClubMemberList(String userId)
+getClubMemberList(int clubId)
+isPresidentOfApprovedClub(String user_id)
+
+EventDAO:
+getEventList(String approvalStatus, String completionStatus)
+getEventNames(String userId)
+getEventIdBy(String eventName)
+getMyEventList(String userId)
+getEventListByClubId(int clubId)
+cancelEvent(int eventId)
+updateEvent(Event currentEvent)
+
+EventRegistrationDAO:
+registerForEvent(int eventId, String userId)
+getParticipantList(int eventId)
+
+NotificationDAO:
+createNotification(String userId, String message)
+markNotificationAsRead(String userId, int notificationId)
+getNotifications(String userId)
+
+StudentDAO:
+getStudent(User user)
+viewEventsHistory(String userId)
+getInterestList(String studentId)
+
+UserDAO:
+getClubId(String clubName)
+getClubIdByUserId(String userId)
+checkDuplicateEmail(String newEmail)
+checkDuplicateEnrollment(String enrollment)
+registrationUser(User user)
+registrationStudent(Student student)
+checkLoginDetails(String emailInput, String passwordInput)
+resetPass(String emailInput, String newPassword)
+registrationClubMember(ClubMember clubMember)
+registrationClub(Club club)
+getAllClubsName()
+getUserByemail(String emailInput)
+getUserNameBy(String userId)
