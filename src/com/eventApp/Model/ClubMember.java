@@ -10,6 +10,11 @@ public class ClubMember extends User{
         this.clubId=clubId;
     }
 
+    public ClubMember(String userId, String name, String email,String position,int clubId) {
+        super(userId, name, email);
+        this.position = position;
+    }
+
     public int getClubId() {
         return clubId;
     }

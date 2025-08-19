@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
@@ -161,6 +162,7 @@ public class EventUpdateController {
         return true;
     }
 
+    ClubDAO clubDAO = new ClubDAO();
     public void handleEventUpdate(ActionEvent event){
         try {
             String eventName = eventNameField.getText();
@@ -187,7 +189,7 @@ public class EventUpdateController {
 
             User currentUser = CurrentUser.getCurrentUser();
             String userId = currentUser.getUserId();
-            int clubId = UserDAO.getClubIdByUserId(currentUser.getUserId());
+            int clubId = clubDAO.getClubIdByUserId(currentUser.getUserId());
             boolean discountApplicable = variableRadio.isSelected();
 
             if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {

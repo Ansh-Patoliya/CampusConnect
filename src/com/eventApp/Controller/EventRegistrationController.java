@@ -1,5 +1,6 @@
 package com.eventApp.Controller;
 
+import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
@@ -90,6 +91,7 @@ public class EventRegistrationController {
         fixedRadio.setOnAction(_ -> discountNote.setVisible(false));
     }
 
+    ClubDAO clubDAO = new ClubDAO();
     public void handleEventRegistration(ActionEvent event) {
         try {
             String eventName = eventNameField.getText();
@@ -116,7 +118,7 @@ public class EventRegistrationController {
 
             User currentUser = CurrentUser.getCurrentUser();
             String userId = currentUser.getUserId();
-            int clubId = UserDAO.getClubIdByUserId(currentUser.getUserId());
+            int clubId = clubDAO.getClubIdByUserId(currentUser.getUserId());
             boolean discountApplicable = variableRadio.isSelected();
 
             if (validateFields(eventName, description, venue, eventDate, startTime, endTime)) {

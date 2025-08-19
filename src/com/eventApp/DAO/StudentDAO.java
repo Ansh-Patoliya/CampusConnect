@@ -1,6 +1,7 @@
 package com.eventApp.DAO;
 
 import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
@@ -22,6 +23,33 @@ import java.util.stream.Collectors;
  * Handles student information retrieval, event history tracking, and interest management.
  */
 public class StudentDAO {
+
+    /**
+     * Registers student-specific information in the students table.
+     * Called after successful user registration to add academic details.
+     * Converts interest list to comma-separated string for database storage.
+     *
+     * @param student the Student object containing academic information
+     * @throws SQLException if database operation fails
+     * @throws ClassNotFoundException if database driver is not found
+     * @throws DatabaseExceptionHandler if student registration fails
+     */
+    public void registrationStudent(Student student) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
+        Connection connection = DatabaseConnection.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement("insert into students values(?,?,?,?)");
+        preparedStatement.setString(1, student.getUserId());
+        preparedStatement.setString(2, student.getDepartment());
+        preparedStatement.setInt(3, student.getSemester());
+        // Convert interest list to CSV string for database storage
+        preparedStatement.setString(4, String.join(",", student.getInterest()));
+
+        int studentInsert = preparedStatement.executeUpdate();
+        if (studentInsert > 0) {
+            return; // Success case
+        }
+        throw new DatabaseExceptionHandler("Student registration failed. Please try again.");
+    }
+
 
     /**
      * Retrieves complete student information for a given user.

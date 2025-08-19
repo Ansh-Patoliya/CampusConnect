@@ -28,7 +28,7 @@ public class ClubService {
     }
 
     public void addEvent(Event event) throws ValidationException, SQLException, ClassNotFoundException {
-         clubDAO.createEvent(event);
+         eventDAO.createEvent(event);
     }
 
     public Club getClubByUser(User user) {
