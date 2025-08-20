@@ -29,7 +29,6 @@ public class ViewEventsStudentController {
     public Label clubName;
     public Label createdBy;
     public Label maxParticipate;
-    public Label discountAvailabel;
     public AnchorPane front;
     public AnchorPane back;
     public Label categoryField;
@@ -82,7 +81,6 @@ public class ViewEventsStudentController {
         createdBy.setText(userDAO.getUserNameBy(event.getUserId()));
         maxParticipate.setText(String.valueOf(event.getMaxParticipants()));
         ticketPrice.setText(String.valueOf(event.getTicketPrice()));
-        discountAvailabel.setText(String.valueOf(event.isDiscountApplicable()));
     }
 
     void setVisibleBack(boolean visible) {
@@ -97,7 +95,6 @@ public class ViewEventsStudentController {
         createdBy.setVisible(visible);
         maxParticipate.setVisible(visible);
         ticketPrice.setVisible(visible);
-        discountAvailabel.setVisible(visible);
     }
 
 

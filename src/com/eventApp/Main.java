@@ -28,12 +28,8 @@ public class Main extends Application {
         Connection connection = DatabaseConnection.getConnection();
 
         // Prepare and execute stored procedure to update event completion statuses
-        PreparedStatement preparedStatement1 = connection.prepareCall("call event_complete()");
-        preparedStatement1.executeUpdate();
-
-        // Prepare and execute stored procedure to apply ticket pricing rules
-        PreparedStatement preparedStatement2 = connection.prepareCall("call apply_ticket_price_rules()");
-        preparedStatement2.executeUpdate();
+        PreparedStatement preparedStatement = connection.prepareCall("call event_complete()");
+        preparedStatement.executeUpdate();
 
         // Launch the JavaFX application (calls start method)
         launch(args);

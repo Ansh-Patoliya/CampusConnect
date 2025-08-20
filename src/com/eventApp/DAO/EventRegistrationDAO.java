@@ -76,4 +76,13 @@ public class EventRegistrationDAO {
         }
         return participantList;
     }
+
+    public void getFinalTicketPrice(){
+        try(Connection connection = DatabaseConnection.getConnection()){
+            PreparedStatement preparedStatement = connection.prepareCall("call apply_ticket_price_rules()");
+            preparedStatement.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
