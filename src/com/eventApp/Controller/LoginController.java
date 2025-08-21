@@ -1,6 +1,7 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.ClubMemberDAO;
+import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
@@ -31,6 +32,7 @@ public class LoginController {
             if(userService.checklogin(emailInput,passwordInput)){
                 User user = userService.getUserByEmail(emailInput);
                 if (user != null) {
+                    new EventRegistrationDAO().getFinalTicketPrice();
                     CurrentUser.setCurrentUser(user);
                     if (user.getRole().equalsIgnoreCase("admin")) {
                         FXMLScreenLoader.showMessage("🔐 Welcome,"+ user.getName()+"! Login Successful.", "Login", "info");
