@@ -163,5 +163,4 @@
    <Circle fill="rgba(255,255,255,0.12)" radius="40" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="0" />
    <Circle fill="rgba(255,255,255,0.12)" radius="45" AnchorPane.topAnchor="360" AnchorPane.leftAnchor="60" />
 
-
 </AnchorPane>
