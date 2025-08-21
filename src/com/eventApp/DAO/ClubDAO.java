@@ -266,7 +266,7 @@ public class ClubDAO {
      * Retrieves a list of all approved club names, sorted alphabetically.
      * Used for dropdown menus and selection components.
      *
-     * @return List<String> containing names of all approved clubs
+     * @return List&lt;String&gt; containing names of all approved clubs
      * @throws SQLException if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */

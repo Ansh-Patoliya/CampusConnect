@@ -61,7 +61,7 @@ public class EventDAO {
      *
      * @param approvalStatus the approval status to filter by (e.g., "approved", "pending")
      * @param completionStatus the completion status to filter by (e.g., "completed", "not completed")
-     * @return List<Event> containing all events matching both status criteria
+     * @return List&lt;Event&gt; containing all events matching both status criteria
      */
     public List<Event> getEventList(String approvalStatus,String completionStatus) {
         List<Event> eventList = new ArrayList<>();
@@ -214,7 +214,7 @@ public class EventDAO {
      * Uses JOIN query to find events through club membership relationship.
      *
      * @param userId the ID of the user whose club events to retrieve
-     * @return List<String> containing event names accessible to the user
+     * @return List&lt;String&gt; containing event names accessible to the user
      */
     public List<String> getEventNames(String userId) {
         List<String> eventNameList = new ArrayList<>();
@@ -263,7 +263,7 @@ public class EventDAO {
      * Returns minimal event information needed for user participation view.
      *
      * @param userId the ID of the user whose registered events to retrieve
-     * @return List<Event> containing simplified Event objects for registered events
+     * @return List&lt;Event&gt; containing simplified Event objects for registered events
      */
     public List<Event> getMyEventList(String userId) {
         List<Event> myEvents = new ArrayList<>();

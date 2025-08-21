@@ -11,6 +11,11 @@ import java.io.FileWriter;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Service class for administrative operations in the CampusConnect system.
+ * Handles data export, reporting, and administrative management tasks.
+ * Provides functionality to export club and event data for administrators.
+ */
 public class AdminService {
 
     // DAO for user-related database operations

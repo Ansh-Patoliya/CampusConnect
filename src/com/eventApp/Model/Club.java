@@ -1,5 +1,10 @@
 package com.eventApp.Model;
 
+/**
+ * Model class representing a Club in the CampusConnect system.
+ * Stores club information including basic details, membership data, and status.
+ * Used throughout the system for club management and event organization.
+ */
 public class Club {
     // Club attributes
     private String clubName,descriptions,category,founderId,status;

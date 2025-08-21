@@ -11,6 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Service class for managing event registration operations.
+ * Handles student enrollment in events, registration validation,
+ * and integration with the event management system.
+ */
 public class EventRegistrationService {
     // Current logged-in user
     private User user = CurrentUser.getCurrentUser();

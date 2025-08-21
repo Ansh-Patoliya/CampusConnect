@@ -85,7 +85,7 @@ public class ClubMemberDAO {
      * Used by club founders to view members of their clubs.
      *
      * @param userId the ID of the club founder
-     * @return List<ClubMember> containing all members of clubs founded by the given user
+     * @return List&lt;ClubMember&gt; containing all members of clubs founded by the given user
      * @throws SQLException           if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */
@@ -115,7 +115,7 @@ public class ClubMemberDAO {
      * Results are ordered alphabetically by member name.
      *
      * @param clubId the unique identifier of the club
-     * @return List<ClubMember> containing all members of the specified club
+     * @return List&lt;ClubMember&gt; containing all members of the specified club
      * @throws SQLException           if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */

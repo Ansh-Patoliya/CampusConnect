@@ -11,6 +11,11 @@ import com.eventApp.Utils.CurrentUser;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Service class for student-related operations in the CampusConnect system.
+ * Manages student event participation, event history, and personalized event recommendations.
+ * Provides functionality for event browsing, sorting by interests, and navigation.
+ */
 public class StudentService {
 
     // Linked list of events tailored for the student

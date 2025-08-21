@@ -49,7 +49,7 @@ public class EventRegistrationDAO {
      * Results are ordered alphabetically by student name.
      *
      * @param eventId the unique identifier of the event
-     * @return List<Student> containing all registered participants with their academic information
+     * @return List&lt;Student&gt; containing all registered participants with their academic information
      * @throws SQLException if database operation fails
      * @throws ClassNotFoundException if database driver is not found
      */

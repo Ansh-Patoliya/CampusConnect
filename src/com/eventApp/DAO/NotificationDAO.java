@@ -73,7 +73,7 @@ public class NotificationDAO {
      * Only returns notifications that have not been marked as read to avoid clutter.
      *
      * @param userId the unique identifier of the user whose notifications to retrieve
-     * @return List<Notification> containing all unread notifications for the user
+     * @return List&lt;Notification&gt; containing all unread notifications for the user
      * @throws SQLException                  if database operation fails
      * @throws ClassNotFoundException       if database driver is not found
      */

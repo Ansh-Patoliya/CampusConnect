@@ -152,7 +152,7 @@ public class StudentDAO {
      * Parses comma-separated interests string from database into individual interest items.
      *
      * @param studentId the unique identifier of the student
-     * @return List<String> containing individual interest items, or empty list if none found
+     * @return List&lt;String&gt; containing individual interest items, or empty list if none found
      */
     public List<String> getInterestList(String studentId) {
         List<String> interestList = new ArrayList<>();

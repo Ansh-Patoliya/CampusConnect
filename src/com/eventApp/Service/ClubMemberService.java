@@ -4,6 +4,11 @@ import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
 
+/**
+ * Service class for managing club membership operations.
+ * Handles the relationship between users and clubs, including membership
+ * status tracking and member-specific operations.
+ */
 public class ClubMemberService {
 
     /**
