@@ -1,0 +1,6 @@
+com.eventApp.DAO
+com.eventApp.DataStructures
+com.eventApp.ExceptionHandler
+com.eventApp.Model
+com.eventApp.Service
+com.eventApp.Utils
