@@ -4,6 +4,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Admin;
 import com.eventApp.Model.User;
 import com.eventApp.Service.AdminService;
+import com.eventApp.Service.impl.AdminServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ public class AdminViewProfileController {
     @FXML private Label emailLabel;
 
     private User user;
-    private AdminService adminService = new AdminService();
+    private final AdminService adminService = new AdminServiceImpl();
 
     @FXML
     public void initialize() {
