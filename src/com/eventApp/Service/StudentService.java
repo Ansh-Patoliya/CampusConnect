@@ -19,7 +19,7 @@ public interface StudentService {
      * @param user The User object to look up
      * @return The matching Student object
      */
-    public Student getStudentByUser(User user) ;
+    Student getStudentByUser(User user) ;
 
     /**
      * Sorts the list of approved and not completed events for the current user.
@@ -28,33 +28,33 @@ public interface StudentService {
      *
      * @return A linked list of sorted events (MyEventLL)
      */
-    public MyEventLL sortEventList() ;
+    MyEventLL sortEventList() ;
 
     /**
      * Loads the student's event list by sorting events and storing in myEventLL.
      */
-    public void loadStudentEvents() ;
+    void loadStudentEvents() ;
 
     /**
      * Retrieves the current event from the student's event list.
      *
      * @return The current Event or null if the list is empty
      */
-    public Event viewCurrentEvent() ;
+    Event viewCurrentEvent() ;
 
     /**
      * Retrieves the next event from the student's event list.
      *
      * @return The next Event or null if the list is empty
      */
-    public Event getNextEvent() ;
+    Event getNextEvent() ;
 
     /**
      * Retrieves the previous event from the student's event list.
      *
      * @return The previous Event or null if the list is empty
      */
-    public Event getPreviousEvent() ;
+    Event getPreviousEvent() ;
 
     /**
      * Returns the list of events the student is registered for, sorted by event date.
@@ -62,5 +62,5 @@ public interface StudentService {
      * @param userId The student's user ID
      * @return List of Events sorted by date
      */
-    public List<Event> myEventListByDate(String userId) ;
+    List<Event> myEventListByDate(String userId) ;
 }

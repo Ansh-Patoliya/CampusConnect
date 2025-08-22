@@ -22,7 +22,7 @@ public interface UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
+    void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Registers a new club member along with associated user data after checking club member limit.
@@ -33,7 +33,7 @@ public interface UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
+    void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Checks login credentials against stored user data.
@@ -42,7 +42,7 @@ public interface UserService {
      * @param passwordInput the password input from user
      * @return true if credentials are valid, false otherwise
      */
-    public boolean checklogin(String emailInput, String passwordInput) ;
+    boolean checklogin(String emailInput, String passwordInput) ;
 
     /**
      * Resets the password for a user with the given email.
@@ -53,7 +53,7 @@ public interface UserService {
      * @throws DatabaseExceptionHandler if database constraints or errors occur
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void resetPassword(String emailInput, String newPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException ;
+    void resetPassword(String emailInput, String newPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException ;
 
     /**
      * Registers a new club along with associated club member and user data.
@@ -65,7 +65,7 @@ public interface UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
+    void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Retrieves a User object by their email.
@@ -73,5 +73,5 @@ public interface UserService {
      * @param emailInput the email of the user
      * @return the User object if found, null otherwise
      */
-    public User getUserByEmail(String emailInput) ;
+    User getUserByEmail(String emailInput) ;
 }

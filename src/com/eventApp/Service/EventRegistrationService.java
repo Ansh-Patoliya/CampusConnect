@@ -18,5 +18,5 @@ public interface EventRegistrationService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if the database driver class is not found
      */
-    public void registerForEvent(int eventId) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
+    void registerForEvent(int eventId) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 }

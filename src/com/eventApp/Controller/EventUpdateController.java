@@ -1,7 +1,6 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.ClubDAO;
-import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;

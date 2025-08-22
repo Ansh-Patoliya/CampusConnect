@@ -15,5 +15,5 @@ public interface ClubMemberService {
      * @param user The User object for which to find the related ClubMember
      * @return The ClubMember associated with the provided User
      */
-    public ClubMember getClubMemberByUser(User user);
+    ClubMember getClubMemberByUser(User user);
 }

@@ -20,7 +20,7 @@ public interface ClubService {
      * @throws SQLException if a database access error occurs during event creation
      * @throws ClassNotFoundException if the JDBC driver class is not found
      */
-    public void addEvent(Event event) throws ValidationException, SQLException, ClassNotFoundException ;
+    void addEvent(Event event) throws ValidationException, SQLException, ClassNotFoundException ;
 
     /**
      * Retrieves the club associated with the given user.
@@ -28,7 +28,7 @@ public interface ClubService {
      * @param user The user whose club is to be retrieved
      * @return Club object associated with the user
      */
-    public Club getClubByUser(User user) ;
+    Club getClubByUser(User user) ;
 
     /**
      * Retrieves and returns a sorted list of club members belonging to the same club as the given user.
@@ -38,7 +38,7 @@ public interface ClubService {
      * @throws SQLException if a database access error occurs while fetching club members
      * @throws ClassNotFoundException if the JDBC driver class is not found
      */
-    public List<ClubMember> getClubMember(User user) throws SQLException, ClassNotFoundException ;
+    List<ClubMember> getClubMember(User user) throws SQLException, ClassNotFoundException ;
 
     /**
      * Retrieves and returns a sorted list of students participating in a specific event.
@@ -48,7 +48,7 @@ public interface ClubService {
      * @throws SQLException if a database access error occurs while fetching participants
      * @throws ClassNotFoundException if the JDBC driver class is not found
      */
-    public List<Student> getParticipant(int eventId) throws SQLException, ClassNotFoundException ;
+    List<Student> getParticipant(int eventId) throws SQLException, ClassNotFoundException ;
 
     /**
      * Exports a list of club members to a CSV file at the specified file path.
@@ -58,7 +58,7 @@ public interface ClubService {
      * @param filePath Destination file path for the CSV
      * @throws IOException if an I/O error occurs during writing to the file
      */
-    public void exportClubMembersToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException ;
+    void exportClubMembersToCSV(List<ClubMember> clubMemberList, String filePath) throws IOException ;
 
     /**
      * Retrieves a sorted list of all event names for a given user.
@@ -66,7 +66,7 @@ public interface ClubService {
      * @param userId The user ID whose event names are requested
      * @return Sorted list of event names
      */
-    public List<String> getAllEventNames(String userId) ;
+    List<String> getAllEventNames(String userId) ;
 
     /**
      * Loads the circular linked list of events for the club associated with the given user.
@@ -76,21 +76,21 @@ public interface ClubService {
      * @throws ClassNotFoundException if the JDBC driver class is not found
      * @throws DatabaseExceptionHandler if there is a custom database related exception
      */
-    public void loadMyEventList(User user) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler ;
+    void loadMyEventList(User user) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler ;
 
     /**
      * Returns the current event in the circular event list.
      *
      * @return The current Event object
      */
-    public Event viewCurrentEvent() ;
+    Event viewCurrentEvent() ;
 
     /**
      * Moves to and returns the next event in the circular event list.
      *
      * @return The next Event object
      */
-    public Event viewNextEvent() ;
+    Event viewNextEvent() ;
 
     /**
      * Cancels the current event by updating its status in the database.
@@ -99,7 +99,7 @@ public interface ClubService {
      * @throws DatabaseExceptionHandler if there is a custom database related exception
      * @throws ClassNotFoundException if the JDBC driver class is not found
      */
-    public void cancelEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException ;
+    void cancelEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException ;
 
     /**
      * Updates the details of the given event in the database.
@@ -109,5 +109,5 @@ public interface ClubService {
      * @throws ClassNotFoundException if the JDBC driver class is not found
      * @throws DatabaseExceptionHandler if there is a custom database related exception
      */
-    public void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler ;
+    void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler ;
 }
