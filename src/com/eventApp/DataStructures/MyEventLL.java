@@ -114,7 +114,7 @@ public class MyEventLL {
      * @return the deleted Event, or null if list is empty
      */
     public Event deleteAtCurrent() {
-        if (isEmpty()) {
+        if (isEmpty() || current == null) {
             return null;
         }
 
@@ -145,7 +145,7 @@ public class MyEventLL {
      * @return the current Event or null if empty
      */
     public Event viewCurrentEvent() {
-        if (isEmpty()) {
+        if (current == null) {
             return null;
         } else {
             return current.data;
