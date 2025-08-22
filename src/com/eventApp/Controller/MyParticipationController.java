@@ -5,6 +5,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
 import com.eventApp.Service.StudentService;
+import com.eventApp.Service.impl.StudentServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,7 +24,7 @@ public class MyParticipationController {
     public TableColumn<Event, String> priceCol;
 
     ClubDAO clubDAO = new ClubDAO();
-    StudentService studentService = new StudentService();
+    StudentService studentService = new StudentServiceImpl();
     List<Event> eventList;
     User currentUser = CurrentUser.getCurrentUser();
     public void initialize() {

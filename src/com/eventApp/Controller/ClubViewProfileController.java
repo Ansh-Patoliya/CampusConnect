@@ -1,10 +1,10 @@
 package com.eventApp.Controller;
 
 import com.eventApp.Loader.FXMLScreenLoader;
-import com.eventApp.Model.Admin;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubMemberService;
+import com.eventApp.Service.impl.ClubMemberServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +18,7 @@ public class ClubViewProfileController {
     @FXML private Label emailLabel;
 
     private User user;
-    private ClubMemberService clubMemberService = new ClubMemberService();
+    private final ClubMemberService clubMemberService = new ClubMemberServiceImpl();
 
     @FXML
     public void initialize() {

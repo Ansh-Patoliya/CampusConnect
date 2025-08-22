@@ -1,29 +1,17 @@
 package com.eventApp.Service;
 
-import com.eventApp.DAO.ClubDAO;
-import com.eventApp.DAO.ClubMemberDAO;
-import com.eventApp.DAO.StudentDAO;
-import com.eventApp.DAO.UserDAO;
 import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Club;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
-import com.eventApp.Utils.DatabaseConnection;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Service class to manage user-related operations such as registration, login, and password reset.
+ * Interface to manage user related service operations.
+ * Defines methods to register, validate login, reset password and register club for users
  */
-public class UserService {
-    private final UserDAO userDAO = new UserDAO();
-    private final StudentDAO studentDAO = new StudentDAO();
-    private final ClubMemberDAO clubMemberDAO = new ClubMemberDAO();
-    private final ClubDAO clubDAO = new ClubDAO();
+public interface UserService {
 
     /**
      * Registers a new student along with associated user data.
@@ -34,10 +22,7 @@ public class UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
-        userDAO.registrationUser(user);
-        studentDAO.registrationStudent(student);
-    }
+    void registerStudent(Student student, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Registers a new club member along with associated user data after checking club member limit.
@@ -48,18 +33,7 @@ public class UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
-        Connection connection = DatabaseConnection.getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement("SELECT checkclubcount(?)");
-        preparedStatement.setInt(1, clubMember.getClubId());
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        if (resultSet.getBoolean(1)) {
-            userDAO.registrationUser(user);
-            clubMemberDAO.registrationClubMember(clubMember);
-        } else
-            throw new DatabaseExceptionHandler("club member limit exceeded.");
-    }
+    void registerClubMember(ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Checks login credentials against stored user data.
@@ -68,9 +42,7 @@ public class UserService {
      * @param passwordInput the password input from user
      * @return true if credentials are valid, false otherwise
      */
-    public boolean checklogin(String emailInput, String passwordInput) {
-        return userDAO.checkLoginDetails(emailInput, passwordInput);
-    }
+    boolean checklogin(String emailInput, String passwordInput) ;
 
     /**
      * Resets the password for a user with the given email.
@@ -81,9 +53,7 @@ public class UserService {
      * @throws DatabaseExceptionHandler if database constraints or errors occur
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void resetPassword(String emailInput, String newPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
-        userDAO.resetPass(emailInput, newPassword);
-    }
+    void resetPassword(String emailInput, String newPassword) throws SQLException, DatabaseExceptionHandler, ClassNotFoundException ;
 
     /**
      * Registers a new club along with associated club member and user data.
@@ -95,13 +65,7 @@ public class UserService {
      * @throws SQLException if a database access error occurs
      * @throws ClassNotFoundException if JDBC driver is not found
      */
-    public void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
-        userDAO.registrationUser(user);
-        clubDAO.registrationClub(club);
-        int clubId = clubDAO.getClubIdBy(club.getClubName());
-        clubMember.setClubId(clubId);
-        clubMemberDAO.registrationClubMember(clubMember);
-    }
+    void registerClub(Club club, ClubMember clubMember, User user) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException ;
 
     /**
      * Retrieves a User object by their email.
@@ -109,7 +73,5 @@ public class UserService {
      * @param emailInput the email of the user
      * @return the User object if found, null otherwise
      */
-    public User getUserByEmail(String emailInput) {
-        return userDAO.getUserByemail(emailInput);
-    }
+    User getUserByEmail(String emailInput) ;
 }

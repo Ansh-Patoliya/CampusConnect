@@ -4,6 +4,7 @@ import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Service.UserService;
+import com.eventApp.Service.impl.UserServiceImpl;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
@@ -13,7 +14,7 @@ import java.sql.SQLException;
 
 public class ForgetPasswordController {
 
-    private final UserService userService = new UserService();
+    private final UserService userService = new UserServiceImpl();
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
     public TextField emailField;

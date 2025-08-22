@@ -1,19 +1,18 @@
-package com.eventApp.Service;
+package com.eventApp.Service.impl;
 
+import com.eventApp.DAO.ClubMemberDAO;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
+import com.eventApp.Service.ClubMemberService;
 
-/**
- * Interface for club member related service operations.
- * Defines a method to get user object.
- */
-public interface ClubMemberService {
-
+public class ClubMemberServiceImpl implements ClubMemberService {
     /**
      * Retrieves a ClubMember object corresponding to the given User.
      *
      * @param user The User object for which to find the related ClubMember
      * @return The ClubMember associated with the provided User
      */
-    ClubMember getClubMemberByUser(User user);
+    public ClubMember getClubMemberByUser(User user) {
+        return ClubMemberDAO.getClubMember(user);
+    }
 }

@@ -10,6 +10,7 @@ import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
+import com.eventApp.Service.impl.UserServiceImpl;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RegistrationController {
-    private final UserService userService = new UserService();
+    private final UserService userService = new UserServiceImpl();
     public TextField nameField;
     public TextField emailField;
     public PasswordField passwordField;

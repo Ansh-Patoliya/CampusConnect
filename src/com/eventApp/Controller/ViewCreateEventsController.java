@@ -9,6 +9,7 @@ import com.eventApp.Model.Event;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
+import com.eventApp.Service.impl.ClubServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -64,7 +65,7 @@ public class ViewCreateEventsController {
 
     private void loadCurrentEvent() {
         try {
-            clubService = new ClubService(currentUser);
+            clubService = new ClubServiceImpl(currentUser);
             currentEvent = clubService.viewCurrentEvent();
             if (currentEvent != null) {
                 front.setVisible(true);

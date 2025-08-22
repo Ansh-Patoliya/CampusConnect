@@ -5,6 +5,7 @@ import com.eventApp.DAO.EventRegistrationDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.User;
 import com.eventApp.Service.UserService;
+import com.eventApp.Service.impl.UserServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ public class LoginController {
         String emailInput = username.getText().trim();
         String passwordInput = password.getText().trim();
 
-        UserService userService=new UserService();
+        UserService userService=new UserServiceImpl();
 
             if(userService.checklogin(emailInput,passwordInput)){
                 User user = userService.getUserByEmail(emailInput);
