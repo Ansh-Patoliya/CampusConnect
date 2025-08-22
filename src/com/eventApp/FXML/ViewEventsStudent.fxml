@@ -136,18 +136,6 @@
                         <!-- Participation Info -->
                         <VBox spacing="10">
                             <HBox spacing="50">
-                                <VBox spacing="5">
-                                    <Label text="Max Participants:" textFill="#654ea3">
-                                        <font>
-                                            <Font name="System Bold" size="14.0" />
-                                        </font>
-                                    </Label>
-                                    <Label fx:id="maxParticipate" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
-                                        <font>
-                                            <Font name="System Bold" size="14.0" />
-                                        </font>
-                                    </Label>
-                                </VBox>
 
                                 <VBox spacing="5">
                                     <Label text="Ticket Price:" textFill="#654ea3">
@@ -161,6 +149,20 @@
                                         </font>
                                     </Label>
                                 </VBox>
+                        <VBox spacing="5">
+                           <children>
+                              <Label text="Final Price:" textFill="#654ea3">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="finalPrice" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
                             </HBox>
 
                             <HBox spacing="50">
@@ -178,6 +180,18 @@
                               </Label>
                            </children>
                         </VBox>
+                                <VBox spacing="5">
+                                    <Label text="Max Participants:" textFill="#654ea3">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="maxParticipate" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 5; -fx-padding: 5;" textFill="#654ea3" wrapText="true">
+                                        <font>
+                                            <Font name="System Bold" size="14.0" />
+                                        </font>
+                                    </Label>
+                                </VBox>
                             </HBox>
                         </VBox>
                     </children>

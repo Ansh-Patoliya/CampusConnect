@@ -1,10 +1,10 @@
 package com.eventApp.Controller;
 
-import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
 import com.eventApp.Service.ClubApprovalService;
+import com.eventApp.Service.impl.ClubApprovalServiceImpl;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +28,7 @@ public class ClubApprovalController {
     @FXML
     private Label createdBy;
 
-    private final ClubApprovalService clubApprovalService = new ClubApprovalService();
+    private final ClubApprovalService clubApprovalService = new ClubApprovalServiceImpl();
 
     private Club currentClub;
 

@@ -23,9 +23,9 @@ public class EventDAO {
      * Creates a new event in the database for a specific club.
      *
      * @param event the Event object containing all event details to be inserted
-     * @throws SQLException if database operation fails
+     * @throws SQLException           if database operation fails
      * @throws ClassNotFoundException if database driver is not found
-     * @throws ValidationException if event creation fails at database level
+     * @throws ValidationException    if event creation fails at database level
      */
     public void createEvent(Event event) throws SQLException, ClassNotFoundException, ValidationException {
         // SQL query to insert new event with all required fields
@@ -59,18 +59,18 @@ public class EventDAO {
      * Retrieves events filtered by both approval status and completion status.
      * Used to fetch events that match specific workflow states.
      *
-     * @param approvalStatus the approval status to filter by (e.g., "approved", "pending")
+     * @param approvalStatus   the approval status to filter by (e.g., "approved", "pending")
      * @param completionStatus the completion status to filter by (e.g., "completed", "not completed")
      * @return List<Event> containing all events matching both status criteria
      */
-    public List<Event> getEventList(String approvalStatus,String completionStatus) {
+    public List<Event> getEventList(String approvalStatus, String completionStatus) {
         List<Event> eventList = new ArrayList<>();
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Query to filter events by both approval and completion status
             String query = "select * from events where approval_status = ? and completion_status=? ";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, approvalStatus);
-            preparedStatement.setString(2,completionStatus);
+            preparedStatement.setString(2, completionStatus);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -87,15 +87,19 @@ public class EventDAO {
                 LocalTime startTime = resultSet.getTime("start_time").toLocalTime();
                 LocalTime endTime = resultSet.getTime("end_time").toLocalTime();
 
-                double ticketPrice = resultSet.getDouble("discounted_price");
+                double ticketPrice = resultSet.getDouble("ticket_price");
+                double discountedPrice = resultSet.getDouble("discounted_price");
                 boolean discountApplicable = resultSet.getBoolean("discount_available");
 
                 // Re-read status from database to ensure consistency
                 approvalStatus = resultSet.getString("approval_status");
                 completionStatus = resultSet.getString("completion_status");
 
-                eventList.add(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus,category));
+                Event event = new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants,
+                        eventDate, startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus, category);
+                event.setDiscountedPrice(discountedPrice);
+                eventList.add(event);
+
             }
         } catch (SQLException | ClassNotFoundException e) {
             // Rethrow as unchecked exception for higher-level handling
@@ -109,14 +113,14 @@ public class EventDAO {
      *
      * @return MyEventLL - a linked list of all Event objects from the database
      */
-    public MyEventLL getEventList(){
+    public MyEventLL getEventList() {
         MyEventLL eventList = new MyEventLL();
-        try(Connection connection = DatabaseConnection.getConnection()){
+        try (Connection connection = DatabaseConnection.getConnection()) {
             // Query to fetch all events
             String query = "select * from events";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 // Extract event fields from the result set
                 int eventId = resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
@@ -135,8 +139,8 @@ public class EventDAO {
                 String completionStatus = resultSet.getString("completion_status");
 
                 // Insert the event into the linked list
-                eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
+                eventList.insert(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                        startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus, category));
             }
         } catch (SQLException | ClassNotFoundException e) {
             // Rethrow as unchecked exception for higher-level handling
@@ -151,17 +155,17 @@ public class EventDAO {
      * @param statusOfEvent the approval status to filter events by
      * @return MyEventLL - a linked list of Event objects with the given approval status
      */
-    public MyEventLL getEventList(String statusOfEvent){
+    public MyEventLL getEventList(String statusOfEvent) {
         MyEventLL eventList = new MyEventLL();
-        try(Connection connection = DatabaseConnection.getConnection()){
+        try (Connection connection = DatabaseConnection.getConnection()) {
             // Query to fetch events by approval status
             String query = "select * from events where approval_status = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,statusOfEvent);
+            preparedStatement.setString(1, statusOfEvent);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 // Extract event fields from the result set
-                int eventId=resultSet.getInt("event_id");
+                int eventId = resultSet.getInt("event_id");
                 String eventName = resultSet.getString("event_name");
                 String description = resultSet.getString("description");
                 String venue = resultSet.getString("venue");
@@ -178,8 +182,8 @@ public class EventDAO {
                 String completionStatus = resultSet.getString("completion_status");
 
                 // Insert the event into the linked list
-                eventList.insert(new Event(eventId,eventName, description, venue, clubId, userId, maxParticipants, eventDate,
-                        startTime, endTime , ticketPrice, discountApplicable,approvalStatus,completionStatus,category));
+                eventList.insert(new Event(eventId, eventName, description, venue, clubId, userId, maxParticipants, eventDate,
+                        startTime, endTime, ticketPrice, discountApplicable, approvalStatus, completionStatus, category));
             }
         } catch (SQLException | ClassNotFoundException e) {
             // Rethrow as unchecked exception for higher-level handling
@@ -192,10 +196,10 @@ public class EventDAO {
      * Updates the approval status of a specific event in the database.
      *
      * @param approvalStatus the new approval status to set (e.g., "approved", "rejected")
-     * @param eventId the ID of the event to update
+     * @param eventId        the ID of the event to update
      * @return true if the update was successful, false otherwise
      */
-    public boolean approvalStatusUpdate(String approvalStatus,int eventId) {
+    public boolean approvalStatusUpdate(String approvalStatus, int eventId) {
         try (Connection connection = DatabaseConnection.getConnection()) {
             // Prepare update statement for event approval status
             String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
@@ -277,7 +281,7 @@ public class EventDAO {
             while (resultSet.next()) {
                 // Create simplified Event objects with only essential information for user view
                 myEvents.add(new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getInt("club_id"), resultSet.getString("venue"),
-                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), resultSet.getTime("start_time").toLocalTime(),resultSet.getTime("end_time").toLocalTime(), resultSet.getInt("max_participants")));
+                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), resultSet.getTime("start_time").toLocalTime(), resultSet.getTime("end_time").toLocalTime(), resultSet.getInt("max_participants")));
             }
         } catch (Exception e) {
             // Rethrow as unchecked exception for higher-level handling
@@ -292,8 +296,8 @@ public class EventDAO {
      *
      * @param clubId the unique identifier of the club
      * @return CircularLL containing all Event objects for the specified club
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
+     * @throws SQLException             if database operation fails
+     * @throws ClassNotFoundException   if database driver is not found
      * @throws DatabaseExceptionHandler if data retrieval fails
      */
     public CircularLL getEventListByClubId(int clubId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
@@ -335,8 +339,8 @@ public class EventDAO {
      * This is a soft delete operation - the event record remains in the database.
      *
      * @param eventId the unique identifier of the event to cancel
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
+     * @throws SQLException             if database operation fails
+     * @throws ClassNotFoundException   if database driver is not found
      * @throws DatabaseExceptionHandler if the cancellation operation fails
      */
     public void cancelEvent(int eventId) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
@@ -357,13 +361,13 @@ public class EventDAO {
      * Performs a comprehensive update of event details while preserving the event ID.
      *
      * @param currentEvent the Event object containing updated information
-     * @throws SQLException if database operation fails
-     * @throws ClassNotFoundException if database driver is not found
+     * @throws SQLException             if database operation fails
+     * @throws ClassNotFoundException   if database driver is not found
      * @throws DatabaseExceptionHandler if the update operation fails
      */
     public void updateEvent(Event currentEvent) throws SQLException, ClassNotFoundException, DatabaseExceptionHandler {
-        Connection connection=DatabaseConnection.getConnection();
-        
+        Connection connection = DatabaseConnection.getConnection();
+
         // Comprehensive UPDATE query for all modifiable event fields
         String query = "UPDATE events SET event_name = ?, description = ?, venue = ?, event_date = ?, start_time = ? , end_time = ?, ticket_price = ?, discount_available = ?, category = ? , max_participants = ? , club_id = ? , created_by = ? where event_id = ? ";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -383,9 +387,9 @@ public class EventDAO {
         preparedStatement.setString(12, currentEvent.getUserId());
         preparedStatement.setInt(13, currentEvent.getEventId()); // WHERE clause parameter
 
-        int r=preparedStatement.executeUpdate();
+        int r = preparedStatement.executeUpdate();
         // Validate that the update operation was successful
-        if (r<0){
+        if (r < 0) {
             throw new DatabaseExceptionHandler("Failed to update the event. Please try again later.");
         }
     }

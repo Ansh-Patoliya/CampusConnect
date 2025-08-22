@@ -1,15 +1,11 @@
 package com.eventApp.Controller;
 
 import com.eventApp.DAO.UserDAO;
-import com.eventApp.DataStructures.MyClubQueue;
 import com.eventApp.ExceptionHandler.ValidationException;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Club;
-import com.eventApp.Model.ClubMember;
-import com.eventApp.Model.User;
 import com.eventApp.Service.AdminService;
-import com.eventApp.Service.ClubService;
-import com.eventApp.Utils.CurrentUser;
+import com.eventApp.Service.impl.AdminServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,8 +15,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 public class ViewClubsController {
@@ -32,7 +26,7 @@ public class ViewClubsController {
     public TableColumn<Club,String> descriptionCol;
 
     List<Club> clubList;
-    AdminService adminService= new AdminService();
+    private final AdminService adminService = new AdminServiceImpl();
     UserDAO userDAO = new UserDAO();
 
 
