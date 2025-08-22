@@ -7,6 +7,7 @@ import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubMemberService;
 import com.eventApp.Service.ClubService;
+import com.eventApp.Service.impl.ClubServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +21,7 @@ public class ClubDetailsController {
     public Label memberCountLabel;
 
     private User user;
-    private ClubService clubService = new ClubService();
+    private final ClubService clubService = new ClubServiceImpl();
 
     @FXML
     public void initialize() {

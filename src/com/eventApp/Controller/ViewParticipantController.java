@@ -5,6 +5,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
+import com.eventApp.Service.impl.ClubServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,7 +63,7 @@ public class ViewParticipantController {
 
     List<Student> participantList;
     List<String> eventNames;
-    ClubService clubService = new ClubService();
+    ClubService clubService = new ClubServiceImpl();
     EventDAO eventDAO = new EventDAO();
     User currentUser= CurrentUser.getCurrentUser();
     @FXML

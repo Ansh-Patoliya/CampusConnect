@@ -8,6 +8,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
+import com.eventApp.Service.impl.ClubServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import com.eventApp.Utils.ValidationUtils;
 import javafx.collections.FXCollections;
@@ -28,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EventRegistrationController {
-    private final ClubService clubService = new ClubService();
+    private final ClubService clubService = new ClubServiceImpl();
     public RadioButton fixedRadio;
     public RadioButton variableRadio;
     public AnchorPane discountNote;

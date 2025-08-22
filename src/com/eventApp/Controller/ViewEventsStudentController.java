@@ -7,6 +7,8 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
 import com.eventApp.Service.EventRegistrationService;
 import com.eventApp.Service.StudentService;
+import com.eventApp.Service.impl.EventRegistrationServiceImpl;
+import com.eventApp.Service.impl.StudentServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -107,7 +109,7 @@ public class ViewEventsStudentController {
         back.setVisible(true);
     }
 
-    StudentService studentService = new StudentService();
+    StudentService studentService = new StudentServiceImpl();
 
     public void onNext(ActionEvent event) {
         front.setVisible(true);
@@ -155,7 +157,7 @@ public class ViewEventsStudentController {
     }
 
     public void onRegistration(ActionEvent event) {
-        EventRegistrationService eventRegistrationService = new EventRegistrationService();
+        final EventRegistrationService eventRegistrationService = new EventRegistrationServiceImpl();
         Event currentEvent = studentService.viewCurrentEvent();
         int eventId = currentEvent.getEventId();
         try {

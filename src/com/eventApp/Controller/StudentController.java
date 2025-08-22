@@ -4,6 +4,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Student;
 import com.eventApp.Model.User;
 import com.eventApp.Service.StudentService;
+import com.eventApp.Service.impl.StudentServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +17,7 @@ public class StudentController {
 
     public TextArea interestArea;
     private User user;
-    private StudentService studentService = new StudentService();
+    private final StudentService studentService = new StudentServiceImpl();
 
     @FXML private Label nameLabel;
     @FXML private Label emailLabel;

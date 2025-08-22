@@ -5,6 +5,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Model.User;
 import com.eventApp.Service.ClubService;
+import com.eventApp.Service.impl.ClubServiceImpl;
 import com.eventApp.Utils.CurrentUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,7 +28,7 @@ public class ViewMemberController {
     public Button export;
 
     List<ClubMember> clubMemberList;
-    ClubService clubService = new ClubService();
+    ClubService clubService = new ClubServiceImpl();
     User currentUser = CurrentUser.getCurrentUser();
 
     @FXML
