@@ -11,20 +11,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class ClubViewProfileController {
-    public Label positionLabel;
-    public Label clubIdLabel;
-    @FXML
-    private Label nameLabel;
+
+    @FXML private Label nameLabel;
     @FXML private Label emailLabel;
+    @FXML private Label positionLabel;
+    @FXML private Label clubIdLabel;
 
     private User user;
     private final ClubMemberService clubMemberService = new ClubMemberServiceImpl();
 
     @FXML
     public void initialize() {
-        // This method is called after the FXML file has been loaded
-        // You can perform any additional initialization here if needed
-        user= CurrentUser.getCurrentUser() ;// Assuming User class has a method to get the current logged-in user
+        // Load current logged-in user
+        user = CurrentUser.getCurrentUser();
         loadClubMemberProfile();
     }
 
@@ -35,12 +34,17 @@ public class ClubViewProfileController {
             emailLabel.setText(clubMember.getEmail());
             positionLabel.setText(clubMember.getPosition());
             clubIdLabel.setText(String.valueOf(clubMember.getClubId()));
+        } else {
+            nameLabel.setText("N/A");
+            emailLabel.setText("N/A");
+            positionLabel.setText("N/A");
+            clubIdLabel.setText("N/A");
         }
     }
 
+    @FXML
     public void onBack(ActionEvent event) {
-        // Logic to go back to the previous screen, e.g., Student Dashboard
-        // This could be implemented using a method from FXMLScreenLoader or similar
+        // Navigate back to Club Dashboard
         FXMLScreenLoader.openClubDashboard(event);
     }
 }
