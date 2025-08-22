@@ -37,7 +37,7 @@ public class MyParticipationController {
         nameCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEventName()));
         dateCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getEventDate().toString()));
         creatorCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(clubDAO.getClubNameBy(cellData.getValue().getClubId())));
-        priceCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getTicketPrice())));
+        priceCol.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(String.valueOf(cellData.getValue().getDiscountedPrice())));
     }
 
     private void showDataInTable() {

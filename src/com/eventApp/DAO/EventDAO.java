@@ -279,9 +279,22 @@ public class EventDAO {
             preparedStatement.setString(2, "Not Completed");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                // Create simplified Event objects with only essential information for user view
-                myEvents.add(new Event(resultSet.getInt("event_id"), resultSet.getString("event_name"), resultSet.getInt("club_id"), resultSet.getString("venue"),
-                        resultSet.getDouble("discounted_price"), resultSet.getDate("event_date").toLocalDate(), resultSet.getTime("start_time").toLocalTime(), resultSet.getTime("end_time").toLocalTime(), resultSet.getInt("max_participants")));
+                double ticketPrice = resultSet.getDouble("ticket_price");
+                double discountedPrice = resultSet.getDouble("discounted_price");
+
+                Event e = new Event(
+                        resultSet.getInt("event_id"),
+                        resultSet.getString("event_name"),
+                        resultSet.getInt("club_id"),
+                        resultSet.getString("venue"),
+                        ticketPrice,
+                        resultSet.getDate("event_date").toLocalDate(),
+                        resultSet.getTime("start_time").toLocalTime(),
+                        resultSet.getTime("end_time").toLocalTime(),
+                        resultSet.getInt("max_participants")
+                );
+                e.setDiscountedPrice(discountedPrice);
+                myEvents.add(e);
             }
         } catch (Exception e) {
             // Rethrow as unchecked exception for higher-level handling
