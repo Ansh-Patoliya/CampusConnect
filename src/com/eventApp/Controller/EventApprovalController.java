@@ -105,15 +105,23 @@ public class EventApprovalController {
         setVisible(false);
     }
 
-    public void onApprove(ActionEvent event) {
-        boolean isApproved = eventService.approveEvent();
-        if (isApproved) {
+public void onApprove(ActionEvent event) {
+    boolean isApproved = eventService.approveEvent();
+
+    if (isApproved) {
+        currentEvent = eventService.viewCurrentEvent();
+
+        if (currentEvent != null) {
             loadCurrentEvent();
             FXMLScreenLoader.showMessage("Event approved successfully.", "Event Approval", "info");
         } else {
-            FXMLScreenLoader.showMessage("Failed to approve the event. Please try again.", "Event Approval", "error");
+            FXMLScreenLoader.showMessage("Event approved. No more events left to approve.", "Event Approval", "info");
+            openAdminDashboard();
         }
+    } else {
+        FXMLScreenLoader.showMessage("Failed to approve the event. Please try again.", "Event Approval", "error");
     }
+}
 
     public void onReject(ActionEvent event) {
         boolean isRejected = eventService.rejectEvent();
