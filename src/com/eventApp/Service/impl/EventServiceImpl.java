@@ -2,10 +2,13 @@ package com.eventApp.Service.impl;
 
 import com.eventApp.DAO.EventDAO;
 import com.eventApp.DataStructures.MyEventLL;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Model.Event;
-import com.eventApp.Service.IEventService;
+import com.eventApp.Service.EventService;
 
-public class EventServiceImpl implements IEventService {
+import java.sql.SQLException;
+
+public class EventServiceImpl implements EventService {
     private MyEventLL LL;
 
     EventDAO eventDAO = new EventDAO();
@@ -37,20 +40,16 @@ public class EventServiceImpl implements IEventService {
 
     /**
      * Approves the current event and removes it from the list.
-     *
-     * @return true if the event was successfully approved; false otherwise.
      */
-    public boolean approveEvent() {
-        return eventDAO.approvalStatusUpdate("Approved", LL.deleteAtCurrent().getEventId());
+    public void approveEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
+         eventDAO.approvalStatusUpdate("Approved", LL.deleteAtCurrent().getEventId());
     }
 
     /**
      * Rejects the current event and removes it from the list.
-     *
-     * @return true if the event was successfully rejected; false otherwise.
      */
-    public boolean rejectEvent() {
-        return eventDAO.approvalStatusUpdate("Rejected", LL.deleteAtCurrent().getEventId());
+    public void rejectEvent() throws SQLException, DatabaseExceptionHandler, ClassNotFoundException {
+         eventDAO.approvalStatusUpdate("Rejected", LL.deleteAtCurrent().getEventId());
     }
 
     /**
@@ -68,7 +67,11 @@ public class EventServiceImpl implements IEventService {
      * @return The current pending Event.
      */
     public Event viewCurrentEvent() {
-        return LL.viewCurrentEvent();
+        Event event=LL.viewCurrentEvent();
+        if (event==null){
+            throw new NullPointerException("No current event available.");
+        }
+         return event;
     }
 
     /**

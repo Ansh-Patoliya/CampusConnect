@@ -36,7 +36,7 @@ public class ClubDetailsController {
             clubNameLabel.setText(club.getClubName());
             categoryLabel.setText(club.getCategory());
             descriptionLabel.setText(club.getDescriptions());
-            founderNameLabel.setText(userDAO.getUserNameBy(user.getUserId()));
+            founderNameLabel.setText(userDAO.getUserNameBy(club.getFounderId()));
             memberCountLabel.setText(String.valueOf(club.getMemberCount()));
         }
     }
