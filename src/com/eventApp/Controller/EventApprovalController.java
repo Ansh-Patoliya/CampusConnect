@@ -2,9 +2,10 @@ package com.eventApp.Controller;
 
 import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
+import com.eventApp.ExceptionHandler.DatabaseExceptionHandler;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
-import com.eventApp.Service.IEventService;
+import com.eventApp.Service.EventService;
 import com.eventApp.Service.impl.EventServiceImpl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,9 +19,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class EventApprovalController {
-    private final IEventService eventService = new EventServiceImpl();
+    private final EventService eventService = new EventServiceImpl();
     public Label startTime;
     public Label eventDate;
     public Label description;
@@ -105,31 +107,23 @@ public class EventApprovalController {
         setVisible(false);
     }
 
-public void onApprove(ActionEvent event) {
-    boolean isApproved = eventService.approveEvent();
-
-    if (isApproved) {
-        currentEvent = eventService.viewCurrentEvent();
-
-        if (currentEvent != null) {
+    public void onApprove(ActionEvent event) {
+        try {
+            eventService.approveEvent();
+            FXMLScreenLoader.showMessage("Event approve successfully.", "Event Approval", "success");
             loadCurrentEvent();
-            FXMLScreenLoader.showMessage("Event approved successfully.", "Event Approval", "info");
-        } else {
-            FXMLScreenLoader.showMessage("Event approved. No more events left to approve.", "Event Approval", "info");
-            openAdminDashboard();
+        } catch (SQLException | DatabaseExceptionHandler | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Event Approval", "error");
         }
-    } else {
-        FXMLScreenLoader.showMessage("Failed to approve the event. Please try again.", "Event Approval", "error");
     }
-}
 
     public void onReject(ActionEvent event) {
-        boolean isRejected = eventService.rejectEvent();
-        if (isRejected) {
+        try {
+            eventService.rejectEvent();
             FXMLScreenLoader.showMessage("Event rejected successfully.", "Event Approval", "success");
             loadCurrentEvent();
-        } else {
-            FXMLScreenLoader.showMessage("Failed to reject the event. Please try again.", "Event Approval", "error");
+        } catch (SQLException | DatabaseExceptionHandler | ClassNotFoundException e) {
+            FXMLScreenLoader.showMessage(e.getMessage(), "Event Approval", "error");
         }
     }
 
@@ -190,6 +184,7 @@ public void onApprove(ActionEvent event) {
         discountAvailabel.setVisible(visible);
         categoryField.setVisible(visible);
     }
+
     public void openAdminDashboard() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/eventApp/FXML/AdminDashboard.fxml"));

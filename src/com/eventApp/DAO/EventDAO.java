@@ -199,18 +199,16 @@ public class EventDAO {
      * @param eventId        the ID of the event to update
      * @return true if the update was successful, false otherwise
      */
-    public boolean approvalStatusUpdate(String approvalStatus, int eventId) {
-        try (Connection connection = DatabaseConnection.getConnection()) {
+    public void approvalStatusUpdate(String approvalStatus, int eventId) throws DatabaseExceptionHandler, SQLException, ClassNotFoundException {
+        Connection connection = DatabaseConnection.getConnection();
             // Prepare update statement for event approval status
             String query = "UPDATE events SET approval_status = ? WHERE event_id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, approvalStatus);
             preparedStatement.setInt(2, eventId);
             int rowsUpdated = preparedStatement.executeUpdate();
-            return rowsUpdated > 0;
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+            if(rowsUpdated<0)
+                throw new DatabaseExceptionHandler("Failed to update approval status. Please try again.");
     }
 
     /**
