@@ -23,6 +23,7 @@ public class ViewEventsStudentController {
     public Label venue1;
     public Label ticketPrice1;
     public Label eventDate1;
+    public Label finalPrice;
     public Label endTime;
     public Label description;
     public Label startTime;
@@ -81,6 +82,7 @@ public class ViewEventsStudentController {
         createdBy.setText(userDAO.getUserNameBy(event.getUserId()));
         maxParticipate.setText(String.valueOf(event.getMaxParticipants()));
         ticketPrice.setText(String.valueOf(event.getTicketPrice()));
+        finalPrice.setText(String.valueOf(event.getDiscountedPrice()));
     }
 
     void setVisibleBack(boolean visible) {
@@ -95,6 +97,8 @@ public class ViewEventsStudentController {
         createdBy.setVisible(visible);
         maxParticipate.setVisible(visible);
         ticketPrice.setVisible(visible);
+        finalPrice.setVisible(visible);
+        categoryField.setVisible(visible);
     }
 
 

@@ -4,7 +4,8 @@ import com.eventApp.DAO.ClubDAO;
 import com.eventApp.DAO.UserDAO;
 import com.eventApp.Loader.FXMLScreenLoader;
 import com.eventApp.Model.Event;
-import com.eventApp.Service.EventService;
+import com.eventApp.Service.IEventService;
+import com.eventApp.Service.impl.EventServiceImpl;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class EventApprovalController {
-    private final EventService eventService = new EventService();
+    private final IEventService eventService = new EventServiceImpl();
     public Label startTime;
     public Label eventDate;
     public Label description;

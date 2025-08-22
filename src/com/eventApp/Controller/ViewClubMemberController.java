@@ -5,6 +5,7 @@ import com.eventApp.Loader.FXMLScreenLoader;
 
 import com.eventApp.Model.ClubMember;
 import com.eventApp.Service.AdminService;
+import com.eventApp.Service.impl.AdminServiceImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -29,7 +30,7 @@ public class ViewClubMemberController {
     public VBox tablePane;
 
     List<ClubMember> clubMemberList;
-    AdminService adminService = new AdminService();
+    private final AdminService adminService = new AdminServiceImpl();
     ClubDAO clubDAO = new ClubDAO();
     @FXML
     public void initialize() {

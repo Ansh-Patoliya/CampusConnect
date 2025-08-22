@@ -12,8 +12,8 @@ public class Event {
     // Basic event details
     private String eventName, venue, description, approvalStatus, completionStatus, userId, category;
     private int maxParticipants, eventId, clubId;
-    private double ticketPrice;
-    private int registeredCount = 0;
+    private double ticketPrice,discountedPrice;
+    private int registeredCount =0;
     private boolean discountApplicable;
     LocalDate eventDate;
     LocalTime startTime, endTime;
@@ -138,12 +138,11 @@ public class Event {
         this.category = category;
     }
 
-    // Overriding to string method
-    @Override
-    public String toString() {
-        return "Event{" +
-                "eventDate=" + eventDate +
-                ", category=" + category +
-                '}';
+    public void setDiscountedPrice(double discountedPrice) {
+        this.discountedPrice = discountedPrice;
+    }
+
+    public double getDiscountedPrice() {
+        return discountedPrice;
     }
 }

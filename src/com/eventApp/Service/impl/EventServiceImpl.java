@@ -1,14 +1,11 @@
-package com.eventApp.Service;
+package com.eventApp.Service.impl;
 
-import com.eventApp.DAO.AdminDAO;
 import com.eventApp.DAO.EventDAO;
 import com.eventApp.DataStructures.MyEventLL;
 import com.eventApp.Model.Event;
+import com.eventApp.Service.IEventService;
 
-/**
- * Service class to manage event approval workflows and event navigation.
- */
-public class EventService {
+public class EventServiceImpl implements IEventService {
     private MyEventLL LL;
 
     EventDAO eventDAO = new EventDAO();
@@ -16,7 +13,7 @@ public class EventService {
     /**
      * Constructs an EventService instance and loads all pending events.
      */
-    public EventService() {
+    public EventServiceImpl() {
         getAllPendingEvents();
     }
 
