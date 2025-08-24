@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eventApp.Controller.ClubDetailsController">
+    <!-- Center Container -->
+    <StackPane AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <!-- Main Content Card -->
+        <VBox alignment="CENTER" maxHeight="300" maxWidth="450" spacing="25" style="-fx-background-color: rgba(255, 255, 255, 0.95);                  -fx-background-radius: 20px;                  -fx-border-radius: 20px;                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 5);" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+            <children>
+                <!-- Title -->
+                <Label style="-fx-font-size: 28px;                           -fx-font-weight: bold;                           -fx-text-fill: #654ea3;                           -fx-font-family: 'Segoe UI', Arial, sans-serif;" text="Club Details" />
+
+                <!-- Profile Information Container -->
+                <VBox alignment="CENTER" prefHeight="286.0" prefWidth="370.0" spacing="15" style="-fx-padding: 0 30 0 30;">
+
+                    <!-- Name Row -->
+                    <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: rgba(101, 78, 163, 0.1);                              -fx-background-radius: 10px;                              -fx-padding: 12 20 12 20;">
+                        <Label style="-fx-font-size: 16px;                                   -fx-font-weight: bold;                                   -fx-text-fill: #654ea3;                                   -fx-min-width: 80px;" text="Club name:" />
+                        <Label fx:id="clubNameLabel" style="-fx-font-size: 16px;                                   -fx-text-fill: #333333;" />
+                    </HBox>
+
+                    <!-- Email Row -->
+                    <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: rgba(234, 175, 200, 0.3);                              -fx-background-radius: 10px;                              -fx-padding: 12 20 12 20;">
+                        <Label style="-fx-font-size: 16px;                                   -fx-font-weight: bold;                                   -fx-text-fill: #654ea3;                                   -fx-min-width: 80px;" text="Category:" />
+                        <Label fx:id="categoryLabel" style="-fx-font-size: 16px;                                   -fx-text-fill: #333333;" />
+                    </HBox>
+
+                    <!-- Position Row -->
+                    <AnchorPane style="-fx-background-color: rgba(101, 78, 163, 0.1);
+                   -fx-background-radius: 10px;
+                   -fx-padding: 12 20 12 20;"
+                                prefWidth="310">
+
+                        <VBox spacing="5" alignment="TOP_LEFT">
+                            <Label text="Description:"
+                                   style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #654ea3;" />
+
+                            <Label fx:id="descriptionLabel"
+                                   wrapText="true"
+                                   maxWidth="280"
+                                   style="-fx-font-size: 16px; -fx-text-fill: #333333;" />
+                        </VBox>
+
+                    </AnchorPane>
+
+                    <!-- Club ID Row -->
+                    <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: rgba(234, 175, 200, 0.3);                              -fx-background-radius: 10px;                              -fx-padding: 12 20 12 20;">
+                        <Label style="-fx-font-size: 16px;                                   -fx-font-weight: bold;                                   -fx-text-fill: #654ea3;                                   -fx-min-width: 80px;" text="Founder name:" />
+                        <Label fx:id="founderNameLabel" style="-fx-font-size: 16px;                                   -fx-text-fill: #333333;" />
+                    </HBox>
+               <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: rgba(101, 78, 163, 0.1);                              -fx-background-radius: 10px;                              -fx-padding: 12 20 12 20;">
+                  <children>
+                     <Label style="-fx-font-size: 16px;                                   -fx-font-weight: bold;                                   -fx-text-fill: #654ea3;                                   -fx-min-width: 80px;" text="Member Count:" />
+                     <Label fx:id="memberCountLabel" style="-fx-font-size: 16px;                                   -fx-text-fill: #333333;" />
+                  </children>
+               </HBox>
+                </VBox>
+
+                <!-- Back Button -->
+
+                <Button onAction="#onBack" prefHeight="45" prefWidth="140" style="-fx-background-color: linear-gradient(to bottom, #654ea3, #8b7bb8);                            -fx-text-fill: white;                            -fx-font-size: 16px;                            -fx-font-weight: bold;                            -fx-background-radius: 25px;                            -fx-border-radius: 25px;                            -fx-cursor: hand;                            -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 8, 0, 0, 2);" text="← Back">
+                    <styleClass>
+                        <String fx:value="custom-button" />
+                    </styleClass>
+                </Button>
+            </children>
+
+            <padding><Insets bottom="30" left="40" right="40" top="30" /></padding>
+        </VBox>
+
+    </StackPane>
+
+    <!-- Decorative Elements -->
+    <Circle centerX="550" centerY="80" radius="30" style="-fx-fill: rgba(255, 255, 255, 0.2);" />
+    <Circle centerX="80" centerY="320" radius="20" style="-fx-fill: rgba(255, 255, 255, 0.15);" />
+    <Circle centerX="520" centerY="350" radius="15" style="-fx-fill: rgba(255, 255, 255, 0.1);" />
+
+
+</AnchorPane>

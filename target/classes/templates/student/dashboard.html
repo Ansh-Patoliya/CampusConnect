@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/main :: html}">
+<head>
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <div th:fragment="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h1 class="h3 mb-0">
+                        <i class="fas fa-tachometer-alt me-2 text-primary"></i>
+                        Student Dashboard
+                    </h1>
+                    <span class="badge bg-success fs-6">
+                        <i class="fas fa-user-graduate me-1"></i>Student
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Welcome Card -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="row align-items-center text-white">
+                            <div class="col-md-8">
+                                <h4 class="mb-2">Welcome back!</h4>
+                                <p class="mb-0 opacity-75">
+                                    Ready to explore campus events and connect with your community?
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-md-end">
+                                <i class="fas fa-graduation-cap fa-3x opacity-50"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="row mb-4">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <div class="text-primary mb-3">
+                            <i class="fas fa-calendar-check fa-2x"></i>
+                        </div>
+                        <h5 class="card-title">Upcoming Events</h5>
+                        <h3 class="text-primary mb-0">5</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-ticket-alt fa-2x"></i>
+                        </div>
+                        <h5 class="card-title">Registered Events</h5>
+                        <h3 class="text-success mb-0">3</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <div class="text-warning mb-3">
+                            <i class="fas fa-star fa-2x"></i>
+                        </div>
+                        <h5 class="card-title">Interest Matches</h5>
+                        <h3 class="text-warning mb-0">8</h3>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <div class="text-info mb-3">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                        <h5 class="card-title">Clubs Joined</h5>
+                        <h3 class="text-info mb-0">2</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white border-0 pb-0">
+                        <h5 class="mb-0">
+                            <i class="fas fa-bolt me-2 text-warning"></i>
+                            Quick Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <a th:href="@{/events}" class="btn btn-outline-primary w-100 py-3">
+                                    <i class="fas fa-search me-2"></i>
+                                    Browse Events
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a th:href="@{/students/profile}" class="btn btn-outline-success w-100 py-3">
+                                    <i class="fas fa-user-edit me-2"></i>
+                                    Update Profile
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a th:href="@{/events/my-registrations}" class="btn btn-outline-info w-100 py-3">
+                                    <i class="fas fa-list-alt me-2"></i>
+                                    My Events
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row">
+            <div class="col-md-8 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-0">
+                        <h5 class="mb-0">
+                            <i class="fas fa-clock me-2 text-primary"></i>
+                            Recent Activity
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="timeline">
+                            <div class="timeline-item mb-3">
+                                <div class="d-flex">
+                                    <div class="timeline-marker bg-success me-3"></div>
+                                    <div>
+                                        <p class="mb-1"><strong>Registered for Tech Conference 2024</strong></p>
+                                        <small class="text-muted">2 hours ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item mb-3">
+                                <div class="d-flex">
+                                    <div class="timeline-marker bg-info me-3"></div>
+                                    <div>
+                                        <p class="mb-1"><strong>Updated interest preferences</strong></p>
+                                        <small class="text-muted">1 day ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="d-flex">
+                                    <div class="timeline-marker bg-warning me-3"></div>
+                                    <div>
+                                        <p class="mb-1"><strong>Joined Programming Club</strong></p>
+                                        <small class="text-muted">3 days ago</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-0">
+                        <h5 class="mb-0">
+                            <i class="fas fa-bell me-2 text-warning"></i>
+                            Notifications
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item mb-3 p-2 bg-light rounded">
+                            <p class="mb-1 small"><strong>Event Reminder</strong></p>
+                            <p class="mb-0 text-muted small">Tech Conference 2024 starts tomorrow</p>
+                        </div>
+                        <div class="notification-item mb-3 p-2 bg-light rounded">
+                            <p class="mb-1 small"><strong>New Event</strong></p>
+                            <p class="mb-0 text-muted small">Cultural Fest registration is now open</p>
+                        </div>
+                        <div class="text-center">
+                            <a href="#" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+
+
+<AnchorPane prefHeight="750.0" prefWidth="950.0"
+            style="-fx-background-color: linear-gradient(to bottom right, #654ea3, #eaafc8);"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.eventApp.Controller.ClubApprovalController">
+
+   <!-- Center Container -->
+   <StackPane AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+      <!-- Modern Card Container -->
+      <HBox alignment="CENTER" maxWidth="880" maxHeight="660"
+            style="-fx-background-color: rgba(255, 255, 255, 0.98);
+                   -fx-background-radius: 20;
+                   -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 25, 0, 0, 8);">
+         <clip>
+            <Rectangle arcHeight="20" arcWidth="20" height="660" width="880" />
+         </clip>
+
+         <!-- Left Panel - Club Details -->
+         <VBox alignment="TOP_LEFT" prefWidth="600.0" spacing="20.0" style="-fx-padding: 35;">
+            <children>
+               <Label text="Club Approval"
+                      style="-fx-font-family: 'Arial', 'Segoe UI', 'Helvetica', sans-serif;
+                             -fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 30px;" />
+
+               <Separator prefWidth="530.0"
+                          style="-fx-background-color: linear-gradient(to right, #654ea3, #eaafc8);
+                                 -fx-padding: 2 0 0 0;
+                                 -fx-pref-height: 4;" />
+
+               <!-- Club Details Container with ScrollPane for overflow content -->
+               <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                           style="-fx-background-color: transparent; -fx-padding: 0;">
+                  <VBox spacing="20">
+                     <!-- Club Name -->
+                     <VBox spacing="10" alignment="TOP_LEFT">
+                        <Label text="CLUB NAME"
+                               style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 14px;" />
+                        <Label fx:id="clubName"
+                               wrapText="true"
+                               style="-fx-text-fill: #1a1a1a; -fx-font-size: 18px; -fx-font-weight: bold;
+                                      -fx-padding: 15 20 15 25; -fx-background-color: rgba(101, 78, 163, 0.12);
+                                      -fx-background-radius: 12; -fx-border-color: rgba(101, 78, 163, 0.4);
+                                      -fx-border-width: 0 0 0 5; -fx-border-radius: 12;
+                                      -fx-pref-width: 530; -fx-min-height: 60;
+                                      -fx-alignment: center-left;" />
+                     </VBox>
+
+                     <!-- Description -->
+                     <VBox spacing="10" alignment="TOP_LEFT">
+                        <Label text="DESCRIPTION"
+                               style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 14px;" />
+                        <Label fx:id="description"
+                               wrapText="true"
+                               style="-fx-text-fill: #2a2a2a; -fx-font-size: 16px;
+                                      -fx-padding: 15 20 15 25; -fx-background-color: rgba(234, 175, 200, 0.18);
+                                      -fx-background-radius: 12; -fx-border-color: rgba(234, 175, 200, 0.45);
+                                      -fx-border-width: 0 0 0 5; -fx-border-radius: 12;
+                                      -fx-pref-width: 530; -fx-min-height: 80;
+                                      -fx-alignment: top-left;" />
+                     </VBox>
+
+                     <!-- Created By -->
+                     <VBox spacing="10" alignment="TOP_LEFT">
+                        <Label text="CREATED BY"
+                               style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 14px;" />
+                        <Label fx:id="createdBy"
+                               wrapText="true"
+                               style="-fx-text-fill: #2a2a2a; -fx-font-size: 16px;
+                                      -fx-padding: 15 20 15 25; -fx-background-color: rgba(101, 78, 163, 0.12);
+                                      -fx-background-radius: 12; -fx-border-color: rgba(101, 78, 163, 0.4);
+                                      -fx-border-width: 0 0 0 5; -fx-border-radius: 12;
+                                      -fx-pref-width: 530; -fx-min-height: 60;
+                                      -fx-alignment: center-left;" />
+                     </VBox>
+
+                     <!-- Category - Fixed to ensure proper display -->
+                     <VBox spacing="10" alignment="TOP_LEFT">
+                        <Label text="CATEGORY"
+                               style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 14px;" />
+                        <Label fx:id="category"
+                               wrapText="true"
+                               style="-fx-text-fill: #2a2a2a; -fx-font-size: 16px;
+                                      -fx-padding: 15 20 15 25; -fx-background-color: rgba(234, 175, 200, 0.18);
+                                      -fx-background-radius: 12; -fx-border-color: rgba(234, 175, 200, 0.45);
+                                      -fx-border-width: 0 0 0 5; -fx-border-radius: 12;
+                                      -fx-pref-width: 530; -fx-min-height: 60;
+                                      -fx-alignment: center-left;" />
+                     </VBox>
+                  </VBox>
+               </ScrollPane>
+            </children>
+         </VBox>
+
+         <!-- Right Panel - Approval Actions -->
+         <VBox alignment="CENTER" prefWidth="280.0" spacing="25.0"
+               style="-fx-padding: 35;
+                      -fx-background-color: rgba(249, 249, 249, 0.9);
+                      -fx-background-radius: 0 20 20 0;">
+            <children>
+               <Label text="Approve Club?"
+                      style="-fx-font-weight: bold; -fx-text-fill: #654ea3; -fx-font-size: 24px;" />
+
+               <VBox alignment="CENTER" spacing="20">
+                  <Button text="✓ APPROVE" onAction="#onApprove"
+                          prefHeight="55.0" prefWidth="200.0"
+                          style="-fx-background-color: linear-gradient(to bottom, #654ea3, #7a68b8);
+                                 -fx-text-fill: white; -fx-background-radius: 28;
+                                 -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;">
+                     <effect>
+                        <DropShadow color="rgba(101,78,163,0.4)" radius="10" spread="0.3" />
+                     </effect>
+                  </Button>
+
+                  <Button text="✗ REJECT" onAction="#onReject"
+                          prefHeight="55.0" prefWidth="200.0"
+                          style="-fx-background-color: linear-gradient(to bottom, #eaafc8, #f0c4d8);
+                                 -fx-text-fill: white; -fx-background-radius: 28;
+                                 -fx-font-weight: bold; -fx-font-size: 16px; -fx-cursor: hand;">
+                     <effect>
+                        <DropShadow color="rgba(234,175,200,0.4)" radius="10" spread="0.3" />
+                     </effect>
+                  </Button>
+               </VBox>
+
+               <Button text="← BACK TO LIST" onAction="#onBack"
+                       prefWidth="200.0" prefHeight="50.0"
+                       style="-fx-background-color: transparent; -fx-text-fill: #654ea3;
+                              -fx-border-color: #654ea3; -fx-border-radius: 25;
+                              -fx-font-weight: bold; -fx-border-width: 2.5;
+                              -fx-font-size: 14px; -fx-cursor: hand;" />
+            </children>
+         </VBox>
+      </HBox>
+   </StackPane>
+
+   <!-- Background Bubble Circles -->
+   <Circle fill="rgba(255,255,255,0.08)" radius="120" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="80" />
+   <Circle fill="rgba(255,255,255,0.08)" radius="130" AnchorPane.bottomAnchor="80" AnchorPane.rightAnchor="80" />
+   <Circle fill="rgba(255,255,255,0.08)" radius="110" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="500" />
+
+   <Circle fill="rgba(255,255,255,0.1)" radius="90" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="120" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="100" AnchorPane.bottomAnchor="150" AnchorPane.rightAnchor="150" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="80" AnchorPane.bottomAnchor="150" AnchorPane.leftAnchor="320" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="85" AnchorPane.topAnchor="150" AnchorPane.rightAnchor="80" />
+   <Circle fill="rgba(255,255,255,0.1)" radius="75" AnchorPane.topAnchor="80" AnchorPane.leftAnchor="550" />
+
+   <Circle fill="rgba(255,255,255,0.12)" radius="40" AnchorPane.topAnchor="300" AnchorPane.leftAnchor="220" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="35" AnchorPane.topAnchor="220" AnchorPane.leftAnchor="720" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="45" AnchorPane.bottomAnchor="80" AnchorPane.leftAnchor="380" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="30" AnchorPane.topAnchor="380" AnchorPane.leftAnchor="780" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="50" AnchorPane.topAnchor="520" AnchorPane.rightAnchor="0" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="55" AnchorPane.topAnchor="450" AnchorPane.leftAnchor="80" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="40" AnchorPane.topAnchor="420" AnchorPane.rightAnchor="0" />
+   <Circle fill="rgba(255,255,255,0.12)" radius="45" AnchorPane.topAnchor="360" AnchorPane.leftAnchor="60" />
+
+</AnchorPane>
