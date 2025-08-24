@@ -68,7 +68,7 @@ public class ViewParticipantController {
     User currentUser= CurrentUser.getCurrentUser();
     @FXML
     public void initialize() {
-        participantTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        participantTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         loadEventNames();
         eventComboBox.getItems().addAll(eventNames);
 

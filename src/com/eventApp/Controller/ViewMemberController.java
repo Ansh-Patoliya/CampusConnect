@@ -33,7 +33,7 @@ public class ViewMemberController {
 
     @FXML
     public void initialize() {
-        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         loadMemberList();
         setupColumns();
     }

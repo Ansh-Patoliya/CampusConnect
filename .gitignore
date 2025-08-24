@@ -27,3 +27,19 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Maven ###
+target/
+dependency-reduced-pom.xml
+
+### Build artifacts ###
+*.jar
+!target/CampusConnect-*.jar
+
+### Logs ###
+*.log
+
+### Temporary files ###
+*.tmp
+*.temp
+META-INF/
