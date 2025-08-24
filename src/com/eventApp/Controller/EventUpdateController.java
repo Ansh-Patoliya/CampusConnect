@@ -93,8 +93,8 @@ public class EventUpdateController {
         startTimeCombo.setItems(timeOptions);
         endTimeCombo.setItems(timeOptions);
 
-        variableRadio.setOnAction(_ -> discountNote.setVisible(true));
-        fixedRadio.setOnAction(_ -> discountNote.setVisible(false));
+        variableRadio.setOnAction(e -> discountNote.setVisible(true));
+        fixedRadio.setOnAction(e -> discountNote.setVisible(false));
 
 
     }
