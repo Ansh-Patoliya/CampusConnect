@@ -194,10 +194,44 @@ private static final String PASSWORD = "your_password";
 ```
 
 ### 5. Build and Run
+
+#### Option 1: Using provided build scripts (Recommended)
+1. **Build the JAR file**:
+   ```bash
+   ./build.sh
+   ```
+
+2. **Run the application**:
+   ```bash
+   ./run.sh
+   ```
+
+#### Option 2: Using Maven directly
+1. **Build the project**:
+   ```bash
+   mvn clean package
+   ```
+
+2. **Run the JAR file**:
+   ```bash
+   java -jar target/CampusConnect-1.0.0.jar
+   ```
+
+#### Option 3: IDE Setup (Development)
 1. Open the project in IntelliJ IDEA
 2. Configure the project SDK (Java 11+)
 3. Add PostgreSQL JDBC driver to libraries
-4. Run the `Main.java` class
+4. Configure JavaFX modules:
+   ```
+   --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml
+   ```
+5. Run the `Main.java` class
+
+#### JAR File Details
+- **Generated JAR**: `target/CampusConnect-1.0.0.jar` (~9.5MB)
+- **Dependencies included**: JavaFX, PostgreSQL JDBC driver
+- **Main class**: `com.eventApp.Main`
+- **All FXML files and resources are bundled**
 
 ---
 

@@ -34,7 +34,7 @@ public class ViewClubMemberController {
     ClubDAO clubDAO = new ClubDAO();
     @FXML
     public void initialize() {
-        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        memberTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         try {
             selectMenu.getItems().addAll(clubDAO.getAllClubNames());
         } catch (SQLException | ClassNotFoundException e) {

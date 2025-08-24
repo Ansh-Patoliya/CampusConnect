@@ -32,7 +32,7 @@ public class ViewClubsController {
 
     @FXML
     public void initialize() {
-        clubTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        clubTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         loadClubList();
         setupColumns();
     }
