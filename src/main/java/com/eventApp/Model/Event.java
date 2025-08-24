@@ -1,5 +1,8 @@
 package com.eventApp.Model;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Min;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -7,16 +10,67 @@ import java.time.LocalTime;
  * Represents an Event in the Event Management System.
  * Stores event details like name, date, time, venue, price, status, etc.
  */
+@Entity
+@Table(name = "events")
 public class Event {
 
-    // Basic event details
-    private String eventName, venue, description, approvalStatus, completionStatus, userId, category;
-    private int maxParticipants, eventId, clubId;
-    private double ticketPrice,discountedPrice;
-    private int registeredCount =0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "event_id")
+    private int eventId;
+
+    @NotBlank
+    @Column(name = "event_name")
+    private String eventName;
+
+    @Column(name = "venue")
+    private String venue;
+
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "approval_status")
+    private String approvalStatus;
+
+    @Column(name = "completion_status")
+    private String completionStatus;
+
+    @Column(name = "user_id")
+    private String userId;
+
+    @Column(name = "category")
+    private String category;
+
+    @Min(1)
+    @Column(name = "max_participants")
+    private int maxParticipants;
+
+    @Column(name = "club_id")
+    private int clubId;
+
+    @Column(name = "ticket_price")
+    private double ticketPrice;
+
+    @Column(name = "discounted_price")
+    private double discountedPrice;
+
+    @Column(name = "registered_count")
+    private int registeredCount = 0;
+
+    @Column(name = "discount_applicable")
     private boolean discountApplicable;
-    LocalDate eventDate;
-    LocalTime startTime, endTime;
+
+    @Column(name = "event_date")
+    private LocalDate eventDate;
+
+    @Column(name = "start_time")
+    private LocalTime startTime;
+
+    @Column(name = "end_time")
+    private LocalTime endTime;
+
+    // Default constructor for JPA
+    public Event() {}
 
     // Constructor for creating a new event
     public Event(String eventName, String description, String venue, int clubId, String userId, int maxParticipants,
@@ -77,6 +131,8 @@ public class Event {
     // Getters and setters for all properties
 
     public int getEventId() { return eventId; }
+
+    public void setEventId(int eventId) { this.eventId = eventId; }
 
     public String getEventName() { return eventName; }
 
